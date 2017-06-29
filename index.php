@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Billet simple pour l'Alaska</title>
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300" rel="stylesheet">
 	<link rel="stylesheet" href="vendors/normalize/normalize.css">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
