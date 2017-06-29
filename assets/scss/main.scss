@@ -1,4 +1,4 @@
-.intro {
+.section-intro {
 	// background: linear-gradient(180deg, #34dddd, #e78720);
 	background-color: lightblue;
 }
@@ -35,16 +35,30 @@
 	width: 78%;
 
 	background-color: #FFF;
-	box-shadow: 0px 0px 100px -10px rgba(0,0,0,0.29);
+	// box-shadow: 0px 0px 100px -10px rgba(0,0,0,0.29);
 }
 
 .admin-bar {
-	height: 50px;
-	text-align: right;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 
-	font-family: 'Merriweather', serif;
+	height: 60px;
+	padding-right: 20px;
+	padding-left: 20px;
 
-	box-shadow: 0px 10px 40px -10px rgba(0,0,0,0.19);
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+
+	.act-new {
+		padding: 7px 10px;
+		border: 1px solid #C3C3C3;
+		border-radius: 2px;
+	}
+
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	// box-shadow: 12px 12px 15px -15px rgba(0, 0, 0, 0.2);
 }
 
 .episodes-card {
@@ -70,7 +84,8 @@
 	margin-bottom: 10px;
 
 	span {
-		padding-right: 5px;
+		padding-top: 1px;
+		padding-right: 7px;
 		padding-left: 5px;
 
 		border-radius: 3px;
@@ -85,7 +100,8 @@
 	}
 
 	h2 {
-		margin-left: 15px;
+		margin-right: 15px;
+		margin-left: 25px;
 
 		font-family: 'Inconsolata', monospace;
 		font-size: 24px;
@@ -95,15 +111,23 @@
 .episode-metadata {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 	font-size: 0.8rem;
 	color: #929292;
 
+	time {
+		margin-right: 20px;
+	}
+
 	a {
 		text-decoration: none;
 		color: inherit;
+	}
+
+	.act-delete {
+		margin-right: 20px;
 	}
 }
