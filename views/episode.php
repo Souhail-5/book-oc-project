@@ -1,7 +1,7 @@
 <div class="section-intro">
 	<section class="container">
 		<header class="poster">
-			<img src="assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
+			<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 		</header>
 		<article class="episode">
 			<header>
