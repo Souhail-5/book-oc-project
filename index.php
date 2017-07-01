@@ -1,6 +1,8 @@
 <?php
 
-include('models/Template.php');
+spl_autoload_register(function ($class) {
+    require_once 'models/'.$class.'.php';
+});
 
 $currentParthUrl = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
 
