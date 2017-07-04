@@ -1,12 +1,5 @@
 <?php
-
-// spl_autoload_register(function ($class) {
-//     require_once 'models/'.$class.'.php';
-// });
-
-spl_autoload_register(function ($class) {
-    require_once 'library/'.$class.'.php';
-});
+require_once 'helpers/class-autoloader.php';
 
 $router = new Router(new HTTPRequest);
 $route = $router->route;
