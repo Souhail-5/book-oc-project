@@ -1,0 +1,21 @@
+{
+	"root":
+	{
+		"url": "/(episodes)?",
+		"controller": "home",
+		"action": "show"
+	},
+	"episode":
+	{
+		"url": "/episode/([0-9]+)/([a-z0-9-]+)",
+		"controller": "episode",
+		"action": "show",
+		"varsNames": ["number", "slug"]
+	},
+	"latest-episode":
+	{
+		"url": "/dernier-episode",
+		"controller": "episode",
+		"action": "showLast"
+	}
+}
