@@ -13,4 +13,9 @@ class HTTPRequest
 	{
 		return $_SERVER['REQUEST_METHOD'];
 	}
+
+	public function setGETData(array $vars)
+	{
+		$_GET = array_merge($_GET, $vars);
+	}
 }

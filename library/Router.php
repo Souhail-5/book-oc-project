@@ -6,7 +6,6 @@
 class Router
 {
 	private $_HTTPRequest;
-	private $_routes = array();
 	public $route;
 
 	public function __construct(HTTPRequest $request)
@@ -15,52 +14,27 @@ class Router
 		$this->setRoute();
 	}
 
-	private function setRoutes()
+	private function setRoute()
 	{
 		$json = file_get_contents('config/routes.json');
 		$routes = json_decode($json, true);
 
 		foreach ($routes as $route_name => $param) {
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
-			$this->_routes[$route_name] = new Route($route_name, $param['url'], $param['controller'], $param['action'], $param['varsNames']);
-		}
-	}
+			$route = new Route($route_name, $param['url'], $param['controller'], $param['action'], $param['varsNames']);
 
-	private function setRoute()
-	{
-		$this->setRoutes();
-
-		foreach ($this->_routes as $route) {
-			if ($this->match($this->_HTTPRequest->getURI(), $route)) {
+			if ($route->match($this->_HTTPRequest->getURI())) {
 				$this->route = $route;
+				$this->_HTTPRequest->setGETData($this->route->vars);
 			}
 		}
 	}
 
-	public function match($url, Route $route)
+	public function runController()
 	{
-		if (preg_match('`^'.$route->url.'$`', $url, $matches)) {
-			if ($route->hasVars()) {
-				$vars = [];
-				foreach ($matches as $key => $match) {
-					if ($key !== 0) {
-						$vars[$route->varsNames[$key - 1]] = $match;
-					}
-				}
-				$route->vars = $vars;
-			}
-			return true;
-		} else {
-			return false;
-		}
+		$controller = ucfirst($this->route->controller)."Controller";
+		$controller = new $controller;
 	}
-
-	public function getRoutes()
-	{
-		return $this->_routes;
-	}
-
-	// Redirect to appropriate controller
 
 	// generate URL from route name and param
 }

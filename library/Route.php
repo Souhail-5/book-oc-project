@@ -20,19 +20,21 @@ class Route
 		$this->varsNames = $varsNames;
 	}
 
-	public function hasVars()
+	public function match($url)
 	{
-		return !empty($this->varsNames);
-	}
-
-	public function __set($property, $value)
-	{
-		$method = "set".ucfirst($property);
-		method_exists($this, $method) ? $this->$method($value) : trigger_error("Not allowed to modify this $property");
-	}
-
-	public function setVars(array $vars)
-	{
-		$this->vars = $vars;
+		if (preg_match('`^'.$this->url.'(?:\\?[a-z0-9-&=]*)?$`', $url, $matches)) {
+			if (!empty($this->varsNames)) {
+				$vars = [];
+				foreach ($matches as $key => $match) {
+					if ($key !== 0) {
+						$vars[$this->varsNames[$key - 1]] = $match;
+					}
+				}
+				$this->vars = $vars;
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
