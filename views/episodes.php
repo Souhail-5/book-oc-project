@@ -5,20 +5,20 @@
 		</figure>
 		<section class="back-poster">
 			<div class="admin-bar">
-				<span class="act-new"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $test; ?></span>
+				<span class="act-new"><i class="fa fa-plus" aria-hidden="true"></i> Nouvel épisode</span>
 			</div>
 			<nav class="episodes-card">
 				<ul>
-					<?php for ($i=23; $i > 0; $i--): ?>
+					<?php foreach ($episodes as $episode): ?>
 					<li>
 						<div class="episode-header">
-							<span># <?php echo $i;?></span>
-							<h2>There will be blood</h2>
+							<span># <?php echo $episode->number(); ?></span>
+							<h2><?php echo $episode->title(); ?></h2>
 						</div>
 						<div class="episode-metadata">
 							<div>
-								<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> 26 juin 2017</time>
-								<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 2 commentaires</a>
+								<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $episode->publish_datetime(); ?></time>
+								<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php echo $episode->nbr_comments(); ?> commentaires</a>
 							</div>
 							<div>
 								<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 					</li>
-					<?php endfor; ?>
+					<?php endforeach; ?>
 				</ul>
 			</nav>
 		</section>

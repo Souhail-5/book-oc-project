@@ -20,10 +20,14 @@ class HomeController
 			'/assets/css/main.css',
 		);
 
-		$episodes = new Template('episodes');
-		$episodes->test = 'Nouvel épisode';
+		$db = new PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
-		$page->view = $episodes->render();
+		$episodes_manager = new EpisodesManager($db);
+
+		$episodesView = new Template('episodes');
+		$episodesView->episodes = $episodes_manager->getList();
+
+		$page->view = $episodesView->render();
 
 		echo $page->render();
 	}

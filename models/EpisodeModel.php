@@ -8,9 +8,9 @@ class EpisodeModel
 	protected $number;
 	protected $title;
 	protected $text;
-	protected $publishDate;
-	protected $draftDate;
-	protected $nbrComments;
+	protected $publish_datetime;
+	protected $draft_datetime;
+	protected $nbr_comments;
 	protected $status;
 
 	public function __construct(array $data = array())
@@ -31,9 +31,9 @@ class EpisodeModel
 	public function number() { return $this->number; }
 	public function title() { return $this->title; }
 	public function text() { return $this->text; }
-	public function publishDate() { return $this->publishDate; }
-	public function draftDate() { return $this->draftDate; }
-	public function nbrComments() { return $this->nbrComments; }
+	public function publish_datetime() { return $this->publish_datetime; }
+	public function draft_datetime() { return $this->draft_datetime; }
+	public function nbr_comments() { return $this->nbr_comments; }
 	public function status() { return $this->status; }
 
 	public function setNumber($value)
@@ -51,19 +51,19 @@ class EpisodeModel
 		$this->text = $value;
 	}
 
-	public function setPublishDate($value)
+	public function setPublish_datetime($value)
 	{
-		$this->publishDate = $value;
+		$this->publish_datetime = $value;
 	}
 
-	public function setDraftDate($value)
+	public function setDraft_datetime($value)
 	{
-		$this->draftDate = $value;
+		$this->draft_datetime = $value;
 	}
 
-	public function setNbrComments($value)
+	public function setNbr_comments($value)
 	{
-		$this->nbrComments = $value;
+		$this->nbr_comments = $value;
 	}
 
 	public function setStatus($value)
