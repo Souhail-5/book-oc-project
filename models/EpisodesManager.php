@@ -61,7 +61,7 @@ class EpisodesManager
 	{
 		$episodes = [];
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes ORDER BY number');
+		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes ORDER BY number DESC');
 
 		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
 			$episodes[] = new EpisodeModel($data);
