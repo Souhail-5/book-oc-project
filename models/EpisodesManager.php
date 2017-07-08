@@ -18,8 +18,8 @@ class EpisodesManager
 		$q->bindValue(':number', $episode->number());
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
-		$q->bindValue(':publish_datetime', $episode->publish_datetime());
-		$q->bindValue(':draft_datetime', $episode->draft_datetime());
+		!empty($episode->publish_datetime()) ? $q->bindValue(':publish_datetime', $episode->publish_datetime()) : $q->bindValue(':publish_datetime', "CURRENT_TIMESTAMP()");
+		!empty($episode->draft_datetime()) ? $q->bindValue(':draft_datetime', $episode->draft_datetime()) : $q->bindValue(':draft_datetime', "CURRENT_TIMESTAMP()");
 		$q->bindValue(':nbr_comments', $episode->nbr_comments());
 		$q->bindValue(':status', $episode->status());
 
