@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="<?php echo $language; ?>">
+<html lang="<?= $language; ?>">
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $title; ?></title>
+	<title><?= $title; ?></title>
 	<?php foreach ($stylesheets as $stylesheet): ?>
-		<link rel="stylesheet" href="<?php echo $stylesheet; ?>">
+		<link rel="stylesheet" href="<?= $stylesheet; ?>">
 	<?php endforeach; ?>
 	<?php foreach ($scripts as $script): ?>
-		<script src="<?php echo $script; ?>"></script>
+		<script src="<?= $script; ?>"></script>
 	<?php endforeach; ?>
 </head>
 <body>
-	<?php echo $view; ?>
+	<?= $view; ?>
 </body>
 </html>
