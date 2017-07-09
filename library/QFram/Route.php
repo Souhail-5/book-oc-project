@@ -24,7 +24,7 @@ class Route
 
 	public function match($url)
 	{
-		if (preg_match('`^'.$this->url.'(?:\\?[a-z0-9-&=]*)?$`', $url, $matches)) {
+		if (preg_match('`^'.$this->url.'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches)) {
 			if (!empty($this->varsNames)) {
 				$vars = [];
 				foreach ($matches as $key => $match) {
