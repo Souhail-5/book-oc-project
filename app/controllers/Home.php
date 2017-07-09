@@ -1,8 +1,13 @@
 <?php
+namespace Controller;
+
+use \QFram\Template;
+use \Model\Mapper;
+
 /**
 * Home Controller
 */
-class HomeController
+class Home
 {
 	function __construct()
 	{
@@ -20,9 +25,9 @@ class HomeController
 			'/assets/css/main.css',
 		);
 
-		$db = new PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
+		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
-		$episodes_manager = new EpisodesManager($db);
+		$episodes_manager = new Mapper\Episodes($db);
 
 		$episodesView = new Template('episodes');
 		$episodesView->episodes = $episodes_manager->getList();
