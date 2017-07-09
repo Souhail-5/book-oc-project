@@ -1,4 +1,8 @@
 <?php
+namespace QFram;
+
+use \QFram\HTTPRequest;
+use \QFram\Route;
 
 /**
 * Router manager
@@ -16,7 +20,7 @@ class Router
 
 	private function setRoute()
 	{
-		$json = file_get_contents('config/routes.json');
+		$json = file_get_contents(__DIR__.'/../../app/config/routes.json');
 		$routes = json_decode($json, true);
 
 		foreach ($routes as $route_name => $param) {
@@ -32,7 +36,7 @@ class Router
 
 	public function runController()
 	{
-		$controller = ucfirst($this->route->controller)."Controller";
+		$controller = '\Controller\\'.ucfirst($this->route->controller);
 		$controller = new $controller;
 	}
 

@@ -1,4 +1,6 @@
 <?php
+namespace QFram;
+
 /**
 * HTTP Request manager
 */

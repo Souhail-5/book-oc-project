@@ -1,8 +1,12 @@
 <?php
+namespace Controller;
+
+use \QFram\Template;
+
 /**
 * Episode Controller
 */
-class EpisodeController
+class Episode
 {
 	function __construct()
 	{

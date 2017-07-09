@@ -1,8 +1,12 @@
 <?php
+namespace Model\Mapper;
+
+use \Model\Object\Episode;
+
 /**
 * Episodes Manager
 */
-class EpisodesManager
+class Episodes
 {
 	protected $db;
 
@@ -11,7 +15,7 @@ class EpisodesManager
 		$this->setDb($db);
 	}
 
-	public function add(EpisodeModel $episode)
+	public function add(Episode $episode)
 	{
 		$q = $this->db->prepare('INSERT INTO episodes(number, title, text, publish_datetime, draft_datetime, nbr_comments, status) VALUES(:number, :title, :text, :publish_datetime, :draft_datetime, :nbr_comments, :status)');
 
@@ -26,7 +30,7 @@ class EpisodesManager
 		$q->execute();
 	}
 
-	public function update(EpisodeModel $episode)
+	public function update(Episode $episode)
 	{
 		$q = $this->db->prepare('UPDATE episodes SET number = :number, title = :title, text = :text, publish_datetime = :publish_datetime, draft_datetime = :draft_datetime, nbr_comments = :nbr_comments, status = :status WHERE id = :id');
 
@@ -42,7 +46,7 @@ class EpisodesManager
 		$q->execute();
 	}
 
-	public function delete(EpisodeModel $episode)
+	public function delete(Episode $episode)
 	{
 		$this->db->exec('DELETE FROM episodes WHERE id = '.$episode->id());
 	}
@@ -52,9 +56,9 @@ class EpisodesManager
 		$id = (int) $id;
 
 		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes WHERE id = '.$id);
-		$data = $q->fetch(PDO::FETCH_ASSOC);
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
 
-		return new EpisodeModel($data);
+		return new Episode($data);
 	}
 
 	public function getList()
@@ -63,14 +67,14 @@ class EpisodesManager
 
 		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes ORDER BY number DESC');
 
-		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
-			$episodes[] = new EpisodeModel($data);
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$episodes[] = new Episode($data);
 		}
 
 		return $episodes;
 	}
 
-	public function setDb(PDO $db)
+	public function setDb(\PDO $db)
 	{
 		$this->db = $db;
 	}

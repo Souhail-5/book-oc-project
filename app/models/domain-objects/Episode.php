@@ -1,8 +1,10 @@
 <?php
+namespace Model\Object;
+
 /**
 * Episode Model
 */
-class EpisodeModel
+class Episode
 {
 	protected $id;
 	protected $number;

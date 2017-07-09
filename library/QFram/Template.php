@@ -1,4 +1,6 @@
 <?php
+namespace QFram;
+
 /**
 * Template manager
 */
@@ -25,11 +27,11 @@ class Template
 
 	public function render()
 	{
-		if (file_exists('views/'.$this->_path.'.php')) {
+		if (file_exists(__DIR__.'/../../app/views/'.$this->_path.'.php')) {
 			extract($this->_data);
 
 			ob_start();
-				include('views/'.$this->_path.'.php');
+				include(__DIR__.'/../../app/views/'.$this->_path.'.php');
 				$rendering = ob_get_contents();
 			@ob_end_clean();
 
