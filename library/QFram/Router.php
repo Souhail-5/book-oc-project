@@ -56,7 +56,7 @@ class Router
 	public function runController()
 	{
 		$controller = '\Controller\\'.ucfirst($this->route->controller);
-		new $controller;
+		new $controller($this->route);
 	}
 
 	// // generate URL from route name and param

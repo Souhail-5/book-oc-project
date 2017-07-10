@@ -2,13 +2,14 @@
 namespace Controller;
 
 use \QFram\Template;
+use \Model\Mapper;
 
 /**
 * Episode Controller
 */
 class Episode
 {
-	function __construct()
+	function __construct($route)
 	{
 		$page = new Template('page');
 		$page->language = "fr";
@@ -24,9 +25,14 @@ class Episode
 			'/assets/css/episode.css',
 		);
 
-		$episode = new Template('episode');
+		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
-		$page->view = $episode->render();
+		$episodes_mapper = new Mapper\Episodes($db);
+
+		$episodeTemplate = new Template('episode');
+		$episodeTemplate->episode = $episodes_mapper->get($route->vars['number']);
+
+		$page->view = $episodeTemplate->render();
 
 		echo $page->render();
 	}
