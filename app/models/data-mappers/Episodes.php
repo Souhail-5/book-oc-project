@@ -55,7 +55,7 @@ class Episodes
 	{
 		$id = (int) $id;
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes WHERE id = '.$id);
+		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status, slug FROM episodes WHERE number = '.$id);
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
 
 		return new Episode($data);
@@ -65,7 +65,7 @@ class Episodes
 	{
 		$episodes = [];
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status FROM episodes ORDER BY number DESC');
+		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status, slug FROM episodes ORDER BY number DESC');
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
 			$episodes[] = new Episode($data);
