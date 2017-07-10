@@ -14,6 +14,7 @@ class Episode
 	protected $draft_datetime;
 	protected $nbr_comments;
 	protected $status;
+	protected $slug;
 
 	public function __construct(array $data = array())
 	{
@@ -37,6 +38,7 @@ class Episode
 	public function draft_datetime() { return $this->draft_datetime; }
 	public function nbr_comments() { return $this->nbr_comments; }
 	public function status() { return $this->status; }
+	public function slug() { return $this->slug; }
 
 	public function setNumber($value)
 	{
@@ -71,6 +73,11 @@ class Episode
 	public function setStatus($value)
 	{
 		$this->status = $value;
+	}
+
+	public function setSlug($value)
+	{
+		$this->slug = $value;
 	}
 
 }
