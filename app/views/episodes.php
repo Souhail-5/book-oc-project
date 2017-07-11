@@ -5,7 +5,7 @@
 		</figure>
 		<section class="back-poster">
 			<div class="admin-bar">
-				<span class="act-new"><i class="fa fa-plus" aria-hidden="true"></i> Nouvel épisode</span>
+				<a href="<?= $path('new-episode') ?>" class="act-new"><i class="fa fa-plus" aria-hidden="true"></i> Nouvel épisode</a>
 			</div>
 			<nav class="episodes-card">
 				<ul>

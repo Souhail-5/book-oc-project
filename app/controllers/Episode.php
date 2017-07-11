@@ -4,6 +4,7 @@ namespace Controller;
 use \Controller\Controller;
 use \QFram\Template;
 use \Model\Mapper;
+use \Model\Object;
 
 /**
 * Episode Controller
@@ -32,6 +33,33 @@ class Episode extends Controller
 
 		$episodeTemplate = new Template('episode');
 		$episodeTemplate->episode = $episodes_mapper->get($this->HTTPRequest->GETData('number'));
+
+		$page->view = $episodeTemplate->render();
+
+		echo $page->render();
+	}
+
+	public function newEpisode()
+	{
+		$page = new Template('page');
+		$page->language = "fr";
+		$page->scripts = array(
+			'#',
+		);
+
+		$page->title = "Nouvel épisode";
+		$page->stylesheets = array(
+			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
+			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
+			'/vendors/normalize/normalize.css',
+			'/assets/css/episode.css',
+		);
+
+		$episode_object = new Object\Episode();
+
+		$episodeTemplate = new Template('episode');
+		$episodeTemplate->user = true;
+		$episodeTemplate->episode = $episode_object;
 
 		$page->view = $episodeTemplate->render();
 

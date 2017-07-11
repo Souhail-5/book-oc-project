@@ -16,7 +16,7 @@ class Episode
 	protected $status;
 	protected $slug;
 
-	public function __construct(array $data = array())
+	public function __construct(array $data = [])
 	{
 		$this->hydrate($data);
 	}

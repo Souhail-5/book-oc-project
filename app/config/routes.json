@@ -17,5 +17,11 @@
 		"url": "/dernier-episode",
 		"controller": "episode",
 		"action": "showLast"
+	},
+	"new-episode":
+	{
+		"url": "/new-episode",
+		"controller": "episode",
+		"action": "newEpisode"
 	}
 }
