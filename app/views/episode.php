@@ -5,7 +5,7 @@
 		</header>
 		<article class="episode">
 			<header>
-				<a href="/">< Accueil</a><br>
+				<a href="<?= $path('root') ?>">< Accueil</a><br>
 				<span># <?= $episode->number() ?></span>
 				<h1><?= $episode->title() ?></h1>
 			</header>
