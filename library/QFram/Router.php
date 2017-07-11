@@ -14,9 +14,9 @@ class Router
 
 	protected static $routes;
 
-	public function __construct(HTTPRequest $request)
+	public function __construct(HTTPRequest $HTTPRequest)
 	{
-		$this->HTTPRequest = $request;
+		$this->HTTPRequest = $HTTPRequest;
 		self::$routes = !empty(self::$routes) ? self::$routes : json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
 		$this->setRoute();
 	}
@@ -53,10 +53,11 @@ class Router
 		}
 	}
 
-	public function runController()
+	public function run()
 	{
 		$controller = '\Controller\\'.ucfirst($this->route->controller);
-		new $controller($this->route);
+		$controller = new $controller($this->HTTPRequest, $this->route->action);
+		$controller->run();
 	}
 
 	// // generate URL from route name and param

@@ -1,15 +1,16 @@
 <?php
 namespace Controller;
 
+use \Controller\Controller;
 use \QFram\Template;
 use \Model\Mapper;
 
 /**
 * Episode Controller
 */
-class Episode
+class Episode extends Controller
 {
-	function __construct($route)
+	public function show()
 	{
 		$page = new Template('page');
 		$page->language = "fr";
@@ -30,7 +31,7 @@ class Episode
 		$episodes_mapper = new Mapper\Episodes($db);
 
 		$episodeTemplate = new Template('episode');
-		$episodeTemplate->episode = $episodes_mapper->get($route->vars['number']);
+		$episodeTemplate->episode = $episodes_mapper->get($this->HTTPRequest->GETData('number'));
 
 		$page->view = $episodeTemplate->render();
 

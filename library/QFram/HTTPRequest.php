@@ -20,4 +20,9 @@ class HTTPRequest
 	{
 		$_GET = array_merge($_GET, $vars);
 	}
+
+	public function GETData($key)
+	{
+		return isset($_GET[$key]) ? $_GET[$key] : null;
+	}
 }

@@ -1,15 +1,16 @@
 <?php
 namespace Controller;
 
+use \Controller\Controller;
 use \QFram\Template;
 use \Model\Mapper;
 
 /**
 * Home Controller
 */
-class Home
+class Home extends Controller
 {
-	function __construct()
+	public function show()
 	{
 		$page = new Template('page');
 		$page->language = "fr";

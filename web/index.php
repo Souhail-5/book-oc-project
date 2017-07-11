@@ -21,4 +21,4 @@ $loader->addNamespace('View', __DIR__.'/../app/views');
 $loader->addNamespace('Controller', __DIR__.'/../app/controllers');
 
 $router = new Router(new HTTPRequest);
-$router->runController();
+$router->run();
