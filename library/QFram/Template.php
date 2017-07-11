@@ -6,7 +6,7 @@ use QFram\Router;
 /**
 * Template manager
 */
-class Template
+abstract class Template
 {
 	private $_path;
 	private $_data;
@@ -27,7 +27,7 @@ class Template
 		return array_key_exists($property, $this->_data) ? $this->_data[$property] : null;
 	}
 
-	protected function path($route_name, array $vars)
+	public function path($route_name, array $vars)
 	{
 		return Router::getPath($route_name, $vars);
 	}
