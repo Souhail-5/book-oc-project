@@ -2,7 +2,8 @@
 namespace Controller;
 
 use \Controller\Controller;
-use \QFram\Template;
+use \QFram\Page;
+use \QFram\Component;
 use \Model\Mapper;
 use \Model\Object;
 
@@ -13,19 +14,8 @@ class Episode extends Controller
 {
 	public function show()
 	{
-		$page = new Template('page');
-		$page->language = "fr";
-		$page->scripts = array(
-			'#',
-		);
-
-		$page->title = "Nom de l'épisode";
-		$page->stylesheets = array(
-			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
-			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
-			'/vendors/normalize/normalize.css',
-			'/assets/css/episode.css',
-		);
+		$this->page->title = "Nom de l'épisode";
+		$this->page->stylesheets[] = '/assets/css/episode.css';
 
 		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
@@ -41,23 +31,18 @@ class Episode extends Controller
 
 	public function newEpisode()
 	{
-		$page = new Template('page');
-		$page->language = "fr";
-		$page->scripts = array(
-			'#',
-		);
-
+		$page = new Page;
 		$page->title = "Nouvel épisode";
-		$page->stylesheets = array(
-			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
-			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
-			'/vendors/normalize/normalize.css',
-			'/assets/css/episode.css',
-		);
+		$page->addStylesheets(['/assets/css/episode.css']);
+		$page->addScripts([
+			'src' => 'https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i',
+			'execute' => '',
+		]);
+		$page->addCustomBtmScripts(["tinymce.init({ selector: '#episode-content' });"]);
 
-		$episode_object = new Object\Episode();
+		$episode_object = new Object\Episode;
 
-		$episodeTemplate = new Template('episode');
+		$episodeTemplate = new Component('episode');
 		$episodeTemplate->user = true;
 		$episodeTemplate->episode = $episode_object;
 

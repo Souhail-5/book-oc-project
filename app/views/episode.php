@@ -21,7 +21,7 @@
 			<div class="metadata">
 				<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
 			</div>
-			<p><?= $episode->text() ?></p>
+			<textarea id="episode-content"><?= $episode->text() ?></textarea>
 		</article>
 		<footer></footer>
 	</section>
