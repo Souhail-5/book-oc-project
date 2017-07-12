@@ -8,16 +8,20 @@ use QFram\Template;
 */
 class Page extends Template
 {
-	protected $language = "fr";
-	protected $title = "Billet simple pour l'Alaska";
-	protected $stylesheets =
-	[
-		'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
-		'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
-		'/vendors/normalize/normalize.css',
-	];
-	protected $scripts = [];
-	protected $custom_b_scripts = [];
+	public function __construct(array $data=array())
+	{
+		parent::__construct('page', $data);
+		$this->language = "fr";
+		$this->title = "Billet simple pour l'Alaska";
+		$this->stylesheets =
+		[
+			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
+			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
+			'/vendors/normalize/normalize.css',
+		];
+		$this->scripts = [];
+		$this->customBtmScripts = [];
+	}
 
 	public function addStylesheets(array $stylesheets)
 	{
@@ -44,5 +48,14 @@ class Page extends Template
 		}
 
 		$this->scripts = $ns;
+	}
+
+	public function addCustomBtmScripts(array $customBtmScripts)
+	{
+		$ns = $this->customBtmScripts;
+		foreach ($customBtmScripts as $script) {
+			$ns[] = $script;
+		}
+		$this->customBtmScripts = $ns;
 	}
 }
