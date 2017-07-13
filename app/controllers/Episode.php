@@ -21,7 +21,11 @@ class Episode extends Controller
 			'src' => 'https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i',
 			'execute' => '',
 		]);
-		$page->addCustomBtmScripts(["tinymce.init({ selector: '#episode-content' });"]);
+		$page->addCustomBtmScripts(["tinymce.init({
+			selector: '.editable-content',
+			inline: true,
+			theme: 'inlite'
+		});"]);
 
 		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
@@ -45,7 +49,14 @@ class Episode extends Controller
 			'src' => 'https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i',
 			'execute' => '',
 		]);
-		$page->addCustomBtmScripts(["tinymce.init({ selector: '#episode-content' });"]);
+		$page->addCustomBtmScripts(["tinymce.init({
+			selector: '.editable-content',
+			inline: true,
+			theme: 'inlite',
+			selection_toolbar: 'bold italic | blockquote h2 h3',
+			insert_toolbar: '',
+			branding: false
+		});"]);
 
 		$episode_object = new Object\Episode;
 

@@ -4,15 +4,11 @@
 			<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 		</header>
 		<article class="episode">
+		<form action="" method="POST">
 			<header>
 				<a href="<?= $path('root') ?>">< Accueil</a><br>
-				<?php if (!empty($user)): ?>
-					<span><input type="text" name="number" placeholder="23" value="<?= $episode->number() ?>"></span>
-					<h1><input type="text" name="title" placeholder="Il était une fois ..." value="<?= $episode->title() ?>"></h1>
-				<?php else: ?>
-					<span># <?= $episode->number() ?></span>
-					<h1><?= $episode->title() ?></h1>
-				<?php endif; ?>
+				<span class="editable-content"># <?= $episode->number() ?></span>
+				<h1 class="editable-content"><?= $episode->title() ?></h1>
 			</header>
 			<div class="metadata">
 				<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->publish_datetime() ?></time>
@@ -21,7 +17,9 @@
 			<div class="metadata">
 				<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
 			</div>
-			<textarea id="episode-content"><?= $episode->text() ?></textarea>
+			<div class="editable-content" placeholder="test" style="min-height: 500px;">Edit me ! <?= $episode->text() ?></div>
+			<button type="submit">Send</button>
+		</form>
 		</article>
 		<footer></footer>
 	</section>
