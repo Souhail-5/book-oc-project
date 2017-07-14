@@ -1,19 +1,22 @@
 <?php
 namespace Controller;
 
-use \QFram\HTTPRequest;
+use \QFram\HttpRequest;
+use \QFram\HttpResponse;
 
 /**
 * Controller Base
 */
 abstract class Controller
 {
-	protected $HTTPRequest;
+	protected $HttpRequest;
+	protected $HttpResponse;
 	protected $action;
 
-	public function __construct(HTTPRequest $HTTPRequest, $action)
+	public function __construct(HttpRequest $HttpRequest, HttpResponse $HttpResponse, $action)
 	{
-		$this->HTTPRequest = $HTTPRequest;
+		$this->HttpRequest = $HttpRequest;
+		$this->HttpResponse = $HttpResponse;
 		$this->setAction($action);
 	}
 

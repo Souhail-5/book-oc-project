@@ -1,7 +1,8 @@
 <?php
 use \QFram\Helper\Psr4AutoloaderClass;
 use \QFram\Router;
-use \QFram\HTTPRequest;
+use \QFram\HttpRequest;
+use \QFram\HttpResponse;
 
 require_once __DIR__.'/../library/QFram/helpers/Psr4AutoloaderClass.php';
 
@@ -20,5 +21,5 @@ $loader->addNamespace('Model\Service', __DIR__.'/../app/models/services');
 $loader->addNamespace('View', __DIR__.'/../app/views');
 $loader->addNamespace('Controller', __DIR__.'/../app/controllers');
 
-$router = new Router(new HTTPRequest);
+$router = new Router(new HttpRequest, new HttpResponse);
 $router->run();

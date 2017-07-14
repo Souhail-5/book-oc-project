@@ -2,6 +2,7 @@
 namespace QFram;
 
 use \QFram\HttpRequest;
+use \QFram\HttpResponse;
 use \QFram\Route;
 
 /**
@@ -10,13 +11,15 @@ use \QFram\Route;
 class Router
 {
 	protected $HttpRequest;
+	protected $HttpResponse;
 	protected $route;
 
 	protected static $routes;
 
-	public function __construct(HttpRequest $HttpRequest)
+	public function __construct(HttpRequest $HttpRequest, HttpResponse $HttpResponse)
 	{
 		$this->HttpRequest = $HttpRequest;
+		$this->HttpResponse = $HttpResponse;
 		self::$routes = !empty(self::$routes) ? self::$routes : json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
 		$this->setRoute();
 	}
@@ -56,7 +59,7 @@ class Router
 	public function run()
 	{
 		$controller = '\Controller\\'.ucfirst($this->route->controller);
-		$controller = new $controller($this->HttpRequest, $this->route->action);
+		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->route->action);
 		$controller->run();
 	}
 
