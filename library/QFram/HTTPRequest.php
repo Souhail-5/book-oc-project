@@ -25,4 +25,14 @@ class HTTPRequest
 	{
 		return isset($_GET[$key]) ? $_GET[$key] : null;
 	}
+
+	public function setPOSTData(array $vars)
+	{
+		$_POST = array_merge($_POST, $vars);
+	}
+
+	public function POSTData($key)
+	{
+		return isset($_POST[$key]) ? $_POST[$key] : null;
+	}
 }

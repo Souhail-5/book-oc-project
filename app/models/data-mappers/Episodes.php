@@ -37,15 +37,15 @@ class Episodes
 		$q = $this->db->prepare('
 			UPDATE episodes
 			SET number = :number, part=:part, title=:title, text=:text, status=:status, slug=:slug
-			WHERE id=:id
+			WHERE number=:number AND part=:part
 		');
 
-		$q->bindValue(':id', $episode->id());
-		$q->bindParam(':number', $episode->number());
-		$q->bindParam(':part', $episode->part());
-		$q->bindParam(':title', $episode->title());
-		$q->bindParam(':text', $episode->text());
+		$q->bindValue(':number', $episode->number());
+		$q->bindValue(':part', $episode->part());
+		$q->bindValue(':title', $episode->title());
+		$q->bindValue(':text', $episode->text());
 		$q->bindValue(':status', $episode->status());
+		$q->bindValue(':slug', $episode->slug());
 
 		$q->execute();
 	}
@@ -55,14 +55,23 @@ class Episodes
 		$this->db->exec('DELETE FROM episodes WHERE id = '.$episode->id());
 	}
 
-	public function get($id)
+	public function get($number, $slug)
 	{
-		$id = (int) $id;
+		$q = $this->db->prepare('
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug
+			FROM episodes
+			WHERE number=:number AND slug=:slug
+			LIMIT 1
+		');
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug FROM episodes WHERE number = '.$id);
+		$q->bindValue(':number', $number);
+		$q->bindValue(':slug', $slug);
+
+		$q->execute();
+
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
 
-		return new Episode($data);
+		return new Episode((array) $data);
 	}
 
 	public function getList()

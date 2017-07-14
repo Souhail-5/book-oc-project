@@ -6,8 +6,11 @@
 		<article class="episode">
 		<form action="" method="POST">
 			<header>
-				<a href="<?= $path('root') ?>">< Accueil</a><br>
-				<span class="editable-content"># <?= $episode->number() ?></span>
+				<a href="<?= $path('root') ?>">< Accueil</a>
+				<br>
+				Numéro <span class="editable-content"><?= $episode->number() ?></span>
+				<br>
+				Partie <span class="editable-content"><?= $episode->part() ?></span>
 				<h1 class="editable-content"><?= $episode->title() ?></h1>
 			</header>
 			<div class="metadata">
@@ -17,7 +20,7 @@
 			<div class="metadata">
 				<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
 			</div>
-			<div class="editable-content" placeholder="test" style="min-height: 500px;">Edit me ! <?= $episode->text() ?></div>
+			<div class="editable-content" placeholder="test" style="min-height: 500px;"><?= $episode->text() ?></div>
 			<button type="submit">Send</button>
 		</form>
 		</article>
