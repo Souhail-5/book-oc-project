@@ -12,7 +12,7 @@ class Episode
 	protected $title;
 	protected $text;
 	protected $publishDatetime;
-	protected $draftDatetime;
+	protected $modificationDatetime;
 	protected $nbrComments;
 	protected $status;
 	protected $slug;
@@ -37,7 +37,7 @@ class Episode
 	public function title() { return $this->title; }
 	public function text() { return $this->text; }
 	public function publishDatetime() { return $this->publishDatetime; }
-	public function draftDatetime() { return $this->draftDatetime; }
+	public function modificationDatetime() { return $this->modificationDatetime; }
 	public function nbrComments() { return $this->nbrComments; }
 	public function status() { return $this->status; }
 	public function slug() { return $this->slug; }
@@ -69,7 +69,7 @@ class Episode
 
 	public function setDraftDatetime($value)
 	{
-		$this->draftDatetime = $value;
+		$this->modificationDatetime = $value;
 	}
 
 	public function setNbrComments($value)
