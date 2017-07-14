@@ -17,8 +17,8 @@
 						</div>
 						<div class="episode-metadata">
 							<div>
-								<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->publish_datetime() ?></time>
-								<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbr_comments() ?> commentaires</a>
+								<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->publishDatetime() ?></time>
+								<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
 							</div>
 							<div>
 								<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>

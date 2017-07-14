@@ -8,11 +8,12 @@ class Episode
 {
 	protected $id;
 	protected $number;
+	protected $part;
 	protected $title;
 	protected $text;
-	protected $publish_datetime;
-	protected $draft_datetime;
-	protected $nbr_comments;
+	protected $publishDatetime;
+	protected $draftDatetime;
+	protected $nbrComments;
 	protected $status;
 	protected $slug;
 
@@ -32,17 +33,23 @@ class Episode
 
 	public function id() { return $this->id; }
 	public function number() { return $this->number; }
+	public function part() { return $this->part; }
 	public function title() { return $this->title; }
 	public function text() { return $this->text; }
-	public function publish_datetime() { return $this->publish_datetime; }
-	public function draft_datetime() { return $this->draft_datetime; }
-	public function nbr_comments() { return $this->nbr_comments; }
+	public function publishDatetime() { return $this->publishDatetime; }
+	public function draftDatetime() { return $this->draftDatetime; }
+	public function nbrComments() { return $this->nbrComments; }
 	public function status() { return $this->status; }
 	public function slug() { return $this->slug; }
 
 	public function setNumber($value)
 	{
 		$this->number = $value;
+	}
+
+	public function setPart($value)
+	{
+		$this->part = $value;
 	}
 
 	public function setTitle($value)
@@ -55,19 +62,19 @@ class Episode
 		$this->text = $value;
 	}
 
-	public function setPublish_datetime($value)
+	public function setPublishDatetime($value)
 	{
-		$this->publish_datetime = $value;
+		$this->publishDatetime = $value;
 	}
 
-	public function setDraft_datetime($value)
+	public function setDraftDatetime($value)
 	{
-		$this->draft_datetime = $value;
+		$this->draftDatetime = $value;
 	}
 
-	public function setNbr_comments($value)
+	public function setNbrComments($value)
 	{
-		$this->nbr_comments = $value;
+		$this->nbrComments = $value;
 	}
 
 	public function setStatus($value)
