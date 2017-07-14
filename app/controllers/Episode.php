@@ -18,11 +18,11 @@ class Episode extends Controller
 		$episodeTemplate = new Component('episode');
 		$episodeTemplate->user = true;
 		$episodeTemplate->episode = $episodes_service->getEpisode(
-			$this->HTTPRequest->GETData('number'),
-			$this->HTTPRequest->GETData('slug')
+			$this->HttpRequest->GETData('number'),
+			$this->HttpRequest->GETData('slug')
 		);
 
-		if ($this->HTTPRequest->method() == 'POST') {
+		if ($this->HttpRequest->method() == 'POST') {
 			try {
 				$q = $episodes_service->update($_POST);
 				$episodeTemplate->episode = $episodes_service->getEpisode(
@@ -31,10 +31,10 @@ class Episode extends Controller
 				);
 			} catch (\Exception $e) {
 				$episode_template->episode = $episodes_service->getNewEpisode([
-					'number' => $this->HTTPRequest->POSTData('mce_0'),
-					'part' => $this->HTTPRequest->POSTData('mce_1'),
-					'title' => $this->HTTPRequest->POSTData('mce_2'),
-					'text' => $this->HTTPRequest->POSTData('mce_3'),
+					'number' => $this->HttpRequest->POSTData('mce_0'),
+					'part' => $this->HttpRequest->POSTData('mce_1'),
+					'title' => $this->HttpRequest->POSTData('mce_2'),
+					'text' => $this->HttpRequest->POSTData('mce_3'),
 				]);
 				echo $e->getMessage();
 			}
@@ -65,15 +65,15 @@ class Episode extends Controller
 		$episode_template->user = true;
 		$episode_template->episode = $episodes_service->getNewEpisode();
 
-		if ($this->HTTPRequest->method() == 'POST') {
+		if ($this->HttpRequest->method() == 'POST') {
 			try {
 				$episodes_service->add($_POST);
 			} catch (\Exception $e) {
 				$episode_template->episode = $episodes_service->getNewEpisode([
-					'number' => $this->HTTPRequest->POSTData('mce_0'),
-					'part' => $this->HTTPRequest->POSTData('mce_1'),
-					'title' => $this->HTTPRequest->POSTData('mce_2'),
-					'text' => $this->HTTPRequest->POSTData('mce_3'),
+					'number' => $this->HttpRequest->POSTData('mce_0'),
+					'part' => $this->HttpRequest->POSTData('mce_1'),
+					'title' => $this->HttpRequest->POSTData('mce_2'),
+					'text' => $this->HttpRequest->POSTData('mce_3'),
 				]);
 				echo $e->getMessage();
 			}

@@ -2,9 +2,9 @@
 namespace QFram;
 
 /**
-* HTTP Request manager
+* Http Request manager
 */
-class HTTPRequest
+class HttpRequest
 {
 	public function getURI()
 	{

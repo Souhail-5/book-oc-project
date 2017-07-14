@@ -1,7 +1,7 @@
 <?php
 namespace QFram;
 
-use \QFram\HTTPRequest;
+use \QFram\HttpRequest;
 use \QFram\Route;
 
 /**
@@ -9,14 +9,14 @@ use \QFram\Route;
 */
 class Router
 {
-	protected $HTTPRequest;
+	protected $HttpRequest;
 	protected $route;
 
 	protected static $routes;
 
-	public function __construct(HTTPRequest $HTTPRequest)
+	public function __construct(HttpRequest $HttpRequest)
 	{
-		$this->HTTPRequest = $HTTPRequest;
+		$this->HttpRequest = $HttpRequest;
 		self::$routes = !empty(self::$routes) ? self::$routes : json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
 		$this->setRoute();
 	}
@@ -27,9 +27,9 @@ class Router
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
 			$route = new Route($route_name, $param['url'], $param['controller'], $param['action'], $param['varsNames']);
 
-			if ($route->match($this->HTTPRequest->getURI())) {
+			if ($route->match($this->HttpRequest->getURI())) {
 				$this->route = $route;
-				$this->HTTPRequest->setGETData($this->route->vars);
+				$this->HttpRequest->setGETData($this->route->vars);
 			}
 		}
 	}
@@ -56,7 +56,7 @@ class Router
 	public function run()
 	{
 		$controller = '\Controller\\'.ucfirst($this->route->controller);
-		$controller = new $controller($this->HTTPRequest, $this->route->action);
+		$controller = new $controller($this->HttpRequest, $this->route->action);
 		$controller->run();
 	}
 
