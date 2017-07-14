@@ -2,6 +2,7 @@
 namespace Model\Mapper;
 
 use \Model\Object\Episode;
+use \QFram\Helper\PDOFactory;
 
 /**
 * Episodes Manager
@@ -10,38 +11,41 @@ class Episodes
 {
 	protected $db;
 
-	function __construct($db)
+	function __construct()
 	{
-		$this->setDb($db);
+		$this->db = PDOFactory::getMysqlConnexion();
 	}
 
 	public function add(Episode $episode)
 	{
-		$q = $this->db->prepare('INSERT INTO episodes(number, title, text, publish_datetime, draft_datetime, nbr_comments, status) VALUES(:number, :title, :text, :publish_datetime, :draft_datetime, :nbr_comments, :status)');
+		$q = $this->db->prepare('
+			INSERT INTO episodes (number, part, title, text, slug)
+			VALUES (:number, :part, :title, :text, :slug)
+		');
 
 		$q->bindValue(':number', $episode->number());
+		$q->bindValue(':part', $episode->part());
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
-		!empty($episode->publish_datetime()) ? $q->bindValue(':publish_datetime', $episode->publish_datetime()) : $q->bindValue(':publish_datetime', "CURRENT_TIMESTAMP()");
-		!empty($episode->draft_datetime()) ? $q->bindValue(':draft_datetime', $episode->draft_datetime()) : $q->bindValue(':draft_datetime', "CURRENT_TIMESTAMP()");
-		$q->bindValue(':nbr_comments', $episode->nbr_comments());
-		$q->bindValue(':status', $episode->status());
+		$q->bindValue(':slug', $episode->slug());
 
 		$q->execute();
 	}
 
 	public function update(Episode $episode)
 	{
-		$q = $this->db->prepare('UPDATE episodes SET number = :number, title = :title, text = :text, publish_datetime = :publish_datetime, draft_datetime = :draft_datetime, nbr_comments = :nbr_comments, status = :status WHERE id = :id');
+		$q = $this->db->prepare('
+			UPDATE episodes
+			SET number = :number, part=:part, title=:title, text=:text, status=:status, slug=:slug
+			WHERE id=:id
+		');
 
-		$q->bindValue(':number', $episode->number());
-		$q->bindValue(':title', $episode->title());
-		$q->bindValue(':text', $episode->text());
-		$q->bindValue(':publish_datetime', $episode->publish_datetime());
-		$q->bindValue(':draft_datetime', $episode->draft_datetime());
-		$q->bindValue(':nbr_comments', $episode->nbr_comments());
-		$q->bindValue(':status', $episode->status());
 		$q->bindValue(':id', $episode->id());
+		$q->bindParam(':number', $episode->number());
+		$q->bindParam(':part', $episode->part());
+		$q->bindParam(':title', $episode->title());
+		$q->bindParam(':text', $episode->text());
+		$q->bindValue(':status', $episode->status());
 
 		$q->execute();
 	}
@@ -55,7 +59,7 @@ class Episodes
 	{
 		$id = (int) $id;
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status, slug FROM episodes WHERE number = '.$id);
+		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug FROM episodes WHERE number = '.$id);
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
 
 		return new Episode($data);
@@ -65,10 +69,22 @@ class Episodes
 	{
 		$episodes = [];
 
-		$q = $this->db->query('SELECT id, number, title, text, publish_datetime, draft_datetime, nbr_comments, status, slug FROM episodes ORDER BY number DESC');
+		$q = $this->db->query('SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug FROM episodes ORDER BY number DESC');
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
-			$episodes[] = new Episode($data);
+			$d = [
+				'id' => $data['id'],
+				'number' => $data['number'],
+				'part' => $data['part'],
+				'title' => $data['title'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'draftDatetime' => $data['modification_datetime'],
+				'nbrComments' => $data['nbr_comments'],
+				'status' => $data['status'],
+				'slug' => $data['slug'],
+			];
+			$episodes[] = new Episode($d);
 		}
 
 		return $episodes;

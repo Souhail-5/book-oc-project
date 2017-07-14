@@ -5,7 +5,7 @@ use \Controller\Controller;
 use \QFram\Page;
 use \QFram\Component;
 use \Model\Mapper;
-use \Model\Object;
+use \Model\Service;
 
 /**
 * Episode Controller
@@ -27,13 +27,11 @@ class Episode extends Controller
 			theme: 'inlite'
 		});"]);
 
-		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
-
-		$episodes_mapper = new Mapper\Episodes($db);
+		$episodes_service = new Service\Episodes;
 
 		$episodeTemplate = new Component('episode');
 		$episodeTemplate->user = true;
-		$episodeTemplate->episode = $episodes_mapper->get($this->HTTPRequest->GETData('number'));
+		$episodeTemplate->episode = $episodes_service->getById($this->HTTPRequest->GETData('number'));
 
 		$page->view = $episodeTemplate->render();
 
@@ -42,6 +40,12 @@ class Episode extends Controller
 
 	public function newEpisode()
 	{
+		$episodes_service = new Service\Episodes;
+
+		if ($this->HTTPRequest->method() == 'POST') {
+			$episodes_service->add($_POST);
+		}
+
 		$page = new Page;
 		$page->title = "Nouvel épisode";
 		$page->addStylesheets(['/assets/css/episode.css']);
@@ -58,11 +62,9 @@ class Episode extends Controller
 			branding: false
 		});"]);
 
-		$episode_object = new Object\Episode;
-
 		$episodeTemplate = new Component('episode');
 		$episodeTemplate->user = true;
-		$episodeTemplate->episode = $episode_object;
+		$episodeTemplate->episode = $episodes_service->blank();
 
 		$page->view = $episodeTemplate->render();
 
