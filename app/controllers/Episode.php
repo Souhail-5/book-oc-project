@@ -2,6 +2,7 @@
 namespace Controller;
 
 use \Controller\Controller;
+use \QFram\Router;
 use \QFram\Page;
 use \QFram\Component;
 use \Model\Mapper;
@@ -15,22 +16,20 @@ class Episode extends Controller
 	public function show()
 	{
 		$episodes_service = new Service\Episodes;
-		$episodeTemplate = new Component('episode');
-		$episodeTemplate->user = true;
-		$episodeTemplate->episode = $episodes_service->getEpisode(
-			$this->HttpRequest->GETData('number'),
-			$this->HttpRequest->GETData('slug')
-		);
+		$episode_template = new Component('episode');
+		$episode_template->user = true;
+		$episode_template->episode = $episodes_service->getEpisode($episodes_service->setNewEpisode([
+			'number' => $this->HttpRequest->GETData('number'),
+			'slug' => $this->HttpRequest->GETData('slug')
+		]));
 
 		if ($this->HttpRequest->method() == 'POST') {
 			try {
-				$q = $episodes_service->update($_POST);
-				$episodeTemplate->episode = $episodes_service->getEpisode(
-					$q->number(),
-					$q->slug()
-				);
+				$episodes_service->update($_POST);
+				$episode_template->episode = $episodes_service->getEpisode($episode_template->episode);
+				$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
 			} catch (\Exception $e) {
-				$episode_template->episode = $episodes_service->getNewEpisode([
+				$episode_template->episode = $episodes_service->setNewEpisode([
 					'number' => $this->HttpRequest->POSTData('mce_0'),
 					'part' => $this->HttpRequest->POSTData('mce_1'),
 					'title' => $this->HttpRequest->POSTData('mce_2'),
@@ -53,7 +52,7 @@ class Episode extends Controller
 			theme: 'inlite'
 		});"]);
 
-		$page->view = $episodeTemplate->render();
+		$page->view = $episode_template->render();
 
 		echo $page->render();
 	}
@@ -63,13 +62,13 @@ class Episode extends Controller
 		$episodes_service = new Service\Episodes;
 		$episode_template = new Component('episode');
 		$episode_template->user = true;
-		$episode_template->episode = $episodes_service->getNewEpisode();
+		$episode_template->episode = $episodes_service->setNewEpisode();
 
 		if ($this->HttpRequest->method() == 'POST') {
 			try {
 				$episodes_service->add($_POST);
 			} catch (\Exception $e) {
-				$episode_template->episode = $episodes_service->getNewEpisode([
+				$episode_template->episode = $episodes_service->setNewEpisode([
 					'number' => $this->HttpRequest->POSTData('mce_0'),
 					'part' => $this->HttpRequest->POSTData('mce_1'),
 					'title' => $this->HttpRequest->POSTData('mce_2'),

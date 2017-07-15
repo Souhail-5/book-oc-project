@@ -18,7 +18,7 @@ class Episodes
 		$this->episodes = new Mapper\Episodes;
 	}
 
-	public function getNewEpisode(array $data=[])
+	public function setNewEpisode(array $data=[])
 	{
 		return new Object\Episode($data);
 	}
@@ -72,7 +72,6 @@ class Episodes
 
 		try {
 			$this->episodes->update($episode);
-			return $episode;
 		} catch (\Exception $e) {
 			if ($e->getCode() == 23000) {
 				$m0 = ($episode->part() == 0) ? '' : " (partie {$episode->part()})";
@@ -89,8 +88,8 @@ class Episodes
 		$this->episodes->delete($id);
 	}
 
-	public function getEpisode($number, $slug)
+	public function getEpisode(Object\Episode $episode)
 	{
-		return $this->episodes->get($number, $slug);
+		return $this->episodes->get($episode);
 	}
 }

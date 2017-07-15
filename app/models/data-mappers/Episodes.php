@@ -55,17 +55,22 @@ class Episodes
 		$this->db->exec('DELETE FROM episodes WHERE id = '.$episode->id());
 	}
 
-	public function get($number, $slug)
+	public function get(Episode $episode)
 	{
-		$q = $this->db->prepare('
+		$where = !empty($episode->id()) ? 'id=:id' : 'number=:number AND slug=:slug';
+		$q = $this->db->prepare("
 			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug
 			FROM episodes
-			WHERE number=:number AND slug=:slug
+			WHERE {$where}
 			LIMIT 1
-		');
+		");
 
-		$q->bindValue(':number', $number);
-		$q->bindValue(':slug', $slug);
+		if (!empty($episode->id())) {
+			$q->bindValue(':id', $episode->id());
+		} else {
+			$q->bindValue(':number', $episode->number());
+			$q->bindValue(':slug', $episode->slug());
+		}
 
 		$q->execute();
 

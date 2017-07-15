@@ -20,7 +20,7 @@
 			<div class="metadata">
 				<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
 			</div>
-			<div class="editable-content" placeholder="test" style="min-height: 500px;"><?= $episode->text() ?></div>
+			<div class="editable-content" placeholder="test" style="min-height: 50px;"><?= $episode->text() ?></div>
 			<button type="submit">Send</button>
 		</form>
 		</article>
