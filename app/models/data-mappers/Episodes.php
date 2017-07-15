@@ -37,9 +37,10 @@ class Episodes
 		$q = $this->db->prepare('
 			UPDATE episodes
 			SET number = :number, part=:part, title=:title, text=:text, status=:status, slug=:slug
-			WHERE number=:number AND part=:part
+			WHERE id=:id
 		');
 
+		$q->bindValue(':id', $episode->id());
 		$q->bindValue(':number', $episode->number());
 		$q->bindValue(':part', $episode->part());
 		$q->bindValue(':title', $episode->title());

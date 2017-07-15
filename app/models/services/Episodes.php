@@ -53,22 +53,14 @@ class Episodes
 		}
 	}
 
-	public function update($data)
+	public function update(Object\Episode $episode)
 	{
-		if (empty($data['mce_0']) || empty($data['mce_2']) || empty($data['mce_3'])) {
+		if (empty($episode->title()) || empty($episode->title()) || empty($episode->title())) {
 			throw new \Exception('Tous les champs sont obligatoires');
 		}
 
-		$data['mce_1'] = !empty($data['mce_1']) ? $data['mce_1'] : 0;
-		$data['slug'] = $this->slugify($data['mce_2']);
-
-		$episode = new Object\Episode([
-			'number' => $data['mce_0'],
-			'part' => $data['mce_1'],
-			'title' => $data['mce_2'],
-			'text' => $data['mce_3'],
-			'slug' => $data['slug']
-		]);
+		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
+		$episode->setSlug($this->slugify($episode->title()));
 
 		try {
 			$this->episodes->update($episode);

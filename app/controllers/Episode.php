@@ -25,8 +25,15 @@ class Episode extends Controller
 
 		if ($this->HttpRequest->method() == 'POST') {
 			try {
-				$episodes_service->update($_POST);
+				$episode_template->episode->setNumber($_POST['mce_0']);
+				$episode_template->episode->setPart($_POST['mce_1']);
+				$episode_template->episode->setTitle($_POST['mce_2']);
+				$episode_template->episode->setText($_POST['mce_3']);
+
+				$episodes_service->update($episode_template->episode);
+
 				$episode_template->episode = $episodes_service->getEpisode($episode_template->episode);
+
 				$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
 			} catch (\Exception $e) {
 				$episode_template->episode = $episodes_service->setNewEpisode([
