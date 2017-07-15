@@ -72,7 +72,7 @@ class Episode
 		$this->publishDatetime = $value;
 	}
 
-	public function setDraftDatetime($value)
+	public function setModificationDatetime($value)
 	{
 		$this->modificationDatetime = $value;
 	}

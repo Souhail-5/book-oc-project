@@ -7,6 +7,7 @@ use \QFram\HttpResponse;
 /**
 * Controller Base
 */
+// To-do: Move to /library/QFram
 abstract class Controller
 {
 	protected $HttpRequest;

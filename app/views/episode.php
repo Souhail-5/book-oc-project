@@ -14,7 +14,7 @@
 				<h1 class="editable-content"><?= $episode->title() ?></h1>
 			</header>
 			<div class="metadata">
-				<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->publishDatetime() ?></time>
+				<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->modificationDatetime() ?></time>
 				<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
 			</div>
 			<div class="metadata">

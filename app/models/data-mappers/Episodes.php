@@ -76,8 +76,20 @@ class Episodes
 		$q->execute();
 
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		$map = [
+			'id' => $data['id'],
+			'number' => $data['number'],
+			'part' => $data['part'],
+			'title' => $data['title'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'modificationDatetime' => $data['modification_datetime'],
+			'nbrComments' => $data['nbr_comments'],
+			'status' => $data['status'],
+			'slug' => $data['slug'],
+		];
 
-		return new Episode((array) $data);
+		return new Episode((array) $map);
 	}
 
 	public function getList()
@@ -87,19 +99,19 @@ class Episodes
 		$q = $this->db->query('SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug FROM episodes ORDER BY number DESC');
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
-			$d = [
+			$map = [
 				'id' => $data['id'],
 				'number' => $data['number'],
 				'part' => $data['part'],
 				'title' => $data['title'],
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
-				'draftDatetime' => $data['modification_datetime'],
+				'modificationDatetime' => $data['modification_datetime'],
 				'nbrComments' => $data['nbr_comments'],
 				'status' => $data['status'],
 				'slug' => $data['slug'],
 			];
-			$episodes[] = new Episode($d);
+			$episodes[] = new Episode($map);
 		}
 
 		return $episodes;
