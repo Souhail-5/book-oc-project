@@ -75,9 +75,9 @@ class Episodes
 		}
 	}
 
-	public function delete($id)
+	public function delete(Object\Episode $episode)
 	{
-		$this->episodes->delete($id);
+		$this->episodes->delete($episode);
 	}
 
 	public function getEpisode(Object\Episode $episode)

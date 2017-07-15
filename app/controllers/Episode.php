@@ -30,11 +30,13 @@ class Episode extends Controller
 				$episode_template->episode->setTitle($_POST['mce_2']);
 				$episode_template->episode->setText($_POST['mce_3']);
 
-				$episodes_service->update($episode_template->episode);
+				if ($_POST['action'] == 'update') $episodes_service->update($episode_template->episode);
+				if ($_POST['action'] == 'delete') $episodes_service->delete($episode_template->episode);
 
 				$episode_template->episode = $episodes_service->getEpisode($episode_template->episode);
 
-				$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+				if ($_POST['action'] == 'update') $this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+				if ($_POST['action'] == 'delete') $this->HttpResponse->redirect(Router::getPath('root'));
 			} catch (\Exception $e) {
 				$episode_template->episode = $episodes_service->setNewEpisode([
 					'number' => $this->HttpRequest->POSTData('mce_0'),

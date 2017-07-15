@@ -18,10 +18,10 @@
 				<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
 			</div>
 			<div class="metadata">
-				<span class="act-delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</span>
+				<button class="act-delete" type="submit" name="action" value="delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
 			</div>
 			<div class="editable-content" placeholder="test" style="min-height: 50px;"><?= $episode->text() ?></div>
-			<button type="submit">Send</button>
+			<button type="submit" name="action" value="update">Send</button>
 		</form>
 		</article>
 		<footer></footer>

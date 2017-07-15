@@ -53,7 +53,7 @@ class Episodes
 
 	public function delete(Episode $episode)
 	{
-		$this->db->exec('DELETE FROM episodes WHERE id = '.$episode->id());
+		$this->db->exec("DELETE FROM episodes WHERE id={$episode->id()}");
 	}
 
 	public function get(Episode $episode)
