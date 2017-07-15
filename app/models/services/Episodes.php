@@ -25,7 +25,7 @@ class Episodes
 
 	public function add(Object\Episode $episode)
 	{
-		if (empty($episode->title()) || empty($episode->title()) || empty($episode->title())) {
+		if (empty($episode->number()) || empty($episode->title()) || empty($episode->text())) {
 			throw new \Exception('Tous les champs sont obligatoires');
 		}
 
@@ -47,7 +47,7 @@ class Episodes
 
 	public function update(Object\Episode $episode)
 	{
-		if (empty($episode->title()) || empty($episode->title()) || empty($episode->title())) {
+		if (empty($episode->number()) || empty($episode->title()) || empty($episode->text())) {
 			throw new \Exception('Tous les champs sont obligatoires');
 		}
 
