@@ -104,9 +104,4 @@ class Episodes
 
 		return $episodes;
 	}
-
-	public function setDb(\PDO $db)
-	{
-		$this->db = $db;
-	}
 }
