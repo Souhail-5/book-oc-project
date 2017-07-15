@@ -42,6 +42,11 @@ class Episode
 	public function status() { return $this->status; }
 	public function slug() { return $this->slug; }
 
+	public function setId($value)
+	{
+		$this->id = $value;
+	}
+
 	public function setNumber($value)
 	{
 		$this->number = $value;
