@@ -59,7 +59,10 @@ class Episode extends Controller
 		$page->addCustomBtmScripts(["tinymce.init({
 			selector: '.editable-content',
 			inline: true,
-			theme: 'inlite'
+			theme: 'inlite',
+			selection_toolbar: 'bold italic | blockquote h2 h3',
+			insert_toolbar: '',
+			branding: false
 		});"]);
 
 		$page->view = $episode_template->render();
