@@ -17,18 +17,8 @@ class Page extends Template
 		[
 			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
 			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
-			'/vendors/kube/dist/css/kube.min.css',
 		];
-		$this->scripts = [
-			[
-				'src' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',
-				'execute' => 'defer',
-			],
-			[
-				'src' => '/vendors/kube/dist/js/kube.min.js',
-				'execute' => 'async',
-			]
-		];
+		$this->scripts = [];
 		$this->customBtmScripts = [];
 	}
 
