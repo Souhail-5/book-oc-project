@@ -15,8 +15,8 @@ class Page extends Template
 		$this->title = "Billet simple pour l'Alaska";
 		$this->stylesheets =
 		[
-			'https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300',
-			'/vendors/font-awesome-4.7.0/css/font-awesome.min.css',
+			'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300">',
+			'<link rel="stylesheet" href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css">',
 		];
 		$this->scripts = [];
 		$this->customBtmScripts = [];
@@ -24,29 +24,12 @@ class Page extends Template
 
 	public function addStylesheets(array $stylesheets)
 	{
-		$ns = $this->stylesheets;
-		foreach ($stylesheets as $stylesheet) {
-			$ns[] = $stylesheet;
-		}
-		$this->stylesheets = $ns;
+		$this->stylesheets = array_merge($this->stylesheets, $stylesheets);
 	}
 
 	public function addScripts(array $scripts)
 	{
-		$ns = $this->scripts;
-		if (isset($scripts[0]) && is_array($scripts[0])) {
-			foreach ($scripts as $script) {
-				$ns[] = $script;
-			}
-		} else {
-			$ns[] =
-			[
-				'src' => $scripts['src'],
-				'execute' => $scripts['execute'],
-			];
-		}
-
-		$this->scripts = $ns;
+		$this->scripts = array_merge($this->scripts, $scripts);
 	}
 
 	public function addCustomBtmScripts(array $customBtmScripts)

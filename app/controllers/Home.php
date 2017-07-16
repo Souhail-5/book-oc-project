@@ -15,7 +15,9 @@ class Home extends Controller
 	{
 		$page = new Page();
 		$page->title = "Billet simple pour l'Alaska";
-		$page->addStylesheets(['/assets/css/main.css']);
+		$page->addStylesheets([
+			'<link rel="stylesheet" href="/assets/css/main.css">',
+		]);
 
 		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 

@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title><?= $title; ?></title>
 	<?php foreach ($stylesheets as $stylesheet): ?>
-		<link rel="stylesheet" href="<?= $stylesheet ?>">
+		<?= $stylesheet ?>
 	<?php endforeach; ?>
 	<?php foreach ($scripts as $script): ?>
-		<script src="<?= $script['src'] ?>" <?= $script['execute'] ?>></script>
+		<?= $script ?>
 	<?php endforeach; ?>
 </head>
 <body>
