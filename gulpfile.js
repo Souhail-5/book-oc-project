@@ -13,7 +13,13 @@ var sassOptions = {
 };
 
 gulp.task('browser-sync', function() {
-
+	browserSync.init({
+		proxy: {
+			target: "localhost:8888",
+			ws: true
+		},
+		port: 8888
+	});
 });
 
 gulp.task('sass', function () {
@@ -24,24 +30,17 @@ gulp.task('sass', function () {
 			.pipe(autoprefixer())
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(output))
-		.pipe(browserSync.stream());
-});
-
-gulp.task('watch', function() {
-	browserSync.init({
-		proxy: {
-			target: "localhost:8888",
-			ws: true
-		},
-		port: 8888
-	});
-
-	return gulp
-		.watch(input, ['sass'])
-		.on('change', function(event) {
-			browserSync.reload();
+		.pipe(browserSync.reload({
+			stream: true
+		}))
+		.pipe(function() {
 			console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 		});
 });
 
-gulp.task('default', ['sass', 'watch']);
+gulp.task('watch', ['browser-sync'], function() {
+	gulp.watch(input, ['sass']);
+	gulp.watch('./app/**/*.php', browserSync.reload);
+});
+
+gulp.task('default', ['watch']);
