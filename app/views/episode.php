@@ -33,7 +33,7 @@
 							Enregistrer
 						</button>
 					</div>
-					<div id="episode-text" class="editable-content" placeholder="test" style="min-height: 150px;">
+					<div class="editable-content episode-text" placeholder="test" style="min-height: 150px;">
 						<?= $episode->text() ?>
 					</div>
 				</form>
