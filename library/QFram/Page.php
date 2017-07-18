@@ -17,6 +17,7 @@ class Page extends Template
 		[
 			'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300">',
 			'<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.css">',
+			'<link rel="stylesheet" href="/assets/css/main.css">',
 		];
 		$this->scripts =
 		[

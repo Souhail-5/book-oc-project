@@ -50,9 +50,6 @@ class Episode extends Controller
 
 		$page = new Page;
 		$page->title = "Nom de l'épisode";
-		$page->addStylesheets([
-			'<link rel="stylesheet" href="/assets/css/episode.css">',
-		]);
 		$page->addScripts([
 			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
 		]);
@@ -102,9 +99,6 @@ class Episode extends Controller
 
 		$page = new Page;
 		$page->title = "Nouvel épisode";
-		$page->addStylesheets([
-			'<link rel="stylesheet" href="/assets/css/episode.css">',
-		]);
 		$page->addScripts([
 			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>',
 		]);
