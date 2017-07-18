@@ -28,13 +28,13 @@ class Comment
 		}
 	}
 
-	public function id() { return $this->id; };
-	public function episodeId() { return $this->episodeId; };
-	public function name() { return $this->name; };
-	public function email() { return $this->email; };
-	public function text() { return $this->text; };
-	public function publishDatetime() { return $this->publishDatetime; };
-	public function nbrSignal() { return $this->nbrSignal; };
+	public function id() { return $this->id; }
+	public function episodeId() { return $this->episodeId; }
+	public function name() { return $this->name; }
+	public function email() { return $this->email; }
+	public function text() { return $this->text; }
+	public function publishDatetime() { return $this->publishDatetime; }
+	public function nbrSignal() { return $this->nbrSignal; }
 
 	protected function setId($value)
 	{
