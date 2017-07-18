@@ -17,6 +17,8 @@ class Episode extends Controller
 	{
 		$episodes_service = new Service\Episodes;
 		$episode_template = new Component('episode');
+		$new_comment_form = new Component('new-comment-form');
+		$episode_template->new_comment_form = $new_comment_form->render();
 		$episode_template->user = true;
 		$episode_template->episode = $episodes_service->getEpisode($episodes_service->setNewEpisode([
 			'number' => $this->HttpRequest->GETData('number'),

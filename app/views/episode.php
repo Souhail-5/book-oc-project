@@ -40,4 +40,9 @@
 			</article>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-10 offset-md-1 bg-white px-5">
+			<?= $new_comment_form ?>
+		</div>
+	</div>
 </div>
