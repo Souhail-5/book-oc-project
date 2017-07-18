@@ -1,12 +1,12 @@
 <!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
 	<div id="main" class="row d-md-flex align-items-md-center">
-		<div id="poster-col" class="align-self-md-start col-md-3 offset-md-1">
+		<div id="main-poster" class="align-self-md-start col-md-3 offset-md-1">
 			<figure class="poster">
 				<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 			</figure>
 		</div>
-		<div id="main-col" class="col-md-8 offset-md-3">
+		<div id="main-content" class="col-md-8 offset-md-3">
 			<div id="admin-bar" class="justify-content-end navbar sticky-top navbar-light">
 				<div class="form-inline ml-auto">
 					<div class="dropdown">
