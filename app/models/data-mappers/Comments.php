@@ -19,10 +19,11 @@ class Comments
 	public function add(Comment $comment)
 	{
 		$q = $this->db->prepare('
-			INSERT INTO comments (name, email, text)
-			VALUES (:name, :email, :text)
+			INSERT INTO comments (episode_id, name, email, text)
+			VALUES (:episode_id, :name, :email, :text)
 		');
 
+		$q->bindValue(':episode_id', $comment->episode_id());
 		$q->bindValue(':name', $comment->name());
 		$q->bindValue(':email', $comment->email());
 		$q->bindValue(':text', $comment->text());
@@ -52,19 +53,29 @@ class Comments
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
 	}
 
-	public function getList()
+	public function getList($episode_id)
 	{
 		$comments = [];
 
-		$q = $this->db->query('SELECT id, name, email, text, publish_datetime, signal FROM comments ORDER BY publish_datetime DESC');
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, signal
+			FROM comments
+			WHERE episode_id=:episode_id
+			ORDER BY publish_datetime DESC
+		');
+
+		$q->bindValue(':episode_id', $episode_id);
+
+		$q->execute();
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
 			$map = [
 				'id' => $data['id'],
+				'episodeId' => $data['episode_id'],
 				'name' => $data['name'],
 				'email' => $data['email'],
 				'text' => $data['text'],
-				'publishDatetime' => $data['publishDatetime'],
+				'publishDatetime' => $data['publish_datetime'],
 				'signal' => $data['signal'],
 			];
 			$comments[] = new Comment($map);
@@ -77,15 +88,23 @@ class Comments
 	{
 		$comments = [];
 
-		$q = $this->db->query('SELECT id, name, email, text, publish_datetime, signal FROM comments WHERE signal>0 ORDER BY publish_datetime DESC');
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, signal
+			FROM comments
+			WHERE signal>0
+			ORDER BY publish_datetime DESC
+		');
+
+		$q->execute();
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
 			$map = [
 				'id' => $data['id'],
+				'episodeId' => $data['episode_id'],
 				'name' => $data['name'],
 				'email' => $data['email'],
 				'text' => $data['text'],
-				'publishDatetime' => $data['publishDatetime'],
+				'publishDatetime' => $data['publish_datetime'],
 				'signal' => $data['signal'],
 			];
 			$comments[] = new Comment($map);

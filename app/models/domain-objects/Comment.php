@@ -7,6 +7,7 @@ namespace Model\Object;
 class Comment
 {
 	protected $id;
+	protected $episodeId;
 	protected $name;
 	protected $email;
 	protected $text;
@@ -28,6 +29,7 @@ class Comment
 	}
 
 	public function id() { return $this->id; };
+	public function episodeId() { return $this->episodeId; };
 	public function name() { return $this->name; };
 	public function email() { return $this->email; };
 	public function text() { return $this->text; };
@@ -37,6 +39,11 @@ class Comment
 	protected function setId($value)
 	{
 		$this->id = $value;
+	}
+
+	protected function setEpisodeId($value)
+	{
+		$this->episodeId = $value;
 	}
 
 	protected function setName($value)

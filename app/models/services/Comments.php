@@ -54,12 +54,12 @@ class Comments
 		$this->comments->delete($comment);
 	}
 
-	public function getList()
+	public function getList($episode_id)
 	{
 		return $this->comments->getList();
 	}
 
-	public function getSignaled()
+	public function getSignaled($episode_id)
 	{
 		return $this->comments->getSignaled();
 	}
