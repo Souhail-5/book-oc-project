@@ -26,10 +26,10 @@
 						<a href="#"><?= $episode->nbrComments() ?> commentaires</a>
 					</div>
 					<div class="text-center">
-						<button class="act-delete" type="submit" name="action" value="delete">
+						<button class="act-delete" type="submit" name="action" value="delete-episode">
 							Supprimer
 						</button>
-						<button type="submit" name="action" value="update">
+						<button type="submit" name="action" value="update-episode">
 							Enregistrer
 						</button>
 					</div>
