@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="<?= $language; ?>">
+<html lang="<?= $language ?>">
 <head>
 	<meta charset="UTF-8">
-	<title><?= $title; ?></title>
+	<title><?= $title ?></title>
 	<?php foreach ($stylesheets as $stylesheet): ?>
 		<?= $stylesheet ?>
 	<?php endforeach; ?>
@@ -10,7 +10,7 @@
 		<?= $script ?>
 	<?php endforeach; ?>
 </head>
-<body>
+<body id="<?= $bodyId ?>">
 	<?= $view; ?>
 	<?php foreach ($customBtmScripts as $script): ?>
 		<script type="text/javascript"><?= $script ?></script>

@@ -15,6 +15,7 @@ class Home extends Controller
 	{
 		$page = new Page();
 		$page->title = "Billet simple pour l'Alaska";
+		$page->bodyId = "home";
 
 		// To-do Use a Service Class
 		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
