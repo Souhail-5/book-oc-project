@@ -53,7 +53,7 @@ class Episode extends Controller
 		$page->addStylesheets([
 			'<link rel="stylesheet" href="/assets/css/episode.css">',
 		]);
-		$page->addScripts([,
+		$page->addScripts([
 			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
 		]);
 		$page->addCustomBtmScripts(["tinymce.init({
