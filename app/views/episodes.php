@@ -29,7 +29,11 @@
 					<?php foreach ($episodes as $episode): ?>
 					<li>
 						<div class="mb-4">
-							<h2 class="h3"><span class="badge badge-default"># <?= $episode->number() ?></span><span class="badge badge-pill badge-default"><?= $episode->part() ?></span><a href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>"><?= $episode->title() ?></a></h2>
+							<h2 class="h3">
+								<span class="badge badge-default"># <?= $episode->number() ?></span>
+								<span class="badge badge-pill badge-default"><?= $episode->part() ?></span>
+								<a href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>"><?= $episode->title() ?></a>
+							</h2>
 						</div>
 						<div class="d-flex justify-content-between">
 							<time datetime="YYYY-MM-DD">
