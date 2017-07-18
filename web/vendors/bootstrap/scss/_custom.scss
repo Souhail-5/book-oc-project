@@ -2,3 +2,10 @@
 //
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
+
+$font-family-sans-serif: 'Lato', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:      'Merriweather', Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:  'Inconsolata', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:       $font-family-sans-serif;
+
+$headings-font-family:   $font-family-monospace;
