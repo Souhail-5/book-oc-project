@@ -1,7 +1,7 @@
 <form action="" method="POST">
 	<div class="form-group">
 	<label for="comment-name">Nom</label>
-		<input type="text" class="form-control" id="comment-name" placeholder="Votre nom">
+		<input type="text" class="form-control" id="comment-name" name="comment-name" placeholder="Votre nom">
 	</div>
 	<div class="form-group">
 		<label for="comment-email">Adresse e-mail</label>

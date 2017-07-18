@@ -23,7 +23,7 @@ class Comments
 			VALUES (:episode_id, :name, :email, :text)
 		');
 
-		$q->bindValue(':episode_id', $comment->episode_id());
+		$q->bindValue(':episode_id', $comment->episodeId());
 		$q->bindValue(':name', $comment->name());
 		$q->bindValue(':email', $comment->email());
 		$q->bindValue(':text', $comment->text());
