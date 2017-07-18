@@ -16,6 +16,7 @@ class Episode extends Controller
 	public function show()
 	{
 		$episodes_service = new Service\Episodes;
+		$comments_service = new Service\Comments;
 		$episode_template = new Component('episode');
 		$new_comment_form = new Component('new-comment-form');
 		$episode_template->new_comment_form = $new_comment_form->render();
@@ -25,7 +26,7 @@ class Episode extends Controller
 			'slug' => $this->HttpRequest->GETData('slug')
 		]));
 
-		if ($this->HttpRequest->method() == 'POST') {
+		if ($this->HttpRequest->method() == 'POST' && ($_POST['action'] == 'update-episode' || $_POST['action'] == 'delete-episode')) {
 			try {
 				$episode_template->episode->setNumber($this->HttpRequest->POSTData('mce_0'));
 				$episode_template->episode->setPart($this->HttpRequest->POSTData('mce_1'));
@@ -46,6 +47,20 @@ class Episode extends Controller
 					'title' => $this->HttpRequest->POSTData('mce_2'),
 					'text' => $this->HttpRequest->POSTData('mce_3'),
 				]);
+				echo $e->getMessage();
+			}
+		}
+
+		if ($this->HttpRequest->method() == 'POST' && $_POST['action'] == 'new-comment') {
+			try {
+				$new_comment = $comments_service->setNewComment([
+					'episodeId' => $episode_template->episode->id(),
+					'name' => $this->HttpRequest->POSTData('comment-name'),
+					'email' => $this->HttpRequest->POSTData('comment-email'),
+					'text' => $this->HttpRequest->POSTData('comment-text'),
+				]);
+				$comments_service->add($new_comment);
+			} catch (\Exception $e) {
 				echo $e->getMessage();
 			}
 		}
@@ -74,6 +89,7 @@ class Episode extends Controller
 	{
 		$episodes_service = new Service\Episodes;
 		$episode_template = new Component('episode');
+		$episode_template->new_comment_form = false;
 		$episode_template->user = true;
 		$episode_template->episode = $episodes_service->setNewEpisode();
 
