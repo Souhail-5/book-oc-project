@@ -12,7 +12,7 @@ class Comment
 	protected $email;
 	protected $text;
 	protected $publishDatetime;
-	protected $signal;
+	protected $nbrSignal;
 
 	public function __construct(array $data = [])
 	{
@@ -34,7 +34,7 @@ class Comment
 	public function email() { return $this->email; };
 	public function text() { return $this->text; };
 	public function publishDatetime() { return $this->publishDatetime; };
-	public function signal() { return $this->signal; };
+	public function nbrSignal() { return $this->nbrSignal; };
 
 	protected function setId($value)
 	{
@@ -66,8 +66,8 @@ class Comment
 		$this->publishDatetime = $value;
 	}
 
-	protected function setSignal($value)
+	protected function setNbrSignal($value)
 	{
-		$this->signal = $value;
+		$this->nbrSignal = $value;
 	}
 }

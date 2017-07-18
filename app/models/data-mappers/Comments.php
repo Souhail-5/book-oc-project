@@ -35,7 +35,7 @@ class Comments
 	{
 		$q = $this->db->prepare('
 			UPDATE comments
-			SET name=:name, email=:email, text=:text, signal=:signal
+			SET name=:name, email=:email, text=:text, nbr_signal=:nbr_signal
 			WHERE id=:id
 		');
 
@@ -43,7 +43,7 @@ class Comments
 		$q->bindValue(':name', $comment->name());
 		$q->bindValue(':email', $comment->email());
 		$q->bindValue(':text', $comment->text());
-		$q->bindValue(':signal', $comment->signal());
+		$q->bindValue(':nbr_signal', $comment->nbrSignal());
 
 		$q->execute();
 	}
@@ -58,7 +58,7 @@ class Comments
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, signal
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signal
 			FROM comments
 			WHERE episode_id=:episode_id
 			ORDER BY publish_datetime DESC
@@ -76,7 +76,7 @@ class Comments
 				'email' => $data['email'],
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
-				'signal' => $data['signal'],
+				'nbrSignal' => $data['nbr_signal'],
 			];
 			$comments[] = new Comment($map);
 		}
@@ -89,9 +89,9 @@ class Comments
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, signal
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signal
 			FROM comments
-			WHERE signal>0
+			WHERE nbr_signal>0
 			ORDER BY publish_datetime DESC
 		');
 
@@ -105,7 +105,7 @@ class Comments
 				'email' => $data['email'],
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
-				'signal' => $data['signal'],
+				'nbrSignal' => $data['nbr_signal'],
 			];
 			$comments[] = new Comment($map);
 		}
