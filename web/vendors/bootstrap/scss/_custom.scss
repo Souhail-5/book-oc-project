@@ -3,9 +3,32 @@
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
 
+$blue: #18587A;
+$brand-primary:             $blue;
+
 $font-family-sans-serif: 'Lato', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-serif:      'Merriweather', Georgia, "Times New Roman", Times, serif;
 $font-family-monospace:  'Inconsolata', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:       $font-family-sans-serif;
 
 $headings-font-family:   $font-family-monospace;
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:            $brand-primary;
+$link-decoration:       none;
+$link-hover-color:      darken($link-color, 15%);
+$link-hover-decoration: underline;
+
+$component-active-bg:    $brand-primary;
+$btn-primary-bg:                 $brand-primary;
+$custom-control-checked-indicator-bg:         $brand-primary;
+$custom-control-focus-indicator-box-shadow: 0 0 0 1px $body-bg, 0 0 0 3px $brand-primary;
+$custom-checkbox-indeterminate-bg: $brand-primary;
+$custom-file-focus-box-shadow: 0 0 0 .075rem $white, 0 0 0 .2rem $brand-primary;
+$pagination-active-bg:                 $brand-primary;
+$pagination-active-border:             $brand-primary;
+$badge-primary-bg:            $brand-primary;
+$progress-bar-bg:               $brand-primary;
