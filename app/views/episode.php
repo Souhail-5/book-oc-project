@@ -1,31 +1,41 @@
+<!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
-	<header id="hero-image" class="jumbotron jumbotron-fluid">
+	<header id="hero-image" class="jumbotron jumbotron-fluid py-0">
 		<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 	</header>
-	<div id="main" class="row">
-		<div class="col-md-10 offset-md-1">
+	<div class="row">
+		<div class="col-md-10 offset-md-1 bg-white px-5">
 			<article class="episode">
-				<ol class="breadcrumb">
+				<ol class="breadcrumb bg-white">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item active">Nouvel épisode</li>
 				</ol>
 				<form action="" method="POST">
-					<header>
-						<br>
-						Numéro <span class="editable-content"><?= $episode->number() ?></span>
-						<br>
-						Partie <span class="editable-content"><?= $episode->part() ?></span>
+					<header class="text-center">
+						<span class="badge badge-default"># <span class="editable-content"><?= $episode->number() ?></span></span>
+						<span class="badge badge-pill badge-default editable-content"><?= $episode->part() ?></span>
 						<h1 class="editable-content"><?= $episode->title() ?></h1>
 					</header>
-					<div class="metadata">
-						<time datetime="YYYY-MM-DD"><i class="fa fa-calendar" aria-hidden="true"></i> <?= $episode->modificationDatetime() ?></time>
-						<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
+					<div class="text-center">
+						<time datetime="YYYY-MM-DD">
+							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
+								<use xlink:href="sprite.svg#si-glyph-calendar-1">
+							</svg>
+							<?= $episode->modificationDatetime() ?>
+						</time>
+						<a href="#"><?= $episode->nbrComments() ?> commentaires</a>
 					</div>
-					<div class="metadata">
-						<button class="act-delete" type="submit" name="action" value="delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
+					<div class="text-center">
+						<button class="act-delete" type="submit" name="action" value="delete">
+							Supprimer
+						</button>
+						<button type="submit" name="action" value="update">
+							Enregistrer
+						</button>
 					</div>
-					<div class="editable-content" placeholder="test" style="min-height: 50px;"><?= $episode->text() ?></div>
-					<button type="submit" name="action" value="update">Send</button>
+					<div id="episode-text" class="editable-content" placeholder="test" style="min-height: 150px;">
+						<?= $episode->text() ?>
+					</div>
 				</form>
 			</article>
 		</div>
