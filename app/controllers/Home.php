@@ -16,6 +16,7 @@ class Home extends Controller
 		$page = new Page();
 		$page->title = "Billet simple pour l'Alaska";
 
+		// To-do Use a Service Class
 		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
 
 		$episodes_manager = new Mapper\Episodes($db);
