@@ -1,3 +1,4 @@
+<!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
 	<div id="main" class="row d-md-flex align-items-md-center">
 		<div id="poster-col" class="align-self-md-start col-md-3 offset-md-1">
