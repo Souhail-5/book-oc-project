@@ -116,4 +116,30 @@ class Episodes
 
 		return $episodes;
 	}
+
+	public function plusNbrComments($episode_id)
+	{
+		$q = $this->db->prepare('
+			UPDATE episodes
+			SET nbr_comments = nbr_comments+1
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $episode_id);
+
+		$q->execute();
+	}
+
+	public function minusNbrComments($episode_id)
+	{
+		$q = $this->db->prepare('
+			UPDATE episodes
+			SET nbr_comments = nbr_comments-1
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $episode_id);
+
+		$q->execute();
+	}
 }

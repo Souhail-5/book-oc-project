@@ -76,4 +76,14 @@ class Episodes
 	{
 		return $this->episodes->get($episode);
 	}
+
+	public function plusNbrComments(Object\Episode $episode)
+	{
+		$this->episodes->plusNbrComments($episode);
+	}
+
+	public function minusNbrComments(Object\Episode $episode)
+	{
+		$this->episodes->plusNbrComments($episode);
+	}
 }
