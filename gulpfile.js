@@ -14,6 +14,7 @@ var sassOptions = {
 
 gulp.task('browser-sync', function() {
 	browserSync.init({
+		open: false,
 		proxy: {
 			target: "localhost:8888",
 			ws: true
@@ -30,17 +31,18 @@ gulp.task('sass', function () {
 			.pipe(autoprefixer())
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(output))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-		.pipe(function() {
-			console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-		});
+		.pipe(browserSync.stream());
 });
 
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch(input, ['sass']);
-	gulp.watch('./app/**/*.php', browserSync.reload);
+	gulp.watch(input, ['sass'])
+		.on('change', function(event) {
+			console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+		});
+	gulp.watch('./app/**/*.php', browserSync.reload)
+		.on('change', function(event) {
+			console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+		});
 });
 
 gulp.task('default', ['watch']);
