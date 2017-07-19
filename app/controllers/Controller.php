@@ -28,7 +28,7 @@ abstract class Controller
 
 	public function run()
 	{
-		$method = $this->action;
+		$method = strtr(lcfirst(ucwords($this->action, '-')), '-', '');
 		$this->$method();
 	}
 }

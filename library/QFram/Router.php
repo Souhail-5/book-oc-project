@@ -32,7 +32,8 @@ class Router
 
 			if ($route->match($this->HttpRequest->getURI())) {
 				$this->route = $route;
-				$this->HttpRequest->setGETData($this->route->vars);
+				if ($this->HttpRequest->POSTData('action')) $this->route->setAction($this->HttpRequest->POSTData('action'));
+				$this->HttpRequest->setGETData($this->route->vars());
 			}
 		}
 	}
@@ -58,8 +59,8 @@ class Router
 
 	public function run()
 	{
-		$controller = '\Controller\\'.ucfirst($this->route->controller);
-		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->route->action);
+		$controller = '\Controller\\'.ucfirst($this->route->controller());
+		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->route->action());
 		$controller->run();
 	}
 
