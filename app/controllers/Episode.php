@@ -13,57 +13,25 @@ use \Model\Service;
 */
 class Episode extends Controller
 {
+	protected $episodes_service;
+	protected $comments_service;
+
+	protected function setServices()
+	{
+		$this->episodes_service = new Service\Episodes;
+		$this->comments_service = new Service\Comments;
+	}
+
 	public function show()
 	{
-		$episodes_service = new Service\Episodes;
-		$comments_service = new Service\Comments;
 		$episode_template = new Component('episode');
 		$new_comment_form = new Component('new-comment-form');
 		$episode_template->new_comment_form = $new_comment_form->render();
 		$episode_template->user = true;
-		$episode_template->episode = $episodes_service->getEpisode($episodes_service->setNewEpisode([
+		$episode_template->episode = $this->episodes_service->getEpisode($this->episodes_service->setNewEpisode([
 			'number' => $this->HttpRequest->GETData('number'),
 			'slug' => $this->HttpRequest->GETData('slug')
 		]));
-
-		if ($this->HttpRequest->method() == 'POST' && ($_POST['action'] == 'update-episode' || $_POST['action'] == 'delete-episode')) {
-			try {
-				$episode_template->episode->setNumber($this->HttpRequest->POSTData('mce_0'));
-				$episode_template->episode->setPart($this->HttpRequest->POSTData('mce_1'));
-				$episode_template->episode->setTitle($this->HttpRequest->POSTData('mce_2'));
-				$episode_template->episode->setText($this->HttpRequest->POSTData('mce_3'));
-
-				if ($_POST['action'] == 'update-episode') $episodes_service->update($episode_template->episode);
-				if ($_POST['action'] == 'delete-episode') $episodes_service->delete($episode_template->episode);
-
-				$episode_template->episode = $episodes_service->getEpisode($episode_template->episode);
-
-				if ($_POST['action'] == 'update-episode') $this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
-				if ($_POST['action'] == 'delete-episode') $this->HttpResponse->redirect(Router::getPath('root'));
-			} catch (\Exception $e) {
-				$episode_template->episode = $episodes_service->setNewEpisode([
-					'number' => $this->HttpRequest->POSTData('mce_0'),
-					'part' => $this->HttpRequest->POSTData('mce_1'),
-					'title' => $this->HttpRequest->POSTData('mce_2'),
-					'text' => $this->HttpRequest->POSTData('mce_3'),
-				]);
-				echo $e->getMessage();
-			}
-		}
-
-		if ($this->HttpRequest->method() == 'POST' && $_POST['action'] == 'new-comment') {
-			try {
-				$new_comment = $comments_service->setNewComment([
-					'episodeId' => $episode_template->episode->id(),
-					'name' => $this->HttpRequest->POSTData('comment-name'),
-					'email' => $this->HttpRequest->POSTData('comment-email'),
-					'text' => $this->HttpRequest->POSTData('comment-text'),
-				]);
-				$comments_service->add($new_comment);
-			} catch (\Exception $e) {
-				echo $e->getMessage();
-			}
-		}
 
 		$page = new Page;
 		$page->title = "Nom de l'épisode";
@@ -85,13 +53,86 @@ class Episode extends Controller
 		echo $page->render();
 	}
 
-	public function newEpisode()
+	public function updateEpisode()
 	{
-		$episodes_service = new Service\Episodes;
 		$episode_template = new Component('episode');
 		$episode_template->new_comment_form = false;
 		$episode_template->user = true;
-		$episode_template->episode = $episodes_service->setNewEpisode();
+		$episode_template->episode = $this->episodes_service->getEpisode(
+			$this->episodes_service->setNewEpisode(
+				[
+					'number' => $this->HttpRequest->GETData('number'),
+					'slug' => $this->HttpRequest->GETData('slug')
+				]
+			)
+		);
+		$episode_template->episode->hydrate(
+			[
+				'number' => $this->HttpRequest->POSTData('mce_0'),
+				'part' => $this->HttpRequest->POSTData('mce_1'),
+				'title' => $this->HttpRequest->POSTData('mce_2'),
+				'text' => $this->HttpRequest->POSTData('mce_3'),
+			]
+		);
+		try {
+			$this->episodes_service->update($episode_template->episode);
+
+			// Puisque le slug peut changer en cas de changement du titre. Récupère le nouveau slug et redirige
+			$episode_template->episode = $this->episodes_service->getEpisode($episode_template->episode);
+			$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	public function deleteEpisode()
+	{
+		$episode = $this->episodes_service->getEpisode(
+			$this->episodes_service->setNewEpisode(
+				[
+					'number' => $this->HttpRequest->GETData('number'),
+					'slug' => $this->HttpRequest->GETData('slug')
+				]
+			)
+		);
+		try {
+			$this->episodes_service->delete($episode);
+			$this->HttpResponse->redirect(Router::getPath('root'));
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	public function newEpisodeComment()
+	{
+		$episode_template = new Component('episode');
+		$new_comment_form = new Component('new-comment-form');
+		$episode_template->new_comment_form = $new_comment_form->render();
+		$episode_template->user = true;
+		$episode_template->episode = $this->episodes_service->getEpisode($this->episodes_service->setNewEpisode([
+			'number' => $this->HttpRequest->GETData('number'),
+			'slug' => $this->HttpRequest->GETData('slug')
+		]));
+		try {
+			$new_comment = $this->comments_service->setNewComment([
+				'episodeId' => $episode_template->episode->id(),
+				'name' => $this->HttpRequest->POSTData('comment-name'),
+				'email' => $this->HttpRequest->POSTData('comment-email'),
+				'text' => $this->HttpRequest->POSTData('comment-text'),
+			]);
+			$this->comments_service->add($new_comment);
+			$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	public function newEpisode()
+	{
+		$episode_template = new Component('episode');
+		$episode_template->new_comment_form = false;
+		$episode_template->user = true;
+		$episode_template->episode = $this->episodes_service->setNewEpisode();
 
 		if ($this->HttpRequest->method() == 'POST') {
 			try {
@@ -100,13 +141,13 @@ class Episode extends Controller
 				$episode_template->episode->setTitle($this->HttpRequest->POSTData('mce_2'));
 				$episode_template->episode->setText($this->HttpRequest->POSTData('mce_3'));
 
-				$episodes_service->add($episode_template->episode);
+				$this->episodes_service->add($episode_template->episode);
 
-				$episode_template->episode = $episodes_service->getEpisode($episode_template->episode);
+				$episode_template->episode = $this->episodes_service->getEpisode($episode_template->episode);
 
 				$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
 			} catch (\Exception $e) {
-				$episode_template->episode = $episodes_service->setNewEpisode([
+				$episode_template->episode = $this->episodes_service->setNewEpisode([
 					'number' => $this->HttpRequest->POSTData('mce_0'),
 					'part' => $this->HttpRequest->POSTData('mce_1'),
 					'title' => $this->HttpRequest->POSTData('mce_2'),

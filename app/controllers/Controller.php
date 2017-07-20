@@ -19,16 +19,19 @@ abstract class Controller
 		$this->HttpRequest = $HttpRequest;
 		$this->HttpResponse = $HttpResponse;
 		$this->setAction($action);
+		$this->setServices();
 	}
 
 	public function setAction($action)
 	{
-		$this->action = $action;
+		$this->action = strtr(lcfirst(ucwords($action, '-')), '-', '');
 	}
+
+	abstract protected function setServices();
 
 	public function run()
 	{
-		$method = strtr(lcfirst(ucwords($this->action, '-')), '-', '');
+		$method = $this->action;
 		$this->$method();
 	}
 }
