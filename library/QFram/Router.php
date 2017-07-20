@@ -59,7 +59,7 @@ class Router
 
 	public function run()
 	{
-		$controller = '\Controller\\'.ucfirst($this->route->controller());
+		$controller = "\Controller\\{$this->route->controller()}";
 		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->route->action());
 		$controller->run();
 	}

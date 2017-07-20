@@ -16,12 +16,12 @@
 	{
 		"url": "/dernier-episode",
 		"controller": "episode",
-		"action": "showLast"
+		"action": "show-last"
 	},
 	"new-episode":
 	{
 		"url": "/new-episode",
-		"controller": "episode",
-		"action": "newEpisode"
+		"controller": "new-episode",
+		"action": "show"
 	}
 }

@@ -68,12 +68,12 @@ class Route
 
 	public function setController($value)
 	{
-		$this->controller = $value;
+		$this->controller = strtr(ucwords($value, '-'), '-', '');
 	}
 
 	public function setAction($value)
 	{
-		$this->action = $value;
+		$this->action = strtr(lcfirst(ucwords($value, '-')), '-', '');
 	}
 
 	public function setVarsNames($value)

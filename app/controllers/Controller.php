@@ -18,13 +18,8 @@ abstract class Controller
 	{
 		$this->HttpRequest = $HttpRequest;
 		$this->HttpResponse = $HttpResponse;
-		$this->setAction($action);
+		$this->action = $action;
 		$this->setServices();
-	}
-
-	public function setAction($action)
-	{
-		$this->action = strtr(lcfirst(ucwords($action, '-')), '-', '');
 	}
 
 	abstract protected function setServices();
