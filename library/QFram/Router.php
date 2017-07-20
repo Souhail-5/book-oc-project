@@ -28,7 +28,14 @@ class Router
 	{
 		foreach (self::$routes as $route_name => $param) {
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
-			$route = new Route($route_name, $param['url'], $param['controller'], $param['action'], $param['varsNames']);
+			$config = [
+				'name' => $route_name,
+				'url' => $param['url'],
+				'controller' => $param['controller'],
+				'action' => $param['action'],
+				'varsNames' => $param['varsNames'],
+			];
+			$route = new Route($config);
 
 			if ($route->match($this->HttpRequest->getURI())) {
 				$this->route = $route;

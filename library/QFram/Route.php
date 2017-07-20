@@ -13,13 +13,9 @@ class Route
 	protected $varsNames = array();
 	protected $vars = array();
 
-	public function __construct($name, $url, $controller, $action, array $varsNames)
+	public function __construct($data)
 	{
-		$this->name = $name;
-		$this->url = $url;
-		$this->controller = $controller;
-		$this->action = $action;
-		$this->varsNames = $varsNames;
+		$this->hydrate($data);
 	}
 
 	// To-do: transform it to a Trait
@@ -68,20 +64,20 @@ class Route
 
 	public function setController($value)
 	{
-		$this->controller = strtr(ucwords($value, '-'), '-', '');
+		$this->controller = str_replace('-', '', ucwords($value, '-'));
 	}
 
 	public function setAction($value)
 	{
-		$this->action = strtr(lcfirst(ucwords($value, '-')), '-', '');
+		$this->action = str_replace('-', '', lcfirst(ucwords($value, '-')));
 	}
 
-	public function setVarsNames($value)
+	public function setVarsNames(array $value)
 	{
 		$this->varsNames = $value;
 	}
 
-	public function setVars($value)
+	public function setVars(array $value)
 	{
 		$this->vars = $value;
 	}
