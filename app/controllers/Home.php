@@ -4,28 +4,32 @@ namespace Controller;
 use \Controller\Controller;
 use \QFram\Page;
 use \QFram\Component;
-use \Model\Mapper;
+use \Model\Service;
 
 /**
 * Home Controller
 */
 class Home extends Controller
 {
+	protected $episodes_service;
+	protected $comments_service;
+
+	protected function setServices()
+	{
+		$this->episodes_service = new Service\Episodes;
+		$this->comments_service = new Service\Comments;
+	}
+
 	public function show()
 	{
 		$page = new Page();
 		$page->title = "Billet simple pour l'Alaska";
 		$page->bodyId = "home";
 
-		// To-do Use a Service Class
-		$db = new \PDO('mysql:host=localhost;dbname=project3', 'root', 'root');
+		$episodes_template = new Component('episodes');
+		$episodes_template->episodes = $this->episodes_service->getEpisodes();
 
-		$episodes_manager = new Mapper\Episodes($db);
-
-		$episodesView = new Component('episodes');
-		$episodesView->episodes = $episodes_manager->getList();
-
-		$page->view = $episodesView->render();
+		$page->view = $episodes_template->render();
 
 		echo $page->render();
 	}

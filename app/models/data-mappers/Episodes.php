@@ -92,7 +92,7 @@ class Episodes
 		return new Episode((array) $map);
 	}
 
-	public function getList()
+	public function getEpisodes()
 	{
 		$episodes = [];
 

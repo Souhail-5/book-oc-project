@@ -72,6 +72,11 @@ class Episodes
 		$this->episodes->delete($episode);
 	}
 
+	public function getEpisodes()
+	{
+		return $this->episodes->getEpisodes();
+	}
+
 	public function getEpisode(Object\Episode $episode)
 	{
 		return $this->episodes->get($episode);
