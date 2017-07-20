@@ -2,35 +2,33 @@
 namespace Controller;
 
 use \Controller\Controller;
-use \QFram\Page;
-use \QFram\Component;
-use \Model\Service;
 
 /**
 * Home Controller
 */
 class Home extends Controller
 {
-	protected $episodes_service;
-	protected $comments_service;
-
-	protected function setServices()
+	protected function init()
 	{
-		$this->episodes_service = new Service\Episodes;
-		$this->comments_service = new Service\Comments;
+		$this->initServices([
+			'episodes' => 'Episodes',
+		]);
+		$this->initPage();
+		$this->initComponents([
+			'episodes' => 'episodes',
+		]);
 	}
 
 	public function show()
 	{
-		$page = new Page();
-		$page->title = "Billet simple pour l'Alaska";
-		$page->bodyId = "home";
+		$this->page->title = "Billet simple pour l'Alaska";
+		$this->page->bodyId = "home";
 
-		$episodes_template = new Component('episodes');
-		$episodes_template->episodes = $this->episodes_service->getEpisodes();
+		$episodes_view = $this->getComponent('episodes');
+		$episodes_view->episodes = $this->getService('episodes')->getEpisodes();
 
-		$page->view = $episodes_template->render();
+		$this->page->view = $episodes_view->render();
 
-		echo $page->render();
+		echo $this->page->render();
 	}
 }
