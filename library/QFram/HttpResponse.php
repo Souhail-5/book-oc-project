@@ -16,4 +16,9 @@ class HttpResponse
 		header('Location: '.$location);
 		exit;
 	}
+
+	public function send($content)
+	{
+		echo $content;
+	}
 }
