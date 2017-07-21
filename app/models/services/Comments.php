@@ -31,7 +31,7 @@ class Comments
 
 		try {
 			$this->comments->add($comment);
-			$episodes_service = new Service\Episodes;
+			$episodes_service = new Episodes;
 			$episodes_service->plusNbrComments($comment->episodeId());
 		} catch (\Exception $e) {
 			return $e;
@@ -54,13 +54,13 @@ class Comments
 	public function delete(Object\Comment $comment)
 	{
 		$this->comments->delete($comment);
-		$episodes_service = new Service\Episodes;
+		$episodes_service = new Episodes;
 		$episodes_service->minusNbrComments($comment->episodeId());
 	}
 
-	public function getList($episode_id)
+	public function getComments($episode_id)
 	{
-		return $this->comments->getList();
+		return $this->comments->getComments($episode_id);
 	}
 
 	public function getSignaled($episode_id)
