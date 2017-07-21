@@ -41,7 +41,7 @@ class NewEpisode extends Controller
 
 		$this->page->view = $this->getComponent('new-episode')->render();
 
-		echo $this->page->render();
+		$this->HttpResponse->send($this->page->render());
 	}
 
 	public function show()
