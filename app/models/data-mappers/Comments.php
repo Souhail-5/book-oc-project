@@ -57,6 +57,7 @@ class Comments
 		');
 
 		$q->bindValue(':id', $comment->id());
+		$q->bindValue(':nbr_signals', $comment->nbrSignals());
 
 		$q->execute();
 	}

@@ -12,23 +12,48 @@ class Home extends Controller
 	{
 		$this->initServices([
 			'episodes' => 'Episodes',
+			'comments' => 'Comments',
 		]);
 		$this->initPage();
 		$this->initComponents([
 			'episodes' => 'episodes',
+			'comments' => 'comments',
 		]);
 	}
 
-	public function show()
+	public function render()
 	{
 		$this->page->title = "Billet simple pour l'Alaska";
 		$this->page->bodyId = "home";
 
+		$this->HttpResponse->send($this->page->render());
+	}
+
+	public function show()
+	{
 		$episodes_view = $this->getComponent('episodes');
 		$episodes_view->episodes = $this->getService('episodes')->getEpisodes();
 
 		$this->page->view = $episodes_view->render();
 
-		echo $this->page->render();
+		$this->render();
+	}
+
+	public function showCommentsSignaled()
+	{
+		$comments_view = $this->getComponent('comments');
+		$comments_signaled = $this->getService('comments')->getSignaled();
+
+		foreach ($comments_signaled as $comment) {
+			$component_name = "comment-{$comment->id()}";
+			$this->initComponents([$component_name => 'comment']);
+
+			$this->getComponent($component_name)->comment = $comment;
+			$comments_view->comments_signaled .= $this->getComponent($component_name)->render();
+		}
+
+		$this->page->view = $comments_view->render();
+
+		$this->render();
 	}
 }

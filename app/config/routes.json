@@ -23,5 +23,11 @@
 		"url": "/new-episode",
 		"controller": "new-episode",
 		"action": "show"
+	},
+	"comments-signaled":
+	{
+		"url": "/comments-signaled",
+		"controller": "home",
+		"action": "show-comments-signaled"
 	}
 }

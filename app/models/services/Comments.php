@@ -73,7 +73,7 @@ class Comments
 		return $this->comments->getComments($episode_id);
 	}
 
-	public function getSignaled($episode_id)
+	public function getSignaled()
 	{
 		return $this->comments->getSignaled();
 	}
