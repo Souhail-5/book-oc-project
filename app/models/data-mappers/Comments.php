@@ -101,7 +101,7 @@ class Comments
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
 			FROM comments
 			WHERE episode_id=:episode_id
-			ORDER BY publish_datetime DESC
+			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':episode_id', $episode_id);

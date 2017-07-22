@@ -42,7 +42,7 @@
 								</svg>
 								<?= $episode->modificationDatetime() ?>
 							</time>
-							<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
+							<a href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $episode->nbrComments() ?> commentaires</a>
 						</div>
 					</li>
 					<?php endforeach; ?>

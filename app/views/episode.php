@@ -50,7 +50,7 @@
 	<?php if (!empty($comments)): ?>
 	<div class="row">
 		<div class="col-md-10 offset-md-1 bg-white px-5 pt-5">
-			<h4>Commentaires</h4>
+			<h4 id="anchor-comments">Commentaires</h4>
 			<hr>
 			<?= $comments ?>
 		</div>
