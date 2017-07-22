@@ -8,7 +8,7 @@
 			<article class="episode">
 				<ol class="breadcrumb bg-white">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
-					<li class="breadcrumb-item active">Nouvel épisode</li>
+					<li class="breadcrumb-item active"><?= $episode->title() ?></li>
 				</ol>
 				<form action="" method="POST">
 					<header class="text-center">
@@ -29,7 +29,7 @@
 						<button class="act-delete" type="submit" name="action" value="delete-episode">
 							Supprimer
 						</button>
-						<button type="submit" name="action" value="new-episode">
+						<button type="submit" name="action" value="update-episode">
 							Enregistrer
 						</button>
 					</div>
@@ -41,8 +41,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-10 offset-md-1 bg-white px-5">
+		<div class="col-md-10 offset-md-1 bg-white px-5 pb-2">
+			<h4>Un commentaire ?</h4>
+			<hr>
 			<?= $new_comment_form ?>
 		</div>
 	</div>
+	<?php if (!empty($comments)): ?>
+	<div class="row">
+		<div class="col-md-10 offset-md-1 bg-white px-5 pt-5">
+			<h4>Commentaires</h4>
+			<hr>
+			<?= $comments ?>
+		</div>
+	</div>
+	<?php endif; ?>
 </div>

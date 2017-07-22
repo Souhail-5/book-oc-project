@@ -25,13 +25,23 @@ class Episode extends Controller
 	public function show()
 	{
 		$episode_template = $this->getComponent('episode');
-		$new_comment_form = $this->getComponent('new-comment-form');
-		$episode_template->new_comment_form = $new_comment_form->render();
 		$episode_template->user = true;
 		$episode_template->episode = $this->getService('episodes')->getEpisode($this->getService('episodes')->setNewEpisode([
 			'number' => $this->HttpRequest->GETData('number'),
 			'slug' => $this->HttpRequest->GETData('slug')
 		]));
+
+		$comments = $this->getService('comments')->getComments($episode_template->episode->id());
+
+		foreach ($comments as $comment) {
+			$component_name = "comment-{$comment->id()}";
+			$this->initComponents([$component_name => 'comment']);
+
+			$this->getComponent($component_name)->comment = $comment;
+			$episode_template->comments .= $this->getComponent($component_name)->render();
+		}
+
+		$episode_template->new_comment_form = $this->getComponent('new-comment-form')->render();
 
 		$this->page->title = "Nom de l'épisode";
 		$this->page->bodyId = "episode";

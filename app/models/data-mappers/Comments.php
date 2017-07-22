@@ -53,7 +53,7 @@ class Comments
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
 	}
 
-	public function getList($episode_id)
+	public function getComments($episode_id)
 	{
 		$comments = [];
 
