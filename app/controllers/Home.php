@@ -16,6 +16,7 @@ class Home extends Controller
 		]);
 		$this->initPage();
 		$this->initComponents([
+			'home' => 'home',
 			'episodes' => 'episodes',
 			'comments' => 'comments',
 		]);
@@ -25,6 +26,7 @@ class Home extends Controller
 	{
 		$this->page->title = "Billet simple pour l'Alaska";
 		$this->page->bodyId = "home";
+		$this->page->view = $this->getComponent('home')->render();
 
 		$this->HttpResponse->send($this->page->render());
 	}
@@ -34,7 +36,7 @@ class Home extends Controller
 		$episodes_view = $this->getComponent('episodes');
 		$episodes_view->episodes = $this->getService('episodes')->getEpisodes();
 
-		$this->page->view = $episodes_view->render();
+		$this->getComponent('home')->view = $episodes_view->render();
 
 		$this->render();
 	}
@@ -52,7 +54,7 @@ class Home extends Controller
 			$comments_view->comments_signaled .= $this->getComponent($component_name)->render();
 		}
 
-		$this->page->view = $comments_view->render();
+		$this->getComponent('home')->view = $comments_view->render();
 
 		$this->render();
 	}
