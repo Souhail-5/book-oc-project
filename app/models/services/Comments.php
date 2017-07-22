@@ -51,11 +51,21 @@ class Comments
 		}
 	}
 
+	public function plusNbrSignals(Object\Comment $comment)
+	{
+		$this->comments->plusNbrSignals($comment);
+	}
+
 	public function delete(Object\Comment $comment)
 	{
 		$this->comments->delete($comment);
 		$episodes_service = new Episodes;
 		$episodes_service->minusNbrComments($comment->episodeId());
+	}
+
+	public function getCommentById($comment_id)
+	{
+		return $this->comments->getCommentById($comment_id);
 	}
 
 	public function getComments($episode_id)

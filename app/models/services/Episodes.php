@@ -82,13 +82,13 @@ class Episodes
 		return $this->episodes->get($episode);
 	}
 
-	public function plusNbrComments($episodeId)
+	public function plusNbrComments($episode_id)
 	{
-		$this->episodes->plusNbrComments($episodeId);
+		$this->episodes->plusNbrComments($episode_id);
 	}
 
-	public function minusNbrComments($episodeId)
+	public function minusNbrComments($episode_id)
 	{
-		$this->episodes->plusNbrComments($episodeId);
+		$this->episodes->minusNbrComments($episode_id);
 	}
 }

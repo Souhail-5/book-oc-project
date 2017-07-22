@@ -135,4 +135,18 @@ class Episode extends Controller
 			echo $e->getMessage();
 		}
 	}
+
+	public function signalComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->plusNbrSignals($comment);
+		$this->HttpResponse->redirect(Router::getPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+	}
+
+	public function deleteComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->delete($comment);
+		$this->HttpResponse->redirect(Router::getPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+	}
 }

@@ -4,8 +4,9 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<h6 class="my-0"><?= $comment->name() ?></h6>
 			<form action="" method="POST">
-				<button type="submit" name="action" value="comment-signal">Signaler</button>
-				<button type="submit" name="action" value="comment-delete">Supprimer</button>
+				<button type="submit" name="action" value="signal-comment">Signaler</button>
+				<button type="submit" name="action" value="delete-comment">Supprimer</button>
+				<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
 			</form>
 		</div>
 		<p><?= $comment->text() ?></p>

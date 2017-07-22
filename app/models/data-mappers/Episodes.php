@@ -89,7 +89,7 @@ class Episodes
 			'slug' => $data['slug'],
 		];
 
-		return new Episode((array) $map);
+		return new Episode($map);
 	}
 
 	public function getEpisodes()

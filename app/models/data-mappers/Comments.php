@@ -48,9 +48,49 @@ class Comments
 		$q->execute();
 	}
 
+	public function plusNbrSignals(Comment $comment)
+	{
+		$q = $this->db->prepare('
+			UPDATE comments
+			SET nbr_signals=:nbr_signals+1
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $comment->id());
+
+		$q->execute();
+	}
+
 	public function delete(Comment $comment)
 	{
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
+	}
+
+	public function getCommentById($comment_id)
+	{
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			FROM comments
+			WHERE id=:id
+			LIMIT 1
+		');
+
+		$q->bindValue(':id', $comment_id);
+
+		$q->execute();
+
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		$map = [
+			'id' => $data['id'],
+			'episodeId' => $data['episode_id'],
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'nbrSignals' => $data['nbr_signals'],
+		];
+
+		return new Comment($map);
 	}
 
 	public function getComments($episode_id)
