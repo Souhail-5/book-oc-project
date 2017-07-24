@@ -325,13 +325,13 @@ blockquote {
 }
 
 a {
-  color: #18587A;
+  color: #30A9DE;
   text-decoration: none;
 }
 
 a:focus, a:hover {
-  color: #0b2a3a;
-  text-decoration: underline;
+  color: #1b7ca7;
+  text-decoration: none;
 }
 
 a:not([href]):not([tabindex]) {

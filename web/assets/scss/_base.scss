@@ -15,15 +15,39 @@ body {
 }
 
 .no-before::before {
-	content: '';
-	display: none;
+	content: '' !important;
+	display: none !important;
 }
 
 .no-after::after {
-	content: '';
-	display: none;
+	content: '' !important;
+	display: none !important;
 }
 
 .bg-white {
 	background-color: #FFF;
+}
+
+.vh100 {
+	height: 100vh;
+}
+
+.vh66 {
+	height: 66vh;
+}
+
+.ov-a {
+	overflow: auto;
+}
+
+.meta-color {
+	color: $gray-light;
+}
+
+a.meta-color {
+	color: $gray-light;
+	&:hover {
+		color: $gray-dark;
+		text-decoration: none;
+	}
 }

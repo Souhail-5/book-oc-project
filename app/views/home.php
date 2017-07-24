@@ -1,33 +1,31 @@
 <!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
-	<div id="main" class="row d-md-flex align-items-md-center">
-		<div id="main-poster" class="align-self-md-start col-md-3 offset-md-1">
-			<figure class="poster">
+	<div class="row no-gutters d-md-flex align-items-md-center vh100">
+		<div class="home-poster-wrap align-self-md-start col-md-3 offset-md-1">
+			<figure class="poster mt-5">
 				<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 			</figure>
 		</div>
-		<div id="main-content" class="col-md-8 offset-md-3">
-			<div id="admin-bar" class="justify-content-end navbar sticky-top navbar-light">
-				<div class="form-inline ml-auto">
-					<div class="dropdown">
-						<button class="no-after btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-gear">
-								<use xlink:href="sprite.svg#si-glyph-gear">
-							</svg>
-						</button>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="<?= $path('new-episode') ?>">Nouvel épisode</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="<?= $path('new-episode') ?>">Mon profil</a>
-							<a class="dropdown-item" href="#">Mes paramètres</a>
-							<a class="dropdown-item" href="<?= $path('root') ?>">Accueil</a>
-							<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Commentaires signalés</a>
-						</div>
-					</div>
+		<div class="main-content-wrap col-md-8 offset-md-3">
+			<div class="push navbar py-3 pr-3 flex-row justify-content-between align-items-center">
+				<div>
+					<a class="mr-4" href="<?= $path('root') ?>">Brouillons</a>
+					<a class="mr-4" href="<?= $path('comments') ?>">Commentaires</a>
+				</div>
+				<div class="d-flex align-items-center">
+					<a class="btn btn-secondary no-after" href="<?= $path('new-episode') ?>">
+						Nouvel épisode
+					</a>
 				</div>
 			</div>
-			<div>
-				<?= $view ?>
+			<div class="vh66 ov-a">
+				<ol class="push font-italic breadcrumb bg-white mb-4 py-4">
+					<li class="breadcrumb-item mr-2">Vous êtes ici :</li>
+					<li class="breadcrumb-item active no-before">Sommaire</li>
+				</ol>
+				<div class="push pr-5">
+					<?= $view ?>
+				</div>
 			</div>
 		</div>
 	</div>

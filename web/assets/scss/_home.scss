@@ -1,37 +1,27 @@
-#main {
-	height: 100vh;
-}
-#main-poster {
+.home-poster-wrap {
 	position: absolute; z-index: 2000;
 	.poster {
 		box-shadow: 0px 0px 80px -10px rgba(0,0,0,0.29);
 	}
 }
 
-#main-content {
+.main-content-wrap {
 	background-color: #FFF;
 	box-shadow: 0px 0px 100px -10px rgba(0,0,0,0.29);
-}
 
-#admin-bar {
-	background-color: #FFF;
-
-	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-#episodes-container {
-	height: 70vh;
-	overflow: auto;
-
-	padding-right: 70px;
-	padding-left: 120px;
-
-	.badge {
-		position: relative; top: -0.25rem;
-		font-size: 1rem;
+	.push {
+		padding-left: 130px;
 	}
 
-	li:not(:first-child) {
-		margin-top: 50px;
+	.navbar {
+		background-color: #FFF;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		box-shadow: 0px 24px 18px -32px rgba(0,0,0,0.46);
+	}
+
+	.breadcrumb {
+		margin: 0;
+		padding-right: 0;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 	}
 }

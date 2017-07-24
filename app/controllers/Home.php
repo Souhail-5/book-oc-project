@@ -17,7 +17,7 @@ class Home extends Controller
 		$this->initPage();
 		$this->initComponents([
 			'home' => 'home',
-			'episodes' => 'episodes',
+			'episodes-list' => 'episodes-list',
 			'comments' => 'comments',
 		]);
 	}
@@ -33,7 +33,7 @@ class Home extends Controller
 
 	public function show()
 	{
-		$episodes_view = $this->getComponent('episodes');
+		$episodes_view = $this->getComponent('episodes-list');
 		$episodes_view->episodes = $this->getService('episodes')->getEpisodes();
 
 		$this->getComponent('home')->view = $episodes_view->render();

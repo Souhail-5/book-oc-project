@@ -3,8 +3,19 @@
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
 
-$blue: #18587A;
-$brand-primary:             $blue;
+$white:  #fff;
+$black:  #090707;
+$red:    #E53A40;
+$orange: #f0ad4e;
+$yellow: #EFDC05;
+$green:  #5cb85c;
+$blue:   #30A9DE;
+$teal:   #5bc0de;
+$pink:   #ff5b77;
+$purple: #613d7c;
+
+$brand-primary: $blue;
+$brand-secondary: $yellow;
 
 $font-family-sans-serif: 'Lato', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-serif:      'Merriweather', Georgia, "Times New Roman", Times, serif;
@@ -17,18 +28,22 @@ $headings-font-family:   $font-family-monospace;
 //
 // Style anchor elements.
 
-$link-color:            $brand-primary;
-$link-decoration:       none;
-$link-hover-color:      darken($link-color, 15%);
-$link-hover-decoration: underline;
+$link-color: $brand-primary;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: none;
 
-$component-active-bg:    $brand-primary;
-$btn-primary-bg:                 $brand-primary;
-$custom-control-checked-indicator-bg:         $brand-primary;
+$component-active-bg: $brand-primary;
+$btn-primary-bg: $brand-primary;
+$custom-control-checked-indicator-bg: $brand-primary;
 $custom-control-focus-indicator-box-shadow: 0 0 0 1px $body-bg, 0 0 0 3px $brand-primary;
 $custom-checkbox-indeterminate-bg: $brand-primary;
 $custom-file-focus-box-shadow: 0 0 0 .075rem $white, 0 0 0 .2rem $brand-primary;
-$pagination-active-bg:                 $brand-primary;
-$pagination-active-border:             $brand-primary;
-$badge-primary-bg:            $brand-primary;
-$progress-bar-bg:               $brand-primary;
+$pagination-active-bg: $brand-primary;
+$pagination-active-border: $brand-primary;
+$badge-primary-bg: $brand-primary;
+$progress-bar-bg: $brand-primary;
+
+$btn-secondary-color: $gray-dark;
+$btn-secondary-bg: lighten($brand-primary, 45%);
+$btn-secondary-border: $brand-primary;
