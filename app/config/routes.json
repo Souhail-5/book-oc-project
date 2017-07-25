@@ -24,10 +24,22 @@
 		"controller": "new-episode",
 		"action": "show"
 	},
+	"comments":
+	{
+		"url": "/comments",
+		"controller": "comments",
+		"action": "show"
+	},
 	"comments-signaled":
 	{
-		"url": "/comments-signaled",
-		"controller": "home",
+		"url": "/comments/signaled",
+		"controller": "comments",
 		"action": "show-comments-signaled"
+	},
+	"comments-trash":
+	{
+		"url": "/comments/trash",
+		"controller": "comments",
+		"action": "show-comments-trash"
 	}
 }
