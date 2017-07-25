@@ -18,7 +18,7 @@ class Home extends Controller
 		$this->initComponents([
 			'home' => 'home',
 			'episodes-list' => 'episodes-list',
-			'comments' => 'comments',
+			'comments-list' => 'comments-list',
 		]);
 	}
 
@@ -43,7 +43,7 @@ class Home extends Controller
 
 	public function showCommentsSignaled()
 	{
-		$comments_view = $this->getComponent('comments');
+		$comments_view = $this->getComponent('comments-list');
 		$comments_signaled = $this->getService('comments')->getSignaled();
 
 		foreach ($comments_signaled as $comment) {

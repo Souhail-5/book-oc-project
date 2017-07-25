@@ -1,4 +1,4 @@
-<div id="episodes-container">
+<div>
 	<?php if (!empty($comments_signaled)): ?>
 		<?= $comments_signaled ?>
 	<?php else: ?>

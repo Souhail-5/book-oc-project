@@ -10,7 +10,7 @@
 			<div class="push navbar py-3 pr-3 flex-row justify-content-between align-items-center">
 				<div>
 					<a class="mr-4" href="<?= $path('root') ?>">Brouillons</a>
-					<a class="mr-4" href="<?= $path('comments') ?>">Commentaires</a>
+					<a class="mr-4" href="<?= $path('comments-signaled') ?>">Commentaires</a>
 				</div>
 				<div class="d-flex align-items-center">
 					<a class="btn btn-secondary no-after" href="<?= $path('new-episode') ?>">
@@ -21,7 +21,14 @@
 			<div class="vh66 ov-a">
 				<ol class="push font-italic breadcrumb bg-white mb-4 py-4">
 					<li class="breadcrumb-item mr-2">Vous êtes ici :</li>
-					<li class="breadcrumb-item active no-before">Sommaire</li>
+					<li class="breadcrumb-item active no-before">
+						<?php if ($origin_action == 'showCommentsSignaled'): ?>
+							Commentaires signalés
+						<?php endif; ?>
+						<?php if ($origin_action == 'show'): ?>
+							Sommaire
+						<?php endif; ?>
+					</li>
 				</ol>
 				<div class="push pr-5">
 					<?= $view ?>

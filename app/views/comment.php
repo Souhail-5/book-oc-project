@@ -2,13 +2,27 @@
 	<img class="mr-3" src="<?= "https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email())))."?d=".urlencode('http://texcites.com/wp-content/uploads/2013/04/gravatar_logo.jpg') ?>" alt="Profil image" width="50" height="50">
 	<div class="media-body">
 		<div class="d-flex justify-content-between align-items-center">
-			<h6 class="my-0"><?= $comment->name() ?></h6>
-			<form action="" method="POST">
-				<button type="submit" name="action" value="signal-comment">Signaler</button>
-				<button type="submit" name="action" value="delete-comment">Supprimer</button>
+			<h6 class="my-0 fz-1-05"><?= $comment->name() ?></h6>
+			<form class="d-flex align-items-center" action="" method="POST">
+				<?php if ($origin_action != 'showCommentsSignaled'): ?>
+					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="signal-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-circle-remove wh-0-95">
+							<use xlink:href="sprite.svg#si-glyph-circle-remove">
+						</svg>
+						Signaler
+					</button>
+				<?php endif; ?>
+				<?php if ($origin_action == 'showCommentsSignaled'): ?>
+					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
+							<use xlink:href="sprite.svg#si-glyph-trash">
+						</svg>
+						Supprimer
+					</button>
+				<?php endif; ?>
 				<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
 			</form>
 		</div>
-		<p><?= $comment->text() ?></p>
+		<p class="mt-3 more"><?= $comment->text() ?></p>
 	</div>
 </div>

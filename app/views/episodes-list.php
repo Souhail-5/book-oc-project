@@ -11,14 +11,14 @@
 				</h2>
 			</div>
 			<div class="d-flex justify-content-between">
-				<time class="datetime meta-color" datetime="<?= $episode->modificationDatetime() ?>">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1 meta-color">
+				<time class="datetime meta" datetime="<?= $episode->modificationDatetime() ?>">
+					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 						<use xlink:href="sprite.svg#si-glyph-calendar-1">
 					</svg>
 					Publié <span></span>
 				</time>
-				<a class="meta-color" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?> meta-color">
+				<a class="meta" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
+					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 						<use xlink:href="sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 					</svg>
 					<?= $episode->nbrComments() ?>

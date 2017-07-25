@@ -6,6 +6,21 @@ body {
 	width: 1rem;
 	height: 1rem;
 	position: relative; top: 0.1rem;
+
+	&.wh-1-05 {
+		width: 1.05rem;
+		height: 1.05rem;
+	}
+
+	&.wh-0-95 {
+		width: 0.95rem;
+		height: 0.95rem;
+	}
+
+	&.wh-0-80 {
+		width: 0.80rem;
+		height: 0.80rem;
+	}
 }
 
 .cover {
@@ -40,14 +55,38 @@ body {
 	overflow: auto;
 }
 
-.meta-color {
+.fz-1-05 {
+	font-size: 1.05rem;
+}
+
+.fz-0-95 {
+	font-size: 0.95rem;
+}
+
+.fz-0-80 {
+	font-size: 0.80rem;
+}
+
+.meta {
 	color: $gray-light;
 }
 
-a.meta-color {
+.meta-danger {
 	color: $gray-light;
-	&:hover {
-		color: $gray-dark;
-		text-decoration: none;
-	}
+}
+
+a:hover.meta, .btn-link:hover.meta {
+	color: $gray-dark;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:hover.meta-danger, .btn-link:hover.meta-danger {
+	color: $brand-danger;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.morecontent span {
+	display: none;
 }
