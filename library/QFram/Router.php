@@ -82,7 +82,7 @@ class Router
 
 	public static function currentPath()
 	{
-		return self::genPath(self::$currentRoute, self::$currentRoute->vars());
+		return self::genPath(self::$currentRoute->name(), self::$currentRoute->vars());
 	}
 
 	public function run()
