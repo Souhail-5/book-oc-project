@@ -80,6 +80,11 @@ class Router
 		return self::$currentRoute;
 	}
 
+	public static function currentPath()
+	{
+		return self::getPath(self::$currentRoute, self::$currentRoute->vars());
+	}
+
 	public function run()
 	{
 		$controller = '\Controller\\'.self::$currentRoute->controller();
