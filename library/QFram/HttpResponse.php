@@ -1,6 +1,8 @@
 <?php
 namespace QFram;
 
+use \Qfram\Router;
+
 /**
 * Http Response manager
 */
@@ -14,6 +16,12 @@ class HttpResponse
 	public function redirect($location)
 	{
 		header('Location: '.$location);
+		exit;
+	}
+
+	public function refresh()
+	{
+		header('Location: '.Router::currentPath());
 		exit;
 	}
 
