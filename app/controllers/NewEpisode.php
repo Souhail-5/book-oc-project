@@ -65,7 +65,7 @@ class NewEpisode extends Controller
 
 			$this->getComponent('new-episode')->episode = $this->getService('episodes')->getEpisode($this->getComponent('new-episode')->episode);
 
-			$this->HttpResponse->redirect(Router::getPath('episode', [$this->getComponent('new-episode')->episode->number(), $this->getComponent('new-episode')->episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$this->getComponent('new-episode')->episode->number(), $this->getComponent('new-episode')->episode->slug()]));
 		} catch (\Exception $e) {
 			echo $e->getMessage();
 			$this->render();

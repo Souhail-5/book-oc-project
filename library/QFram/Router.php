@@ -56,7 +56,7 @@ class Router
 		$this->HttpRequest->setGETData(self::$currentRoute->vars());
 	}
 
-	public static function getPath($route_name, array $vars=[])
+	public static function genPath($route_name, array $vars=[])
 	{
 		if (!empty(self::$routes[$route_name])) {
 			return preg_replace_callback_array(
@@ -82,7 +82,7 @@ class Router
 
 	public static function currentPath()
 	{
-		return self::getPath(self::$currentRoute, self::$currentRoute->vars());
+		return self::genPath(self::$currentRoute, self::$currentRoute->vars());
 	}
 
 	public function run()

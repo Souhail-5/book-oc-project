@@ -88,7 +88,7 @@ class Episode extends Controller
 
 			// Puisque le slug peut changer en cas de changement du titre. Récupère le nouveau slug et redirige
 			$episode_template->episode = $this->getService('episodes')->getEpisode($episode_template->episode);
-			$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
 		} catch (\Exception $e) {
 			echo $e->getMessage();
 		}
@@ -106,7 +106,7 @@ class Episode extends Controller
 		);
 		try {
 			$this->getService('episodes')->delete($episode);
-			$this->HttpResponse->redirect(Router::getPath('root'));
+			$this->HttpResponse->redirect(Router::genPath('root'));
 		} catch (\Exception $e) {
 			echo $e->getMessage();
 		}
@@ -130,7 +130,7 @@ class Episode extends Controller
 				'text' => $this->HttpRequest->POSTData('comment-text'),
 			]);
 			$this->getService('comments')->add($new_comment);
-			$this->HttpResponse->redirect(Router::getPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$episode_template->episode->number(), $episode_template->episode->slug()]));
 		} catch (\Exception $e) {
 			echo $e->getMessage();
 		}
@@ -140,13 +140,13 @@ class Episode extends Controller
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->plusNbrSignals($comment);
-		$this->HttpResponse->redirect(Router::getPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
 	}
 
 	public function deleteComment()
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->delete($comment);
-		$this->HttpResponse->redirect(Router::getPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
 	}
 }

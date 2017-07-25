@@ -37,7 +37,7 @@ abstract class Template
 			$current_route = Router::currentRoute();
 
 			$path = function($route_name, $vars=[]) {
-				return Router::getPath($route_name, $vars);
+				return Router::genPath($route_name, $vars);
 			};
 
 			$_ifNotEmpty = function($test, $notEmpty, $empty='') {
