@@ -67,7 +67,7 @@ class Comments
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
 	}
 
-	public function getComments()
+	public function getValidComments()
 	{
 		$comments = [];
 

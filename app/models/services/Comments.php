@@ -63,9 +63,9 @@ class Comments
 		$episodes_service->minusNbrComments($comment->episodeId());
 	}
 
-	public function getComments()
+	public function getValidComments()
 	{
-		return $this->comments->getComments();
+		return $this->comments->getValidComments();
 	}
 
 	public function getCommentById($comment_id)

@@ -32,7 +32,7 @@ class Comments extends Controller
 	public function show()
 	{
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getComments();
+		$comments_list = $this->getService('comments')->getValidComments();
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
