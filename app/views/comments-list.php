@@ -1,9 +1,9 @@
 <div>
-	<?php if (!empty($comments_signaled)): ?>
-		<?= $comments_signaled ?>
+	<?php if (!empty($comments_list)): ?>
+		<?= $comments_list ?>
 	<?php else: ?>
 		<p>
-			Aucun commentaire n'a été signalé.
+			Aucun commentaire.
 		</p>
 	<?php endif; ?>
 </div>
