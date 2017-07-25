@@ -8,6 +8,8 @@ use QFram\Router;
 */
 abstract class Template
 {
+	use \QFram\Helper\Utility;
+
 	protected $view;
 	protected $data;
 
@@ -39,6 +41,14 @@ abstract class Template
 
 			$path = function($route_name, $vars=[]) {
 				return $this->path($route_name, $vars);
+			};
+
+			$_ifNotEmpty = function($test, $notEmpty, $empty='') {
+				return $this->_ifNotEmpty($test, $notEmpty, $empty);
+			};
+
+			$_ifPlural = function($value, $plural, $singular='') {
+				return $this->_ifPlural($value, $plural, $singular);
 			};
 
 			ob_start();

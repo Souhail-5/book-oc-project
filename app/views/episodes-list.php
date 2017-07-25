@@ -5,7 +5,7 @@
 			<div class="mb-4">
 				<h2 class="h3">
 					<span class="badge badge-primary pr-2 py-1">
-						# <?= $episode->number() ?><?php if (empty($episode->part())): ?>-<?= $episode->part() ?><?php endif; ?>
+						# <?= $episode->number() ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
 					</span>
 					<a href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>"><?= $episode->title() ?></a>
 				</h2>
@@ -18,10 +18,11 @@
 					Publié <span><?= $episode->modificationDatetime() ?></span>
 				</time>
 				<a class="meta-color" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-message meta-color">
-						<use xlink:href="sprite.svg#si-glyph-bubble-message">
+					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?> meta-color">
+						<use xlink:href="sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 					</svg>
 					<?= $episode->nbrComments() ?>
+					<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
 				</a>
 			</div>
 		</li>
