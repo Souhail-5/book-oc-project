@@ -24,7 +24,7 @@
 						Commentaires
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
-						<a class="dropdown-item" href="<?= $path('comments') ?>">Commentaires</a>
+						<a class="dropdown-item" href="<?= $path('comments') ?>">Validés</a>
 						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Corbeille</a>
@@ -37,17 +37,21 @@
 				</div>
 			</div>
 			<div class="vh66 ov-a">
-				<ol class="push font-italic breadcrumb bg-white mb-4 py-4">
-					<li class="breadcrumb-item mr-2">Vous êtes ici :</li>
-					<li class="breadcrumb-item active no-before">
-						<?php if ($origin_action == 'showCommentsSignaled'): ?>
-							Commentaires signalés
+				<nav class="push font-italic breadcrumb bg-white mb-4 py-4">
+					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
+					<?php if ($current_route->name() == 'root'): ?>
+						<span class="breadcrumb-item no-before">Accueil</span>
+					<?php else: ?>
+						<a class="breadcrumb-item no-before" href="<?= $path('root') ?>">Accueil</a>
+						<?php if ($current_route->name() == 'comments'): ?>
+							<span class="breadcrumb-item">Commentaires</span>
 						<?php endif; ?>
-						<?php if ($origin_action == 'show'): ?>
-							Sommaire
+						<?php if ($current_route->name() == 'comments-signaled'): ?>
+							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
+							<span class="breadcrumb-item">Commentaires signalés</span>
 						<?php endif; ?>
-					</li>
-				</ol>
+					<?php endif; ?>
+				</nav>
 				<div class="push pr-5">
 					<?= $view ?>
 				</div>
