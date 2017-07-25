@@ -15,7 +15,7 @@
 					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1 meta-color">
 						<use xlink:href="sprite.svg#si-glyph-calendar-1">
 					</svg>
-					Publié <span><?= $episode->modificationDatetime() ?></span>
+					Publié <span></span>
 				</time>
 				<a class="meta-color" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
 					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?> meta-color">
