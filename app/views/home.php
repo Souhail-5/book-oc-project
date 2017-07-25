@@ -24,7 +24,7 @@
 						Commentaires
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
-						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Commentaires</a>
+						<a class="dropdown-item" href="<?= $path('comments') ?>">Commentaires</a>
 						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Corbeille</a>
