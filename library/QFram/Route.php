@@ -9,7 +9,9 @@ class Route
 	protected $name;
 	protected $urlPattern;
 	protected $controller;
+	protected $originalController;
 	protected $action;
+	protected $originalAction;
 	protected $varsNames = array();
 	protected $vars = array();
 
@@ -30,7 +32,9 @@ class Route
 	public function name() { return $this->name; }
 	public function urlPattern() { return $this->urlPattern; }
 	public function controller() { return $this->controller; }
+	public function originalController() { return $this->originalController; }
 	public function action() { return $this->action; }
+	public function originalAction() { return $this->originalAction; }
 	public function varsNames() { return $this->varsNames; }
 	public function vars() { return $this->vars; }
 
@@ -47,11 +51,13 @@ class Route
 	public function setController($value)
 	{
 		$this->controller = str_replace('-', '', ucwords($value, '-'));
+		$this->originalController = $value;
 	}
 
 	public function setAction($value)
 	{
 		$this->action = str_replace('-', '', lcfirst(ucwords($value, '-')));
+		$this->originalAction = $value;
 	}
 
 	public function setVarsNames(array $value)

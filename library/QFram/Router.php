@@ -75,9 +75,14 @@ class Router
 		}
 	}
 
-	public static function getAction()
+	public static function getOriginalController()
 	{
-		return self::$currentRoute->action();
+		return self::$currentRoute->originalController();
+	}
+
+	public static function getOriginalAction()
+	{
+		return self::$currentRoute->originalAction();
 	}
 
 	public function run()
