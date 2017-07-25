@@ -12,7 +12,7 @@ class Router
 {
 	protected $HttpRequest;
 	protected $HttpResponse;
-	protected $route;
+	protected $currentRoute;
 
 	protected static $routes;
 
@@ -20,29 +20,40 @@ class Router
 	{
 		$this->HttpRequest = $HttpRequest;
 		$this->HttpResponse = $HttpResponse;
-		self::$routes = !empty(self::$routes) ? self::$routes : json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
-		$this->setRoute();
+		$this->setRoutes();
 	}
 
-	protected function setRoute()
+	protected function setRoutes()
 	{
-		foreach (self::$routes as $route_name => $param) {
+		$config_routes = json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
+
+		foreach ($config_routes as $route_name => $param) {
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
 			$config = [
 				'name' => $route_name,
-				'url' => $param['url'],
+				'urlPattern' => $param['url'],
 				'controller' => $param['controller'],
 				'action' => $param['action'],
 				'varsNames' => $param['varsNames'],
+				'varsFromUrl' => $this->HttpRequest->getURI(),
 			];
-			$route = new Route($config);
 
-			if ($route->match($this->HttpRequest->getURI())) {
-				$this->route = $route;
-				if ($this->HttpRequest->POSTData('action')) $this->route->setAction($this->HttpRequest->POSTData('action'));
-				$this->HttpRequest->setGETData($this->route->vars());
-			}
+			self::$routes[$route_name] = new Route($config);
+
+			if ($this->isCurrentRoute(self::$routes[$route_name])) $this->setCurrentRoute(self::$routes[$route_name]);
 		}
+	}
+
+	protected function isCurrentRoute(Route $route)
+	{
+		return $route->isValidUrl($this->HttpRequest->getURI());
+	}
+
+	protected function setCurrentRoute(Route $route)
+	{
+		$this->currentRoute = $route;
+		if ($this->HttpRequest->POSTData('action')) $this->currentRoute->setAction($this->HttpRequest->POSTData('action'));
+		$this->HttpRequest->setGETData($this->currentRoute->vars());
 	}
 
 	public static function getPath($route_name, array $vars=[])
@@ -57,17 +68,22 @@ class Router
 						return "";
 					}
 				],
-				self::$routes[$route_name]['url']
+				self::$routes[$route_name]->urlPattern()
 			);
 		} else {
 			return "/";
 		}
 	}
 
+	public static function isCurrentPath($route_name, array $vars=[])
+	{
+		return (self::$routes[$route->name()]->setVarsFromUrl($this->HttpRequest->getURI())) ? true : false;
+	}
+
 	public function run()
 	{
-		$controller = "\Controller\\{$this->route->controller()}";
-		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->route->action());
+		$controller = "\Controller\\{$this->currentRoute->controller()}";
+		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->currentRoute->action());
 		$controller->run();
 	}
 

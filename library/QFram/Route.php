@@ -7,7 +7,7 @@ namespace QFram;
 class Route
 {
 	protected $name;
-	protected $url;
+	protected $urlPattern;
 	protected $controller;
 	protected $action;
 	protected $varsNames = array();
@@ -27,26 +27,8 @@ class Route
 		}
 	}
 
-	public function match($url)
-	{
-		if (preg_match('`^'.$this->url.'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches)) {
-			if (!empty($this->varsNames)) {
-				$vars = [];
-				foreach ($matches as $key => $match) {
-					if ($key !== 0) {
-						$vars[$this->varsNames[$key - 1]] = $match;
-					}
-				}
-				$this->vars = $vars;
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public function name() { return $this->name; }
-	public function url() { return $this->url; }
+	public function urlPattern() { return $this->urlPattern; }
 	public function controller() { return $this->controller; }
 	public function action() { return $this->action; }
 	public function varsNames() { return $this->varsNames; }
@@ -57,9 +39,9 @@ class Route
 		$this->name = $value;
 	}
 
-	public function setUrl($value)
+	public function setUrlPattern($value)
 	{
-		$this->url = $value;
+		$this->urlPattern = $value;
 	}
 
 	public function setController($value)
@@ -82,4 +64,34 @@ class Route
 		$this->vars = $value;
 	}
 
+	public function setVarsFromUrl($url)
+	{
+		if (
+			preg_match('`^'.$this->urlPattern().'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches) &&
+			(
+				(int) count($this->varsNames()) == (int) (count($matches)-1)
+			)
+		) {
+			$vars = [];
+			foreach ($matches as $key => $match) {
+				if ($key !== 0) {
+					$vars[$this->varsNames()[$key - 1]] = $match;
+				}
+			}
+			$this->setVars($vars);
+		}
+	}
+
+	public function isValidUrl($url)
+	{
+		if (
+			preg_match('`^'.$this->urlPattern().'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches) &&
+			(
+				(int) count($this->varsNames()) == (int) (count($matches)-1)
+			)
+		) {
+			return true;
+		}
+		return false;
+	}
 }
