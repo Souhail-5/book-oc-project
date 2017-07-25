@@ -26,19 +26,19 @@
 	},
 	"comments":
 	{
-		"url": "/comments",
+		"url": "/commentaires",
 		"controller": "comments",
 		"action": "show"
 	},
 	"comments-signaled":
 	{
-		"url": "/comments/signaled",
+		"url": "/commentaires/signales",
 		"controller": "comments",
 		"action": "show-comments-signaled"
 	},
 	"comments-trash":
 	{
-		"url": "/comments/trash",
+		"url": "/commentaires/corbeille",
 		"controller": "comments",
 		"action": "show-comments-trash"
 	}
