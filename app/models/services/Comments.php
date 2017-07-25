@@ -63,14 +63,19 @@ class Comments
 		$episodes_service->minusNbrComments($comment->episodeId());
 	}
 
+	public function getComments()
+	{
+		return $this->comments->getComments();
+	}
+
 	public function getCommentById($comment_id)
 	{
 		return $this->comments->getCommentById($comment_id);
 	}
 
-	public function getComments($episode_id)
+	public function getCommentsByEpisode($episode_id)
 	{
-		return $this->comments->getComments($episode_id);
+		return $this->comments->getCommentsByEpisode($episode_id);
 	}
 
 	public function getSignaled()
