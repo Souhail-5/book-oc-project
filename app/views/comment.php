@@ -4,18 +4,18 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<h6 class="my-0 fz-1-05"><?= $comment->name() ?></h6>
 			<form class="d-flex align-items-center" action="" method="POST">
-				<?php if ($origin_action != 'showCommentsSignaled'): ?>
+				<?php if ($current_route->originalController() != 'comments'): ?>
 					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="signal-comment">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-circle-remove wh-0-95">
-							<use xlink:href="sprite.svg#si-glyph-circle-remove">
+							<use xlink:href="/sprite.svg#si-glyph-circle-remove">
 						</svg>
 						Signaler
 					</button>
 				<?php endif; ?>
-				<?php if ($origin_action == 'showCommentsSignaled'): ?>
+				<?php if ($current_route->originalController() == 'comments'): ?>
 					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-							<use xlink:href="sprite.svg#si-glyph-trash">
+							<use xlink:href="/sprite.svg#si-glyph-trash">
 						</svg>
 						Supprimer
 					</button>
