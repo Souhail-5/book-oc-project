@@ -29,18 +29,13 @@ abstract class Template
 		return array_key_exists($property, $this->data) ? $this->data[$property] : null;
 	}
 
-	public function path($route_name, array $vars)
-	{
-		return Router::getPath($route_name, $vars);
-	}
-
 	public function render()
 	{
 		if (file_exists(__DIR__.'/../../app/views/'.$this->view.'.php')) {
 			extract($this->data);
 
 			$path = function($route_name, $vars=[]) {
-				return $this->path($route_name, $vars);
+				return Router::getPath($route_name, $vars);
 			};
 
 			$_ifNotEmpty = function($test, $notEmpty, $empty='') {

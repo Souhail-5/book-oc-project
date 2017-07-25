@@ -75,11 +75,6 @@ class Router
 		}
 	}
 
-	public static function isCurrentPath($route_name, array $vars=[])
-	{
-		return (self::$routes[$route->name()]->setVarsFromUrl($this->HttpRequest->getURI())) ? true : false;
-	}
-
 	public function run()
 	{
 		$controller = "\Controller\\{$this->currentRoute->controller()}";
