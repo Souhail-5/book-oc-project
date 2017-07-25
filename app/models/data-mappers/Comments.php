@@ -161,7 +161,7 @@ class Comments
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
 			FROM comments
 			WHERE nbr_signals>0
-			ORDER BY publish_datetime DESC
+			ORDER BY nbr_signals DESC
 		');
 
 		$q->execute();
