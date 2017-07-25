@@ -64,4 +64,26 @@ class Comments extends Controller
 
 		$this->render();
 	}
+
+
+	public function signalComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->plusNbrSignals($comment);
+		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+	}
+
+	public function trashComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->trash($comment);
+		$this->HttpResponse->refresh();
+	}
+
+	public function deleteComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->delete($comment);
+		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+	}
 }

@@ -62,6 +62,20 @@ class Comments
 		$q->execute();
 	}
 
+	public function trash(Comment $comment)
+	{
+		$q = $this->db->prepare('
+			UPDATE comments
+			SET status=:status
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $comment->id());
+		$q->bindValue(':status', 'trash');
+
+		$q->execute();
+	}
+
 	public function delete(Comment $comment)
 	{
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");

@@ -16,7 +16,7 @@
 					</button>
 				<?php endif; ?>
 				<?php if ($current_route->originalController() == 'comments'): ?>
-					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
+					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="trash-comment">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
 							<use xlink:href="/sprite.svg#si-glyph-trash">
 						</svg>

@@ -56,6 +56,13 @@ class Comments
 		$this->comments->plusNbrSignals($comment);
 	}
 
+	public function trash(Object\Comment $comment)
+	{
+		$this->comments->trash($comment);
+		$episodes_service = new Episodes;
+		$episodes_service->minusNbrComments($comment->episodeId());
+	}
+
 	public function delete(Object\Comment $comment)
 	{
 		$this->comments->delete($comment);
