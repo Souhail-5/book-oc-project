@@ -90,3 +90,19 @@ a:hover.meta-danger, .btn-link:hover.meta-danger {
 .morecontent span {
 	display: none;
 }
+
+.btn-link.dropdown-toggle {
+	cursor: pointer;
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+.dropdown-menu {
+	box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.04);
+	border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.dropdown-item:hover {
+	background-color: $btn-secondary-bg;
+}
