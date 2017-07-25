@@ -34,9 +34,7 @@ abstract class Template
 		if (file_exists(__DIR__.'/../../app/views/'.$this->view.'.php')) {
 			extract($this->data);
 
-			$current_controller = Router::getOriginalController();
-
-			$current_action = Router::getOriginalAction();
+			$current_route = Router::currentRoute();
 
 			$path = function($route_name, $vars=[]) {
 				return Router::getPath($route_name, $vars);
