@@ -12,8 +12,8 @@ class Router
 {
 	protected $HttpRequest;
 	protected $HttpResponse;
-	protected $currentRoute;
 
+	protected static $currentRoute;
 	protected static $routes;
 
 	public function __construct(HttpRequest $HttpRequest, HttpResponse $HttpResponse)
@@ -51,9 +51,9 @@ class Router
 
 	protected function setCurrentRoute(Route $route)
 	{
-		$this->currentRoute = $route;
-		if ($this->HttpRequest->POSTData('action')) $this->currentRoute->setAction($this->HttpRequest->POSTData('action'));
-		$this->HttpRequest->setGETData($this->currentRoute->vars());
+		self::$currentRoute = $route;
+		if ($this->HttpRequest->POSTData('action')) self::$currentRoute->setAction($this->HttpRequest->POSTData('action'));
+		$this->HttpRequest->setGETData(self::$currentRoute->vars());
 	}
 
 	public static function getPath($route_name, array $vars=[])
@@ -75,10 +75,15 @@ class Router
 		}
 	}
 
+	public static function getAction()
+	{
+		return self::$currentRoute->action();
+	}
+
 	public function run()
 	{
-		$controller = "\Controller\\{$this->currentRoute->controller()}";
-		$controller = new $controller($this->HttpRequest, $this->HttpResponse, $this->currentRoute->action());
+		$controller = '\Controller\\'.self::$currentRoute->controller();
+		$controller = new $controller($this->HttpRequest, $this->HttpResponse, self::$currentRoute->action());
 		$controller->run();
 	}
 
