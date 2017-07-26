@@ -45,8 +45,8 @@ class Comments
 		$q->bindValue(':text', $comment->text());
 		$q->bindValue(':nbr_signals', $comment->nbrSignals());
 		$q->bindValue(':status', $comment->status());
-		$q->bindValue(':approved', $comment->approved());
-		$q->bindValue(':trash', $comment->trash());
+		$q->bindValue(':approved', (int) $comment->approved(), \PDO::PARAM_INT);
+		$q->bindValue(':trash', (int) $comment->trash(), \PDO::PARAM_INT);
 
 		$q->execute();
 	}
