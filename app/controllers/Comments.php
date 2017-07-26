@@ -47,7 +47,7 @@ class Comments extends Controller
 		$this->render();
 	}
 
-	public function showCommentsTrash()
+	public function showTrash()
 	{
 		$comments_view = $this->getComponent('comments-list');
 		$comments_list = $this->getService('comments')->getTrash();
@@ -65,7 +65,7 @@ class Comments extends Controller
 		$this->render();
 	}
 
-	public function showCommentsSignaled()
+	public function showSignaled()
 	{
 		$comments_view = $this->getComponent('comments-list');
 		$comments_list = $this->getService('comments')->getSignaled();
@@ -87,14 +87,6 @@ class Comments extends Controller
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->plusNbrSignals($comment);
-		$this->HttpResponse->refresh();
-	}
-
-	public function resetSignalsComment()
-	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$comment->setNbrSignals(0);
-		$this->getService('comments')->update($comment);
 		$this->HttpResponse->refresh();
 	}
 

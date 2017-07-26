@@ -34,12 +34,12 @@
 	{
 		"url": "/commentaires/signales",
 		"controller": "comments",
-		"action": "show-comments-signaled"
+		"action": "show-signaled"
 	},
 	"comments-trash":
 	{
 		"url": "/commentaires/corbeille",
 		"controller": "comments",
-		"action": "show-comments-trash"
+		"action": "show-trash"
 	}
 }
