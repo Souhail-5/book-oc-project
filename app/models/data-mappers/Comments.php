@@ -65,7 +65,7 @@ class Comments
 		$q->execute();
 	}
 
-	public function delete(Comment $comment)
+	public function deleteComment(Comment $comment)
 	{
 		$q = $this->db->prepare('
 			DELETE FROM comments

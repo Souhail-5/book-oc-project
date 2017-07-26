@@ -129,7 +129,7 @@ class Comments extends Controller
 	public function deleteComment()
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->delete($comment);
+		$this->getService('comments')->deleteComment($comment);
 		$this->HttpResponse->refresh();
 	}
 }

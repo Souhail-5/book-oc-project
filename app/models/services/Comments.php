@@ -88,11 +88,13 @@ class Comments
 		}
 	}
 
-	public function delete(Object\Comment $comment)
+	public function deleteComment(Object\Comment $comment)
 	{
-		$this->comments->delete($comment);
-		$episodes_service = new Episodes;
-		$episodes_service->minusNbrComments($comment->episodeId());
+		$this->comments->deleteComment($comment);
+		if ($this->comments->status() == 'publish') {
+			$episodes_service = new Episodes;
+			$episodes_service->minusNbrComments($comment->episodeId());
+		}
 	}
 
 	public function getPublish()
