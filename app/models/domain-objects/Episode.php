@@ -14,8 +14,9 @@ class Episode
 	protected $publishDatetime;
 	protected $modificationDatetime;
 	protected $nbrComments;
-	protected $status;
 	protected $slug;
+	protected $status;
+	protected $trash;
 
 	public function __construct(array $data = [])
 	{
@@ -39,8 +40,9 @@ class Episode
 	public function publishDatetime() { return $this->publishDatetime; }
 	public function modificationDatetime() { return $this->modificationDatetime; }
 	public function nbrComments() { return $this->nbrComments; }
-	public function status() { return $this->status; }
 	public function slug() { return $this->slug; }
+	public function status() { return $this->status; }
+	public function trash() { return $this->trash; }
 
 	protected function setId($value)
 	{
@@ -82,14 +84,19 @@ class Episode
 		$this->nbrComments = $value;
 	}
 
+	public function setSlug($value)
+	{
+		$this->slug = $value;
+	}
+
 	public function setStatus($value)
 	{
 		$this->status = $value;
 	}
 
-	public function setSlug($value)
+	public function setTrash($value)
 	{
-		$this->slug = $value;
+		$this->trash = $value;
 	}
 
 }
