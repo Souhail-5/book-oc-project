@@ -75,6 +75,10 @@ body {
 	color: $gray-light;
 }
 
+.meta-success {
+	color: $gray-light;
+}
+
 a:hover.meta, .btn-link:hover.meta {
 	color: $gray-dark;
 	text-decoration: none;
@@ -83,6 +87,12 @@ a:hover.meta, .btn-link:hover.meta {
 
 a:hover.meta-danger, .btn-link:hover.meta-danger {
 	color: $brand-danger;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:hover.meta-success, .btn-link:hover.meta-success {
+	color: $brand-success;
 	text-decoration: none;
 	cursor: pointer;
 }
