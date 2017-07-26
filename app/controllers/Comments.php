@@ -88,7 +88,7 @@ class Comments extends Controller
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->plusNbrSignals($comment);
-		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+		$this->HttpResponse->redirect();
 	}
 
 	public function trashComment()
@@ -102,6 +102,6 @@ class Comments extends Controller
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->delete($comment);
-		$this->HttpResponse->redirect(Router::genPath('episode', [$this->HttpRequest->GETData('number'), $this->HttpRequest->GETData('slug')]));
+		$this->HttpResponse->refresh();
 	}
 }
