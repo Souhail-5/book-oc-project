@@ -35,7 +35,7 @@ class Comments
 	{
 		$q = $this->db->prepare('
 			UPDATE comments
-			SET name=:name, email=:email, text=:text, nbr_signals=:nbr_signals
+			SET name=:name, email=:email, text=:text, nbr_signals=:nbr_signals, status=:status, approved=:approved, trash=:trash
 			WHERE id=:id
 		');
 
@@ -44,6 +44,9 @@ class Comments
 		$q->bindValue(':email', $comment->email());
 		$q->bindValue(':text', $comment->text());
 		$q->bindValue(':nbr_signals', $comment->nbrSignals());
+		$q->bindValue(':status', $comment->status());
+		$q->bindValue(':approved', $comment->approved());
+		$q->bindValue(':trash', $comment->trash());
 
 		$q->execute();
 	}
@@ -66,19 +69,26 @@ class Comments
 	{
 		$q = $this->db->prepare('
 			UPDATE comments
-			SET status=:status
+			SET trash=:trash
 			WHERE id=:id
 		');
 
 		$q->bindValue(':id', $comment->id());
-		$q->bindValue(':status', 'trash');
+		$q->bindValue(':trash', 1);
 
 		$q->execute();
 	}
 
 	public function delete(Comment $comment)
 	{
-		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
+		$q = $this->db->prepare('
+			DELETE FROM comments
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $comment->id());
+
+		$q->execute();
 	}
 
 	public function getPublish()
@@ -86,13 +96,14 @@ class Comments
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE status=:status
+			WHERE status=:status AND trash=:trash
 			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':status', 'publish');
+		$q->bindValue(':trash', 0);
 
 		$q->execute();
 
@@ -105,6 +116,9 @@ class Comments
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
 				'nbrSignals' => $data['nbr_signals'],
+				'status' => $data['status'],
+				'approved' => $data['approved'],
+				'trash' => $data['trash'],
 			];
 			$comments[] = new Comment($map);
 		}
@@ -117,13 +131,13 @@ class Comments
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE status=:status
+			WHERE trash=:trash
 			ORDER BY publish_datetime ASC
 		');
 
-		$q->bindValue(':status', 'trash');
+		$q->bindValue(':trash', 1);
 
 		$q->execute();
 
@@ -136,6 +150,9 @@ class Comments
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
 				'nbrSignals' => $data['nbr_signals'],
+				'status' => $data['status'],
+				'approved' => $data['approved'],
+				'trash' => $data['trash'],
 			];
 			$comments[] = new Comment($map);
 		}
@@ -148,14 +165,14 @@ class Comments
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE nbr_signals>:nbr_signals AND status<>:status
-			ORDER BY nbr_signals DESC
+			WHERE nbr_signals>:nbr_signals AND trash=:trash
+			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':nbr_signals', 0);
-		$q->bindValue(':status', 'trash');
+		$q->bindValue(':trash', 0);
 
 		$q->execute();
 
@@ -168,6 +185,9 @@ class Comments
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
 				'nbrSignals' => $data['nbr_signals'],
+				'status' => $data['status'],
+				'approved' => $data['approved'],
+				'trash' => $data['trash'],
 			];
 			$comments[] = new Comment($map);
 		}
@@ -178,7 +198,7 @@ class Comments
 	public function getCommentById($comment_id)
 	{
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
 			WHERE id=:id
 			LIMIT 1
@@ -197,23 +217,28 @@ class Comments
 			'text' => $data['text'],
 			'publishDatetime' => $data['publish_datetime'],
 			'nbrSignals' => $data['nbr_signals'],
+			'status' => $data['status'],
+			'approved' => $data['approved'],
+			'trash' => $data['trash'],
 		];
 
 		return new Comment($map);
 	}
 
-	public function getCommentsByEpisode($episode_id)
+	public function getCommentsByEpisodeId($episode_id)
 	{
 		$comments = [];
 
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE episode_id=:episode_id
+			WHERE episode_id=:episode_id AND status=:status AND trash=:trash
 			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':episode_id', $episode_id);
+		$q->bindValue(':status', 'publish');
+		$q->bindValue(':trash', 0);
 
 		$q->execute();
 
@@ -226,6 +251,9 @@ class Comments
 				'text' => $data['text'],
 				'publishDatetime' => $data['publish_datetime'],
 				'nbrSignals' => $data['nbr_signals'],
+				'status' => $data['status'],
+				'approved' => $data['approved'],
+				'trash' => $data['trash'],
 			];
 			$comments[] = new Comment($map);
 		}

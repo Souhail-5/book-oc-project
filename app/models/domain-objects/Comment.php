@@ -13,6 +13,9 @@ class Comment
 	protected $text;
 	protected $publishDatetime;
 	protected $nbrSignals;
+	protected $status;
+	protected $approved;
+	protected $trash;
 
 	public function __construct(array $data = [])
 	{
@@ -35,6 +38,9 @@ class Comment
 	public function text() { return $this->text; }
 	public function publishDatetime() { return $this->publishDatetime; }
 	public function nbrSignals() { return $this->nbrSignals; }
+	public function status() { return $this->status; }
+	public function approved() { return $this->approved; }
+	public function trash() { return $this->trash; }
 
 	public function setId($value)
 	{
@@ -69,5 +75,20 @@ class Comment
 	public function setNbrSignals($value)
 	{
 		$this->nbrSignals = $value;
+	}
+
+	public function setStatus($value)
+	{
+		$this->status = $value;
+	}
+
+	public function setApproved($value)
+	{
+		$this->approved = $value;
+	}
+
+	public function setTrash($value)
+	{
+		$this->trash = $value;
 	}
 }

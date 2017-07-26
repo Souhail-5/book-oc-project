@@ -56,6 +56,12 @@ class Comments
 		$this->comments->plusNbrSignals($comment);
 	}
 
+	public function approve(Object\Comment $comment)
+	{
+		$this->comments->setStatus('approved');
+		$this->comments->update($comment);
+	}
+
 	public function trash(Object\Comment $comment)
 	{
 		$this->comments->trash($comment);
@@ -90,8 +96,8 @@ class Comments
 		return $this->comments->getCommentById($comment_id);
 	}
 
-	public function getCommentsByEpisode($episode_id)
+	public function getCommentsByEpisodeId($episode_id)
 	{
-		return $this->comments->getCommentsByEpisode($episode_id);
+		return $this->comments->getCommentsByEpisodeId($episode_id);
 	}
 }
