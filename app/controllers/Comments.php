@@ -115,7 +115,14 @@ class Comments extends Controller
 	public function trashComment()
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->trash($comment);
+		$this->getService('comments')->trashComment($comment);
+		$this->HttpResponse->refresh();
+	}
+
+	public function untrashComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->untrashComment($comment);
 		$this->HttpResponse->refresh();
 	}
 

@@ -68,11 +68,24 @@ class Comments
 		$this->comments->update($comment);
 	}
 
-	public function trash(Object\Comment $comment)
+	public function trashComment(Object\Comment $comment)
 	{
-		$this->comments->trash($comment);
-		$episodes_service = new Episodes;
-		$episodes_service->minusNbrComments($comment->episodeId());
+		$this->comments->setTrash(1);
+		$this->comments->update($comment);
+		if ($this->comments->status() == 'publish') {
+			$episodes_service = new Episodes;
+			$episodes_service->minusNbrComments($comment->episodeId());
+		}
+	}
+
+	public function untrashComment(Object\Comment $comment)
+	{
+		$this->comments->setTrash(0);
+		$this->comments->update($comment);
+		if ($this->comments->status() == 'publish') {
+			$episodes_service = new Episodes;
+			$episodes_service->plusNbrComments($comment->episodeId());
+		}
 	}
 
 	public function delete(Object\Comment $comment)
@@ -97,13 +110,13 @@ class Comments
 		return $this->comments->getSignaled();
 	}
 
-	public function getCommentById($comment_id)
-	{
-		return $this->comments->getCommentById($comment_id);
-	}
-
 	public function getCommentsByEpisodeId($episode_id)
 	{
 		return $this->comments->getCommentsByEpisodeId($episode_id);
+	}
+
+	public function getCommentById($comment_id)
+	{
+		return $this->comments->getCommentById($comment_id);
 	}
 }

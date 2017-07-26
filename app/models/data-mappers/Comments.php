@@ -65,20 +65,6 @@ class Comments
 		$q->execute();
 	}
 
-	public function trash(Comment $comment)
-	{
-		$q = $this->db->prepare('
-			UPDATE comments
-			SET trash=:trash
-			WHERE id=:id
-		');
-
-		$q->bindValue(':id', $comment->id());
-		$q->bindValue(':trash', 1);
-
-		$q->execute();
-	}
-
 	public function delete(Comment $comment)
 	{
 		$q = $this->db->prepare('
@@ -195,36 +181,6 @@ class Comments
 		return $comments;
 	}
 
-	public function getCommentById($comment_id)
-	{
-		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
-			FROM comments
-			WHERE id=:id
-			LIMIT 1
-		');
-
-		$q->bindValue(':id', $comment_id);
-
-		$q->execute();
-
-		$data = $q->fetch(\PDO::FETCH_ASSOC);
-		$map = [
-			'id' => $data['id'],
-			'episodeId' => $data['episode_id'],
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'text' => $data['text'],
-			'publishDatetime' => $data['publish_datetime'],
-			'nbrSignals' => $data['nbr_signals'],
-			'status' => $data['status'],
-			'approved' => $data['approved'],
-			'trash' => $data['trash'],
-		];
-
-		return new Comment($map);
-	}
-
 	public function getCommentsByEpisodeId($episode_id)
 	{
 		$comments = [];
@@ -259,5 +215,35 @@ class Comments
 		}
 
 		return $comments;
+	}
+
+	public function getCommentById($comment_id)
+	{
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
+			FROM comments
+			WHERE id=:id
+			LIMIT 1
+		');
+
+		$q->bindValue(':id', $comment_id);
+
+		$q->execute();
+
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		$map = [
+			'id' => $data['id'],
+			'episodeId' => $data['episode_id'],
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'nbrSignals' => $data['nbr_signals'],
+			'status' => $data['status'],
+			'approved' => $data['approved'],
+			'trash' => $data['trash'],
+		];
+
+		return new Comment($map);
 	}
 }
