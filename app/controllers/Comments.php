@@ -88,7 +88,15 @@ class Comments extends Controller
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$this->getService('comments')->plusNbrSignals($comment);
-		$this->HttpResponse->redirect();
+		$this->HttpResponse->refresh();
+	}
+
+	public function resetSignalsComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$comment->setNbrSignals(0);
+		$this->getService('comments')->update($comment);
+		$this->HttpResponse->refresh();
 	}
 
 	public function trashComment()

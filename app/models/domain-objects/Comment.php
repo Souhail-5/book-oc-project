@@ -36,37 +36,37 @@ class Comment
 	public function publishDatetime() { return $this->publishDatetime; }
 	public function nbrSignals() { return $this->nbrSignals; }
 
-	protected function setId($value)
+	public function setId($value)
 	{
 		$this->id = $value;
 	}
 
-	protected function setEpisodeId($value)
+	public function setEpisodeId($value)
 	{
 		$this->episodeId = $value;
 	}
 
-	protected function setName($value)
+	public function setName($value)
 	{
 		$this->name = $value;
 	}
 
-	protected function setEmail($value)
+	public function setEmail($value)
 	{
 		$this->email = $value;
 	}
 
-	protected function setText($value)
+	public function setText($value)
 	{
 		$this->text = $value;
 	}
 
-	protected function setPublishDatetime($value)
+	public function setPublishDatetime($value)
 	{
 		$this->publishDatetime = $value;
 	}
 
-	protected function setNbrSignals($value)
+	public function setNbrSignals($value)
 	{
 		$this->nbrSignals = $value;
 	}
