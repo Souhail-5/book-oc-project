@@ -86,7 +86,7 @@ class Comments extends Controller
 	public function signalComment()
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->plusNbrSignals($comment);
+		$this->getService('comments')->signalComment($comment);
 		$this->HttpResponse->refresh();
 	}
 

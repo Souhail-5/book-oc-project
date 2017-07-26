@@ -51,9 +51,12 @@ class Comments
 		}
 	}
 
-	public function plusNbrSignals(Object\Comment $comment)
+	public function signalComment(Object\Comment $comment)
 	{
-		$this->comments->plusNbrSignals($comment);
+		if ($this->comments->approved() == 0) {
+			$this->comments->setNbrSignals($comment->nbrSignals()+1);
+			$this->comments->update($comment);
+		}
 	}
 
 	public function approveComment(Object\Comment $comment)

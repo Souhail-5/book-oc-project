@@ -51,20 +51,6 @@ class Comments
 		$q->execute();
 	}
 
-	public function plusNbrSignals(Comment $comment)
-	{
-		$q = $this->db->prepare('
-			UPDATE comments
-			SET nbr_signals=:nbr_signals
-			WHERE id=:id
-		');
-
-		$q->bindValue(':id', $comment->id());
-		$q->bindValue(':nbr_signals', $comment->nbrSignals()+1);
-
-		$q->execute();
-	}
-
 	public function deleteComment(Comment $comment)
 	{
 		$q = $this->db->prepare('
