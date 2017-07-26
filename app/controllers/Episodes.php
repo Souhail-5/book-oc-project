@@ -4,9 +4,9 @@ namespace Controller;
 use \Controller\Controller;
 
 /**
-* Home Controller
+* Episodes Controller
 */
-class Home extends Controller
+class Episodes extends Controller
 {
 	protected function init()
 	{
