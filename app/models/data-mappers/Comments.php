@@ -139,11 +139,12 @@ class Comments
 		$q = $this->db->prepare('
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE nbr_signals>:nbr_signals AND trash=:trash
+			WHERE nbr_signals>:nbr_signals AND approved=:approved AND trash=:trash
 			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':nbr_signals', 0);
+		$q->bindValue(':approved', 0);
 		$q->bindValue(':trash', 0);
 
 		$q->execute();
