@@ -105,14 +105,19 @@ class Comments
 		return $this->comments->getPublish();
 	}
 
-	public function getTrash()
+	public function getApproved()
 	{
-		return $this->comments->getTrash();
+		return $this->comments->getApproved();
 	}
 
 	public function getSignaled()
 	{
 		return $this->comments->getSignaled();
+	}
+
+	public function getTrash()
+	{
+		return $this->comments->getTrash();
 	}
 
 	public function getCommentsByEpisodeId($episode_id)

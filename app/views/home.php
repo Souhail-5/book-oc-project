@@ -25,6 +25,7 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
 						<a class="dropdown-item" href="<?= $path('comments') ?>">Voir tout</a>
+						<a class="dropdown-item" href="<?= $path('comments-approved') ?>">Approuvés</a>
 						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<?= $path('comments-trash') ?>">Corbeille</a>
@@ -45,6 +46,10 @@
 						<a class="breadcrumb-item no-before" href="<?= $path('root') ?>">Accueil</a>
 						<?php if ($current_route->name() == 'comments'): ?>
 							<span class="breadcrumb-item">Commentaires</span>
+						<?php endif; ?>
+						<?php if ($current_route->name() == 'comments-approved'): ?>
+							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
+							<span class="breadcrumb-item">Approuvés</span>
 						<?php endif; ?>
 						<?php if ($current_route->name() == 'comments-signaled'): ?>
 							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>

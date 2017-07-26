@@ -98,18 +98,19 @@ class Comments
 		return $comments;
 	}
 
-	public function getTrash()
+	public function getApproved()
 	{
 		$comments = [];
 
 		$q = $this->db->prepare('
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
-			WHERE trash=:trash
+			WHERE approved=:approved AND trash=:trash
 			ORDER BY publish_datetime ASC
 		');
 
-		$q->bindValue(':trash', 1);
+		$q->bindValue(':approved', 1);
+		$q->bindValue(':trash', 0);
 
 		$q->execute();
 
@@ -146,6 +147,40 @@ class Comments
 		$q->bindValue(':nbr_signals', 0);
 		$q->bindValue(':approved', 0);
 		$q->bindValue(':trash', 0);
+
+		$q->execute();
+
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$map = [
+				'id' => $data['id'],
+				'episodeId' => $data['episode_id'],
+				'name' => $data['name'],
+				'email' => $data['email'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'nbrSignals' => $data['nbr_signals'],
+				'status' => $data['status'],
+				'approved' => $data['approved'],
+				'trash' => $data['trash'],
+			];
+			$comments[] = new Comment($map);
+		}
+
+		return $comments;
+	}
+
+	public function getTrash()
+	{
+		$comments = [];
+
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
+			FROM comments
+			WHERE trash=:trash
+			ORDER BY publish_datetime ASC
+		');
+
+		$q->bindValue(':trash', 1);
 
 		$q->execute();
 

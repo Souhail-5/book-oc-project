@@ -47,10 +47,10 @@ class Comments extends Controller
 		$this->render();
 	}
 
-	public function showTrash()
+	public function showSignaled()
 	{
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getTrash();
+		$comments_list = $this->getService('comments')->getSignaled();
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -65,10 +65,28 @@ class Comments extends Controller
 		$this->render();
 	}
 
-	public function showSignaled()
+	public function showApproved()
 	{
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getSignaled();
+		$comments_list = $this->getService('comments')->getApproved();
+
+		foreach ($comments_list as $comment) {
+			$component_name = "comment-{$comment->id()}";
+			$this->initComponents([$component_name => 'comment']);
+
+			$this->getComponent($component_name)->comment = $comment;
+			$comments_view->comments_list .= $this->getComponent($component_name)->render();
+		}
+
+		$this->getComponent('home')->view = $comments_view->render();
+
+		$this->render();
+	}
+
+	public function showTrash()
+	{
+		$comments_view = $this->getComponent('comments-list');
+		$comments_list = $this->getService('comments')->getTrash();
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";

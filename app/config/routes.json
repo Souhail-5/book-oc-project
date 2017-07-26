@@ -30,6 +30,12 @@
 		"controller": "comments",
 		"action": "show"
 	},
+	"comments-approved":
+	{
+		"url": "/commentaires/approuves",
+		"controller": "comments",
+		"action": "show-approved"
+	},
 	"comments-signaled":
 	{
 		"url": "/commentaires/signales",
