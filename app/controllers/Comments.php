@@ -83,7 +83,6 @@ class Comments extends Controller
 		$this->render();
 	}
 
-
 	public function signalComment()
 	{
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
@@ -96,6 +95,20 @@ class Comments extends Controller
 		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 		$comment->setNbrSignals(0);
 		$this->getService('comments')->update($comment);
+		$this->HttpResponse->refresh();
+	}
+
+	public function approveComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->approveComment($comment);
+		$this->HttpResponse->refresh();
+	}
+
+	public function disapproveComment()
+	{
+		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+		$this->getService('comments')->disapproveComment($comment);
 		$this->HttpResponse->refresh();
 	}
 

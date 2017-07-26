@@ -56,9 +56,15 @@ class Comments
 		$this->comments->plusNbrSignals($comment);
 	}
 
-	public function approve(Object\Comment $comment)
+	public function approveComment(Object\Comment $comment)
 	{
-		$this->comments->setStatus('approved');
+		$this->comments->setApproved(1);
+		$this->comments->update($comment);
+	}
+
+	public function disapproveComment(Object\Comment $comment)
+	{
+		$this->comments->setApproved(0);
 		$this->comments->update($comment);
 	}
 
