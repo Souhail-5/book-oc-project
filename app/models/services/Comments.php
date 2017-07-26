@@ -38,44 +38,31 @@ class Comments
 		}
 	}
 
-	public function update(Object\Comment $comment)
-	{
-		if (empty($comment->name()) || empty($comment->email()) || empty($comment->text())) {
-			throw new \Exception('Tous les champs sont obligatoires');
-		}
-
-		try {
-			$this->comments->update($comment);
-		} catch (\Exception $e) {
-			return $e;
-		}
-	}
-
 	public function signalComment(Object\Comment $comment)
 	{
-		if ($this->comments->approved() == 0) {
-			$this->comments->setNbrSignals($comment->nbrSignals()+1);
+		if ($comment->approved() == 0) {
+			$comment->setNbrSignals($comment->nbrSignals()+1);
 			$this->comments->update($comment);
 		}
 	}
 
 	public function approveComment(Object\Comment $comment)
 	{
-		$this->comments->setApproved(1);
+		$comment->setApproved(1);
 		$this->comments->update($comment);
 	}
 
 	public function disapproveComment(Object\Comment $comment)
 	{
-		$this->comments->setApproved(0);
+		$comment->setApproved(0);
 		$this->comments->update($comment);
 	}
 
 	public function trashComment(Object\Comment $comment)
 	{
-		$this->comments->setTrash(1);
+		$comment->setTrash(1);
 		$this->comments->update($comment);
-		if ($this->comments->status() == 'publish') {
+		if ($comment->status() == 'publish') {
 			$episodes_service = new Episodes;
 			$episodes_service->minusNbrComments($comment->episodeId());
 		}
@@ -83,9 +70,9 @@ class Comments
 
 	public function untrashComment(Object\Comment $comment)
 	{
-		$this->comments->setTrash(0);
+		$comment->setTrash(0);
 		$this->comments->update($comment);
-		if ($this->comments->status() == 'publish') {
+		if ($comment->status() == 'publish') {
 			$episodes_service = new Episodes;
 			$episodes_service->plusNbrComments($comment->episodeId());
 		}
@@ -94,7 +81,7 @@ class Comments
 	public function deleteComment(Object\Comment $comment)
 	{
 		$this->comments->deleteComment($comment);
-		if ($this->comments->status() == 'publish') {
+		if ($comment->status() == 'publish') {
 			$episodes_service = new Episodes;
 			$episodes_service->minusNbrComments($comment->episodeId());
 		}
