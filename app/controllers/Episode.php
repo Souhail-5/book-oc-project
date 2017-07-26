@@ -31,7 +31,7 @@ class Episode extends Controller
 			'slug' => $this->HttpRequest->GETData('slug')
 		]));
 
-		$comments = $this->getService('comments')->getCommentsByEpisode($episode_template->episode->id());
+		$comments = $this->getService('comments')->getCommentsByEpisodeId($episode_template->episode->id());
 
 		foreach ($comments as $comment) {
 			$component_name = "comment-{$comment->id()}";
