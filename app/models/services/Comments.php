@@ -70,9 +70,19 @@ class Comments
 		$episodes_service->minusNbrComments($comment->episodeId());
 	}
 
-	public function getValidComments()
+	public function getPublish()
 	{
-		return $this->comments->getValidComments();
+		return $this->comments->getPublish();
+	}
+
+	public function getTrash()
+	{
+		return $this->comments->getTrash();
+	}
+
+	public function getSignaled()
+	{
+		return $this->comments->getSignaled();
 	}
 
 	public function getCommentById($comment_id)
@@ -83,10 +93,5 @@ class Comments
 	public function getCommentsByEpisode($episode_id)
 	{
 		return $this->comments->getCommentsByEpisode($episode_id);
-	}
-
-	public function getSignaled()
-	{
-		return $this->comments->getSignaled();
 	}
 }

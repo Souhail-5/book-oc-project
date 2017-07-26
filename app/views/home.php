@@ -27,7 +27,7 @@
 						<a class="dropdown-item" href="<?= $path('comments') ?>">Voir tout</a>
 						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Corbeille</a>
+						<a class="dropdown-item" href="<?= $path('comments-trash') ?>">Corbeille</a>
 					</div>
 				</div>
 				<div class="ml-auto d-flex align-items-center">
@@ -48,7 +48,11 @@
 						<?php endif; ?>
 						<?php if ($current_route->name() == 'comments-signaled'): ?>
 							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
-							<span class="breadcrumb-item">Commentaires signalés</span>
+							<span class="breadcrumb-item">Signalés</span>
+						<?php endif; ?>
+						<?php if ($current_route->name() == 'comments-trash'): ?>
+							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
+							<span class="breadcrumb-item">Corbeille</span>
 						<?php endif; ?>
 					<?php endif; ?>
 				</nav>

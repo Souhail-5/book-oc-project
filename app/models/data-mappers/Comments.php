@@ -52,12 +52,12 @@ class Comments
 	{
 		$q = $this->db->prepare('
 			UPDATE comments
-			SET nbr_signals=:nbr_signals+1
+			SET nbr_signals=:nbr_signals
 			WHERE id=:id
 		');
 
 		$q->bindValue(':id', $comment->id());
-		$q->bindValue(':nbr_signals', $comment->nbrSignals());
+		$q->bindValue(':nbr_signals', $comment->nbrSignals()+1);
 
 		$q->execute();
 	}
@@ -81,15 +81,81 @@ class Comments
 		$this->db->exec("DELETE FROM comments WHERE id={$comment->id()}");
 	}
 
-	public function getValidComments()
+	public function getPublish()
 	{
 		$comments = [];
 
 		$q = $this->db->prepare('
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
 			FROM comments
+			WHERE status=:status
 			ORDER BY publish_datetime ASC
 		');
+
+		$q->bindValue(':status', 'publish');
+
+		$q->execute();
+
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$map = [
+				'id' => $data['id'],
+				'episodeId' => $data['episode_id'],
+				'name' => $data['name'],
+				'email' => $data['email'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'nbrSignals' => $data['nbr_signals'],
+			];
+			$comments[] = new Comment($map);
+		}
+
+		return $comments;
+	}
+
+	public function getTrash()
+	{
+		$comments = [];
+
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			FROM comments
+			WHERE status=:status
+			ORDER BY publish_datetime ASC
+		');
+
+		$q->bindValue(':status', 'trash');
+
+		$q->execute();
+
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$map = [
+				'id' => $data['id'],
+				'episodeId' => $data['episode_id'],
+				'name' => $data['name'],
+				'email' => $data['email'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'nbrSignals' => $data['nbr_signals'],
+			];
+			$comments[] = new Comment($map);
+		}
+
+		return $comments;
+	}
+
+	public function getSignaled()
+	{
+		$comments = [];
+
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
+			FROM comments
+			WHERE nbr_signals>:nbr_signals AND status<>:status
+			ORDER BY nbr_signals DESC
+		');
+
+		$q->bindValue(':nbr_signals', 0);
+		$q->bindValue(':status', 'trash');
 
 		$q->execute();
 
@@ -148,35 +214,6 @@ class Comments
 		');
 
 		$q->bindValue(':episode_id', $episode_id);
-
-		$q->execute();
-
-		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
-			$map = [
-				'id' => $data['id'],
-				'episodeId' => $data['episode_id'],
-				'name' => $data['name'],
-				'email' => $data['email'],
-				'text' => $data['text'],
-				'publishDatetime' => $data['publish_datetime'],
-				'nbrSignals' => $data['nbr_signals'],
-			];
-			$comments[] = new Comment($map);
-		}
-
-		return $comments;
-	}
-
-	public function getSignaled()
-	{
-		$comments = [];
-
-		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals
-			FROM comments
-			WHERE nbr_signals>0
-			ORDER BY nbr_signals DESC
-		');
 
 		$q->execute();
 
