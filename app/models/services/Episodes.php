@@ -87,9 +87,14 @@ class Episodes
 		return $this->episodes->getAllTrash();
 	}
 
-	public function getEpisode(Object\Episode $episode)
+	public function getOnePublishById($episode_id)
 	{
-		return $this->episodes->get($episode);
+		return $this->episodes->getOnePublishById($episode_id);
+	}
+
+	public function getOnePublishByNumSlug($episode_num, $episode_slug)
+	{
+		return $this->episodes->getOnePublishByNumSlug($episode_num, $episode_slug);
 	}
 
 	public function plusNbrComments($episode_id)
