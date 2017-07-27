@@ -1,6 +1,6 @@
 <!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
-	<header id="hero-image" class="jumbotron jumbotron-fluid py-0">
+	<header class="featured-image-main" class="jumbotron jumbotron-fluid py-0">
 		<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 	</header>
 	<div class="row">

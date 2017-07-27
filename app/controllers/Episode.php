@@ -17,14 +17,14 @@ class Episode extends Controller
 		]);
 		$this->initPage();
 		$this->initComponents([
-			'episode' => 'episode',
+			'episode-single' => 'episode-single',
 			'new-comment-form' => 'new-comment-form',
 		]);
 	}
 
 	public function show()
 	{
-		$episode_template = $this->getComponent('episode');
+		$episode_template = $this->getComponent('episode-single');
 		$episode_template->user = true;
 		$episode_template->episode = $this->getService('episodes')->getEpisode($this->getService('episodes')->setNewEpisode([
 			'number' => $this->HttpRequest->GETData('number'),
@@ -64,7 +64,7 @@ class Episode extends Controller
 
 	public function updateEpisode()
 	{
-		$episode_template = $this->getComponent('episode');
+		$episode_template = $this->getComponent('episode-single');
 		$episode_template->new_comment_form = false;
 		$episode_template->user = true;
 		$episode_template->episode = $this->getService('episodes')->getEpisode(
@@ -114,7 +114,7 @@ class Episode extends Controller
 
 	public function newEpisodeComment()
 	{
-		$episode_template = $this->getComponent('episode');
+		$episode_template = $this->getComponent('episode-single');
 		$new_comment_form = $this->getComponent('new-comment-form');
 		$episode_template->new_comment_form = $new_comment_form->render();
 		$episode_template->user = true;
