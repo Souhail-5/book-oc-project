@@ -72,9 +72,19 @@ class Episodes
 		$this->episodes->delete($episode);
 	}
 
-	public function getEpisodes()
+	public function getAllPublish()
 	{
-		return $this->episodes->getEpisodes();
+		return $this->episodes->getAllPublish();
+	}
+
+	public function getAllDraft()
+	{
+		return $this->episodes->getAllDraft();
+	}
+
+	public function getAllTrash()
+	{
+		return $this->episodes->getAllTrash();
 	}
 
 	public function getEpisode(Object\Episode $episode)

@@ -28,6 +28,7 @@ class Episodes
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
 		$q->bindValue(':slug', $episode->slug());
+		$q->bindValue(':status', $episode->status());
 
 		$q->execute();
 	}
@@ -36,7 +37,7 @@ class Episodes
 	{
 		$q = $this->db->prepare('
 			UPDATE episodes
-			SET number = :number, part=:part, title=:title, text=:text, status=:status, slug=:slug
+			SET number = :number, part=:part, title=:title, text=:text, nbr_comments=:nbr_comments, slug=:slug, status=:status, trash=:trash
 			WHERE id=:id
 		');
 
@@ -45,15 +46,24 @@ class Episodes
 		$q->bindValue(':part', $episode->part());
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
-		$q->bindValue(':status', $episode->status());
+		$q->bindValue(':nbr_comments', $episode->nbrComments());
 		$q->bindValue(':slug', $episode->slug());
+		$q->bindValue(':status', $episode->status());
+		$q->bindValue(':trash', $episode->trash());
 
 		$q->execute();
 	}
 
 	public function delete(Episode $episode)
 	{
-		$this->db->exec("DELETE FROM episodes WHERE id={$episode->id()}");
+		$q = $this->db->prepare('
+			DELETE FROM episodes
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $episode->id());
+
+		$q->execute();
 	}
 
 	public function get(Episode $episode)
@@ -92,11 +102,21 @@ class Episodes
 		return new Episode($map);
 	}
 
-	public function getEpisodes()
+	public function getAllPublish()
 	{
 		$episodes = [];
 
-		$q = $this->db->query('SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, status, slug FROM episodes ORDER BY number DESC');
+		$q = $this->db->prepare('
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE status=:status AND trash=:trash
+			ORDER BY number DESC
+		');
+
+		$q->bindValue(':status', 'publish');
+		$q->bindValue(':trash', 0);
+
+		$q->execute();
 
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
 			$map = [
@@ -108,8 +128,80 @@ class Episodes
 				'publishDatetime' => $data['publish_datetime'],
 				'modificationDatetime' => $data['modification_datetime'],
 				'nbrComments' => $data['nbr_comments'],
-				'status' => $data['status'],
 				'slug' => $data['slug'],
+				'status' => $data['status'],
+				'trash' => $data['trash'],
+			];
+			$episodes[] = new Episode($map);
+		}
+
+		return $episodes;
+	}
+
+	public function getAllDraft()
+	{
+		$episodes = [];
+
+		$q = $this->db->prepare('
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE status=:status AND trash=:trash
+			ORDER BY number DESC
+		');
+
+		$q->bindValue(':status', 'draft');
+		$q->bindValue(':trash', 0);
+
+		$q->execute();
+
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$map = [
+				'id' => $data['id'],
+				'number' => $data['number'],
+				'part' => $data['part'],
+				'title' => $data['title'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'modificationDatetime' => $data['modification_datetime'],
+				'nbrComments' => $data['nbr_comments'],
+				'slug' => $data['slug'],
+				'status' => $data['status'],
+				'trash' => $data['trash'],
+			];
+			$episodes[] = new Episode($map);
+		}
+
+		return $episodes;
+	}
+
+	public function getAllTrash()
+	{
+		$episodes = [];
+
+		$q = $this->db->prepare('
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE trash=:trash
+			ORDER BY number DESC
+		');
+
+		$q->bindValue(':trash', 1);
+
+		$q->execute();
+
+		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+			$map = [
+				'id' => $data['id'],
+				'number' => $data['number'],
+				'part' => $data['part'],
+				'title' => $data['title'],
+				'text' => $data['text'],
+				'publishDatetime' => $data['publish_datetime'],
+				'modificationDatetime' => $data['modification_datetime'],
+				'nbrComments' => $data['nbr_comments'],
+				'slug' => $data['slug'],
+				'status' => $data['status'],
+				'trash' => $data['trash'],
 			];
 			$episodes[] = new Episode($map);
 		}

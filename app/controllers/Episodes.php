@@ -12,13 +12,11 @@ class Episodes extends Controller
 	{
 		$this->initServices([
 			'episodes' => 'Episodes',
-			'comments' => 'Comments',
 		]);
 		$this->initPage();
 		$this->initComponents([
 			'home' => 'home',
 			'episodes-list' => 'episodes-list',
-			'comments-list' => 'comments-list',
 		]);
 	}
 
@@ -31,30 +29,32 @@ class Episodes extends Controller
 		$this->HttpResponse->send($this->page->render());
 	}
 
-	public function show()
+	public function showAllPublish()
 	{
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getEpisodes();
+		$episodes_view->episodes = $this->getService('episodes')->getAllPublish();
 
 		$this->getComponent('home')->view = $episodes_view->render();
 
 		$this->render();
 	}
 
-	public function showCommentsSignaled()
+	public function showAllDraft()
 	{
-		$comments_view = $this->getComponent('comments-list');
-		$comments_signaled = $this->getService('comments')->getSignaled();
+		$episodes_view = $this->getComponent('episodes-list');
+		$episodes_view->episodes = $this->getService('episodes')->getAllDraft();
 
-		foreach ($comments_signaled as $comment) {
-			$component_name = "comment-{$comment->id()}";
-			$this->initComponents([$component_name => 'comment']);
+		$this->getComponent('home')->view = $episodes_view->render();
 
-			$this->getComponent($component_name)->comment = $comment;
-			$comments_view->comments_signaled .= $this->getComponent($component_name)->render();
-		}
+		$this->render();
+	}
 
-		$this->getComponent('home')->view = $comments_view->render();
+	public function showAllTrash()
+	{
+		$episodes_view = $this->getComponent('episodes-list');
+		$episodes_view->episodes = $this->getService('episodes')->getAllTrash();
+
+		$this->getComponent('home')->view = $episodes_view->render();
 
 		$this->render();
 	}
