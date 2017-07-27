@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<div class="ml-auto d-flex align-items-center">
-					<a class="btn btn-secondary no-after" href="<?= $path('new-episode') ?>">
+					<a class="btn btn-secondary no-after" href="<?= $path('episode-new') ?>">
 						Nouvel épisode
 					</a>
 				</div>
