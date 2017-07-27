@@ -1,31 +1,39 @@
 <!-- To-do: Add some HTML5 semantic elements -->
+<header class="featured-image-main jumbotron jumbotron-fluid py-0">
+	<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
+</header>
 <div class="container">
-	<header class="featured-image-main jumbotron jumbotron-fluid py-0">
-		<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
-	</header>
-	<div class="row">
-		<div class="col-md-10 offset-md-1 bg-white px-5">
+	<div class="episode-main-content-wrap row">
+		<div class="episode-main-content col-md-10 offset-md-1 px-5 py-3">
 			<article class="episode">
-				<ol class="breadcrumb bg-white">
+				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item active">Nouvel épisode</li>
 				</ol>
-				<form action="" method="POST">
-					<header class="text-center">
-						<span class="badge badge-default"># <span class="editable-content">X<?= $episode->number() ?></span></span>
-						<span class="badge badge-pill badge-default editable-content">0<?= $episode->part() ?></span>
-						<h1 class="editable-content">Titre de l'épisode <?= $episode->title() ?></h1>
-					</header>
-					<div class="text-center">
-						<button class="act-delete" type="submit" name="action" value="delete-episode">
-							Supprimer
+				<header class="text-center">
+					<div class="badge badge-primary mw-100">
+						#
+						<input class="ghost text-white mw-100" type="text" name="episode-number" id="input-episode-number" value="<?= $episode->number() ?>" pattern="[0-9]+" placeholder="épisode" size="1">
+						<span class="mr-1">-</span>
+						<input class="ghost text-white mw-100" type="text" name="episode-part" id="input-episode-part" value="<?= $episode->part() ?>" pattern="[0-9]+" placeholder="partie" size="1">
+					</div>
+					<h1 class="w-75 mx-auto my-5 episode-title"><?= $episode->title() ?></h1>
+					<div class="input-group justify-content-center mb-3">
+						<span class="input-group-addon" id="basic-addon-slug">Permalien</span>
+						<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $episode->slug() ?>" pattern="[a-z0-9-]+" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
+					</div>
+				</header>
+				<div class="episode-text" placeholder="test" style="min-height: 150px;">
+					<?= $episode->text() ?>
+				</div>
+				<form class="text-right" action="" method="POST">
+					<div>
+						<button class="btn btn-link meta-success" type="submit" name="action" value="draft-episode">
+							Enregistrer en tant que brouillon
 						</button>
-						<button type="submit" name="action" value="new-episode">
+						<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
 							Publier
 						</button>
-					</div>
-					<div class="editable-content episode-text" placeholder="test" style="min-height: 150px;">
-						Votre texte <?= $episode->text() ?>
 					</div>
 				</form>
 			</article>
