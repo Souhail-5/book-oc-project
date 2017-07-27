@@ -26,21 +26,21 @@
 	"episode":
 	{
 		"url": "/episode/([0-9]+)/([a-z0-9-]+)",
-		"controller": "episode",
-		"action": "show",
+		"controller": "episodes",
+		"action": "show-one-publish",
 		"varsNames": ["number", "slug"]
+	},
+	"episode-new":
+	{
+		"url": "/nouvel-episode",
+		"controller": "episodes",
+		"action": "show-new"
 	},
 	"latest-episode":
 	{
 		"url": "/dernier-episode",
 		"controller": "episode",
 		"action": "show-last"
-	},
-	"new-episode":
-	{
-		"url": "/new-episode",
-		"controller": "new-episode",
-		"action": "show"
 	},
 	"comments":
 	{
