@@ -1,8 +1,44 @@
 .featured-image-main {
-	height: 50vh;
+	height: 70vh;
+}
+
+.episode-main-content-wrap {
+	position: relative; top: -200px;
+}
+
+.episode-main-content {
+	background-color: #FFF;
+	box-shadow: 0px 0px 100px -10px rgba(0,0,0,0.29);
+
+	.breadcrumb {
+		border-radius: 0;
+		border-bottom: 1px solid rgba(0,0,0,0.05);
+	}
+}
+.episode-main-content header {
+	h1 {
+		font-size: 3.5rem;
+		line-height: 1.5;
+
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	.badge {
+		position: relative; top: -0.3rem;
+		font-size: 1.3rem;
+	}
 }
 
 .episode-text {
+	margin-top: 4rem;
+	margin-bottom: 4rem;
 	font-family: Merriweather;
 	font-size: 1.15rem;
+	line-height: 1.7 !important;
+
+	&:focus {
+		outline: 0;
+	}
 }

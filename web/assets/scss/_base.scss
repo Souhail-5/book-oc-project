@@ -116,3 +116,22 @@ a:hover.meta-success, .btn-link:hover.meta-success {
 .dropdown-item:hover {
 	background-color: $btn-secondary-bg;
 }
+
+.ghost {
+	border: none;
+	background: transparent;
+	outline: 0;
+	box-shadow: none;
+
+	&.text-white::placeholder {
+		color: rgba(#000, 0.3);
+	}
+}
+
+.w-a {
+	width: auto;
+}
+
+.flex-g-0 {
+	flex-grow: 0 !important;
+}

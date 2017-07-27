@@ -22,6 +22,28 @@ class Episodes extends Controller
 			'new-comment-form' => 'new-comment-form',
 			'episode-new' => 'episode-new',
 		]);
+
+		$this->page->addScripts([
+			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
+		]);
+		$this->page->addCustomBtmScripts([
+			"tinymce.init({
+				selector: '.episode-title',
+				inline: true,
+				theme: 'inlite',
+				selection_toolbar: '',
+				insert_toolbar: '',
+				branding: false
+			});",
+			"tinymce.init({
+				selector: '.episode-text',
+				inline: true,
+				theme: 'inlite',
+				selection_toolbar: 'bold italic | blockquote h2 h3',
+				insert_toolbar: '',
+				branding: false
+			});",
+		]);
 	}
 
 	public function renderHomePage()
@@ -35,19 +57,8 @@ class Episodes extends Controller
 
 	public function renderSinglePage()
 	{
-		$this->page->title = "Nom de l'épisode";
+		$this->page->title = "Billet simple pour l'Alaska | {$this->getComponent('episode-single')->episode->title()}";
 		$this->page->bodyId = "episode-single";
-		$this->page->addScripts([
-			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
-		]);
-		$this->page->addCustomBtmScripts(["tinymce.init({
-			selector: '.editable-content',
-			inline: true,
-			theme: 'inlite',
-			selection_toolbar: 'bold italic | blockquote h2 h3',
-			insert_toolbar: '',
-			branding: false
-		});"]);
 
 		$this->page->view = $this->getComponent('episode-single')->render();
 
@@ -56,19 +67,8 @@ class Episodes extends Controller
 
 	public function renderNewEpisodePage()
 	{
-		$this->page->title = "Nom de l'épisode";
+		$this->page->title = "Créer un nouvel épisode";
 		$this->page->bodyId = "episode-single";
-		$this->page->addScripts([
-			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
-		]);
-		$this->page->addCustomBtmScripts(["tinymce.init({
-			selector: '.editable-content',
-			inline: true,
-			theme: 'inlite',
-			selection_toolbar: 'bold italic | blockquote h2 h3',
-			insert_toolbar: '',
-			branding: false
-		});"]);
 
 		$this->page->view = $this->getComponent('episode-new')->render();
 
