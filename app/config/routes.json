@@ -1,9 +1,27 @@
 {
 	"root":
 	{
-		"url": "/(episodes)?",
-		"controller": "home",
-		"action": "show"
+		"url": "/",
+		"controller": "episodes",
+		"action": "show-all-publish"
+	},
+	"episodes":
+	{
+		"url": "/episodes",
+		"controller": "episodes",
+		"action": "show-all-publish"
+	},
+	"episodes-draft":
+	{
+		"url": "/episodes/brouillon",
+		"controller": "episodes",
+		"action": "show-all-draft"
+	},
+	"episodes-trash":
+	{
+		"url": "/episodes/corbeille",
+		"controller": "episodes",
+		"action": "show-all-trash"
 	},
 	"episode":
 	{

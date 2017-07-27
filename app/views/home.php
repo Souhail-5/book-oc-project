@@ -13,10 +13,10 @@
 						Épisodes
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuEpisodes">
-						<a class="dropdown-item" href="<?= $path('root') ?>">Publiés</a>
-						<a class="dropdown-item" href="#">Brouillons</a>
+						<a class="dropdown-item" href="<?= $path('episodes') ?>">Publiés</a>
+						<a class="dropdown-item" href="<?= $path('episodes-draft') ?>">Brouillons</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Corbeille</a>
+						<a class="dropdown-item" href="<?= $path('episodes-trash') ?>">Corbeille</a>
 					</div>
 				</div>
 				<div class="dropdown">
@@ -44,7 +44,22 @@
 						<span class="breadcrumb-item no-before">Accueil</span>
 					<?php else: ?>
 						<a class="breadcrumb-item no-before" href="<?= $path('root') ?>">Accueil</a>
+
+						<?php if ($current_route->name() == 'episodes'): ?>
+							<!-- Episodes -->
+							<span class="breadcrumb-item">Épisodes</span>
+						<?php endif; ?>
+						<?php if ($current_route->name() == 'episodes-draft'): ?>
+							<a class="breadcrumb-item" href="<?= $path('episodes') ?>">Épisodes</a>
+							<span class="breadcrumb-item">Brouillon</span>
+						<?php endif; ?>
+						<?php if ($current_route->name() == 'episodes-trash'): ?>
+							<a class="breadcrumb-item" href="<?= $path('episodes') ?>">Épisodes</a>
+							<span class="breadcrumb-item">Corbeille</span>
+						<?php endif; ?>
+
 						<?php if ($current_route->name() == 'comments'): ?>
+							<!-- Comments -->
 							<span class="breadcrumb-item">Commentaires</span>
 						<?php endif; ?>
 						<?php if ($current_route->name() == 'comments-approved'): ?>
