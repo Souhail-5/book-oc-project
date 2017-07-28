@@ -5,15 +5,21 @@
 <div class="container">
 	<div class="episode-main-content-wrap row">
 		<div class="episode-main-content col-md-10 offset-md-1 px-5 py-3">
-			<article class="episode">
+			<form class="episode" action="" method="POST">
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item active">Nouvel épisode</li>
 				</ol>
+				<?php if (!empty($warning)): ?>
+					<div class="alert alert-warning mb-5" role="alert">
+						<h4 class="alert-heading">Attention !</h4>
+						<p><?= $warning ?></p>
+					</div>
+				<?php endif; ?>
 				<header class="text-center">
 					<div class="badge badge-primary mw-100">
 						#
-						<input class="ghost text-white mw-100" type="text" name="episode-number" id="input-episode-number" value="<?= $episode->number() ?>" pattern="[0-9]+" placeholder="épisode" size="1">
+						<input class="ghost text-white mw-100" type="text" name="episode-number" id="input-episode-number" value="<?= $episode->number() ?>" pattern="[0-9]+" placeholder="épisode" size="1" required>
 						<span class="mr-1">-</span>
 						<input class="ghost text-white mw-100" type="text" name="episode-part" id="input-episode-part" value="<?= $episode->part() ?>" pattern="[0-9]+" placeholder="partie" size="1">
 					</div>
@@ -26,17 +32,15 @@
 				<div class="episode-text" placeholder="test" style="min-height: 150px;">
 					<?= $episode->text() ?>
 				</div>
-				<form class="text-right" action="" method="POST">
-					<div>
-						<button class="btn btn-link meta-success" type="submit" name="action" value="draft-episode">
-							Enregistrer en tant que brouillon
-						</button>
-						<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
-							Publier
-						</button>
-					</div>
-				</form>
-			</article>
+				<div class="text-right">
+					<button class="btn btn-link meta-success" type="submit" name="action" value="draft-episode">
+						Enregistrer en tant que brouillon
+					</button>
+					<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
+						Publier
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

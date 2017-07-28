@@ -2,6 +2,7 @@
 namespace Controller;
 
 use \Controller\Controller;
+use \QFram\Router;
 
 /**
 * Episodes Controller
@@ -132,6 +133,42 @@ class Episodes extends Controller
 	{
 		$this->getComponent('episode-new')->episode = $this->getService('episodes')->setNewEpisode();
 
+		$this->renderNewEpisodePage();
+	}
+
+	public function draftEpisode()
+	{
+		$this->getComponent('episode-new')->episode = $this->getService('episodes')->setNewEpisode([
+			'number' => $this->HttpRequest->POSTData('episode-number'),
+			'part' => $this->HttpRequest->POSTData('episode-part'),
+			'slug' => $this->HttpRequest->POSTData('episode-slug'),
+			'title' => $this->HttpRequest->POSTData('mce_0'),
+			'text' => $this->HttpRequest->POSTData('mce_1'),
+			'status' => 'draft',
+		]);
+
+		try {
+			$this->getService('episodes')->save($this->getComponent('episode-new')->episode);
+
+			$this->getComponent('episode-new')->episode = $this->getService('episodes')->getOneDraftByNumSlug($this->getComponent('episode-new')->episode->number(), $this->getComponent('episode-new')->episode->slug());
+
+			$this->HttpResponse->redirect(Router::genPath('episode', [$this->getComponent('episode-new')->episode->number(), $this->getComponent('episode-new')->episode->slug()]));
+		} catch (\Exception $e) {
+			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->renderNewEpisodePage();
+		}
+	}
+
+	public function publishEpisode()
+	{
+		$this->getComponent('episode-new')->episode = $this->getService('episodes')->setNewEpisode([
+			'number' => $this->HttpRequest->POSTData('episode-number'),
+			'part' => $this->HttpRequest->POSTData('episode-part'),
+			'slug' => $this->HttpRequest->POSTData('episode-slug'),
+			'title' => $this->HttpRequest->POSTData('mce_0'),
+			'text' => $this->HttpRequest->POSTData('mce_1'),
+		]);
+		var_dump($_POST);
 		$this->renderNewEpisodePage();
 	}
 }

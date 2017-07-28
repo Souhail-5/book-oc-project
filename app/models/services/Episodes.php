@@ -23,22 +23,26 @@ class Episodes
 		return new Object\Episode($data);
 	}
 
-	public function add(Object\Episode $episode)
+	public function save(Object\Episode $episode, $publish=false)
 	{
-		if (empty($episode->number()) || empty($episode->title()) || empty($episode->text())) {
-			throw new \Exception('Tous les champs sont obligatoires');
-		}
+		$error = [];
+
+		if (empty($episode->number()) && $episode->number() != 0) $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
+		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
+		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
+
+		if (!empty($error)) throw new \Exception(implode('<br>', $error));
 
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
-		$episode->setSlug($this->slugify($episode->title()));
+		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
 
 		try {
-			$this->episodes->add($episode);
+			$this->episodes->add($episode, $publish);
 		} catch (\Exception $e) {
 			if ($e->getCode() == 23000) {
-				$m0 = ($episode->part() == 0) ? '' : " (partie {$episode->part()})";
-				$mf = "Un épisode numéroté {$episode->number()}{$m0} existe déjà.";
-				throw new \Exception($mf);
+				$m = ($episode->part() == 0) ? '' : "(partie {$episode->part()})";
+				$error[] = "Un épisode numéroté {$episode->number()} {$m} existe déjà.";
+				throw new \Exception(implode(' ', $error));
 			} else {
 				return $e;
 			}
@@ -95,6 +99,16 @@ class Episodes
 	public function getOnePublishByNumSlug($episode_num, $episode_slug)
 	{
 		return $this->episodes->getOnePublishByNumSlug($episode_num, $episode_slug);
+	}
+
+	public function getOneDraftById($episode_id)
+	{
+		return $this->episodes->getOneDraftById($episode_id);
+	}
+
+	public function getOneDraftByNumSlug($episode_num, $episode_slug)
+	{
+		return $this->episodes->getOneDraftByNumSlug($episode_num, $episode_slug);
 	}
 
 	public function plusNbrComments($episode_id)

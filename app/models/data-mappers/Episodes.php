@@ -16,17 +16,19 @@ class Episodes
 		$this->db = PDOFactory::getMysqlConnexion();
 	}
 
-	public function add(Episode $episode)
+	public function add(Episode $episode, $publish=false)
 	{
 		$q = $this->db->prepare('
-			INSERT INTO episodes (number, part, title, text, slug)
-			VALUES (:number, :part, :title, :text, :slug)
+			INSERT INTO episodes (number, part, title, text, publish_datetime, slug, status)
+			VALUES (:number, :part, :title, :text, :publish_datetime, :slug, :status)
 		');
 
 		$q->bindValue(':number', $episode->number());
 		$q->bindValue(':part', $episode->part());
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
+		$q->bindValue(':publish_datetime', null, \PDO::PARAM_NULL);
+		if ($publish) $q->bindValue(':publish_datetime', 'NOW()');
 		$q->bindValue(':slug', $episode->slug());
 		$q->bindValue(':status', $episode->status());
 
@@ -217,6 +219,71 @@ class Episodes
 		$q->bindValue(':number', $episode_num);
 		$q->bindValue(':slug', $episode_slug);
 		$q->bindValue(':status', 'publish');
+
+		$q->execute();
+
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		$map = [
+			'id' => $data['id'],
+			'number' => $data['number'],
+			'part' => $data['part'],
+			'title' => $data['title'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'modificationDatetime' => $data['modification_datetime'],
+			'nbrComments' => $data['nbr_comments'],
+			'slug' => $data['slug'],
+			'status' => $data['status'],
+			'trash' => $data['trash'],
+		];
+
+		return new Episode($map);
+	}
+
+	public function getOneDraftById($episode_id)
+	{
+		$q = $this->db->prepare("
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE id=:id AND status=:status
+			LIMIT 1
+		");
+
+		$q->bindValue(':id', $episode_id);
+		$q->bindValue(':status', 'draft');
+
+		$q->execute();
+
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		$map = [
+			'id' => $data['id'],
+			'number' => $data['number'],
+			'part' => $data['part'],
+			'title' => $data['title'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'modificationDatetime' => $data['modification_datetime'],
+			'nbrComments' => $data['nbr_comments'],
+			'slug' => $data['slug'],
+			'status' => $data['status'],
+			'trash' => $data['trash'],
+		];
+
+		return new Episode($map);
+	}
+
+	public function getOneDraftByNumSlug($episode_num, $episode_slug)
+	{
+		$q = $this->db->prepare("
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE number=:number AND slug=:slug AND status=:status
+			LIMIT 1
+		");
+
+		$q->bindValue(':number', $episode_num);
+		$q->bindValue(':slug', $episode_slug);
+		$q->bindValue(':status', 'draft');
 
 		$q->execute();
 
