@@ -36,6 +36,20 @@ class Episodes
 		$q->execute();
 	}
 
+	public function publish(Episode $episode)
+	{
+		$q = $this->db->prepare('
+			UPDATE episodes
+			SET publish_datetime=NOW(), status=:status
+			WHERE id=:id
+		');
+
+		$q->bindValue(':id', $episode->id());
+		$q->bindValue(':status', 'publish');
+
+		$q->execute();
+	}
+
 	public function update(Episode $episode)
 	{
 		$q = $this->db->prepare('

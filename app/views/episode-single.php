@@ -55,14 +55,18 @@
 						<button class="mr-auto px-0 btn btn-link meta-danger" type="submit" name="action" value="trash-episode">
 							Mettre à la corbeille
 						</button>
-						<?php if ($episode->status() != 'publish'): ?>
+						<?php if ($episode->status() == 'publish'): ?>
+							<button class="btn btn-primary" type="submit" name="action" value="update-episode">
+								Publier les modifications
+							</button>
+						<?php else: ?>
 							<button class="btn btn-outline-success mr-3" type="submit" name="action" value="update-episode">
 								Enregistrer
 							</button>
+							<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
+								Publier
+							</button>
 						<?php endif; ?>
-						<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
-							Publier
-						</button>
 					</div>
 				</form>
 			</article>

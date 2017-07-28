@@ -164,7 +164,7 @@ class Episodes extends Controller
 		}
 	}
 
-	public function publishEpisode()
+	public function publishNewEpisode()
 	{
 		$episode = $this->getService('episodes')->setNewEpisode([
 			'number' => $this->HttpRequest->POSTData('episode-number'),
@@ -183,11 +183,17 @@ class Episodes extends Controller
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
 		} catch (\Exception $e) {
 			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		}
 	}
 
-	public function updateEpisode()
+	public function publishEpisode()
+	{
+		$this->updateEpisode(true);
+	}
+
+	public function updateEpisode($publish=false)
 	{
 		$episode = $this->getService('episodes')->getOne(
 			$this->getService('episodes')->setNewEpisode([
@@ -202,7 +208,7 @@ class Episodes extends Controller
 		$episode->setText($this->HttpRequest->POSTData('mce_1'));
 
 		try {
-			$this->getService('episodes')->update($episode);
+			$this->getService('episodes')->update($episode, $publish);
 
 			$episode = $this->getService('episodes')->getOne($episode);
 

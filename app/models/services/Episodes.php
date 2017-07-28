@@ -49,7 +49,7 @@ class Episodes
 		}
 	}
 
-	public function update(Object\Episode $episode)
+	public function update(Object\Episode $episode, $publish=false)
 	{
 		$error = [];
 		if (empty($episode->number()) && $episode->number() === '') $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
@@ -64,6 +64,7 @@ class Episodes
 
 		try {
 			$this->episodes->update($episode);
+			if ($publish === true) $this->episodes->publish($episode);
 		} catch (\Exception $e) {
 			if ($e->getCode() == 23000) {
 				$m = ($episode->part() == 0) ? '' : "(partie {$episode->part()})";

@@ -36,7 +36,7 @@
 					<button class="btn btn-link meta-success" type="submit" name="action" value="draft-episode">
 						Enregistrer en tant que brouillon
 					</button>
-					<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
+					<button class="btn btn-primary" type="submit" name="action" value="publish-new-episode">
 						Publier
 					</button>
 				</div>
