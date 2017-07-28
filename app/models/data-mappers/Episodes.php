@@ -52,7 +52,7 @@ class Episodes
 		$q->bindValue(':nbr_comments', $episode->nbrComments());
 		$q->bindValue(':slug', $episode->slug());
 		$q->bindValue(':status', $episode->status());
-		$q->bindValue(':trash', $episode->trash());
+		$q->bindValue(':trash', (int) $episode->trash(), \PDO::PARAM_INT);
 
 		$q->execute();
 	}

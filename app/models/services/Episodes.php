@@ -51,20 +51,25 @@ class Episodes
 
 	public function update(Object\Episode $episode)
 	{
-		if (empty($episode->number()) || empty($episode->title()) || empty($episode->text())) {
-			throw new \Exception('Tous les champs sont obligatoires');
-		}
+		$error = [];
+		var_dump($episode);
+		if (empty($episode->number()) && $episode->number() != 0) $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
+		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
+		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
+
+		if (!empty($error)) throw new \Exception(implode('<br>', $error));
 
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
-		$episode->setSlug($this->slugify($episode->title()));
+		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
+		$episode->setTrash(0);
 
 		try {
 			$this->episodes->update($episode);
 		} catch (\Exception $e) {
 			if ($e->getCode() == 23000) {
-				$m0 = ($episode->part() == 0) ? '' : " (partie {$episode->part()})";
-				$mf = "Un épisode numéroté {$episode->number()}{$m0} existe déjà.";
-				throw new \Exception($mf);
+				$m = ($episode->part() == 0) ? '' : "(partie {$episode->part()})";
+				$error[] = "Un épisode numéroté {$episode->number()} {$m} existe déjà.";
+				throw new \Exception(implode(' ', $error));
 			} else {
 				return $e;
 			}
