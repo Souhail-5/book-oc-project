@@ -116,6 +116,8 @@ class Episodes extends Controller
 			])
 		);
 
+		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
+
 		$comments = $this->getService('comments')->getCommentsByEpisodeId($episode_view->episode->id());
 
 		foreach ($comments as $comment) {

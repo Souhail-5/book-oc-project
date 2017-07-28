@@ -22,41 +22,48 @@
 						<span class="input-group-addon" id="basic-addon-slug">Permalien</span>
 						<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $episode->slug() ?>" pattern="[a-z0-9-]+" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
 					</div>
-					<div class="d-flex col-6 offset-3 justify-content-between">
-						<time class="datetime meta" datetime="<?= ($current_route->name() == 'episode') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
+					<div class="d-flex col-6 offset-3 <?= ($episode->status() == 'publish') ? "justify-content-between" : "justify-content-center" ?>">
+						<time class="datetime meta" datetime="<?= ($episode->status() != 'publish') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
 							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 								<use xlink:href="/sprite.svg#si-glyph-calendar-1">
 							</svg>
-							<?= ($current_route->name() == 'episode') ? 'Modifié' : 'Publié' ?> <span></span>
+							<?= ($episode->status() != 'publish') ? 'Modifié' : 'Publié' ?> <span></span>
 						</time>
-						<a class="meta" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-								<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-							</svg>
-							<?= $episode->nbrComments() ?>
-							<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
-						</a>
+						<?php if ($episode->status() == 'publish'): ?>
+							<a class="meta" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
+								<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
+									<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
+								</svg>
+								<?= $episode->nbrComments() ?>
+								<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
+							</a>
+						<?php endif; ?>
 					</div>
 				</header>
 				<div class="episode-text" placeholder="test" style="min-height: 150px;">
 					<?= $episode->text() ?>
 				</div>
-				<form class="text-right" action="" method="POST">
-					<div>
-						<button class="btn btn-link meta-danger" type="submit" name="action" value="delete-episode">
-							Mettre à la corbeille
-						</button>
-						<button class="btn btn-primary" type="submit" name="action" value="update-episode">
+				<form class="d-flex justify-content-end align-items-center" action="" method="POST">
+					<button class="mr-auto px-0 btn btn-link meta-danger" type="submit" name="action" value="trash-episode">
+						Mettre à la corbeille
+					</button>
+					<?php if ($episode->status() != 'publish'): ?>
+						<button class="btn btn-outline-success mr-3" type="submit" name="action" value="update-episode">
 							Enregistrer
 						</button>
-					</div>
+					<?php endif; ?>
+					<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
+						Publier
+					</button>
 				</form>
 			</article>
-			<div class="mt-5">
-				<h4>Un commentaire ?</h4>
-				<hr>
-				<?= $new_comment_form ?>
-			</div>
+			<?php if (!empty($new_comment_form)): ?>
+				<div class="mt-5">
+					<h4>Un commentaire ?</h4>
+					<hr>
+					<?= $new_comment_form ?>
+				</div>
+			<?php endif; ?>
 			<?php if (!empty($comments)): ?>
 				<div class="mt-5">
 					<h4 id="anchor-comments">Commentaires</h4>
