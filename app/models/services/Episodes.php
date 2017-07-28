@@ -91,24 +91,9 @@ class Episodes
 		return $this->episodes->getAllTrash();
 	}
 
-	public function getOnePublishById($episode_id)
+	public function getOne(Object\Episode $episode)
 	{
-		return $this->episodes->getOnePublishById($episode_id);
-	}
-
-	public function getOnePublishByNumSlug($episode_num, $episode_slug)
-	{
-		return $this->episodes->getOnePublishByNumSlug($episode_num, $episode_slug);
-	}
-
-	public function getOneDraftById($episode_id)
-	{
-		return $this->episodes->getOneDraftById($episode_id);
-	}
-
-	public function getOneDraftByNumSlug($episode_num, $episode_slug)
-	{
-		return $this->episodes->getOneDraftByNumSlug($episode_num, $episode_slug);
+		return $this->episodes->getOne($episode);
 	}
 
 	public function plusNbrComments($episode_id)

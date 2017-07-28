@@ -27,7 +27,7 @@
 	{
 		"url": "/episode/([0-9]+)/([a-z0-9-]+)",
 		"controller": "episodes",
-		"action": "show-one-publish",
+		"action": "show-one",
 		"varsNames": ["number", "slug"]
 	},
 	"episode-new":

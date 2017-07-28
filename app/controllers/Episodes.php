@@ -106,12 +106,14 @@ class Episodes extends Controller
 		$this->renderHomePage();
 	}
 
-	public function showOnePublish()
+	public function showOne()
 	{
 		$episode_view = $this->getComponent('episode-single');
-		$episode_view->episode = $this->getService('episodes')->getOnePublishByNumSlug(
-			$this->HttpRequest->GETData('number'),
-			$this->HttpRequest->GETData('slug')
+		$episode_view->episode = $this->getService('episodes')->getOne(
+			$this->getService('episodes')->setNewEpisode([
+				'number' => $this->HttpRequest->GETData('number'),
+				'slug' => $this->HttpRequest->GETData('slug'),
+			])
 		);
 
 		$comments = $this->getService('comments')->getCommentsByEpisodeId($episode_view->episode->id());
@@ -150,7 +152,9 @@ class Episodes extends Controller
 		try {
 			$this->getService('episodes')->save($this->getComponent('episode-new')->episode);
 
-			$this->getComponent('episode-new')->episode = $this->getService('episodes')->getOneDraftByNumSlug($this->getComponent('episode-new')->episode->number(), $this->getComponent('episode-new')->episode->slug());
+			$this->getComponent('episode-new')->episode = $this->getService('episodes')->getOne(
+				$this->getComponent('episode-new')->episode
+			);
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$this->getComponent('episode-new')->episode->number(), $this->getComponent('episode-new')->episode->slug()]));
 		} catch (\Exception $e) {
@@ -167,6 +171,7 @@ class Episodes extends Controller
 			'slug' => $this->HttpRequest->POSTData('episode-slug'),
 			'title' => $this->HttpRequest->POSTData('mce_0'),
 			'text' => $this->HttpRequest->POSTData('mce_1'),
+			'status' => 'publish',
 		]);
 		var_dump($_POST);
 		$this->renderNewEpisodePage();
