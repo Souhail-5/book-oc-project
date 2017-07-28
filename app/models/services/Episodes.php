@@ -27,7 +27,7 @@ class Episodes
 	{
 		$error = [];
 
-		if (empty($episode->number()) && $episode->number() != 0) $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
+		if (empty($episode->number()) && $episode->number() === '') $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
 		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
 		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
 
@@ -52,8 +52,7 @@ class Episodes
 	public function update(Object\Episode $episode)
 	{
 		$error = [];
-		var_dump($episode);
-		if (empty($episode->number()) && $episode->number() != 0) $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
+		if (empty($episode->number()) && $episode->number() === '') $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
 		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
 		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
 

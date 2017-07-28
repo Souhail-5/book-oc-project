@@ -213,10 +213,17 @@ class Episodes extends Controller
 					'id' => $this->HttpRequest->POSTData('episode-id'),
 				])
 			);
+			$episode = $this->getComponent('episode-single')->episode;
 
-			if (!empty($this->HttpRequest->POSTData('episode-number'))) $episode->setNumber($this->HttpRequest->POSTData('episode-number'));
-			if (!empty($this->HttpRequest->POSTData('mce_0'))) $episode->setTitle($this->HttpRequest->POSTData('mce_0'));
-			if (!empty($this->HttpRequest->POSTData('mce_1'))) $episode->setText($this->HttpRequest->POSTData('mce_1'));
+			if (
+				empty($this->HttpRequest->POSTData('episode-number')) ||
+				empty($this->HttpRequest->POSTData('mce_0')) ||
+				empty($this->HttpRequest->POSTData('mce_1'))
+			) {
+				if (!empty($this->HttpRequest->POSTData('episode-number'))) $episode->setNumber($this->HttpRequest->POSTData('episode-number'));
+				if (!empty($this->HttpRequest->POSTData('mce_0'))) $episode->setTitle($this->HttpRequest->POSTData('mce_0'));
+				if (!empty($this->HttpRequest->POSTData('mce_1'))) $episode->setText($this->HttpRequest->POSTData('mce_1'));
+			}
 
 			$this->renderSinglePage();
 		}
