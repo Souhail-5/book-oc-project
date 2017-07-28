@@ -18,7 +18,7 @@ class Episodes
 
 	public function add(Episode $episode, $publish=false)
 	{
-		$publish_datetime = ':publish_datetime';
+		$publish_datetime = 'null';
 		if ($publish) $publish_datetime = 'NOW()';
 
 		$q = $this->db->prepare("

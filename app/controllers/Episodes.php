@@ -159,6 +159,7 @@ class Episodes extends Controller
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
 		} catch (\Exception $e) {
 			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		}
 	}
