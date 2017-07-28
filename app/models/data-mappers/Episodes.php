@@ -71,7 +71,7 @@ class Episodes
 		$q->execute();
 	}
 
-	public function delete(Episode $episode)
+	public function deleteOne(Episode $episode)
 	{
 		$q = $this->db->prepare('
 			DELETE FROM episodes

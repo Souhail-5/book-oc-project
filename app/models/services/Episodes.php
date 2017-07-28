@@ -60,7 +60,7 @@ class Episodes
 
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
 		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
-		$episode->setTrash(0);
+		$episode->setTrash(!empty($episode->trash()) ? $episode->trash() : 0);
 
 		try {
 			$this->episodes->update($episode);
@@ -76,9 +76,21 @@ class Episodes
 		}
 	}
 
-	public function delete(Object\Episode $episode)
+	public function trashOne(Object\Episode $episode)
 	{
-		$this->episodes->delete($episode);
+		$episode->setTrash(1);
+		$this->episodes->update($episode);
+	}
+
+	public function untrashOne(Object\Episode $episode)
+	{
+		$episode->setTrash(0);
+		$this->episodes->update($episode);
+	}
+
+	public function deleteOne(Object\Episode $episode)
+	{
+		$this->episodes->deleteOne($episode);
 	}
 
 	public function getAllPublish()

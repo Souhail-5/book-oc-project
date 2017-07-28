@@ -235,4 +235,37 @@ class Episodes extends Controller
 			$this->renderSinglePage();
 		}
 	}
+
+	public function trashEpisode()
+	{
+		$episode = $this->getService('episodes')->getOne(
+			$this->getService('episodes')->setNewEpisode([
+				'id' => $this->HttpRequest->POSTData('episode-id'),
+			])
+		);
+		$this->getService('episodes')->trashOne($episode);
+		$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->number(), $episode->slug()]));
+	}
+
+	public function untrashEpisode()
+	{
+		$episode = $this->getService('episodes')->getOne(
+			$this->getService('episodes')->setNewEpisode([
+				'id' => $this->HttpRequest->POSTData('episode-id'),
+			])
+		);
+		$this->getService('episodes')->untrashOne($episode);
+		$this->HttpResponse->refresh();
+	}
+
+	public function deleteEpisode()
+	{
+		$episode = $this->getService('episodes')->getOne(
+			$this->getService('episodes')->setNewEpisode([
+				'id' => $this->HttpRequest->POSTData('episode-id'),
+			])
+		);
+		$this->getService('episodes')->deleteOne($episode);
+		$this->HttpResponse->refresh();
+	}
 }
