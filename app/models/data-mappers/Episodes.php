@@ -18,17 +18,18 @@ class Episodes
 
 	public function add(Episode $episode, $publish=false)
 	{
-		$q = $this->db->prepare('
+		$publish_datetime = ':publish_datetime';
+		if ($publish) $publish_datetime = 'NOW()';
+
+		$q = $this->db->prepare("
 			INSERT INTO episodes (number, part, title, text, publish_datetime, slug, status)
-			VALUES (:number, :part, :title, :text, :publish_datetime, :slug, :status)
-		');
+			VALUES (:number, :part, :title, :text, {$publish_datetime}, :slug, :status)
+		");
 
 		$q->bindValue(':number', $episode->number());
 		$q->bindValue(':part', $episode->part());
 		$q->bindValue(':title', $episode->title());
 		$q->bindValue(':text', $episode->text());
-		$q->bindValue(':publish_datetime', null, \PDO::PARAM_NULL);
-		if ($publish) $q->bindValue(':publish_datetime', 'NOW()');
 		$q->bindValue(':slug', $episode->slug());
 		$q->bindValue(':status', $episode->status());
 

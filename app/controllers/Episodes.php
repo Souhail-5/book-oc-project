@@ -175,7 +175,18 @@ class Episodes extends Controller
 			'text' => $this->HttpRequest->POSTData('mce_1'),
 			'status' => 'publish',
 		]);
-		var_dump($_POST);
-		$this->renderNewEpisodePage();
+
+		try {
+			$this->getService('episodes')->save($this->getComponent('episode-new')->episode, true);
+
+			$this->getComponent('episode-new')->episode = $this->getService('episodes')->getOne(
+				$this->getComponent('episode-new')->episode
+			);
+
+			$this->HttpResponse->redirect(Router::genPath('episode', [$this->getComponent('episode-new')->episode->number(), $this->getComponent('episode-new')->episode->slug()]));
+		} catch (\Exception $e) {
+			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->renderNewEpisodePage();
+		}
 	}
 }
