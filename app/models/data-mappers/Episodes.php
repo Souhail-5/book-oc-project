@@ -234,7 +234,7 @@ class Episodes
 	{
 		$q = $this->db->prepare('
 			UPDATE episodes
-			SET nbr_comments = nbr_comments+1
+			SET nbr_comments = (nbr_comments+1)
 			WHERE id=:id
 		');
 
@@ -247,7 +247,7 @@ class Episodes
 	{
 		$q = $this->db->prepare('
 			UPDATE episodes
-			SET nbr_comments = nbr_comments-1
+			SET nbr_comments = (nbr_comments-1)
 			WHERE id=:id
 		');
 

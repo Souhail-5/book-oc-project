@@ -25,14 +25,22 @@ class Comments
 
 	public function add(Object\Comment $comment)
 	{
-		if (empty($comment->name()) || empty($comment->email()) || empty($comment->text())) {
-			throw new \Exception('Tous les champs sont obligatoires');
-		}
+		$error = [];
+
+		if (empty($comment->name())) $error[] = "Vous devez renseigner un nom valide : au moins une lettre.";
+		if (empty($comment->email())) $error[] = "Vous devez renseigner un e-mail valide : voici.un@example.com .";
+		if (empty($comment->text())) $error[] = "Vous devez renseigner un commentaire valide : au moins un caractère.";
+
+		if (!empty($error)) throw new \Exception(implode('<br>', $error));
+
+		$comment->setStatus('publish');
 
 		try {
 			$this->comments->add($comment);
-			$episodes_service = new Episodes;
-			$episodes_service->plusNbrComments($comment->episodeId());
+			if ($comment->status() == 'publish') {
+				$episodes_service = new Episodes;
+				$episodes_service->plusNbrComments($comment->episodeId());
+			}
 		} catch (\Exception $e) {
 			return $e;
 		}
@@ -81,10 +89,6 @@ class Comments
 	public function deleteComment(Object\Comment $comment)
 	{
 		$this->comments->deleteComment($comment);
-		if ($comment->status() == 'publish') {
-			$episodes_service = new Episodes;
-			$episodes_service->minusNbrComments($comment->episodeId());
-		}
 	}
 
 	public function getPublish()

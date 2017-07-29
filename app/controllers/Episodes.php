@@ -1,7 +1,6 @@
 <?php
 namespace Controller;
 
-use \Controller\Controller;
 use \QFram\Router;
 
 /**
@@ -128,7 +127,9 @@ class Episodes extends Controller
 			$episode_view->comments .= $this->getComponent($component_name)->render();
 		}
 
-		$episode_view->new_comment_form = $this->getComponent('new-comment-form')->render();
+		$new_comment_form = $this->getComponent('new-comment-form');
+		$new_comment_form->episode = $episode_view->episode;
+		$episode_view->new_comment_form = $new_comment_form->render();
 
 		$this->renderSinglePage();
 	}
@@ -267,5 +268,28 @@ class Episodes extends Controller
 		);
 		$this->getService('episodes')->deleteOne($episode);
 		$this->HttpResponse->refresh();
+	}
+
+	public function newEpisodeComment()
+	{
+		try {
+			$new_comment = $this->getService('comments')->setNewComment([
+				'episodeId' => $this->HttpRequest->POSTData('episode-id'),
+				'name' => $this->HttpRequest->POSTData('comment-name'),
+				'email' => $this->HttpRequest->POSTData('comment-email'),
+				'text' => $this->HttpRequest->POSTData('comment-text'),
+			]);
+			$this->getService('comments')->add($new_comment);
+			$this->showOne();
+		} catch (\Exception $e) {
+			$this->getComponent('episode-single')->warning = $e->getMessage();
+			$this->showOne();
+		}
+	}
+
+	public function signalComment()
+	{
+		$comment_controller = new Comments($this->HttpRequest, $this->HttpResponse, 'signalComment');
+		$comment_controller->run();
 	}
 }

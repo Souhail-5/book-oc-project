@@ -13,4 +13,5 @@
 		<textarea class="form-control" id="comment-textarea" name="comment-text" rows="10"></textarea>
 	</div>
 	<button type="submit" name="action" value="new-episode-comment" class="btn btn-primary">Submit</button>
+	<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
 </form>
