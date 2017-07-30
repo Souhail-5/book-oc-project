@@ -8,7 +8,7 @@ use QFram\Router;
 */
 abstract class Template
 {
-	use \QFram\Helper\Utility;
+	use Helper\Utility;
 
 	protected $view;
 	protected $data;
