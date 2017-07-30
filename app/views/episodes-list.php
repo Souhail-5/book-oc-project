@@ -48,8 +48,3 @@
 		<?php endforeach; ?>
 	</ul>
 </nav>
-<?php if (empty($episodes)): ?>
-	<div>
-		Aucun épisode.
-	</div>
-<?php endif; ?>
