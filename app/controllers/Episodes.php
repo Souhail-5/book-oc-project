@@ -23,28 +23,29 @@ class Episodes extends Controller
 			'new-comment-form' => 'new-comment-form',
 			'episode-new' => 'episode-new',
 		]);
-
-		$this->page->addScripts([
-			'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
-		]);
-		$this->page->addCustomBtmScripts([
-			"tinymce.init({
-				selector: '.episode-title',
-				inline: true,
-				theme: 'inlite',
-				selection_toolbar: '',
-				insert_toolbar: '',
-				branding: false
-			});",
-			"tinymce.init({
-				selector: '.episode-text',
-				inline: true,
-				theme: 'inlite',
-				selection_toolbar: 'bold italic | blockquote h2 h3',
-				insert_toolbar: '',
-				branding: false
-			});",
-		]);
+		if ($this->user->isAuthenticated()) {
+			$this->page->addScripts([
+				'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
+			]);
+			$this->page->addCustomBtmScripts([
+				"tinymce.init({
+					selector: '.episode-title',
+					inline: true,
+					theme: 'inlite',
+					selection_toolbar: '',
+					insert_toolbar: '',
+					branding: false
+				});",
+				"tinymce.init({
+					selector: '.episode-text',
+					inline: true,
+					theme: 'inlite',
+					selection_toolbar: 'bold italic | blockquote h2 h3',
+					insert_toolbar: '',
+					branding: false
+				});",
+			]);
+		}
 	}
 
 	public function renderHomePage()

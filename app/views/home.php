@@ -7,36 +7,38 @@
 			</figure>
 		</div>
 		<div class="main-content-wrap col-md-8 offset-md-3">
-			<div class="push navbar py-3 pr-3 flex-row justify-content-start align-items-center">
-				<div class="dropdown">
-					<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuEpisodes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Épisodes
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuEpisodes">
-						<a class="dropdown-item" href="<?= $path('episodes') ?>">Publiés</a>
-						<a class="dropdown-item" href="<?= $path('episodes-draft') ?>">Brouillons</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?= $path('episodes-trash') ?>">Corbeille</a>
+			<?php if ($user->isAuthenticated()): ?>
+				<div class="push navbar py-3 pr-3 flex-row justify-content-start align-items-center">
+					<div class="dropdown">
+						<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuEpisodes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Épisodes
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuEpisodes">
+							<a class="dropdown-item" href="<?= $path('episodes') ?>">Publiés</a>
+							<a class="dropdown-item" href="<?= $path('episodes-draft') ?>">Brouillons</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="<?= $path('episodes-trash') ?>">Corbeille</a>
+						</div>
+					</div>
+					<div class="dropdown">
+						<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Commentaires
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
+							<a class="dropdown-item" href="<?= $path('comments') ?>">Voir tout</a>
+							<a class="dropdown-item" href="<?= $path('comments-approved') ?>">Approuvés</a>
+							<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="<?= $path('comments-trash') ?>">Corbeille</a>
+						</div>
+					</div>
+					<div class="ml-auto d-flex align-items-center">
+						<a class="btn btn-secondary no-after" href="<?= $path('episode-new') ?>">
+							Nouvel épisode
+						</a>
 					</div>
 				</div>
-				<div class="dropdown">
-					<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Commentaires
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
-						<a class="dropdown-item" href="<?= $path('comments') ?>">Voir tout</a>
-						<a class="dropdown-item" href="<?= $path('comments-approved') ?>">Approuvés</a>
-						<a class="dropdown-item" href="<?= $path('comments-signaled') ?>">Signalés</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?= $path('comments-trash') ?>">Corbeille</a>
-					</div>
-				</div>
-				<div class="ml-auto d-flex align-items-center">
-					<a class="btn btn-secondary no-after" href="<?= $path('episode-new') ?>">
-						Nouvel épisode
-					</a>
-				</div>
-			</div>
+			<?php endif; ?>
 			<div class="vh66 ov-a">
 				<nav class="push font-italic breadcrumb bg-white mb-4 py-4">
 					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
