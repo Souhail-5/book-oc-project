@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 use \QFram\Helper\Psr4AutoloaderClass;
 use \QFram\Router;
 use \QFram\HttpRequest;
