@@ -2,6 +2,7 @@
 namespace Controller;
 
 use \QFram\Router;
+use \QFram\Controller;
 
 /**
 * Episodes Controller

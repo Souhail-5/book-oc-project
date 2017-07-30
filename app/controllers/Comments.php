@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
 
-use \Controller\Controller;
+use \QFram\Controller;
 
 /**
 * Comments Controller

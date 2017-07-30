@@ -1,15 +1,9 @@
 <?php
-namespace Controller;
-
-use \QFram\HttpRequest;
-use \QFram\HttpResponse;
-use \QFram\Page;
-use \QFram\Component;
+namespace QFram;
 
 /**
 * Controller Base
 */
-// To-do: Move to /library/QFram
 abstract class Controller
 {
 	protected $HttpRequest;
