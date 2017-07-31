@@ -1,6 +1,6 @@
 <!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
-	<div class="row no-gutters d-md-flex align-items-md-center vh100">
+	<div class="row no-gutters d-md-flex align-items-md-center vh-100">
 		<div class="home-poster-wrap align-self-md-start col-md-3 offset-md-1">
 			<figure class="poster mt-5">
 				<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
@@ -39,7 +39,7 @@
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="vh66 ov-a">
+			<div class="vh-66 ov-a">
 				<nav class="push font-italic breadcrumb bg-white py-4">
 					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
 					<?php if ($current_route->name() == 'root'): ?>
@@ -80,7 +80,7 @@
 				</nav>
 				<?php if ($user->hasFlash()): ?>
 					<div class="push pr-5 border-0 rounded-0 alert alert-success" role="alert">
-						<p><?= $user->getFlash() ?></p>
+						<p class="m-0"><?= $user->getFlash() ?></p>
 					</div>
 				<?php endif; ?>
 				<div class="push mt-4 pr-5">

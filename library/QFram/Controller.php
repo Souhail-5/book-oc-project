@@ -1,6 +1,8 @@
 <?php
 namespace QFram;
 
+use \QFram\Router;
+
 /**
 * Controller Base
 */
@@ -45,6 +47,12 @@ abstract class Controller
 			$this->components[$component_name] = new Component($component_view);
 			$this->components[$component_name]->user = $this->user;
 		}
+	}
+
+	protected function signOut()
+	{
+		$this->user->setAuthenticated(false);
+		$this->HttpResponse->redirect(Router::genPath('episodes'));
 	}
 
 	protected function getComponent($name)

@@ -43,11 +43,11 @@ body {
 	background-color: #FFF;
 }
 
-.vh100 {
+.vh-100 {
 	height: 100vh;
 }
 
-.vh66 {
+.vh-66 {
 	height: 66vh;
 }
 
@@ -134,4 +134,8 @@ a:hover.meta-success, .btn-link:hover.meta-success {
 
 .flex-g-0 {
 	flex-grow: 0 !important;
+}
+
+.zi-50 {
+	z-index: 5000;
 }

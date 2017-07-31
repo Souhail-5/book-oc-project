@@ -1,8 +1,8 @@
 <div class="container">
-	<div class="row justify-content-center align-items-center vh100">
-		<form class="col-md-3" action="" method="POST">
+	<div class="row justify-content-center align-items-center vh-66">
+		<form class="col-md-4" action="" method="POST">
 			<?php if ($user->hasFlash()): ?>
-				<div class="alert alert-warning mb-5" role="alert">
+				<div class="alert alert-warning mb-3" role="alert">
 					<p><?= $user->getFlash() ?></p>
 				</div>
 			<?php endif; ?>
