@@ -40,7 +40,7 @@
 				</div>
 			<?php endif; ?>
 			<div class="vh66 ov-a">
-				<nav class="push font-italic breadcrumb bg-white mb-4 py-4">
+				<nav class="push font-italic breadcrumb bg-white py-4">
 					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
 					<?php if ($current_route->name() == 'root'): ?>
 						<span class="breadcrumb-item no-before">Accueil</span>
@@ -78,7 +78,12 @@
 						<?php endif; ?>
 					<?php endif; ?>
 				</nav>
-				<div class="push pr-5">
+				<?php if ($user->hasFlash()): ?>
+					<div class="push pr-5 border-0 rounded-0 alert alert-success" role="alert">
+						<p><?= $user->getFlash() ?></p>
+					</div>
+				<?php endif; ?>
+				<div class="push mt-4 pr-5">
 					<?= $view ?>
 				</div>
 			</div>

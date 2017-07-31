@@ -87,7 +87,7 @@ class Router
 
 	public function run()
 	{
-		$controller = '\Controller\\'.self::$currentRoute->controller();
+		$controller = self::$currentRoute->controller() == 'Auth' ? '\QFram\Auth' : '\Controller\\'.self::$currentRoute->controller();
 		$controller = new $controller($this->HttpRequest, $this->HttpResponse, self::$currentRoute->action());
 		$controller->run();
 	}
