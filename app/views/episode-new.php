@@ -23,14 +23,14 @@
 						<span class="mr-1">-</span>
 						<input class="ghost text-white mw-100" type="text" name="episode-part" id="input-episode-part" value="<?= $episode->part() ?>" pattern="[0-9]+" placeholder="partie" size="1">
 					</div>
-					<h1 class="w-75 mx-auto my-5 episode-title"><?= $episode->title() ?></h1>
+					<h1 class="w-75 mx-auto my-5 episode-title"><?= $_ifNotEmpty($episode->title(), $episode->title(), 'Votre titre') ?></h1>
 					<div class="input-group justify-content-center mb-3">
 						<span class="input-group-addon" id="basic-addon-slug">Permalien</span>
 						<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $episode->slug() ?>" pattern="[a-z0-9-]+" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
 					</div>
 				</header>
 				<div class="episode-text" placeholder="test" style="min-height: 150px;">
-					<?= $episode->text() ?>
+					<?= $_ifNotEmpty($episode->text(), $episode->text(), 'Il était une fois ...') ?>
 				</div>
 				<div class="text-right">
 					<button class="btn btn-link meta-success" type="submit" name="action" value="draft-episode">
