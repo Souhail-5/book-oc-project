@@ -29,6 +29,7 @@ class Router
 
 		foreach ($config_routes as $route_name => $param) {
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
+			$param['before'] = isset($param['before']) ? $param['before'] : [];
 			$config = [
 				'name' => $route_name,
 				'urlPattern' => $param['url'],
@@ -36,6 +37,7 @@ class Router
 				'action' => $param['action'],
 				'varsNames' => $param['varsNames'],
 				'varsFromUrl' => $this->HttpRequest->getURI(),
+				'before' => $param['before'],
 			];
 
 			self::$routes[$route_name] = new Route($config);
@@ -87,6 +89,14 @@ class Router
 
 	public function run()
 	{
+		if (!empty(self::$currentRoute->before())) {
+			$before = self::$currentRoute->before();
+			foreach ($before as $key => $value) {
+				$controller = $before[$key]["controller"] == 'Auth' ? '\QFram\Auth' : '\Controller\\'.$before[$key]["controller"];
+				$controller = new $controller($this->HttpRequest, $this->HttpResponse, $before[$key]["action"]);
+				$controller->run();
+			}
+		}
 		$controller = self::$currentRoute->controller() == 'Auth' ? '\QFram\Auth' : '\Controller\\'.self::$currentRoute->controller();
 		$controller = new $controller($this->HttpRequest, $this->HttpResponse, self::$currentRoute->action());
 		$controller->run();

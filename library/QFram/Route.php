@@ -14,6 +14,7 @@ class Route
 	protected $originalAction;
 	protected $varsNames = array();
 	protected $vars = array();
+	protected $before = array();
 
 	public function __construct($data)
 	{
@@ -37,6 +38,7 @@ class Route
 	public function originalAction() { return $this->originalAction; }
 	public function varsNames() { return $this->varsNames; }
 	public function vars() { return $this->vars; }
+	public function before() { return $this->before; }
 
 	public function setName($value)
 	{
@@ -68,6 +70,15 @@ class Route
 	public function setVars(array $value)
 	{
 		$this->vars = $value;
+	}
+
+	public function setBefore(array $before)
+	{
+		foreach ($before as $key => $value) {
+			$before[$key]["controller"] = str_replace('-', '', ucwords($before[$key]["controller"], '-'));
+			$before[$key]["action"] = str_replace('-', '', lcfirst(ucwords($before[$key]["action"], '-')));
+		}
+		$this->before = $before;
 	}
 
 	public function setVarsFromUrl($url)

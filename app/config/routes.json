@@ -21,13 +21,25 @@
 	{
 		"url": "/episodes/brouillon",
 		"controller": "episodes",
-		"action": "show-all-draft"
+		"action": "show-all-draft",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"episodes-trash":
 	{
 		"url": "/episodes/corbeille",
 		"controller": "episodes",
-		"action": "show-all-trash"
+		"action": "show-all-trash",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"episode":
 	{
@@ -40,7 +52,13 @@
 	{
 		"url": "/nouvel-episode",
 		"controller": "episodes",
-		"action": "show-new"
+		"action": "show-new",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"latest-episode":
 	{
@@ -52,24 +70,48 @@
 	{
 		"url": "/commentaires",
 		"controller": "comments",
-		"action": "show"
+		"action": "show",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"comments-approved":
 	{
 		"url": "/commentaires/approuves",
 		"controller": "comments",
-		"action": "show-approved"
+		"action": "show-approved",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"comments-signaled":
 	{
 		"url": "/commentaires/signales",
 		"controller": "comments",
-		"action": "show-signaled"
+		"action": "show-signaled",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	},
 	"comments-trash":
 	{
 		"url": "/commentaires/corbeille",
 		"controller": "comments",
-		"action": "show-trash"
+		"action": "show-trash",
+		"before": {
+			"auth" : {
+				"controller" : "auth",
+				"action" : "is-authenticated"
+			}
+		}
 	}
 }

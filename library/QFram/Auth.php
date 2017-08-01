@@ -40,6 +40,14 @@ class Auth extends Controller
 		$this->render();
 	}
 
+	public function isAuthenticated()
+	{
+		if (!$this->user->isAuthenticated()) {
+			$this->user->setFlash("Vous devez être connecté pour accéder à cette page.");
+			$this->HttpResponse->redirect(Router::genPath('sign-in'));
+		}
+	}
+
 	public function signIn()
 	{
 		$q = $this->db->prepare('
