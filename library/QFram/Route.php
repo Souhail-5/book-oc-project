@@ -16,7 +16,7 @@ class Route
 	protected $vars = array();
 	protected $before = array();
 
-	public function __construct($data)
+	public function __construct(array $data)
 	{
 		$this->hydrate($data);
 	}
