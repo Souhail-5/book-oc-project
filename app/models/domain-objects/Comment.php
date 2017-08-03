@@ -6,7 +6,6 @@ namespace Model\Object;
 */
 class Comment
 {
-	protected $validPatterns;
 	protected $id;
 	protected $episodeId;
 	protected $name;
@@ -32,15 +31,6 @@ class Comment
 		}
 	}
 
-	public function isValid($property)
-	{
-		if (!isset($this->validPatterns[$property])) {
-			return true;
-		}
-		return preg_match($this->validPatterns[$property], $this->$property);
-	}
-
-	public function validPatterns() { return $this->validPatterns; }
 	public function id() { return $this->id; }
 	public function episodeId() { return $this->episodeId; }
 	public function name() { return $this->name; }
@@ -51,11 +41,6 @@ class Comment
 	public function status() { return $this->status; }
 	public function approved() { return $this->approved; }
 	public function trash() { return $this->trash; }
-
-	public function setValidPatterns(array $validPatterns)
-	{
-		array_merge($this->validPatterns, $validPatterns);
-	}
 
 	public function setId($value)
 	{
@@ -69,34 +54,16 @@ class Comment
 
 	public function setName($value)
 	{
-		$this->setValidPatterns([
-			'name' => [
-				'regex' => '#^[a-zA-Z ]{5,50}$#',
-				'message' => 'Le nom ne doit comporter que des lettres et espaces. Sa longueur doit être comprise entre 5 et 50 caractères.',
-			]
-		]);
 		$this->name = $value;
 	}
 
 	public function setEmail($value)
 	{
-		$this->setValidPatterns([
-			'name' => [
-				'regex' => '#^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$#',
-				'message' => "L'email doit être sous la forme de mon@exemple.com",
-			]
-		]);
 		$this->email = $value;
 	}
 
 	public function setText($value)
 	{
-		$this->setValidPatterns([
-			'name' => [
-				'regex' => '#^(.){140,1400}$#',
-				'message' => 'La longueur du commentaire doit être comprise entre 140 et 1400 caractères.',
-			]
-		]);
 		$this->text = $value;
 	}
 
