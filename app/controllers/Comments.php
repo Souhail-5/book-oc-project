@@ -103,8 +103,21 @@ class Comments extends Controller
 
 	public function signalComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->signalComment($comment);
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->signalComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Notification',
+				'text' => 'Le signalement a bien été pris en compte',
+			]);
+		} catch (\Exception $e) {
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Attention !',
+				'text' => "Le signalement n'a pas pu être effectué",
+			]);
+		}
 		$this->HttpResponse->refresh();
 	}
 

@@ -253,6 +253,8 @@ class Comments
 		$q->execute();
 
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		if (!$data) throw new \Exception("Aucun commentaire n'a été trouvé");
+
 		$map = [
 			'id' => $data['id'],
 			'episodeId' => $data['episode_id'],

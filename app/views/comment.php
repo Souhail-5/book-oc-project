@@ -11,56 +11,58 @@
 						</svg>
 						Signaler
 					</button>
+					<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
 				<?php endif; ?>
 				<?php if ($comment->approved() == 0 && $current_route->originalController() == 'comments' && !empty($comment->nbrSignals())): ?>
 					<span class="meta ml-4 fz-0-95">
 						<?= $comment->nbrSignals().' '.$_ifPlural($comment->nbrSignals(), 'signalements', 'signalement') ?>
 					</span>
 				<?php endif; ?>
-				<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
 			</form>
 		</div>
 		<p class="mt-3 more"><?= $comment->text() ?></p>
-		<form class="d-flex justify-content-end align-items-center" action="" method="POST">
-			<?php if ($current_route->originalController() == 'comments' && $current_route->name() != 'comments-trash'): ?>
-				<button class="btn btn-link p-0 mr-4 meta-danger fz-0-95" type="submit" name="action" value="trash-comment">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-						<use xlink:href="/sprite.svg#si-glyph-trash">
-					</svg>
-					Corbeille
-				</button>
-			<?php endif; ?>
-			<?php if ($current_route->name() == 'comments-trash'): ?>
-				<button class="btn btn-link p-0 mr-4 meta-success fz-0-95" type="submit" name="action" value="untrash-comment">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-arrow-backward wh-0-95">
-						<use xlink:href="/sprite.svg#si-glyph-arrow-backward">
-					</svg>
-					Restaurer
-				</button>
-				<button class="btn btn-link p-0 ml-auto meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-						<use xlink:href="/sprite.svg#si-glyph-trash">
-					</svg>
-					Supprimer définitivement
-				</button>
-			<?php endif; ?>
-			<?php if ($comment->approved() == 0 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-signaled')): ?>
-				<button class="btn btn-link p-0 ml-auto meta-success fz-0-95" type="submit" name="action" value="approve-comment">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-checked wh-0-95">
-						<use xlink:href="/sprite.svg#si-glyph-checked">
-					</svg>
-					Approuver
-				</button>
-			<?php endif; ?>
-			<?php if ($comment->approved() == 1 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-approved')): ?>
-				<button class="btn btn-link p-0 ml-auto meta-danger fz-0-95" type="submit" name="action" value="disapprove-comment">
-					<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-delete wh-0-95">
-						<use xlink:href="/sprite.svg#si-glyph-delete">
-					</svg>
-					Désapprouver
-				</button>
-			<?php endif; ?>
-			<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
-		</form>
+		<?php if ($user->isAuthenticated()): ?>
+			<form class="d-flex justify-content-end align-items-center" action="" method="POST">
+				<?php if ($current_route->originalController() == 'comments' && $current_route->name() != 'comments-trash'): ?>
+					<button class="btn btn-link p-0 mr-4 meta-danger fz-0-95" type="submit" name="action" value="trash-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
+							<use xlink:href="/sprite.svg#si-glyph-trash">
+						</svg>
+						Corbeille
+					</button>
+				<?php endif; ?>
+				<?php if ($current_route->name() == 'comments-trash'): ?>
+					<button class="btn btn-link p-0 mr-4 meta-success fz-0-95" type="submit" name="action" value="untrash-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-arrow-backward wh-0-95">
+							<use xlink:href="/sprite.svg#si-glyph-arrow-backward">
+						</svg>
+						Restaurer
+					</button>
+					<button class="btn btn-link p-0 ml-auto meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
+							<use xlink:href="/sprite.svg#si-glyph-trash">
+						</svg>
+						Supprimer définitivement
+					</button>
+				<?php endif; ?>
+				<?php if ($comment->approved() == 0 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-signaled')): ?>
+					<button class="btn btn-link p-0 ml-auto meta-success fz-0-95" type="submit" name="action" value="approve-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-checked wh-0-95">
+							<use xlink:href="/sprite.svg#si-glyph-checked">
+						</svg>
+						Approuver
+					</button>
+				<?php endif; ?>
+				<?php if ($comment->approved() == 1 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-approved')): ?>
+					<button class="btn btn-link p-0 ml-auto meta-danger fz-0-95" type="submit" name="action" value="disapprove-comment">
+						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-delete wh-0-95">
+							<use xlink:href="/sprite.svg#si-glyph-delete">
+						</svg>
+						Désapprouver
+					</button>
+				<?php endif; ?>
+				<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
+			</form>
+		<?php endif; ?>
 	</div>
 </div>

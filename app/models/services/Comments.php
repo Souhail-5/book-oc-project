@@ -27,9 +27,12 @@ class Comments
 	{
 		$error = [];
 
-		if (empty($comment->name())) $error[] = "Vous devez renseigner un nom valide : au moins une lettre.";
-		if (empty($comment->email())) $error[] = "Vous devez renseigner un e-mail valide : voici.un@example.com .";
-		if (empty($comment->text())) $error[] = "Vous devez renseigner un commentaire valide : au moins un caractère.";
+		if (!preg_match('#^[a-zA-Z ]{5,50}$#', $comment->name()))
+			$error[] = "Le nom ne doit comporter que des lettres et espaces. Sa longueur doit être comprise entre 5 et 50 caractères.";
+		if (!filter_var($comment->email(), FILTER_VALIDATE_EMAIL))
+			$error[] = "L'email doit être sous la forme de mon@exemple.com";
+		if (!preg_match('#^(.){140,1400}$#', $comment->text()))
+			$error[] = "La longueur du commentaire doit être comprise entre 140 et 1400 caractères.";
 
 		if (!empty($error)) throw new \Exception(implode('<br>', $error));
 
@@ -50,7 +53,11 @@ class Comments
 	{
 		if ($comment->approved() == 0) {
 			$comment->setNbrSignals($comment->nbrSignals()+1);
-			$this->comments->update($comment);
+			try {
+				$this->comments->update($comment);
+			} catch (\Exception $e) {
+				return $e;
+			}
 		}
 	}
 
@@ -118,6 +125,10 @@ class Comments
 
 	public function getCommentById($comment_id)
 	{
-		return $this->comments->getCommentById($comment_id);
+		try {
+			return $this->comments->getCommentById($comment_id);
+		} catch (\Exception $e) {
+			throw $e;
+		}
 	}
 }
