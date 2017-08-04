@@ -92,12 +92,12 @@ class Router
 		if (!empty(self::$currentRoute->before())) {
 			$before = self::$currentRoute->before();
 			foreach ($before as $key => $value) {
-				$controller = $before[$key]["controller"] == 'Auth' ? '\QFram\Auth' : '\Controller\\'.$before[$key]["controller"];
+				$controller = '\Controller\\'.$before[$key]["controller"];
 				$controller = new $controller($this->HttpRequest, $this->HttpResponse, $before[$key]["action"]);
 				$controller->run();
 			}
 		}
-		$controller = self::$currentRoute->controller() == 'Auth' ? '\QFram\Auth' : '\Controller\\'.self::$currentRoute->controller();
+		$controller = '\Controller\\'.self::$currentRoute->controller();
 		$controller = new $controller($this->HttpRequest, $this->HttpResponse, self::$currentRoute->action());
 		$controller->run();
 	}

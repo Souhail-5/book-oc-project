@@ -1,8 +1,9 @@
 <?php
-namespace QFram;
+namespace Controller;
 
-use QFram\Helper\PDOFactory;
-use QFram\Router;
+use \QFram\Helper\PDOFactory;
+use \QFram\Router;
+use \QFram\Controller;
 
 /**
 * Auth Controller
