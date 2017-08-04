@@ -101,10 +101,4 @@ class Router
 		$controller = new $controller($this->HttpRequest, $this->HttpResponse, self::$currentRoute->action());
 		$controller->run();
 	}
-
-	// // generate URL from route name and param
-	// public static function generate($value, array $param)
-	// {
-	// 	# code...
-	// }
 }
