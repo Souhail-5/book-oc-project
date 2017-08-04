@@ -10,10 +10,10 @@
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item active">Nouvel épisode</li>
 				</ol>
-				<?php if (!empty($warning)): ?>
-					<div class="alert alert-warning mb-5" role="alert">
-						<h4 class="alert-heading">Attention !</h4>
-						<p><?= $warning ?></p>
+				<?php if ($flash->exist()): ?>
+					<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
+						<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
+						<p><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
 				<header class="text-center">

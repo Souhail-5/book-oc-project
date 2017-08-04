@@ -78,9 +78,9 @@
 						<?php endif; ?>
 					<?php endif; ?>
 				</nav>
-				<?php if ($user->hasFlash()): ?>
-					<div class="push pr-5 border-0 rounded-0 alert alert-success" role="alert">
-						<p class="m-0"><?= $user->getFlash() ?></p>
+				<?php if ($flash->exist()): ?>
+					<div class="push pr-5 border-0 rounded-0 alert alert-<?= $flash->get('type') ?>" role="alert">
+						<p class="m-0"><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
 				<div class="push mt-4 pr-5">

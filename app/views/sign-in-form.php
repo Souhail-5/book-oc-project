@@ -1,9 +1,10 @@
 <div class="container">
 	<div class="row justify-content-center align-items-center vh-66">
 		<form class="col-md-4" action="" method="POST">
-			<?php if ($user->hasFlash()): ?>
-				<div class="alert alert-warning mb-3" role="alert">
-					<p><?= $user->getFlash() ?></p>
+			<?php if ($flash->exist()): ?>
+				<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
+					<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
+					<p><?= $flash->get('text') ?></p>
 				</div>
 			<?php endif; ?>
 			<h2 class="mb-4">Se connectez</h2>

@@ -161,7 +161,11 @@ class Episodes extends Controller
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
 		} catch (\Exception $e) {
-			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Attention !',
+				'text' => $e->getMessage(),
+			]);
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		}
@@ -185,7 +189,11 @@ class Episodes extends Controller
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
 		} catch (\Exception $e) {
-			$this->getComponent('episode-new')->warning = $e->getMessage();
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Attention !',
+				'text' => $e->getMessage(),
+			]);
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		}
@@ -217,7 +225,11 @@ class Episodes extends Controller
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
 		} catch (\Exception $e) {
-			$this->getComponent('episode-single')->warning = $e->getMessage();
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Attention !',
+				'text' => $e->getMessage(),
+			]);
 			$this->getComponent('episode-single')->episode = $this->getService('episodes')->getOne(
 				$this->getService('episodes')->setNewEpisode([
 					'id' => $this->HttpRequest->POSTData('episode-id'),
@@ -284,7 +296,11 @@ class Episodes extends Controller
 			$this->getService('comments')->add($new_comment);
 			$this->showOne();
 		} catch (\Exception $e) {
-			$this->getComponent('episode-single')->warning = $e->getMessage();
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Attention !',
+				'text' => $e->getMessage(),
+			]);
 			$this->showOne();
 		}
 	}

@@ -33,7 +33,11 @@ class Auth extends Controller
 	public function show()
 	{
 		if ($this->user->isAuthenticated()) {
-			$this->user->setFlash("Bonjour {$this->user->getAttribute('display_name')}, vous êtes déjà connecté.");
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => '',
+				'text' => "Bonjour {$this->user->getAttribute('display_name')}, vous êtes déjà connecté.",
+			]);
 			$this->HttpResponse->redirect(Router::genPath('episodes'));
 		}
 
@@ -43,7 +47,11 @@ class Auth extends Controller
 	public function isAuthenticated()
 	{
 		if (!$this->user->isAuthenticated()) {
-			$this->user->setFlash("Vous devez être connecté pour accéder à cette page.");
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Oups !',
+				'text' => "Vous devez être connecté pour accéder à cette page.",
+			]);
 			$this->HttpResponse->redirect(Router::genPath('sign-in'));
 		}
 	}
@@ -64,7 +72,11 @@ class Auth extends Controller
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
 
 		if (!$data || !password_verify($this->HttpRequest->POSTData('password'), $data['password'])) {
-			$this->user->setFlash('Les identifiants sont incorrectes.');
+			$this->flash->hydrate([
+				'type' => 'warning',
+				'title' => 'Aie !',
+				'text' => 'Les identifiants sont incorrectes.',
+			]);
 			$this->HttpResponse->redirect(Router::genPath('sign-in'));
 		}
 

@@ -12,6 +12,7 @@ abstract class Controller
 	protected $HttpResponse;
 	protected $action;
 	protected $user;
+	protected $flash;
 	protected $services = [];
 	protected $page;
 	protected $components = [];
@@ -22,6 +23,7 @@ abstract class Controller
 		$this->HttpResponse = $HttpResponse;
 		$this->action = $action;
 		$this->user = new User;
+		$this->flash = new Flash;
 		$this->init();
 	}
 
@@ -39,6 +41,7 @@ abstract class Controller
 	{
 		$this->page = new Page;
 		$this->page->user = $this->user;
+		$this->page->flash = $this->flash;
 	}
 
 	protected function initComponents(array $components)
@@ -46,6 +49,7 @@ abstract class Controller
 		foreach ($components as $component_name => $component_view) {
 			$this->components[$component_name] = new Component($component_view);
 			$this->components[$component_name]->user = $this->user;
+			$this->components[$component_name]->flash = $this->flash;
 		}
 	}
 
