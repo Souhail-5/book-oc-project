@@ -9,8 +9,6 @@ use \Model\Mapper;
 */
 class Comments
 {
-	use \QFram\Helper\Formater;
-
 	protected $comments;
 
 	public function __construct()
