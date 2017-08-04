@@ -10,6 +10,13 @@ class Flash
 	protected $title;
 	protected $text;
 
+	public function __construct()
+	{
+		$this->type = isset($_SESSION['flash']['type']) ? $_SESSION['flash']['type'] : null;
+		$this->title = isset($_SESSION['flash']['title']) ? $_SESSION['flash']['title'] : null;
+		$this->text = isset($_SESSION['flash']['text']) ? $_SESSION['flash']['text'] : null;
+	}
+
 	// To-do: transform it to a Trait
 	public function hydrate(array $data)
 	{
