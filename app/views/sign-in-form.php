@@ -2,7 +2,7 @@
 	<div class="row justify-content-center align-items-center vh-66">
 		<form class="col-md-4" action="" method="POST">
 			<?php if ($flash->exist()): ?>
-				<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
+				<div class="alert alert-<?= $flash->get('type') ?> mb-3" role="alert">
 					<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
 					<p><?= $flash->get('text') ?></p>
 				</div>
