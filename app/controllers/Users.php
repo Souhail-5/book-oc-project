@@ -6,16 +6,14 @@ use \QFram\Router;
 use \QFram\Controller;
 
 /**
-* Auth Controller
+* Users Controller
 */
-class Auth extends Controller
+class Users extends Controller
 {
 	protected $db;
 
 	protected function init()
 	{
-		$this->db = PDOFactory::getMysqlConnexion();
-
 		$this->initPage();
 		$this->initComponents([
 			'sign-in-form' => 'sign-in-form',
@@ -25,13 +23,13 @@ class Auth extends Controller
 	public function render()
 	{
 		$this->page->title = "Billet simple pour l'Alaska | Se connecter";
-		$this->page->bodyId = "auth";
+		$this->page->bodyId = "sign-in";
 		$this->page->view = $this->getComponent('sign-in-form')->render();
 
 		$this->HttpResponse->send($this->page->render());
 	}
 
-	public function show()
+	public function showSignIn()
 	{
 		if ($this->user->isAuthenticated()) {
 			$this->flash->hydrate([

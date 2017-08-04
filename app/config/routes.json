@@ -8,8 +8,8 @@
 	"sign-in":
 	{
 		"url": "/se-connecter",
-		"controller": "auth",
-		"action": "show"
+		"controller": "users",
+		"action": "showSignIn"
 	},
 	"episodes":
 	{
@@ -23,9 +23,9 @@
 		"controller": "episodes",
 		"action": "show-all-draft",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -35,9 +35,9 @@
 		"controller": "episodes",
 		"action": "show-all-trash",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -54,9 +54,9 @@
 		"controller": "episodes",
 		"action": "show-new",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -72,9 +72,9 @@
 		"controller": "comments",
 		"action": "show",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -84,9 +84,9 @@
 		"controller": "comments",
 		"action": "show-approved",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -96,9 +96,9 @@
 		"controller": "comments",
 		"action": "show-signaled",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	},
@@ -108,9 +108,9 @@
 		"controller": "comments",
 		"action": "show-trash",
 		"before": {
-			"auth" : {
-				"controller" : "auth",
-				"action" : "is-authenticated"
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
 			}
 		}
 	}
