@@ -23,6 +23,40 @@ class Router
 		$this->setRoutes();
 	}
 
+	protected function isCurrentRoute(Route $route)
+	{
+		return $route->isValidUrl($this->HttpRequest->getURI());
+	}
+
+	public static function currentRoute()
+	{
+		return self::$currentRoute;
+	}
+
+	public static function currentPath()
+	{
+		return self::genPath(self::$currentRoute->name(), self::$currentRoute->vars());
+	}
+
+	public static function genPath($route_name, array $vars=[])
+	{
+		if (!empty(self::$routes[$route_name])) {
+			return preg_replace_callback_array(
+				[
+					'`\([^\)]*\)(?!\?)`U' => function($matches) use(&$vars) {
+						return array_shift($vars);
+					},
+					'`\([^\)]*\)\?`U' => function($matches) {
+						return "";
+					}
+				],
+				self::$routes[$route_name]->urlPattern()
+			);
+		} else {
+			return "/";
+		}
+	}
+
 	protected function setRoutes()
 	{
 		$config_routes = json_decode(file_get_contents(__DIR__.'/../../app/config/routes.json'), true);
@@ -46,45 +80,11 @@ class Router
 		}
 	}
 
-	protected function isCurrentRoute(Route $route)
-	{
-		return $route->isValidUrl($this->HttpRequest->getURI());
-	}
-
 	protected function setCurrentRoute(Route $route)
 	{
 		self::$currentRoute = $route;
 		if ($this->HttpRequest->POSTData('action')) self::$currentRoute->setAction($this->HttpRequest->POSTData('action'));
 		$this->HttpRequest->setGETData(self::$currentRoute->vars());
-	}
-
-	public static function genPath($route_name, array $vars=[])
-	{
-		if (!empty(self::$routes[$route_name])) {
-			return preg_replace_callback_array(
-				[
-					'`\([^\)]*\)(?!\?)`U' => function($matches) use(&$vars) {
-						return array_shift($vars);
-					},
-					'`\([^\)]*\)\?`U' => function($matches) {
-						return "";
-					}
-				],
-				self::$routes[$route_name]->urlPattern()
-			);
-		} else {
-			return "/";
-		}
-	}
-
-	public static function currentRoute()
-	{
-		return self::$currentRoute;
-	}
-
-	public static function currentPath()
-	{
-		return self::genPath(self::$currentRoute->name(), self::$currentRoute->vars());
 	}
 
 	public function run()
