@@ -130,6 +130,8 @@ class Episodes extends Controller
 		}
 
 		$new_comment_form = $this->getComponent('new-comment-form');
+		$new_comment = $new_comment_form->comment;
+		if (!isset($new_comment)) $new_comment_form->comment = $this->getService('comments')->setNewComment();
 		$new_comment_form->episode = $episode_view->episode;
 		$episode_view->new_comment_form = $new_comment_form->render();
 
@@ -286,14 +288,15 @@ class Episodes extends Controller
 
 	public function newEpisodeComment()
 	{
+		$this->getComponent('new-comment-form')->comment = $this->getService('comments')->setNewComment([
+			'episodeId' => $this->HttpRequest->POSTData('episode-id'),
+			'name' => $this->HttpRequest->POSTData('comment-name'),
+			'email' => $this->HttpRequest->POSTData('comment-email'),
+			'text' => $this->HttpRequest->POSTData('comment-text'),
+		]);
 		try {
-			$new_comment = $this->getService('comments')->setNewComment([
-				'episodeId' => $this->HttpRequest->POSTData('episode-id'),
-				'name' => $this->HttpRequest->POSTData('comment-name'),
-				'email' => $this->HttpRequest->POSTData('comment-email'),
-				'text' => $this->HttpRequest->POSTData('comment-text'),
-			]);
-			$this->getService('comments')->add($new_comment);
+			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
+			$this->getComponent('new-comment-form')->comment = null;
 			$this->showOne();
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
