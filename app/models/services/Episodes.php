@@ -27,38 +27,47 @@ class Episodes
 	{
 		$error = [];
 
-		if (empty($episode->number()) && $episode->number() === '') $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
-		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
-		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
+		if (!preg_match('#^[0-9]{,99999}$#', $episode->number()))
+			$error[] = "Le numéro de l'épisode doit être compris entre 0 et 99999.";
+		if (!preg_match('#^[0-9]{,99999}$#', $episode->part()))
+			$error[] = "Le numéro de partie de l'épisode doit être compris entre 0 et 99999.";
+		if (!preg_match('#^(.){,255}$#', $episode->title()))
+			$error[] = "La longueur du titre de l'épisode ne doit pas dépasser 255 caractères.";
+		if (!preg_match('#^[a-z0-9-]{,255}$#', $episode->slug()))
+			$error[] = "Le slug de l'épisode doit contenir que des caractères alphanumérique en minuscule et tiret (-). Maximum : 255 caractères.";
 
 		if (!empty($error)) throw new \Exception(implode('<br>', $error));
 
+		$episode->setNumber(!empty($episode->number()) ? $episode->number() : 0);
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
+		$episode->setTitle(!empty($episode->title()) ? $episode->title() : 'Sans titre');
 		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
 
 		try {
 			$this->episodes->add($episode, $publish);
 		} catch (\Exception $e) {
-			if ($e->getCode() == 23000) {
-				$m = ($episode->part() == 0) ? '' : "(partie {$episode->part()})";
-				$error[] = "Un épisode numéroté {$episode->number()} {$m} existe déjà.";
-				throw new \Exception(implode(' ', $error));
-			} else {
-				return $e;
-			}
+			return $e;
 		}
 	}
 
 	public function update(Object\Episode $episode, $publish=false)
 	{
 		$error = [];
-		if (empty($episode->number()) && $episode->number() === '') $error[] = "Vous devez renseigner un numéro d'épisode valide : au moins un chiffre.";
-		if (empty($episode->title())) $error[] = "Vous devez renseigner un titre d'épisode valide : au moins une lettre ou un chiffre.";
-		if (empty($episode->text())) $error[] = "Vous devez renseigner un contenu d'épisode valide : au moins un caractère.";
+
+		if (!preg_match('#^[0-9]{,99999}$#', $episode->number()))
+			$error[] = "Le numéro de l'épisode doit être compris entre 0 et 99999.";
+		if (!preg_match('#^[0-9]{,99999}$#', $episode->part()))
+			$error[] = "Le numéro de partie de l'épisode doit être compris entre 0 et 99999.";
+		if (!preg_match('#^(.){,255}$#', $episode->title()))
+			$error[] = "La longueur du titre de l'épisode ne doit pas dépasser 255 caractères.";
+		if (!preg_match('#^[a-z0-9-]{,255}$#', $episode->slug()))
+			$error[] = "Le slug de l'épisode doit contenir que des caractères alphanumérique en minuscule et tiret (-). Maximum : 255 caractères.";
 
 		if (!empty($error)) throw new \Exception(implode('<br>', $error));
 
+		$episode->setNumber(!empty($episode->number()) ? $episode->number() : 0);
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
+		$episode->setTitle(!empty($episode->title()) ? $episode->title() : 'Sans titre');
 		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
 		$episode->setTrash(!empty($episode->trash()) ? $episode->trash() : 0);
 
@@ -66,13 +75,7 @@ class Episodes
 			$this->episodes->update($episode);
 			if ($publish === true) $this->episodes->publish($episode);
 		} catch (\Exception $e) {
-			if ($e->getCode() == 23000) {
-				$m = ($episode->part() == 0) ? '' : "(partie {$episode->part()})";
-				$error[] = "Un épisode numéroté {$episode->number()} {$m} existe déjà.";
-				throw new \Exception(implode(' ', $error));
-			} else {
-				return $e;
-			}
+			return $e;
 		}
 	}
 
