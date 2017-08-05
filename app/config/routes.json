@@ -43,10 +43,10 @@
 	},
 	"episode":
 	{
-		"url": "/episode/([0-9]+)/([a-z0-9-]+)",
+		"url": "/episode/([a-z0-9-]+)",
 		"controller": "episodes",
 		"action": "show-one",
-		"varsNames": ["number", "slug"]
+		"varsNames": ["slug"]
 	},
 	"episode-new":
 	{

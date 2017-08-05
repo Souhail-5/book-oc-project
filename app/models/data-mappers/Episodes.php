@@ -192,7 +192,7 @@ class Episodes
 
 	public function getOne(Episode $episode)
 	{
-		$where = 'number=:number AND slug=:slug';
+		$where = 'slug=:slug';
 
 		if (!empty($episode->id())) $where = 'id=:id';
 
@@ -206,7 +206,6 @@ class Episodes
 		if (!empty($episode->id())) {
 			$q->bindValue(':id', $episode->id());
 		} else {
-			$q->bindValue(':number', $episode->number());
 			$q->bindValue(':slug', $episode->slug());
 		}
 

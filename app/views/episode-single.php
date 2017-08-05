@@ -45,7 +45,7 @@
 									<?= ($episode->status() != 'publish') ? 'Modifié' : 'Publié' ?> <span></span>
 								</time>
 								<?php if ($episode->status() == 'publish'): ?>
-									<a class="meta" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
+									<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">
 										<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 											<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 										</svg>

@@ -112,7 +112,6 @@ class Episodes extends Controller
 		$episode_view = $this->getComponent('episode-single');
 		$episode_view->episode = $this->getService('episodes')->getOne(
 			$this->getService('episodes')->setNewEpisode([
-				'number' => $this->HttpRequest->GETData('number'),
 				'slug' => $this->HttpRequest->GETData('slug'),
 			])
 		);
@@ -161,7 +160,7 @@ class Episodes extends Controller
 
 			$episode = $this->getService('episodes')->getOne($episode);
 
-			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
@@ -189,7 +188,7 @@ class Episodes extends Controller
 
 			$episode = $this->getService('episodes')->getOne($episode);
 
-			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
@@ -225,7 +224,7 @@ class Episodes extends Controller
 
 			$episode = $this->getService('episodes')->getOne($episode);
 
-			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->number(), $episode->slug()]));
+			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
@@ -261,7 +260,7 @@ class Episodes extends Controller
 			])
 		);
 		$this->getService('episodes')->trashOne($episode);
-		$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->number(), $episode->slug()]));
+		$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->slug()]));
 	}
 
 	public function untrashEpisode()

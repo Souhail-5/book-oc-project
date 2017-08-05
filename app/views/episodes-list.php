@@ -7,7 +7,7 @@
 					<span class="badge badge-primary pr-2 py-1">
 						# <?= $episode->number() ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
 					</span>
-					<a href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>"><?= $episode->title() ?></a>
+					<a href="<?= $path('episode', [$episode->slug()]) ?>"><?= $episode->title() ?></a>
 				</h2>
 			</div>
 
@@ -35,7 +35,7 @@
 						</svg>
 						<?= ($current_route->name() == 'episodes-draft') ? 'Modifié' : 'Publié' ?> <span></span>
 					</time>
-					<a class="meta" href="<?= $path('episode', [$episode->number(), $episode->slug()]) ?>#anchor-comments">
+					<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 							<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
 						</svg>
