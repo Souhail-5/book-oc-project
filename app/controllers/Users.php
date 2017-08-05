@@ -14,6 +14,9 @@ class Users extends Controller
 
 	protected function init()
 	{
+		$this->initServices([
+			'users' => 'Users',
+		]);
 		$this->initPage();
 		$this->initComponents([
 			'sign-in-form' => 'sign-in-form',
@@ -57,30 +60,21 @@ class Users extends Controller
 
 	public function signIn()
 	{
-		$q = $this->db->prepare('
-			SELECT id, email, display_name, password
-			FROM users
-			WHERE email=:email
-			LIMIT 1
-		');
-
-		$q->bindValue(':email', $this->HttpRequest->POSTData('email'));
-
-		$q->execute();
-
-		$data = $q->fetch(\PDO::FETCH_ASSOC);
-
-		if (!$data || !password_verify($this->HttpRequest->POSTData('password'), $data['password'])) {
+		try {
+			$user = $this->getService('users')->signInByEmail($this->getService('users')->setNewUser([
+				'email' => $this->HttpRequest->POSTData('email'),
+				'password' => $this->HttpRequest->POSTData('password'),
+			]));
+		} catch (\Exception $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Aie !',
-				'text' => 'Les identifiants sont incorrectes.',
+				'text' => 'Les identifiants sont incorrects.',
 			]);
 			$this->HttpResponse->redirect(Router::genPath('sign-in'));
 		}
-
 		$this->user->setAuthenticated();
-		$this->user->setAttribute('display_name', $data['display_name']);
+		$this->user->setAttribute('display_name', $user->displayName());
 		$this->HttpResponse->redirect(Router::genPath('episodes'));
 	}
 
