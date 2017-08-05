@@ -305,13 +305,15 @@ class Episodes extends Controller
 			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
 			$this->getComponent('new-comment-form')->comment = null;
 			$this->showOne();
-		} catch (\Exception $e) {
+		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
 				'text' => $e->getMessage(),
 			]);
 			$this->showOne();
+		} catch (\Exception $e) {
+			var_dump('404');
 		}
 	}
 

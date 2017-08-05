@@ -32,7 +32,7 @@ class Comments
 		if (!preg_match('#^(.){140,1400}$#', $comment->text()))
 			$error[] = "La longueur du commentaire doit être comprise entre 140 et 1400 caractères.";
 
-		if (!empty($error)) throw new \Exception(implode('<br>', $error));
+		if (!empty($error)) throw new \InvalidArgumentException(implode('<br>', $error));
 
 		$comment->setStatus('publish');
 
@@ -43,7 +43,7 @@ class Comments
 				$episodes_service->plusNbrComments($comment->episodeId());
 			}
 		} catch (\Exception $e) {
-			return $e;
+			throw $e;
 		}
 	}
 
