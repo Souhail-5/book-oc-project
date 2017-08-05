@@ -34,6 +34,8 @@ class Episodes
 		$q->bindValue(':status', $episode->status());
 
 		$q->execute();
+
+		return $this->db->lastInsertId();
 	}
 
 	public function publish(Episode $episode)
@@ -69,6 +71,8 @@ class Episodes
 		$q->bindValue(':trash', (int) $episode->trash(), \PDO::PARAM_INT);
 
 		$q->execute();
+
+		if (!$q->rowCount()) throw new \Exception("Impossible de modifier l'épisode");
 	}
 
 	public function deleteOne(Episode $episode)
@@ -212,6 +216,8 @@ class Episodes
 		$q->execute();
 
 		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		if (!$data) throw new \Exception("Aucun épisode n'a été trouvé");
+
 		$map = [
 			'id' => $data['id'],
 			'number' => $data['number'],

@@ -110,11 +110,15 @@ class Episodes extends Controller
 	public function showOne()
 	{
 		$episode_view = $this->getComponent('episode-single');
-		$episode_view->episode = $this->getService('episodes')->getOne(
-			$this->getService('episodes')->setNewEpisode([
-				'slug' => $this->HttpRequest->GETData('slug'),
-			])
-		);
+		try {
+			$episode_view->episode = $this->getService('episodes')->getOne(
+				$this->getService('episodes')->setNewEpisode([
+					'slug' => $this->HttpRequest->GETData('slug'),
+				])
+			);
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 
 		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
 
@@ -156,12 +160,14 @@ class Episodes extends Controller
 		]);
 
 		try {
-			$this->getService('episodes')->save($episode);
+			$episode_id = $this->getService('episodes')->save($episode);
 
-			$episode = $this->getService('episodes')->getOne($episode);
+			$episode = $this->getService('episodes')->getOne($this->getService('episodes')->setNewEpisode([
+				'id' => $episode_id,
+			]));
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
-		} catch (\Exception $e) {
+		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
@@ -169,6 +175,8 @@ class Episodes extends Controller
 			]);
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
+		} catch (\Exception $e) {
+			var_dump('404');
 		}
 	}
 
@@ -184,12 +192,14 @@ class Episodes extends Controller
 		]);
 
 		try {
-			$this->getService('episodes')->save($episode, true);
+			$episode_id = $this->getService('episodes')->save($episode, true);
 
-			$episode = $this->getService('episodes')->getOne($episode);
+			$episode = $this->getService('episodes')->getOne($this->getService('episodes')->setNewEpisode([
+				'id' => $episode_id,
+			]));
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
-		} catch (\Exception $e) {
+		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
@@ -197,6 +207,8 @@ class Episodes extends Controller
 			]);
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
+		} catch (\Exception $e) {
+			var_dump('404');
 		}
 	}
 
@@ -207,17 +219,14 @@ class Episodes extends Controller
 
 	public function updateEpisode($publish=false)
 	{
-		$episode = $this->getService('episodes')->getOne(
-			$this->getService('episodes')->setNewEpisode([
-				'id' => $this->HttpRequest->POSTData('episode-id'),
-			])
-		);
-
-		$episode->setNumber($this->HttpRequest->POSTData('episode-number'));
-		$episode->setPart($this->HttpRequest->POSTData('episode-part'));
-		$episode->setSlug($this->HttpRequest->POSTData('episode-slug'));
-		$episode->setTitle($this->HttpRequest->POSTData('mce_0'));
-		$episode->setText($this->HttpRequest->POSTData('mce_1'));
+		$episode = $this->getService('episodes')->setNewEpisode([
+			'id' => $this->HttpRequest->POSTData('episode-id'),
+			'number' => $this->HttpRequest->POSTData('episode-number'),
+			'part' => $this->HttpRequest->POSTData('episode-part'),
+			'slug' => $this->HttpRequest->POSTData('episode-slug'),
+			'title' => $this->HttpRequest->POSTData('mce_0'),
+			'text' => $this->HttpRequest->POSTData('mce_1'),
+		]);
 
 		try {
 			$this->getService('episodes')->update($episode, $publish);
@@ -225,64 +234,63 @@ class Episodes extends Controller
 			$episode = $this->getService('episodes')->getOne($episode);
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
-		} catch (\Exception $e) {
+		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
-				'title' => 'Attention !',
+				'title' => "Aucune modification n'a été prise en compte",
 				'text' => $e->getMessage(),
 			]);
-			$this->getComponent('episode-single')->episode = $this->getService('episodes')->getOne(
-				$this->getService('episodes')->setNewEpisode([
-					'id' => $this->HttpRequest->POSTData('episode-id'),
-				])
-			);
-			$episode = $this->getComponent('episode-single')->episode;
-
-			if (
-				empty($this->HttpRequest->POSTData('episode-number')) ||
-				empty($this->HttpRequest->POSTData('mce_0')) ||
-				empty($this->HttpRequest->POSTData('mce_1'))
-			) {
-				if (!empty($this->HttpRequest->POSTData('episode-number'))) $episode->setNumber($this->HttpRequest->POSTData('episode-number'));
-				if (!empty($this->HttpRequest->POSTData('mce_0'))) $episode->setTitle($this->HttpRequest->POSTData('mce_0'));
-				if (!empty($this->HttpRequest->POSTData('mce_1'))) $episode->setText($this->HttpRequest->POSTData('mce_1'));
-			}
+			$this->getComponent('episode-single')->episode = $episode;
 
 			$this->renderSinglePage();
+		} catch (\Exception $e) {
+			var_dump('404');
 		}
 	}
 
 	public function trashEpisode()
 	{
-		$episode = $this->getService('episodes')->getOne(
-			$this->getService('episodes')->setNewEpisode([
-				'id' => $this->HttpRequest->POSTData('episode-id'),
-			])
-		);
-		$this->getService('episodes')->trashOne($episode);
-		$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->slug()]));
+		try {
+			$episode = $this->getService('episodes')->getOne(
+				$this->getService('episodes')->setNewEpisode([
+					'id' => $this->HttpRequest->POSTData('episode-id'),
+				])
+			);
+			$this->getService('episodes')->trashOne($episode);
+			$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->slug()]));
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function untrashEpisode()
 	{
-		$episode = $this->getService('episodes')->getOne(
-			$this->getService('episodes')->setNewEpisode([
-				'id' => $this->HttpRequest->POSTData('episode-id'),
-			])
-		);
-		$this->getService('episodes')->untrashOne($episode);
-		$this->HttpResponse->refresh();
+		try {
+			$episode = $this->getService('episodes')->getOne(
+				$this->getService('episodes')->setNewEpisode([
+					'id' => $this->HttpRequest->POSTData('episode-id'),
+				])
+			);
+			$this->getService('episodes')->untrashOne($episode);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function deleteEpisode()
 	{
-		$episode = $this->getService('episodes')->getOne(
-			$this->getService('episodes')->setNewEpisode([
-				'id' => $this->HttpRequest->POSTData('episode-id'),
-			])
-		);
-		$this->getService('episodes')->deleteOne($episode);
-		$this->HttpResponse->refresh();
+		try {
+			$episode = $this->getService('episodes')->getOne(
+				$this->getService('episodes')->setNewEpisode([
+					'id' => $this->HttpRequest->POSTData('episode-id'),
+				])
+			);
+			$this->getService('episodes')->deleteOne($episode);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function newEpisodeComment()

@@ -27,16 +27,16 @@ class Episodes
 	{
 		$error = [];
 
-		if (!preg_match('#^[0-9]{,99999}$#', $episode->number()))
-			$error[] = "Le numéro de l'épisode doit être compris entre 0 et 99999.";
-		if (!preg_match('#^[0-9]{,99999}$#', $episode->part()))
-			$error[] = "Le numéro de partie de l'épisode doit être compris entre 0 et 99999.";
-		if (!preg_match('#^(.){,255}$#', $episode->title()))
+		if (!preg_match('#^[0-9]{0,999}$#', $episode->number()))
+			$error[] = "Le numéro de l'épisode ne doit pas être supérieur 999.";
+		if (!preg_match('#^[0-9]{0,999}$#', $episode->part()))
+			$error[] = "Le numéro de partie ne doit pas être supérieur 999.";
+		if (!preg_match('#^(.){0,255}$#', $episode->title()))
 			$error[] = "La longueur du titre de l'épisode ne doit pas dépasser 255 caractères.";
-		if (!preg_match('#^[a-z0-9-]{,255}$#', $episode->slug()))
+		if (!preg_match('#^[a-z0-9-]{0,255}$#', $episode->slug()))
 			$error[] = "Le slug de l'épisode doit contenir que des caractères alphanumérique en minuscule et tiret (-). Maximum : 255 caractères.";
 
-		if (!empty($error)) throw new \Exception(implode('<br>', $error));
+		if (!empty($error)) throw new \InvalidArgumentException(implode('<br>', $error));
 
 		$episode->setNumber(!empty($episode->number()) ? $episode->number() : 0);
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
@@ -44,9 +44,9 @@ class Episodes
 		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
 
 		try {
-			$this->episodes->add($episode, $publish);
+			return $this->episodes->add($episode, $publish);
 		} catch (\Exception $e) {
-			return $e;
+			throw $e;
 		}
 	}
 
@@ -54,16 +54,16 @@ class Episodes
 	{
 		$error = [];
 
-		if (!preg_match('#^[0-9]{,99999}$#', $episode->number()))
-			$error[] = "Le numéro de l'épisode doit être compris entre 0 et 99999.";
-		if (!preg_match('#^[0-9]{,99999}$#', $episode->part()))
-			$error[] = "Le numéro de partie de l'épisode doit être compris entre 0 et 99999.";
-		if (!preg_match('#^(.){,255}$#', $episode->title()))
+		if (!preg_match('#^[0-9]{0,999}$#', $episode->number()))
+			$error[] = "Le numéro de l'épisode doit être compris entre 0 et 999.";
+		if (!preg_match('#^[0-9]{0,999}$#', $episode->part()))
+			$error[] = "Le numéro de partie de l'épisode doit être compris entre 0 et 999.";
+		if (!preg_match('#^(.){0,255}$#', $episode->title()))
 			$error[] = "La longueur du titre de l'épisode ne doit pas dépasser 255 caractères.";
-		if (!preg_match('#^[a-z0-9-]{,255}$#', $episode->slug()))
+		if (!preg_match('#^[a-z0-9-]{0,255}$#', $episode->slug()))
 			$error[] = "Le slug de l'épisode doit contenir que des caractères alphanumérique en minuscule et tiret (-). Maximum : 255 caractères.";
 
-		if (!empty($error)) throw new \Exception(implode('<br>', $error));
+		if (!empty($error)) throw new \InvalidArgumentException(implode('<br>', $error));
 
 		$episode->setNumber(!empty($episode->number()) ? $episode->number() : 0);
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
@@ -75,7 +75,7 @@ class Episodes
 			$this->episodes->update($episode);
 			if ($publish === true) $this->episodes->publish($episode);
 		} catch (\Exception $e) {
-			return $e;
+			throw $e;
 		}
 	}
 
@@ -113,7 +113,11 @@ class Episodes
 
 	public function getOne(Object\Episode $episode)
 	{
-		return $this->episodes->getOne($episode);
+		try {
+			return $this->episodes->getOne($episode);
+		} catch (\Exception $e) {
+			throw $e;
+		}
 	}
 
 	public function plusNbrComments($episode_id)
