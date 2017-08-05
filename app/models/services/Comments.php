@@ -51,11 +51,7 @@ class Comments
 	{
 		if ($comment->approved() == 0) {
 			$comment->setNbrSignals($comment->nbrSignals()+1);
-			try {
-				$this->comments->update($comment);
-			} catch (\Exception $e) {
-				return $e;
-			}
+			$this->comments->update($comment);
 		}
 	}
 

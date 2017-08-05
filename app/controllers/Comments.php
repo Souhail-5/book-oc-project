@@ -123,36 +123,56 @@ class Comments extends Controller
 
 	public function approveComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->approveComment($comment);
-		$this->HttpResponse->refresh();
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->approveComment($comment);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function disapproveComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->disapproveComment($comment);
-		$this->HttpResponse->refresh();
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->disapproveComment($comment);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function trashComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->trashComment($comment);
-		$this->HttpResponse->refresh();
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->trashComment($comment);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function untrashComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->untrashComment($comment);
-		$this->HttpResponse->refresh();
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->untrashComment($comment);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 
 	public function deleteComment()
 	{
-		$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
-		$this->getService('comments')->deleteComment($comment);
-		$this->HttpResponse->refresh();
+		try {
+			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
+			$this->getService('comments')->deleteComment($comment);
+			$this->HttpResponse->refresh();
+		} catch (\Exception $e) {
+			var_dump('404');
+		}
 	}
 }
