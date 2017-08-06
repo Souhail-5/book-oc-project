@@ -78,6 +78,8 @@ class Router
 
 			if ($this->isCurrentRoute(self::$routes[$route_name])) $this->setCurrentRoute(self::$routes[$route_name]);
 		}
+
+		if (!self::$currentRoute) $this->HttpResponse->redirect(self::genPath('404'));
 	}
 
 	protected function setCurrentRoute(Route $route)
