@@ -25,3 +25,26 @@
 		border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 	}
 }
+
+/* Respnsive container */
+@media (max-width: 992px) {
+	.home-poster-wrap {
+		position: relative;
+	}
+
+	.home-poster-wrap .poster {
+		margin-top: 0 !important;
+	}
+
+	.main-content-wrap .vh-90 {
+		height: auto;
+	}
+
+	.main-content-wrap .vh-80 {
+		height: auto;
+	}
+
+	.main-content-wrap .push {
+		padding-left: 15px;
+	}
+}

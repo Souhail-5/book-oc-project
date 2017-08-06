@@ -42,3 +42,27 @@
 		outline: 0;
 	}
 }
+
+/* Respnsive container */
+@media (max-width: 992px) {
+	.episode-main-content-wrap {
+		position: relative; top: 0px;
+	}
+
+	.episode-main-content header {
+		h1 {
+			font-size: 2.5rem;
+			line-height: 1;
+		}
+
+		.badge {
+			position: relative; top: 0rem;
+			font-size: 1rem;
+		}
+	}
+
+	#input-episode-slug {
+		width: 100% !important;
+		min-width: 100% !important;
+	}
+}

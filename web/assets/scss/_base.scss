@@ -47,6 +47,14 @@ body {
 	height: 100vh;
 }
 
+.vh-90 {
+	height: 90vh;
+}
+
+.vh-80 {
+	height: 80vh;
+}
+
 .vh-66 {
 	height: 66vh;
 }
@@ -138,4 +146,12 @@ a:hover.meta-success, .btn-link:hover.meta-success {
 
 .zi-50 {
 	z-index: 5000;
+}
+
+/* Respnsive container */
+@media (max-width: 992px) {
+	.container {
+		width: 100%;
+		padding: 0;
+	}
 }

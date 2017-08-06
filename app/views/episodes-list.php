@@ -16,15 +16,15 @@
 			</div>
 
 			<?php if ($current_route->name() == 'episodes-trash'): ?>
-				<form class="d-flex justify-content-between" action="" method="POST">
+				<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-between align-items-lg-center" action="" method="POST">
 					<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
-					<button class="btn btn-link p-0 mr-4 meta-success fz-0-95" type="submit" name="action" value="untrash-episode">
+					<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-success fz-0-95" type="submit" name="action" value="untrash-episode">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-arrow-backward wh-0-95">
 							<use xlink:href="/sprite.svg#si-glyph-arrow-backward">
 						</svg>
 						Restaurer
 					</button>
-					<button class="btn btn-link p-0 ml-auto meta-danger fz-0-95" type="submit" name="action" value="delete-episode">
+					<button class="btn btn-link p-0 ml-lg-auto meta-danger fz-0-95" type="submit" name="action" value="delete-episode">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
 							<use xlink:href="/sprite.svg#si-glyph-trash">
 						</svg>
@@ -32,8 +32,8 @@
 					</button>
 				</form>
 			<?php else: ?>
-				<div class="d-flex justify-content-between">
-					<time class="datetime meta" datetime="<?= ($current_route->name() == 'episodes-draft') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
+				<div class="d-flex flex-column flex-lg-row justify-content-between">
+					<time class="datetime meta mb-2 mb-lg-0" datetime="<?= ($current_route->name() == 'episodes-draft') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
 						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 							<use xlink:href="/sprite.svg#si-glyph-calendar-1">
 						</svg>

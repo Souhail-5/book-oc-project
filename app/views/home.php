@@ -1,16 +1,16 @@
 <!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
-	<div class="row no-gutters d-md-flex align-items-md-center vh-100">
-		<div class="home-poster-wrap align-self-md-start col-md-3 offset-md-1">
-			<figure class="poster mt-5">
+	<div class="row no-gutters align-items-md-center vh-100">
+		<div class="home-poster-wrap align-self-md-start col-lg-3">
+			<figure class="poster mt-2 mb-0">
 				<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 			</figure>
 		</div>
-		<div class="main-content-wrap col-md-8 offset-md-3">
+		<div class="main-content-wrap col-lg-10 offset-lg-2">
 			<?php if ($user->isAuthenticated()): ?>
-				<div class="push navbar py-3 pr-3 flex-row justify-content-start align-items-center">
-					<div class="dropdown">
-						<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuEpisodes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<div class="push navbar py-3 pr-3 flex-column flex-lg-row align-items-center">
+					<div class="dropdown mr-lg-4">
+						<button class="btn btn-link px-0 dropdown-toggle" type="button" id="dropdownMenuEpisodes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Épisodes
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuEpisodes">
@@ -20,8 +20,8 @@
 							<a class="dropdown-item" href="<?= $path('episodes-trash') ?>">Corbeille</a>
 						</div>
 					</div>
-					<div class="dropdown">
-						<button class="btn btn-link mr-4 px-0 dropdown-toggle" type="button" id="dropdownMenuComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div class="dropdown mr-lg-4">
+						<button class="btn btn-link px-0 dropdown-toggle" type="button" id="dropdownMenuComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Commentaires
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuComments">
@@ -32,14 +32,14 @@
 							<a class="dropdown-item" href="<?= $path('comments-trash') ?>">Corbeille</a>
 						</div>
 					</div>
-					<div class="ml-auto d-flex align-items-center">
-						<a class="btn btn-secondary no-after" href="<?= $path('episode-new') ?>">
+					<div class="ml-lg-auto mt-3 mt-lg-0 align-self-stretch">
+						<a class="btn btn-secondary w-100 no-after" href="<?= $path('episode-new') ?>">
 							Nouvel épisode
 						</a>
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="vh-66 ov-a">
+			<div class="<?= $user->isAuthenticated() ? 'vh-80' : 'vh-90' ?> ov-a">
 				<nav class="push font-italic breadcrumb bg-white py-4">
 					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
 					<?php if ($current_route->name() == 'root'): ?>
@@ -83,7 +83,7 @@
 						<p class="m-0"><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
-				<div class="push mt-4 pr-5">
+				<div class="push mt-4 pr-1 pr-lg-5">
 					<?= $view ?>
 				</div>
 			</div>

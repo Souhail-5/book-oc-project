@@ -1,10 +1,10 @@
 <!-- To-do: Add some HTML5 semantic elements -->
-<header class="featured-image-main jumbotron jumbotron-fluid py-0">
+<header class="featured-image-main jumbotron jumbotron-fluid mb-0 py-0">
 	<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 </header>
 <div class="container">
-	<div class="episode-main-content-wrap row">
-		<div class="episode-main-content col-md-10 offset-md-1 px-5 py-3">
+	<div class="episode-main-content-wrap row no-gutters">
+		<div class="episode-main-content col-lg-10 offset-lg-1 px-2 px-lg-5 py-3">
 			<article class="episode">
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
@@ -30,14 +30,14 @@
 									<?= $_esc($episode->number()) ?> - <?= $_esc($episode->part()) ?>
 								<?php endif; ?>
 							</div>
-							<h1 class="w-75 mx-auto my-5 episode-title"><?= $episode->title() ?></h1>
+							<h1 class="mx-auto my-3 my-lg-5 episode-title"><?= $episode->title() ?></h1>
 							<?php if ($user->isAuthenticated()): ?>
-								<div class="input-group justify-content-center mb-3">
+								<div class="input-group flex-column flex-lg-row justify-content-center mb-3">
 									<span class="input-group-addon" id="basic-addon-slug">Permalien</span>
 									<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $_esc($episode->slug()) ?>" pattern="[a-z0-9-]+" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
 								</div>
 							<?php endif; ?>
-							<div class="d-flex col-6 offset-3 <?= ($episode->status() == 'publish') ? "justify-content-between" : "justify-content-center" ?>">
+							<div class="d-flex flex-column flex-lg-row col-lg-6 offset-lg-3 <?= ($episode->status() == 'publish') ? "justify-content-between" : "justify-content-center" ?>">
 								<time class="datetime meta" datetime="<?= ($episode->status() != 'publish') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
 									<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 										<use xlink:href="/sprite.svg#si-glyph-calendar-1">
@@ -59,9 +59,9 @@
 							<?= $episode->text() ?>
 						</div>
 						<?php if ($user->isAuthenticated()): ?>
-							<div class="d-flex justify-content-end align-items-center" action="" method="POST">
+							<div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center" action="" method="POST">
 								<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
-								<button class="mr-auto px-0 btn btn-link meta-danger" type="submit" name="action" value="trash-episode">
+								<button class="btn btn-link meta-danger mr-auto px-0 mb-3 mb-lg-0" type="submit" name="action" value="trash-episode">
 									Mettre à la corbeille
 								</button>
 								<?php if ($episode->status() == 'publish'): ?>
@@ -69,7 +69,7 @@
 										Publier les modifications
 									</button>
 								<?php else: ?>
-									<button class="btn btn-link meta-success" type="submit" name="action" value="update-episode">
+									<button class="btn btn-link meta-success mb-3 mb-lg-0" type="submit" name="action" value="update-episode">
 										Enregistrer
 									</button>
 									<button class="btn btn-primary" type="submit" name="action" value="publish-episode">
