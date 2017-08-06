@@ -28,5 +28,6 @@ class HttpResponse
 	public function send($content)
 	{
 		echo $content;
+		exit;
 	}
 }
