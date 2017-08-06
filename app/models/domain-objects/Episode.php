@@ -6,6 +6,8 @@ namespace Model\Object;
 */
 class Episode
 {
+	use \QFram\Helper\Utility;
+
 	protected $id;
 	protected $number;
 	protected $part;
@@ -21,15 +23,6 @@ class Episode
 	public function __construct(array $data = [])
 	{
 		$this->hydrate($data);
-	}
-
-	// To-do: transform it to a Trait
-	public function hydrate(array $data)
-	{
-		foreach ($data as $property => $value) {
-			$method = 'set'.ucfirst($property);
-			if (method_exists($this, $method)) $this->$method($value);
-		}
 	}
 
 	public function id() { return $this->id; }

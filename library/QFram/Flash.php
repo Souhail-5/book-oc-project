@@ -6,6 +6,8 @@ namespace QFram;
 */
 class Flash
 {
+	use \QFram\Helper\Utility;
+
 	protected $type;
 	protected $title;
 	protected $text;
@@ -15,15 +17,6 @@ class Flash
 		$this->type = isset($_SESSION['flash']['type']) ? $_SESSION['flash']['type'] : null;
 		$this->title = isset($_SESSION['flash']['title']) ? $_SESSION['flash']['title'] : null;
 		$this->text = isset($_SESSION['flash']['text']) ? $_SESSION['flash']['text'] : null;
-	}
-
-	// To-do: transform it to a Trait
-	public function hydrate(array $data)
-	{
-		foreach ($data as $property => $value) {
-			$method = 'set'.ucfirst($property);
-			if (method_exists($this, $method)) $this->$method($value);
-		}
 	}
 
 	public function exist()

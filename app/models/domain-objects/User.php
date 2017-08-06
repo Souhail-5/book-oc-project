@@ -6,6 +6,8 @@ namespace Model\Object;
 */
 class User
 {
+	use \QFram\Helper\Utility;
+
 	protected $id;
 	protected $email;
 	protected $displayName;
@@ -14,15 +16,6 @@ class User
 	public function __construct(array $data = [])
 	{
 		$this->hydrate($data);
-	}
-
-	// To-do: transform it to a Trait
-	public function hydrate(array $data)
-	{
-		foreach ($data as $property => $value) {
-			$method = 'set'.ucfirst($property);
-			if (method_exists($this, $method)) $this->$method($value);
-		}
 	}
 
 	public function id() { return $this->id; }
