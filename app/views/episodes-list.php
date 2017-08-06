@@ -7,7 +7,11 @@
 					<span class="badge badge-primary pr-2 py-1">
 						# <?= $episode->number() ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
 					</span>
-					<a href="<?= $path('episode', [$episode->slug()]) ?>"><?= $episode->title() ?></a>
+					<?php if ($current_route->name() != 'episodes-trash'): ?>
+						<a href="<?= $path('episode', [$episode->slug()]) ?>"><?= $episode->title() ?></a>
+					<?php else: ?>
+						<?= $episode->title() ?>
+					<?php endif; ?>
 				</h2>
 			</div>
 

@@ -116,8 +116,9 @@ class Episodes extends Controller
 					'slug' => $this->HttpRequest->GETData('slug'),
 				])
 			);
+			if ($episode_view->episode->trash()) throw new \Exception("Cette épisode n'est pas accessible");
 		} catch (\Exception $e) {
-			$this->HttpResponse->redirect(Router::genPath('403'));
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 
 		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
