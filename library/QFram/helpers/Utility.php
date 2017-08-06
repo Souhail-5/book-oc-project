@@ -21,11 +21,9 @@ trait Utility
 
 	public function _ifPlural($value, $plural, $singular='')
 	{
-		if ($value > 1) {
-			return $plural;
-		}
-		if (!empty($singular)) {
+		if (2 > $value && !empty($singular)) {
 			return $singular;
 		}
+		return $plural;
 	}
 }
