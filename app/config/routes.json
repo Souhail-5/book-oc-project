@@ -72,12 +72,6 @@
 			}
 		}
 	},
-	"latest-episode":
-	{
-		"url": "/dernier-episode",
-		"controller": "episodes",
-		"action": "show-last"
-	},
 	"comments":
 	{
 		"url": "/commentaires",
