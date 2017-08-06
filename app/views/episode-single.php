@@ -38,7 +38,7 @@
 								</div>
 							<?php endif; ?>
 							<div class="d-flex flex-column flex-lg-row col-lg-6 offset-lg-3 <?= ($episode->status() == 'publish') ? "justify-content-between" : "justify-content-center" ?>">
-								<time class="datetime meta" datetime="<?= ($episode->status() != 'publish') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
+								<time class="datetime meta mb-2 mb-lg-0" datetime="<?= ($episode->status() != 'publish') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
 									<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 										<use xlink:href="/sprite.svg#si-glyph-calendar-1">
 									</svg>
