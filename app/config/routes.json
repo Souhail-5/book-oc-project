@@ -11,6 +11,12 @@
 		"controller": "users",
 		"action": "show-404"
 	},
+	"403":
+	{
+		"url": "/403",
+		"controller": "users",
+		"action": "show-403"
+	},
 	"sign-in":
 	{
 		"url": "/se-connecter",
