@@ -5,6 +5,12 @@
 		"controller": "episodes",
 		"action": "show-all-publish"
 	},
+	"404":
+	{
+		"url": "/404",
+		"controller": "users",
+		"action": "show-404"
+	},
 	"sign-in":
 	{
 		"url": "/se-connecter",
