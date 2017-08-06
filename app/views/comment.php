@@ -1,8 +1,8 @@
 <div class="media mb-3">
-	<img class="mr-3" src="<?= "https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email())))."?d=".urlencode('http://texcites.com/wp-content/uploads/2013/04/gravatar_logo.jpg') ?>" alt="Profil image" width="50" height="50">
+	<img class="mr-3" src="<?= "https://www.gravatar.com/avatar/".md5(strtolower(trim($_esc($comment->email()))))."?d=".urlencode('http://texcites.com/wp-content/uploads/2013/04/gravatar_logo.jpg') ?>" alt="Profil image" width="50" height="50">
 	<div class="media-body">
 		<div class="d-flex justify-content-between align-items-center">
-			<h6 class="my-0 fz-1-05"><?= $comment->name() ?></h6>
+			<h6 class="my-0 fz-1-05"><?= $_esc($comment->name()) ?></h6>
 			<form class="d-flex align-items-center" action="" method="POST">
 				<?php if ($comment->approved() == 0 && $current_route->name() == 'episode'): ?>
 					<button class="btn btn-link p-0 ml-4 meta-danger fz-0-95" type="submit" name="action" value="signal-comment">
@@ -20,7 +20,7 @@
 				<?php endif; ?>
 			</form>
 		</div>
-		<p class="mt-3 more"><?= $comment->text() ?></p>
+		<p class="mt-3 more"><?= $_esc($comment->text()) ?></p>
 		<?php if ($user->isAuthenticated()): ?>
 			<form class="d-flex justify-content-end align-items-center" action="" method="POST">
 				<?php if ($current_route->originalController() == 'comments' && $current_route->name() != 'comments-trash'): ?>

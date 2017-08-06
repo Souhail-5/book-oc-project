@@ -26,7 +26,7 @@
 					<h1 class="w-75 mx-auto my-5 episode-title"><?= $_ifNotEmpty($episode->title(), $episode->title(), 'Votre titre') ?></h1>
 					<div class="input-group justify-content-center mb-3">
 						<span class="input-group-addon" id="basic-addon-slug"><?= $_SERVER['SERVER_NAME'] ?>/episode/</span>
-						<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $episode->slug() ?>" pattern="[a-z0-9-]{0,255}" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
+						<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $_esc($episode->slug()) ?>" pattern="[a-z0-9-]{0,255}" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
 					</div>
 				</header>
 				<div class="episode-text" placeholder="test" style="min-height: 150px;">

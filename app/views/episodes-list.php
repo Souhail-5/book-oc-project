@@ -5,7 +5,7 @@
 			<div class="mb-4">
 				<h2 class="h3">
 					<span class="badge badge-primary pr-2 py-1">
-						# <?= $episode->number() ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
+						# <?= $_esc($episode->number()) ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
 					</span>
 					<?php if ($current_route->name() != 'episodes-trash'): ?>
 						<a href="<?= $path('episode', [$episode->slug()]) ?>"><?= $episode->title() ?></a>
