@@ -42,6 +42,7 @@ class Episodes
 		$episode->setPart(!empty($episode->part()) ? $episode->part() : 0);
 		$episode->setTitle(!empty($episode->title()) ? $episode->title() : 'Sans titre');
 		$episode->setSlug(!empty($episode->slug()) ? $episode->slug() : $this->slugify($episode->title()));
+		$episode->setText(!empty($episode->text()) ? $episode->text() : 'Il était une fois ...');
 
 		try {
 			return $this->episodes->add($episode, $publish);
