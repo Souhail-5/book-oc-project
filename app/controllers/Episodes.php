@@ -150,6 +150,8 @@ class Episodes extends Controller
 
 	public function draftEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		$episode = $this->getService('episodes')->setNewEpisode([
 			'number' => $this->HttpRequest->POSTData('episode-number'),
 			'part' => $this->HttpRequest->POSTData('episode-part'),
@@ -182,6 +184,8 @@ class Episodes extends Controller
 
 	public function publishNewEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		$episode = $this->getService('episodes')->setNewEpisode([
 			'number' => $this->HttpRequest->POSTData('episode-number'),
 			'part' => $this->HttpRequest->POSTData('episode-part'),
@@ -214,11 +218,15 @@ class Episodes extends Controller
 
 	public function publishEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		$this->updateEpisode(true);
 	}
 
 	public function updateEpisode($publish=false)
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		$episode = $this->getService('episodes')->setNewEpisode([
 			'id' => $this->HttpRequest->POSTData('episode-id'),
 			'number' => $this->HttpRequest->POSTData('episode-number'),
@@ -250,6 +258,8 @@ class Episodes extends Controller
 
 	public function trashEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		try {
 			$episode = $this->getService('episodes')->getOne(
 				$this->getService('episodes')->setNewEpisode([
@@ -265,6 +275,8 @@ class Episodes extends Controller
 
 	public function untrashEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		try {
 			$episode = $this->getService('episodes')->getOne(
 				$this->getService('episodes')->setNewEpisode([
@@ -280,6 +292,8 @@ class Episodes extends Controller
 
 	public function deleteEpisode()
 	{
+		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
+
 		try {
 			$episode = $this->getService('episodes')->getOne(
 				$this->getService('episodes')->setNewEpisode([
