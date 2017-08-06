@@ -110,13 +110,13 @@ class Comments extends Controller
 			$this->flash->hydrate([
 				'type' => 'info',
 				'title' => 'Notification',
-				'text' => 'Le signalement a bien été pris en compte',
+				'text' => 'Votre signalement a bien été pris en compte.',
 			]);
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
-				'text' => "Le signalement n'a pas pu être effectué",
+				'text' => "Le signalement n'a pas pu être effectué.",
 			]);
 		}
 		$this->HttpResponse->refresh();
@@ -127,6 +127,11 @@ class Comments extends Controller
 		try {
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->approveComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => '',
+				'text' => 'Le commentaire a bien été approuvé. <a href="'.Router::genPath('comments-approved').'">Voir les commentaires approuvés</a>.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
@@ -138,6 +143,11 @@ class Comments extends Controller
 		try {
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->disapproveComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Notification',
+				'text' => 'Le commentaire a bien été désapprouvé.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
@@ -149,6 +159,11 @@ class Comments extends Controller
 		try {
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->trashComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Notification',
+				'text' => 'Le commentaire a bien été mis à la corbeille. <a href="'.Router::genPath('comments-trash').'">Voir</a>.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
@@ -160,6 +175,11 @@ class Comments extends Controller
 		try {
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->untrashComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Notification',
+				'text' => 'Le commentaire a bien été restauré.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
@@ -171,6 +191,11 @@ class Comments extends Controller
 		try {
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->deleteComment($comment);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Notification',
+				'text' => 'Le commentaire a bien été supprimé.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));

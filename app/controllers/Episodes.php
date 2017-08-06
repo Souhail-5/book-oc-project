@@ -169,6 +169,12 @@ class Episodes extends Controller
 				'id' => $episode_id,
 			]));
 
+			$this->flash->hydrate([
+				'type' => 'success',
+				'title' => 'Brouillon enregistré',
+				'text' => 'Un nouveau brouillon a bien été enregistré.',
+			]);
+
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
@@ -203,6 +209,12 @@ class Episodes extends Controller
 				'id' => $episode_id,
 			]));
 
+			$this->flash->hydrate([
+				'type' => 'success',
+				'title' => 'Bravo !',
+				'text' => 'Votre nouvel épisode a été directement publié.',
+			]);
+
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
@@ -220,7 +232,11 @@ class Episodes extends Controller
 	public function publishEpisode()
 	{
 		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
-
+		$this->flash->hydrate([
+			'type' => 'success',
+			'title' => 'Bravo !',
+			'text' => 'Cet épisode est maintenant publié et visible par tous.',
+		]);
 		$this->updateEpisode(true);
 	}
 
@@ -243,6 +259,12 @@ class Episodes extends Controller
 			$this->getService('episodes')->update($episode, $publish);
 
 			$episode = $this->getService('episodes')->getOne($episode);
+
+			if (!$publish) $this->flash->hydrate([
+				'type' => 'info',
+				'title' => 'Modification enregistré',
+				'text' => 'Vos modifications ont bien été prises en compte.',
+			]);
 
 			$this->HttpResponse->redirect(Router::genPath('episode', [$episode->slug()]));
 		} catch (\InvalidArgumentException $e) {
@@ -270,7 +292,12 @@ class Episodes extends Controller
 				])
 			);
 			$this->getService('episodes')->trashOne($episode);
-			$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->slug()]));
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => '',
+				'text' => 'L\'épisode a bien été mis à la corbeille. <a href="'.Router::genPath('episodes-trash').'">Voir la corbeille</a>.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('episodes'));
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
 		}
@@ -287,6 +314,11 @@ class Episodes extends Controller
 				])
 			);
 			$this->getService('episodes')->untrashOne($episode);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => '',
+				'text' => 'L\'épisode a bien été restauré.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
@@ -304,6 +336,11 @@ class Episodes extends Controller
 				])
 			);
 			$this->getService('episodes')->deleteOne($episode);
+			$this->flash->hydrate([
+				'type' => 'info',
+				'title' => '',
+				'text' => 'L\'épisode a été définitivement supprimé.',
+			]);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
