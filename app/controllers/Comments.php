@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 
+use \QFram\Router;
 use \QFram\Controller;
 
 /**
@@ -128,7 +129,10 @@ class Comments extends Controller
 			$this->getService('comments')->approveComment($comment);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -139,7 +143,10 @@ class Comments extends Controller
 			$this->getService('comments')->disapproveComment($comment);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -150,7 +157,10 @@ class Comments extends Controller
 			$this->getService('comments')->trashComment($comment);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -161,7 +171,10 @@ class Comments extends Controller
 			$this->getService('comments')->untrashComment($comment);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -172,7 +185,10 @@ class Comments extends Controller
 			$this->getService('comments')->deleteComment($comment);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 }
