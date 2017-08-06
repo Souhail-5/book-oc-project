@@ -1,4 +1,3 @@
-<!-- To-do: Add some HTML5 semantic elements -->
 <header class="featured-image-main jumbotron jumbotron-fluid mb-0 py-0">
 	<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 </header>

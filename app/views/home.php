@@ -1,4 +1,3 @@
-<!-- To-do: Add some HTML5 semantic elements -->
 <div class="container">
 	<div class="row no-gutters align-items-md-center vh-100">
 		<div class="home-poster-wrap align-self-md-start col-lg-3">
@@ -8,7 +7,7 @@
 		</div>
 		<div class="main-content-wrap col-lg-10 offset-lg-2">
 			<?php if ($user->isAuthenticated()): ?>
-				<div class="push navbar py-3 pr-3 flex-column flex-lg-row align-items-center">
+				<nav class="push navbar py-3 pr-3 flex-column flex-lg-row align-items-center">
 					<div class="dropdown mr-lg-4">
 						<button class="btn btn-link px-0 dropdown-toggle" type="button" id="dropdownMenuEpisodes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Épisodes
@@ -37,7 +36,7 @@
 							Nouvel épisode
 						</a>
 					</div>
-				</div>
+				</nav>
 			<?php endif; ?>
 			<div class="<?= $user->isAuthenticated() ? 'vh-80' : 'vh-90' ?> ov-a">
 				<nav class="push font-italic breadcrumb bg-white py-4">
@@ -83,9 +82,9 @@
 						<p class="m-0"><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
-				<div class="push mt-4 pr-1 pr-lg-5">
+				<section class="push mt-4 pr-1 pr-lg-5">
 					<?= $view ?>
-				</div>
+				</section>
 			</div>
 		</div>
 	</div>

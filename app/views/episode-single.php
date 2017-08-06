@@ -1,15 +1,16 @@
-<!-- To-do: Add some HTML5 semantic elements -->
 <header class="featured-image-main jumbotron jumbotron-fluid mb-0 py-0">
 	<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 </header>
 <div class="container">
-	<div class="episode-main-content-wrap row no-gutters">
+	<section class="episode-main-content-wrap row no-gutters">
 		<div class="episode-main-content col-lg-10 offset-lg-1 px-2 px-lg-5 py-3">
-			<article class="episode">
+			<nav>
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item active"><?= $episode->title() ?></li>
 				</ol>
+			</nav>
+			<article class="episode">
 				<?php if ($flash->exist()): ?>
 					<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
 						<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
@@ -83,19 +84,19 @@
 				<?php endif; ?>
 			</article>
 			<?php if (!empty($new_comment_form)): ?>
-				<div class="mt-5">
+				<aside class="mt-5">
 					<h4>Un commentaire ?</h4>
 					<hr>
 					<?= $new_comment_form ?>
-				</div>
+				</aside>
 			<?php endif; ?>
 			<?php if (!empty($comments)): ?>
-				<div class="mt-5">
+				<aside class="mt-5">
 					<h4 id="anchor-comments">Commentaires</h4>
 					<hr>
 					<?= $comments ?>
-				</div>
+				</aside>
 			<?php endif; ?>
 		</div>
-	</div>
+	</section>
 </div>
