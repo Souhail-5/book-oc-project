@@ -1,4 +1,4 @@
-<div class="media mb-3">
+<div class="media mb-4">
 	<img class="mr-3" src="<?= "https://www.gravatar.com/avatar/".md5(strtolower(trim($_esc($comment->email()))))."?d=".urlencode('http://texcites.com/wp-content/uploads/2013/04/gravatar_logo.jpg') ?>" alt="Profil image" width="50" height="50">
 	<div class="media-body">
 		<div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
