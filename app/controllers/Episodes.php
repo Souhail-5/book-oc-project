@@ -117,7 +117,10 @@ class Episodes extends Controller
 				])
 			);
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 
 		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
@@ -176,7 +179,10 @@ class Episodes extends Controller
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -208,7 +214,10 @@ class Episodes extends Controller
 			$this->getComponent('episode-new')->episode = $episode;
 			$this->renderNewEpisodePage();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -244,7 +253,10 @@ class Episodes extends Controller
 
 			$this->renderSinglePage();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -259,7 +271,10 @@ class Episodes extends Controller
 			$this->getService('episodes')->trashOne($episode);
 			$this->HttpResponse->redirect(Router::genPath('episodes-trash', [$episode->slug()]));
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -274,7 +289,10 @@ class Episodes extends Controller
 			$this->getService('episodes')->untrashOne($episode);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -289,7 +307,10 @@ class Episodes extends Controller
 			$this->getService('episodes')->deleteOne($episode);
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
@@ -313,7 +334,10 @@ class Episodes extends Controller
 			]);
 			$this->showOne();
 		} catch (\Exception $e) {
-			var_dump('404');
+			$this->flash->hydrate([
+				'text' => 'Vous rencontrez cette page car vous avez effectué une action non acceptée.',
+			]);
+			$this->HttpResponse->redirect(Router::genPath('404'));
 		}
 	}
 
