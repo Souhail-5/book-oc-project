@@ -56,7 +56,7 @@ class Episodes
 	{
 		$q = $this->db->prepare('
 			UPDATE episodes
-			SET number = :number, part=:part, title=:title, text=:text, nbr_comments=:nbr_comments, slug=:slug, status=:status, trash=:trash
+			SET number = :number, part=:part, title=:title, text=:text, modification_datetime=NOW(), nbr_comments=:nbr_comments, slug=:slug, status=:status, trash=:trash
 			WHERE id=:id
 		');
 

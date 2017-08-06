@@ -69,7 +69,7 @@
 										Publier les modifications
 									</button>
 								<?php else: ?>
-									<button class="btn btn-outline-success mr-3" type="submit" name="action" value="update-episode">
+									<button class="btn btn-link meta-success" type="submit" name="action" value="update-episode">
 										Enregistrer
 									</button>
 									<button class="btn btn-primary" type="submit" name="action" value="publish-episode">

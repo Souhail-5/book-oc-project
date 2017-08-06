@@ -227,16 +227,18 @@ class Episodes extends Controller
 	{
 		if (!$this->user->isAuthenticated()) $this->HttpResponse->redirect(Router::genPath('403'));
 
-		$episode = $this->getService('episodes')->setNewEpisode([
-			'id' => $this->HttpRequest->POSTData('episode-id'),
-			'number' => $this->HttpRequest->POSTData('episode-number'),
-			'part' => $this->HttpRequest->POSTData('episode-part'),
-			'slug' => $this->HttpRequest->POSTData('episode-slug'),
-			'title' => $this->HttpRequest->POSTData('mce_0'),
-			'text' => $this->HttpRequest->POSTData('mce_1'),
-		]);
-
 		try {
+			$episode = $this->getService('episodes')->getOne(
+				$this->getService('episodes')->setNewEpisode([
+					'id' => $this->HttpRequest->POSTData('episode-id'),
+				])
+			);
+			$episode->setNumber($this->HttpRequest->POSTData('episode-number'));
+			$episode->setPart($this->HttpRequest->POSTData('episode-part'));
+			$episode->setSlug($this->HttpRequest->POSTData('episode-slug'));
+			$episode->setTitle($this->HttpRequest->POSTData('mce_0'));
+			$episode->setText($this->HttpRequest->POSTData('mce_1'));
+
 			$this->getService('episodes')->update($episode, $publish);
 
 			$episode = $this->getService('episodes')->getOne($episode);
