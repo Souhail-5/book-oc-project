@@ -49,7 +49,7 @@ class Users extends Controller
 
 	public function show404()
 	{
-		// $this->HttpResponse->addHeader($_SERVER["SERVER_PROTOCOL"].' 404 Not Found');
+		$this->HttpResponse->addHeader($_SERVER["SERVER_PROTOCOL"].' 404 Not Found');
 		$this->page->title = "Billet simple pour l'Alaska | Page non trouvée";
 		$this->page->bodyId = "not-found-404";
 		$this->page->view = $this->getComponent('404')->render();
