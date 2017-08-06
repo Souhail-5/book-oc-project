@@ -3,6 +3,11 @@ namespace QFram\Helper;
 
 trait Formater
 {
+	public function escape($string)
+	{
+		return htmlspecialchars($string);
+	}
+
 	public function slugify($string)
 	{
 		$separator = '-';

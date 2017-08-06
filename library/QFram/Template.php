@@ -8,6 +8,7 @@ use QFram\Router;
 */
 abstract class Template
 {
+	use Helper\Formater;
 	use Helper\Utility;
 
 	protected $view;
@@ -38,6 +39,10 @@ abstract class Template
 
 			$path = function($route_name, $vars=[]) {
 				return Router::genPath($route_name, $vars);
+			};
+
+			$_esc = function($string) {
+				return $this->escape($string);
 			};
 
 			$_ifNotEmpty = function($test, $notEmpty, $empty='') {
