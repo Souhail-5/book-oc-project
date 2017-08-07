@@ -107,9 +107,14 @@ class Episodes
 		return $this->episodes->getAllPublish($page, $limit);
 	}
 
-	public function getAllDraft()
+	public function countAllDraft()
 	{
-		return $this->episodes->getAllDraft();
+		return $this->episodes->countAllDraft();
+	}
+
+	public function getAllDraft($page, $limit)
+	{
+		return $this->episodes->getAllDraft($page, $limit);
 	}
 
 	public function getAllTrash()

@@ -48,6 +48,19 @@
 			}
 		}
 	},
+	"episodes-draft-page":
+	{
+		"url": "/episodes/brouillon/page-([0-9]{1,5})",
+		"controller": "episodes",
+		"action": "show-all-draft",
+		"varsNames": ["page"],
+		"before": {
+			"auth": {
+				"controller": "users",
+				"action": "is-authenticated"
+			}
+		}
+	},
 	"episodes-trash":
 	{
 		"url": "/episodes/corbeille",

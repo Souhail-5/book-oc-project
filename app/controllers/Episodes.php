@@ -94,8 +94,12 @@ class Episodes extends Controller
 
 	public function showAllDraft()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllDraft();
+
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllDraft();
+		$episodes_view->episodes = $this->getService('episodes')->getAllDraft($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
 
