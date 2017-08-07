@@ -19,6 +19,7 @@ class Episodes extends Controller
 		$this->initComponents([
 			'home' => 'home',
 			'episodes-list' => 'episodes-list',
+			'pagination' => 'pagination',
 			'episode-single' => 'episode-single',
 			'new-comment-form' => 'new-comment-form',
 			'episode-new' => 'episode-new',
@@ -79,8 +80,12 @@ class Episodes extends Controller
 
 	public function showAllPublish()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 10;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllPublish();
+
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllPublish();
+		$episodes_view->episodes = $this->getService('episodes')->getAllPublish($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
 

@@ -29,6 +29,13 @@
 		"controller": "episodes",
 		"action": "show-all-publish"
 	},
+	"episodes-page":
+	{
+		"url": "/episodes/page-([0-9]{1,5})",
+		"controller": "episodes",
+		"action": "show-all-publish",
+		"varsNames": ["page"]
+	},
 	"episodes-draft":
 	{
 		"url": "/episodes/brouillon",

@@ -53,6 +53,7 @@
 			<?php endforeach; ?>
 		</ul>
 	</nav>
+	<?= $pagination ?>
 <?php else: ?>
 	<p>
 		Aucun épisode.

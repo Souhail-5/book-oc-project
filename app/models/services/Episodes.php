@@ -97,9 +97,14 @@ class Episodes
 		$this->episodes->deleteOne($episode);
 	}
 
-	public function getAllPublish()
+	public function countAllPublish()
 	{
-		return $this->episodes->getAllPublish();
+		return $this->episodes->countAllPublish();
+	}
+
+	public function getAllPublish($page, $limit)
+	{
+		return $this->episodes->getAllPublish($page, $limit);
 	}
 
 	public function getAllDraft()
