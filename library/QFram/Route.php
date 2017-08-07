@@ -79,7 +79,7 @@ class Route
 		if (
 			preg_match('`^'.$this->urlPattern().'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches) &&
 			(
-				(int) count($this->varsNames()) == (int) (count($matches)-1)
+				(int) count($this->varsNames()) >= (int) (count($matches)-1)
 			)
 		) {
 			$vars = [];
@@ -97,7 +97,7 @@ class Route
 		if (
 			preg_match('`^'.$this->urlPattern().'(?:\\?[a-z0-9-&=]{3,})?$`', $url, $matches) &&
 			(
-				(int) count($this->varsNames()) == (int) (count($matches)-1)
+				(int) count($this->varsNames()) >= (int) (count($matches)-1)
 			)
 		) {
 			return true;

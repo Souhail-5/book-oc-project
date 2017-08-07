@@ -25,32 +25,14 @@
 	},
 	"episodes":
 	{
-		"url": "/episodes",
-		"controller": "episodes",
-		"action": "show-all-publish"
-	},
-	"episodes-page":
-	{
-		"url": "/episodes/page-([0-9]{1,5})",
+		"url": "/episodes(?:/page-([0-9]{1,5}))?",
 		"controller": "episodes",
 		"action": "show-all-publish",
 		"varsNames": ["page"]
 	},
 	"episodes-draft":
 	{
-		"url": "/episodes/brouillon",
-		"controller": "episodes",
-		"action": "show-all-draft",
-		"before": {
-			"auth": {
-				"controller": "users",
-				"action": "is-authenticated"
-			}
-		}
-	},
-	"episodes-draft-page":
-	{
-		"url": "/episodes/brouillon/page-([0-9]{1,5})",
+		"url": "/episodes/brouillon(?:/page-([0-9]{1,5}))?",
 		"controller": "episodes",
 		"action": "show-all-draft",
 		"varsNames": ["page"],
