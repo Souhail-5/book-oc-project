@@ -50,6 +50,12 @@ class Comments
 	public function signalComment(Object\Comment $comment)
 	{
 		if ($comment->approved() == 0) {
+			$signals_service = new Signals;
+			$signal = $signals_service->setNewSignal([
+				'commentId' => $comment->id(),
+			]);
+			if ($signals_service->hasAlreadySignaledComment($signal)) throw new \InvalidArgumentException('Déjà signalé.');
+			$signals_service->add($signal);
 			$comment->setNbrSignals($comment->nbrSignals()+1);
 			$this->comments->update($comment);
 		}

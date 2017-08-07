@@ -108,9 +108,15 @@ class Comments extends Controller
 			$comment = $this->getService('comments')->getCommentById($this->HttpRequest->POSTData('comment-id'));
 			$this->getService('comments')->signalComment($comment);
 			$this->flash->hydrate([
+				'type' => 'success',
+				'title' => 'Merci',
+				'text' => 'Votre signalement a bien été pris en compte. Ce commentaire sera modéré dès que possible.',
+			]);
+		} catch (\InvalidArgumentException $e) {
+			$this->flash->hydrate([
 				'type' => 'info',
-				'title' => 'Notification',
-				'text' => 'Votre signalement a bien été pris en compte.',
+				'title' => 'Oups !',
+				'text' => "Vous avez déjà signalé ce commentaire. Il sera modéré dès que possible.",
 			]);
 		} catch (\Exception $e) {
 			$this->flash->hydrate([
