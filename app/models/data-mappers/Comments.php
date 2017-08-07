@@ -106,7 +106,7 @@ class Comments
 			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
 			FROM comments
 			WHERE approved=:approved AND trash=:trash
-			ORDER BY publish_datetime ASC
+			ORDER BY modification_datetime DESC
 		');
 
 		$q->bindValue(':approved', 1);
