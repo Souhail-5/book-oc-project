@@ -14,6 +14,7 @@ class Comment
 	protected $email;
 	protected $text;
 	protected $publishDatetime;
+	protected $modificationDatetime;
 	protected $nbrSignals;
 	protected $status;
 	protected $approved;
@@ -30,6 +31,7 @@ class Comment
 	public function email() { return $this->email; }
 	public function text() { return $this->text; }
 	public function publishDatetime() { return $this->publishDatetime; }
+	public function modificationDatetime() { return $this->modificationDatetime; }
 	public function nbrSignals() { return $this->nbrSignals; }
 	public function status() { return $this->status; }
 	public function approved() { return $this->approved; }
@@ -63,6 +65,11 @@ class Comment
 	public function setPublishDatetime($value)
 	{
 		$this->publishDatetime = $value;
+	}
+
+	public function setModificationDatetime($value)
+	{
+		$this->modificationDatetime = $value;
 	}
 
 	public function setNbrSignals($value)
