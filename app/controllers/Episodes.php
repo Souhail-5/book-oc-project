@@ -394,6 +394,11 @@ class Episodes extends Controller
 			if (!json_decode(file_get_contents($recaptcha_api_url), true)['success']) throw new \InvalidArgumentException("Votre commentaire n'a pas été validé. Vous devez d'abord valider le catpcha.");
 			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
 			$this->getComponent('new-comment-form')->comment = null;
+			$this->flash->hydrate([
+				'type' => 'success',
+				'title' => 'Merci !',
+				'text' => "Votre commentaire a bien été ajouté.",
+			]);
 			$this->showOne();
 		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
