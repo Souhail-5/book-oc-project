@@ -25,7 +25,7 @@
 				<?php endif; ?>
 			</form>
 		</div>
-		<p class="mt-3 more"><?= $_esc($comment->text()) ?></p>
+		<p class="mt-3 more"><?= nl2br($_esc($comment->text())) ?></p>
 		<?php if ($user->isAuthenticated()): ?>
 			<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-end align-items-lg-center" action="" method="POST">
 				<?php if ($current_route->originalController() == 'comments' && $current_route->name() != 'comments-trash'): ?>

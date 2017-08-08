@@ -29,7 +29,7 @@ class Comments
 			$error[] = "Le nom ne doit comporter que des lettres et espaces. Sa longueur doit être comprise entre 5 et 50 caractères.";
 		if (!filter_var($comment->email(), FILTER_VALIDATE_EMAIL))
 			$error[] = "L'email doit être sous la forme de mon@exemple.com";
-		if (!preg_match('#^(.){1,1400}$#', $comment->text()))
+		if (!preg_match('#^(.){1,1400}$#m', $comment->text()))
 			$error[] = "La longueur du commentaire ne doit pas dépasser 1400 caractères.";
 
 		if (!empty($error)) throw new \InvalidArgumentException(implode('<br>', $error));
