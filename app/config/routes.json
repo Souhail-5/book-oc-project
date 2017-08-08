@@ -77,9 +77,10 @@
 	},
 	"comments":
 	{
-		"url": "/commentaires",
+		"url": "/commentaires(?:/page-([0-9]{1,5}))?",
 		"controller": "comments",
 		"action": "show",
+		"varsNames": ["page"],
 		"before": {
 			"auth": {
 				"controller": "users",

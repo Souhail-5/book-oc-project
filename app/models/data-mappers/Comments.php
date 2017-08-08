@@ -63,7 +63,23 @@ class Comments
 		$q->execute();
 	}
 
-	public function getPublish()
+	public function countPublish()
+	{
+		$q = $this->db->prepare('
+			SELECT COUNT(id)
+			FROM comments
+			WHERE status=:status AND trash=:trash
+		');
+
+		$q->bindValue(':status', 'publish');
+		$q->bindValue(':trash', 0);
+
+		$q->execute();
+
+		return $q->fetch()[0];
+	}
+
+	public function getPublish($page, $limit)
 	{
 		$comments = [];
 
@@ -72,10 +88,13 @@ class Comments
 			FROM comments
 			WHERE status=:status AND trash=:trash
 			ORDER BY publish_datetime ASC
+			LIMIT :limit OFFSET :offset
 		');
 
 		$q->bindValue(':status', 'publish');
 		$q->bindValue(':trash', 0);
+		$q->bindValue(':limit', (int) $limit, \PDO::PARAM_INT);
+		$q->bindValue(':offset', max((((int) $page * $limit) - $limit), 0), \PDO::PARAM_INT);
 
 		$q->execute();
 

@@ -98,9 +98,14 @@ class Comments
 		$this->comments->deleteComment($comment);
 	}
 
-	public function getPublish()
+	public function countPublish()
 	{
-		return $this->comments->getPublish();
+		return $this->comments->countPublish();
+	}
+
+	public function getPublish($page, $limit)
+	{
+		return $this->comments->getPublish($page, $limit);
 	}
 
 	public function getApproved()
