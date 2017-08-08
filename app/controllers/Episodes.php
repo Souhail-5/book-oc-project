@@ -9,7 +9,7 @@ use \QFram\Controller;
 */
 class Episodes extends Controller
 {
-	const ELEMENTS_LIMIT_BY_PAGE = 10;
+	const NBR_ELEMENTS_PER_PAGE = 10;
 
 	protected function init()
 	{
@@ -82,15 +82,15 @@ class Episodes extends Controller
 
 	public function showAllPublish()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllPublish();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllPublish($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllPublish($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
@@ -100,15 +100,15 @@ class Episodes extends Controller
 
 	public function showAllDraft()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllDraft();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllDraft($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllDraft($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
@@ -118,15 +118,15 @@ class Episodes extends Controller
 
 	public function showAllTrash()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllTrash();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllTrash($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllTrash($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();

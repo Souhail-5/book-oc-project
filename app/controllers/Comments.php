@@ -9,7 +9,7 @@ use \QFram\Controller;
 */
 class Comments extends Controller
 {
-	const ELEMENTS_LIMIT_BY_PAGE = 10;
+	const NBR_ELEMENTS_PER_PAGE = 10;
 
 	protected function init()
 	{
@@ -35,15 +35,15 @@ class Comments extends Controller
 
 	public function show()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countPublish();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getPublish($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$comments_list = $this->getService('comments')->getPublish($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -62,15 +62,15 @@ class Comments extends Controller
 
 	public function showSignaled()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countSignaled();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getSignaled($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$comments_list = $this->getService('comments')->getSignaled($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -89,15 +89,15 @@ class Comments extends Controller
 
 	public function showApproved()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countApproved();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getApproved($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$comments_list = $this->getService('comments')->getApproved($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -116,15 +116,15 @@ class Comments extends Controller
 
 	public function showTrash()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
+		$this->getComponent('pagination')->nbr_elements_per_page = self::NBR_ELEMENTS_PER_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countTrash();
 		$nbr_page = $this->HttpRequest->GETData('page');
-		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->nbr_elements_per_page);
 		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
 		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getTrash($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
+		$comments_list = $this->getService('comments')->getTrash($nbr_page, $this->getComponent('pagination')->nbr_elements_per_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
