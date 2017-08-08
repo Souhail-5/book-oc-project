@@ -40,14 +40,19 @@ class Router
 
 	public static function genPath($route_name, array $vars=[])
 	{
+		$hasVars = !empty($vars);
 		if (!empty(self::$routes[$route_name])) {
 			return preg_replace_callback_array(
 				[
-					'`\([^\)]*\)(?!\?)`U' => function($matches) use(&$vars) {
+					'`\((?!\?:)[^\)]*\)(?!\?)`U' => function($matches) use(&$vars) {
 						return array_shift($vars);
 					},
-					'`\([^\)]*\)\?`U' => function($matches) {
-						return "";
+					'`\((?!\?:)[^\)]*\)\?`U' => function($matches) {
+						return '';
+					},
+					'`\((?=\?:)[^\)]*\)\?`U' => function($matches) use($hasVars) {
+						if ($hasVars) return implode(str_replace(['(?:', ')?'], '', $matches));
+						return '';
 					}
 				],
 				self::$routes[$route_name]->urlPattern()
