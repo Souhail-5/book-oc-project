@@ -9,6 +9,8 @@ use \QFram\Controller;
 */
 class Comments extends Controller
 {
+	const ELEMENTS_LIMIT_BY_PAGE = 10;
+
 	protected function init()
 	{
 		$this->initServices([
@@ -33,7 +35,7 @@ class Comments extends Controller
 
 	public function show()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countPublish();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
@@ -60,7 +62,7 @@ class Comments extends Controller
 
 	public function showSignaled()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countSignaled();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
@@ -87,7 +89,7 @@ class Comments extends Controller
 
 	public function showApproved()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countApproved();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
@@ -114,7 +116,7 @@ class Comments extends Controller
 
 	public function showTrash()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countTrash();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);

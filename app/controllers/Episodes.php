@@ -9,6 +9,8 @@ use \QFram\Controller;
 */
 class Episodes extends Controller
 {
+	const ELEMENTS_LIMIT_BY_PAGE = 10;
+
 	protected function init()
 	{
 		$this->initServices([
@@ -80,7 +82,7 @@ class Episodes extends Controller
 
 	public function showAllPublish()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 10;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllPublish();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
@@ -98,7 +100,7 @@ class Episodes extends Controller
 
 	public function showAllDraft()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllDraft();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
@@ -116,7 +118,7 @@ class Episodes extends Controller
 
 	public function showAllTrash()
 	{
-		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->elements_limit_by_page = self::ELEMENTS_LIMIT_BY_PAGE;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllTrash();
 		$nbr_page = $this->HttpRequest->GETData('page');
 		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
