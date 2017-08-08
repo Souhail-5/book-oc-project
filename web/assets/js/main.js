@@ -6,7 +6,7 @@ $(document).ready(function() {
 	});
 
 	var current_textarea = $('#comment-textarea').val();
-	$('#text-length-help').text(current_textarea.length);
+	if (typeof current_textarea !== "undefined") $('#text-length-help').text(current_textarea.length);
 	$('#comment-textarea').on('input', function() {
 	    $('#text-length-help').text(this.value.length);
 	});
