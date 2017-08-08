@@ -27,6 +27,9 @@ class Episodes extends Controller
 			'episode-new' => 'episode-new',
 		]);
 		if ($this->user->isAuthenticated()) {
+			if (Router::currentRoute()->name() == 'episode' || Router::currentRoute()->name() == 'episode-new') {
+				$this->page->addScripts(['<script src="/assets/js/autosize-input.js"></script>']);
+			}
 			$this->page->addScripts([
 				'<script src="https://www.google.com/recaptcha/api.js"></script>',
 				'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
