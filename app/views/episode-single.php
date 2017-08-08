@@ -28,7 +28,7 @@
 									<span class="mr-1">-</span>
 									<input class="ghost text-white mw-100" type="text" name="episode-part" id="input-episode-part" value="<?= $_esc($episode->part()) ?>" pattern="[0-9]+" placeholder="partie" size="1">
 								<?php else: ?>
-									<?= $_esc($episode->number()) ?> - <?= $_esc($episode->part()) ?>
+									<?= $_esc($episode->number()) ?><?= $_ifNotEmpty($episode->part(), " - {$_esc($episode->part())}") ?>
 								<?php endif; ?>
 							</div>
 							<h1 class="mx-auto my-3 my-lg-5 episode-title"><?= $episode->title() ?></h1>
