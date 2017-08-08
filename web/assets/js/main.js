@@ -43,6 +43,7 @@ function transformDate(string, format) {
 }
 
 function truncateText() {
+	var showLineBreak = 4;
 	var showChar = 280;
 	var ellipsestext = "...";
 	var moretext = "Voir plus";
@@ -51,11 +52,17 @@ function truncateText() {
 
 	$('.more').each(function() {
 		var content = $(this).html();
+		var content_splitted = content.split(/\r\n|\r|\n/);
+		var nbr_content_lines = content_splitted.length;
 
-		if(content.length > showChar) {
-
-			var c = content.substr(0, showChar);
-			var h = content.substr(showChar, content.length - showChar);
+		if(content.length > showChar || nbr_content_lines > showLineBreak) {
+			if (nbr_content_lines > showLineBreak) {
+				var c = content_splitted.slice(0, showLineBreak).join('');
+				var h = content_splitted.slice(showLineBreak).join('');
+			} else {
+				var c = content.substr(0, showChar);
+				var h = content.substr(showChar, content.length - showChar);
+			}
 
 			var html = c + '<span class="moreellipses">' + ellipsestext + ' </span><span class="morecontent"><span>' + h + '</span> <a href="" class="morelink">' + moretext + '</a></span>';
 
