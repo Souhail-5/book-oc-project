@@ -255,6 +255,7 @@ class Episodes
 		$where = 'slug=:slug';
 
 		if (!empty($episode->id())) $where = 'id=:id';
+		if (!empty($episode->status())) $where .= ' AND status=:status';
 
 		$q = $this->db->prepare("
 			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
@@ -268,6 +269,7 @@ class Episodes
 		} else {
 			$q->bindValue(':slug', $episode->slug());
 		}
+		if (!empty($episode->status())) $q->bindValue(':status', $episode->status());
 
 		$q->execute();
 
