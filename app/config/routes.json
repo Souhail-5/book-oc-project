@@ -90,9 +90,10 @@
 	},
 	"comments-approved":
 	{
-		"url": "/commentaires/approuves",
+		"url": "/commentaires/approuves(?:/page-([0-9]{1,5}))?",
 		"controller": "comments",
 		"action": "show-approved",
+		"varsNames": ["page"],
 		"before": {
 			"auth": {
 				"controller": "users",
@@ -102,9 +103,10 @@
 	},
 	"comments-signaled":
 	{
-		"url": "/commentaires/signales",
+		"url": "/commentaires/signales(?:/page-([0-9]{1,5}))?",
 		"controller": "comments",
 		"action": "show-signaled",
+		"varsNames": ["page"],
 		"before": {
 			"auth": {
 				"controller": "users",
@@ -114,9 +116,10 @@
 	},
 	"comments-trash":
 	{
-		"url": "/commentaires/corbeille",
+		"url": "/commentaires/corbeille(?:/page-([0-9]{1,5}))?",
 		"controller": "comments",
 		"action": "show-trash",
+		"varsNames": ["page"],
 		"before": {
 			"auth": {
 				"controller": "users",

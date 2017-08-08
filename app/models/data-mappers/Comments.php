@@ -117,7 +117,23 @@ class Comments
 		return $comments;
 	}
 
-	public function getApproved()
+	public function countApproved()
+	{
+		$q = $this->db->prepare('
+			SELECT COUNT(id)
+			FROM comments
+			WHERE approved=:approved AND trash=:trash
+		');
+
+		$q->bindValue(':approved', 1);
+		$q->bindValue(':trash', 0);
+
+		$q->execute();
+
+		return $q->fetch()[0];
+	}
+
+	public function getApproved($page, $limit)
 	{
 		$comments = [];
 
@@ -126,10 +142,13 @@ class Comments
 			FROM comments
 			WHERE approved=:approved AND trash=:trash
 			ORDER BY modification_datetime DESC
+			LIMIT :limit OFFSET :offset
 		');
 
 		$q->bindValue(':approved', 1);
 		$q->bindValue(':trash', 0);
+		$q->bindValue(':limit', (int) $limit, \PDO::PARAM_INT);
+		$q->bindValue(':offset', max((((int) $page * $limit) - $limit), 0), \PDO::PARAM_INT);
 
 		$q->execute();
 
@@ -152,15 +171,12 @@ class Comments
 		return $comments;
 	}
 
-	public function getSignaled()
+	public function countSignaled()
 	{
-		$comments = [];
-
 		$q = $this->db->prepare('
-			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
+			SELECT COUNT(id)
 			FROM comments
 			WHERE nbr_signals>:nbr_signals AND approved=:approved AND trash=:trash
-			ORDER BY publish_datetime ASC
 		');
 
 		$q->bindValue(':nbr_signals', 0);
@@ -169,6 +185,29 @@ class Comments
 
 		$q->execute();
 
+		return $q->fetch()[0];
+	}
+
+	public function getSignaled($page, $limit)
+	{
+		$comments = [];
+
+		$q = $this->db->prepare('
+			SELECT id, episode_id, name, email, text, publish_datetime, nbr_signals, status, approved, trash
+			FROM comments
+			WHERE nbr_signals>:nbr_signals AND approved=:approved AND trash=:trash
+			ORDER BY publish_datetime ASC
+			LIMIT :limit OFFSET :offset
+		');
+
+		$q->bindValue(':nbr_signals', 0);
+		$q->bindValue(':approved', 0);
+		$q->bindValue(':trash', 0);
+		$q->bindValue(':limit', (int) $limit, \PDO::PARAM_INT);
+		$q->bindValue(':offset', max((((int) $page * $limit) - $limit), 0), \PDO::PARAM_INT);
+
+		$q->execute();
+
 		while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
 			$map = [
 				'id' => $data['id'],
@@ -188,7 +227,22 @@ class Comments
 		return $comments;
 	}
 
-	public function getTrash()
+	public function countTrash()
+	{
+		$q = $this->db->prepare('
+			SELECT COUNT(id)
+			FROM comments
+			WHERE trash=:trash
+		');
+
+		$q->bindValue(':trash', 1);
+
+		$q->execute();
+
+		return $q->fetch()[0];
+	}
+
+	public function getTrash($page, $limit)
 	{
 		$comments = [];
 
@@ -197,9 +251,12 @@ class Comments
 			FROM comments
 			WHERE trash=:trash
 			ORDER BY publish_datetime ASC
+			LIMIT :limit OFFSET :offset
 		');
 
 		$q->bindValue(':trash', 1);
+		$q->bindValue(':limit', (int) $limit, \PDO::PARAM_INT);
+		$q->bindValue(':offset', max((((int) $page * $limit) - $limit), 0), \PDO::PARAM_INT);
 
 		$q->execute();
 

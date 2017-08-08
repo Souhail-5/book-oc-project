@@ -108,19 +108,34 @@ class Comments
 		return $this->comments->getPublish($page, $limit);
 	}
 
-	public function getApproved()
+	public function countApproved()
 	{
-		return $this->comments->getApproved();
+		return $this->comments->countApproved();
 	}
 
-	public function getSignaled()
+	public function getApproved($page, $limit)
 	{
-		return $this->comments->getSignaled();
+		return $this->comments->getApproved($page, $limit);
 	}
 
-	public function getTrash()
+	public function countSignaled()
 	{
-		return $this->comments->getTrash();
+		return $this->comments->countSignaled();
+	}
+
+	public function getSignaled($page, $limit)
+	{
+		return $this->comments->getSignaled($page, $limit);
+	}
+
+	public function countTrash()
+	{
+		return $this->comments->countTrash();
+	}
+
+	public function getTrash($page, $limit)
+	{
+		return $this->comments->getTrash($page, $limit);
 	}
 
 	public function getCommentsByEpisodeId($episode_id)

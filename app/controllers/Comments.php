@@ -60,8 +60,15 @@ class Comments extends Controller
 
 	public function showSignaled()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countSignaled();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
+
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getSignaled();
+		$comments_list = $this->getService('comments')->getSignaled($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -70,6 +77,8 @@ class Comments extends Controller
 			$this->getComponent($component_name)->comment = $comment;
 			$comments_view->comments_list .= $this->getComponent($component_name)->render();
 		}
+
+		$comments_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $comments_view->render();
 
@@ -78,8 +87,15 @@ class Comments extends Controller
 
 	public function showApproved()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countApproved();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
+
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getApproved();
+		$comments_list = $this->getService('comments')->getApproved($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -88,6 +104,8 @@ class Comments extends Controller
 			$this->getComponent($component_name)->comment = $comment;
 			$comments_view->comments_list .= $this->getComponent($component_name)->render();
 		}
+
+		$comments_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $comments_view->render();
 
@@ -96,8 +114,15 @@ class Comments extends Controller
 
 	public function showTrash()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('comments')->countTrash();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
+
 		$comments_view = $this->getComponent('comments-list');
-		$comments_list = $this->getService('comments')->getTrash();
+		$comments_list = $this->getService('comments')->getTrash($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 
 		foreach ($comments_list as $comment) {
 			$component_name = "comment-{$comment->id()}";
@@ -106,6 +131,8 @@ class Comments extends Controller
 			$this->getComponent($component_name)->comment = $comment;
 			$comments_view->comments_list .= $this->getComponent($component_name)->render();
 		}
+
+		$comments_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $comments_view->render();
 
