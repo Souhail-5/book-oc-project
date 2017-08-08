@@ -34,7 +34,7 @@
 							<h1 class="mx-auto my-3 my-lg-5 episode-title"><?= $episode->title() ?></h1>
 							<?php if ($user->isAuthenticated()): ?>
 								<div class="input-group flex-column flex-lg-row justify-content-center mb-3">
-									<span class="input-group-addon" id="basic-addon-slug">Permalien</span>
+									<span class="input-group-addon" id="basic-addon-slug"><?= $_SERVER['SERVER_NAME'] ?>/episode/</span>
 									<input class="form-control flex-g-0" type="text" name="episode-slug" id="input-episode-slug" value="<?= $_esc($episode->slug()) ?>" pattern="[a-z0-9-]+" placeholder="Laissé vide, il sera généré automatiquement." aria-describedby="basic-addon-slug">
 								</div>
 							<?php endif; ?>
