@@ -5,8 +5,8 @@
 			<div class="h6 mb-2 mb-lg-0 my-lg-0 fz-1-05">
 				<?= $_esc($comment->name()) ?>
 			</div>
-			<time class="datetime" datetime="<?= $comment->publishDatetime() ?>">
-				, <span class="meta"></span>
+			<time class="datetime d-flex mb-2 mb-lg-0 my-lg-0" datetime="<?= $comment->publishDatetime() ?>">
+				<span class="meta mr-1">, écrit</span><span class="time-description meta"></span>
 			</time>
 			<form class="ml-auto" action="" method="POST">
 				<?php if ($comment->approved() == 0 && $current_route->name() == 'episode'): ?>
