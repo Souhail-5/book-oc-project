@@ -38,7 +38,7 @@
 							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 								<use xlink:href="/sprite.svg#si-glyph-calendar-1">
 							</svg>
-							<?= ($current_route->name() == 'episodes-draft') ? 'Modifié' : 'Publié' ?> <span></span>
+							<?= ($current_route->name() == 'episodes-draft') ? 'Modifié' : 'Publié' ?> <span class="time-description"></span>
 						</time>
 						<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">
 							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">

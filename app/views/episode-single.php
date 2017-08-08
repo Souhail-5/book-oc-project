@@ -43,7 +43,7 @@
 									<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
 										<use xlink:href="/sprite.svg#si-glyph-calendar-1">
 									</svg>
-									<?= ($episode->status() != 'publish') ? 'Modifié' : 'Publié' ?> <span></span>
+									<?= ($episode->status() != 'publish') ? 'Modifié' : 'Publié' ?> <span class="time-description"></span>
 								</time>
 								<?php if ($episode->status() == 'publish'): ?>
 									<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('time').each(function(i, e) {
 		var datetime = $(e).attr('datetime');
-		$(e).children("span").html(transformDate(datetime, 'YYYY-MM-DD HH:mm:ss'));
+		$(e).children('.time-description').html(transformDate(datetime, 'YYYY-MM-DD HH:mm:ss'));
 		$(e).attr('datetime', moment(datetime, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD'));
 	});
 
