@@ -3,7 +3,7 @@
 </header>
 <div class="container">
 	<section class="episode-main-content-wrap row no-gutters">
-		<div class="episode-main-content col-lg-10 offset-lg-1 px-2 px-lg-5 py-3">
+		<div class="episode-main-content col-lg-10 offset-lg-1 px-2 px-lg-5 py-3 pb-5">
 			<nav>
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
@@ -56,7 +56,7 @@
 								<?php endif; ?>
 							</div>
 						</header>
-						<div class="episode-text" placeholder="test" style="min-height: 150px;">
+						<div class="episode-text col-lg-10 offset-lg-1 text-justify" placeholder="test" style="min-height: 150px;">
 							<?= $episode->text() ?>
 						</div>
 						<?php if ($user->isAuthenticated()): ?>

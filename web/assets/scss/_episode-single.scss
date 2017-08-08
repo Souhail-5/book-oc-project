@@ -14,10 +14,16 @@
 		border-radius: 0;
 		border-bottom: 1px solid rgba(0,0,0,0.05);
 	}
+
+	form .episode-text {
+		border: 1px solid #EEE;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
 }
 .episode-main-content header {
 	h1 {
-		font-size: 3.5rem;
+		font-size: 4.5rem;
 		line-height: 1.5;
 
 		&:focus {
