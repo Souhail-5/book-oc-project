@@ -11,8 +11,8 @@
 	</div>
 	<div class="form-group">
 	<label for="comment-textarea">Votre commentaire</label>
-		<textarea class="form-control" id="comment-textarea" name="comment-text" aria-describedby="text-help" rows="10" required minlength="140" maxlength="1400"><?= $_esc($comment->text()) ?></textarea>
-		<small id="text-help" class="form-text text-muted">La longueur du commentaire doit être comprise entre 140 et 1400 caractères.</small>
+		<textarea class="form-control" id="comment-textarea" name="comment-text" aria-describedby="text-help" rows="10" required minlength="140"><?= $_esc($comment->text()) ?></textarea>
+		<small id="text-help" class="form-text text-muted">La longueur du commentaire doit être au moins de 140 caractères.</small>
 	</div>
 	<div class="d-lg-flex justify-content-lg-between align-items-lg-center">
 		<div class="g-recaptcha mb-3 mb-lg-0" data-sitekey="6LcqKywUAAAAAHv9CGPw68Y9p-oS-1WfgZgdtaUe"></div>
