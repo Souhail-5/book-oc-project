@@ -28,6 +28,7 @@ class Episodes extends Controller
 		]);
 		if ($this->user->isAuthenticated()) {
 			$this->page->addScripts([
+				'<script src="https://www.google.com/recaptcha/api.js"></script>',
 				'<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=kivzmmaltnur462zqk88udo27pcq653plylb48017r3cq75i"></script>'
 			]);
 			$this->page->addCustomBtmScripts([
@@ -376,6 +377,10 @@ class Episodes extends Controller
 
 	public function newEpisodeComment()
 	{
+		$recaptcha_api_url = "https://www.google.com/recaptcha/api/siteverify?secret=6LcqKywUAAAAALJShgZJU8CB9VkLtgtCIIkcG6ng&response="
+		. $this->HttpRequest->POSTData('g-recaptcha-response')
+		. "&remoteip=" . $_SERVER['REMOTE_ADDR'] ;
+
 		$this->getComponent('new-comment-form')->comment = $this->getService('comments')->setNewComment([
 			'episodeId' => $this->HttpRequest->POSTData('episode-id'),
 			'name' => $this->HttpRequest->POSTData('comment-name'),
@@ -383,6 +388,7 @@ class Episodes extends Controller
 			'text' => $this->HttpRequest->POSTData('comment-text'),
 		]);
 		try {
+			if (!json_decode(file_get_contents($recaptcha_api_url), true)['success']) throw new \InvalidArgumentException("Votre commentaire n'a pas été validé. Vous devez d'abord valider le catpcha.");
 			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
 			$this->getComponent('new-comment-form')->comment = null;
 			$this->showOne();

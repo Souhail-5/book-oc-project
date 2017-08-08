@@ -14,6 +14,9 @@
 		<textarea class="form-control" id="comment-textarea" name="comment-text" aria-describedby="text-help" rows="10" required minlength="140" maxlength="1400"><?= $_esc($comment->text()) ?></textarea>
 		<small id="text-help" class="form-text text-muted">La longueur du commentaire doit être comprise entre 140 et 1400 caractères.</small>
 	</div>
-	<button type="submit" name="action" value="new-episode-comment" class="btn btn-primary">Valider</button>
+	<div class="d-lg-flex justify-content-lg-between align-items-lg-center">
+		<div class="g-recaptcha mb-3 mb-lg-0" data-sitekey="6LcqKywUAAAAAHv9CGPw68Y9p-oS-1WfgZgdtaUe"></div>
+		<button type="submit" name="action" value="new-episode-comment" class="btn btn-primary">Valider</button>
+	</div>
 	<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
 </form>
