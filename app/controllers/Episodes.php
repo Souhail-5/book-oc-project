@@ -82,9 +82,13 @@ class Episodes extends Controller
 	{
 		$this->getComponent('pagination')->elements_limit_by_page = 10;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllPublish();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllPublish($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllPublish($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
@@ -96,9 +100,13 @@ class Episodes extends Controller
 	{
 		$this->getComponent('pagination')->elements_limit_by_page = 1;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllDraft();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllDraft($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllDraft($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
@@ -110,9 +118,13 @@ class Episodes extends Controller
 	{
 		$this->getComponent('pagination')->elements_limit_by_page = 1;
 		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllTrash();
+		$nbr_page = $this->HttpRequest->GETData('page');
+		$nbr_pages = ceil($this->getComponent('pagination')->nbr_elements / $this->getComponent('pagination')->elements_limit_by_page);
+		if (isset($nbr_page) && $nbr_page == 0) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name()));
+		if ($nbr_page > $nbr_pages) $this->HttpResponse->redirect(Router::genPath(Router::currentRoute()->name(), [$nbr_pages]));
 
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllTrash($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->episodes = $this->getService('episodes')->getAllTrash($nbr_page, $this->getComponent('pagination')->elements_limit_by_page);
 		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
