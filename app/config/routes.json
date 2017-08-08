@@ -45,9 +45,10 @@
 	},
 	"episodes-trash":
 	{
-		"url": "/episodes/corbeille",
+		"url": "/episodes/corbeille(?:/page-([0-9]{1,5}))?",
 		"controller": "episodes",
 		"action": "show-all-trash",
+		"varsNames": ["page"],
 		"before": {
 			"auth": {
 				"controller": "users",

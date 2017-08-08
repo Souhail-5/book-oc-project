@@ -117,9 +117,14 @@ class Episodes
 		return $this->episodes->getAllDraft($page, $limit);
 	}
 
-	public function getAllTrash()
+	public function countAllTrash()
 	{
-		return $this->episodes->getAllTrash();
+		return $this->episodes->countAllTrash();
+	}
+
+	public function getAllTrash($page, $limit)
+	{
+		return $this->episodes->getAllTrash($page, $limit);
 	}
 
 	public function getOne(Object\Episode $episode)

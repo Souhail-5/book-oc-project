@@ -197,7 +197,22 @@ class Episodes
 		return $episodes;
 	}
 
-	public function getAllTrash()
+	public function countAllTrash()
+	{
+		$q = $this->db->prepare('
+			SELECT COUNT(id)
+			FROM episodes
+			WHERE trash=:trash
+		');
+
+		$q->bindValue(':trash', 1);
+
+		$q->execute();
+
+		return $q->fetch()[0];
+	}
+
+	public function getAllTrash($page, $limit)
 	{
 		$episodes = [];
 
@@ -206,9 +221,12 @@ class Episodes
 			FROM episodes
 			WHERE trash=:trash
 			ORDER BY number DESC
+			LIMIT :limit OFFSET :offset
 		');
 
 		$q->bindValue(':trash', 1);
+		$q->bindValue(':limit', (int) $limit, \PDO::PARAM_INT);
+		$q->bindValue(':offset', max((((int) $page * $limit) - $limit), 0), \PDO::PARAM_INT);
 
 		$q->execute();
 

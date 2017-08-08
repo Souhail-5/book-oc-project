@@ -108,8 +108,12 @@ class Episodes extends Controller
 
 	public function showAllTrash()
 	{
+		$this->getComponent('pagination')->elements_limit_by_page = 1;
+		$this->getComponent('pagination')->nbr_elements = $this->getService('episodes')->countAllTrash();
+
 		$episodes_view = $this->getComponent('episodes-list');
-		$episodes_view->episodes = $this->getService('episodes')->getAllTrash();
+		$episodes_view->episodes = $this->getService('episodes')->getAllTrash($this->HttpRequest->GETData('page'), $this->getComponent('pagination')->elements_limit_by_page);
+		$episodes_view->pagination = $this->getComponent('pagination')->render();
 
 		$this->getComponent('home')->view = $episodes_view->render();
 
