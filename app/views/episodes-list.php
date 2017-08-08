@@ -40,13 +40,21 @@
 							</svg>
 							<?= ($current_route->name() == 'episodes-draft') ? 'Modifié' : 'Publié' ?> <span class="time-description"></span>
 						</time>
-						<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-								<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-							</svg>
-							<?= $episode->nbrComments() ?>
-							<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
-						</a>
+						<?php if ($episode->nbrComments()): ?>
+							<a class="meta" href="<?= $path('episode', [$episode->slug()]) ?>#anchor-comments">
+						<?php else: ?>
+							<span class="meta">
+						<?php endif; ?>
+								<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
+									<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
+								</svg>
+								<?= $episode->nbrComments() ?>
+								<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
+						<?php if ($episode->nbrComments()): ?>
+							</a>
+						<?php else: ?>
+							</span>
+						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 			</li>
