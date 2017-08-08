@@ -5,6 +5,12 @@ $(document).ready(function() {
 		$(e).attr('datetime', moment(datetime, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD'));
 	});
 
+	var current_textarea = $('#comment-textarea').val();
+	$('#text-length-help').text(current_textarea.length);
+	$('#comment-textarea').on('input', function() {
+	    $('#text-length-help').text(this.value.length);
+	});
+
 	truncateText();
 });
 
