@@ -49,7 +49,8 @@ class Episodes extends Controller
 					theme: 'inlite',
 					selection_toolbar: 'bold italic | blockquote | h2 h3 | quicklink',
 					insert_toolbar: '',
-					branding: false
+					branding: false,
+					extended_valid_elements: 'blockquote[class=episode-blockquote-text]'
 				});",
 			]);
 		}
