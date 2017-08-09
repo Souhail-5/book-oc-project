@@ -12,7 +12,7 @@
 </head>
 <body id="<?= $bodyId ?>">
 	<?php if ($user->isAuthenticated()): ?>
-		<nav class="navbar fixed-top navbar-inverse bg-inverse zi-50 flex-row justify-content-between align-items-center py-1 fz-0-95">
+		<nav class="navbar fixed-bottom navbar-inverse bg-inverse zi-50 flex-row justify-content-between align-items-center py-1 fz-0-95">
 			<span class="text-white">Mode administration</span>
 			<button class="btn btn-link meta-danger p-0 m-0" form="form-log-out" type="submit" name="action" value="sign-out">
 				<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-turn-off">

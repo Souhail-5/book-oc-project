@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row no-gutters align-items-md-center vh-100">
 		<div class="home-poster-wrap align-self-md-start col-lg-3">
-			<figure class="poster mt-2 mb-0">
+			<figure class="poster mt-3 mb-0">
 				<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
 			</figure>
 		</div>
