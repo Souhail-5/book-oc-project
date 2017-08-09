@@ -407,14 +407,14 @@ class Episodes extends Controller
 				'title' => 'Merci !',
 				'text' => "Votre commentaire a bien été ajouté.",
 			]);
-			$this->showOne();
+			$this->HttpResponse->refresh(true);
 		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
 				'text' => $e->getMessage(),
 			]);
-			$this->showOne();
+			$this->HttpResponse->refresh(true);
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
 		}

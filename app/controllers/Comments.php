@@ -164,7 +164,7 @@ class Comments extends Controller
 				'text' => "Le signalement n'a pas pu être effectué.",
 			]);
 		}
-		$this->HttpResponse->refresh();
+		$this->HttpResponse->refresh(true);
 	}
 
 	public function approveComment()
