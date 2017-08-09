@@ -50,7 +50,7 @@ class Episodes extends Controller
 					selection_toolbar: 'bold italic | blockquote | h2 h3 | quicklink',
 					insert_toolbar: '',
 					branding: false,
-					extended_valid_elements: 'blockquote[class=episode-blockquote-text]'
+					extended_valid_elements: 'a[href|target=_blank],blockquote[class=episode-blockquote-text]'
 				});",
 			]);
 		}
