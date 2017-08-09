@@ -21,7 +21,7 @@
 					<form action="" method="POST">
 				<?php endif; ?>
 						<header class="text-center">
-							<div class="badge badge-primary mw-100">
+							<div class="badge badge-primary mw-100 mt-2 mt-lg-5 mb-1 mb-lg-4">
 								#
 								<?php if ($user->isAuthenticated()): ?>
 									<input class="ghost text-white mw-100" type="text" name="episode-number" id="input-episode-number" value="<?= $_esc($episode->number()) ?>" pattern="[0-9]+" placeholder="épisode" size="1">
@@ -31,7 +31,7 @@
 									<?= $_esc($episode->number()) ?><?= $_ifNotEmpty($episode->part(), " - {$_esc($episode->part())}") ?>
 								<?php endif; ?>
 							</div>
-							<h1 class="mx-auto my-3 my-lg-5 episode-title"><?= $episode->title() ?></h1>
+							<h1 class="mx-auto my-4 mb-lg-5 episode-title"><?= $episode->title() ?></h1>
 							<?php if ($user->isAuthenticated()): ?>
 								<div class="input-group flex-column flex-lg-row justify-content-center mb-3">
 									<span class="input-group-addon" id="basic-addon-slug"><?= $_SERVER['SERVER_NAME'] ?>/episode/</span>
