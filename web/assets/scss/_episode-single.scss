@@ -51,16 +51,6 @@
 	}
 }
 
-.episode-blockquote-text {
-	padding: .5rem 1rem;
-	margin-bottom: 1rem;
-	font-size: 1.25rem;
-	border-left: .25rem solid #eceeef;
-	p:last-child {
-		margin-bottom: 0;
-	}
-}
-
 /* Respnsive container */
 @media (max-width: 992px) {
 	.episode-main-content-wrap {

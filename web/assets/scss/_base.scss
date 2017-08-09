@@ -125,6 +125,10 @@ a:hover.meta-success, .btn-link:hover.meta-success {
 	background-color: $btn-secondary-bg;
 }
 
+.blockquote p:last-child {
+	margin-bottom: 0;
+}
+
 .ghost {
 	border: none;
 	background: transparent;

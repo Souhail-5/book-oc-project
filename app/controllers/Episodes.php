@@ -41,16 +41,51 @@ class Episodes extends Controller
 					theme: 'inlite',
 					selection_toolbar: '',
 					insert_toolbar: '',
-					branding: false
+					branding: false,
 				});",
 				"tinymce.init({
 					selector: '.episode-text',
+					plugins: 'textcolor',
 					inline: true,
 					theme: 'inlite',
-					selection_toolbar: 'bold italic | blockquote | h2 h3 | quicklink',
+					selection_toolbar: 'bold italic underline highlighter strikethrough | blockquote | h2 h3 | divider | quicklink',
 					insert_toolbar: '',
 					branding: false,
-					extended_valid_elements: 'a[href|target=_blank],blockquote[class=episode-blockquote-text]'
+					extended_valid_elements: 'a[href|target=_blank],blockquote[class=blockquote]',
+					formats: {
+						underline: {inline : 'u', exact : true},
+						strikethrough: {inline : 'del'},
+						blockquote: {block : 'blockquote', 'classes' : 'blockquote'},
+					},
+					setup: function (ed) {
+						ed.addButton('divider', {
+							text: '',
+							image: 'http://p.yusukekamiyamane.com/icons/search/fugue/icons/edit-code-division.png',
+							onclick: function () {
+								ed.focus();
+								var text = ed.selection.getContent({'format': 'html'});
+								if(text && text.length > 0) {
+									ed.execCommand('InsertHorizontalRule');
+								}
+							}
+						});
+						ed.addButton('highlighter', {
+							text: '',
+							image: 'http://p.yusukekamiyamane.com/icons/search/fugue/icons/highlighter-text.png',
+							onclick: function () {
+								ed.focus();
+								var text = ed.selection.getContent({'format': 'html'});
+								text = text.replace(/<mark>|<\/mark>/g, '');
+								if(text && text.length > 0) {
+									if (ed.selection.getNode().nodeName != 'MARK') {
+										ed.execCommand('mceInsertContent', false, '<mark>'+text+'</mark>');
+										return;
+									}
+									ed.execCommand('mceInsertContent', false, text);
+								}
+							}
+						});
+					},
 				});",
 			]);
 		}
