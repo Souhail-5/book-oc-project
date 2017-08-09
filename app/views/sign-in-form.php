@@ -17,7 +17,7 @@
 			<label for="password">Nom</label>
 				<input type="password" class="form-control" id="password" name="password" placeholder="Votre mot de passe">
 			</div>
-			<button type="submit" name="action" value="sign-in" class="w-100 btn btn-primary">Submit</button>
+			<button type="submit" name="action" value="sign-in" class="w-100 btn btn-primary">Se connecter</button>
 		</form>
 	</div>
 </div>
