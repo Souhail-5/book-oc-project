@@ -43,6 +43,8 @@
 	font-family: Merriweather;
 	font-size: 1.15rem;
 	line-height: 1.7 !important;
+	word-break: break-word;
+	hyphens: auto;
 
 	&:focus {
 		outline: 0;
