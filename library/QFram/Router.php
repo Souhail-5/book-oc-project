@@ -69,6 +69,7 @@ class Router
 		foreach ($config_routes as $route_name => $param) {
 			$param['varsNames'] = isset($param['varsNames']) ? $param['varsNames'] : [];
 			$param['before'] = isset($param['before']) ? $param['before'] : [];
+			$param['breadcrumb'] = isset($param['breadcrumb']) ? $param['breadcrumb'] : [];
 			$config = [
 				'name' => $route_name,
 				'urlPattern' => $param['url'],
@@ -77,6 +78,7 @@ class Router
 				'varsNames' => $param['varsNames'],
 				'varsFromUrl' => $this->HttpRequest->getURI(),
 				'before' => $param['before'],
+				'breadcrumb' => $param['breadcrumb'],
 			];
 
 			self::$routes[$route_name] = new Route($config);

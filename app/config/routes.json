@@ -28,7 +28,12 @@
 		"url": "/episodes(?:/page-([0-9]{1,5}))?",
 		"controller": "episodes",
 		"action": "show-all-publish",
-		"varsNames": ["page"]
+		"varsNames": ["page"],
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"#": "Page {page}"
+		}
 	},
 	"episodes-draft":
 	{
@@ -41,6 +46,12 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"episodes-draft": "Brouillons",
+			"#": "Page {page}"
 		}
 	},
 	"episodes-trash":
@@ -54,6 +65,12 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"episodes-trash": "Corbeille",
+			"#": "Page {page}"
 		}
 	},
 	"episode":
@@ -61,7 +78,12 @@
 		"url": "/episode/([a-z0-9-]+)",
 		"controller": "episodes",
 		"action": "show-one",
-		"varsNames": ["slug"]
+		"varsNames": ["slug"],
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"#": "{slug}"
+		}
 	},
 	"episode-new":
 	{
@@ -73,6 +95,11 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"episode-new": "Créer un nouvel épisode"
 		}
 	},
 	"comments":
@@ -86,6 +113,11 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"comments": "Commentaires",
+			"#": "Page {page}"
 		}
 	},
 	"comments-approved":
@@ -99,6 +131,12 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"comments": "Commentaires",
+			"comments-approved": "Approuvés",
+			"#": "Page {page}"
 		}
 	},
 	"comments-signaled":
@@ -112,6 +150,12 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"comments": "Commentaires",
+			"comments-signaled": "Signalés",
+			"#": "Page {page}"
 		}
 	},
 	"comments-trash":
@@ -125,6 +169,12 @@
 				"controller": "users",
 				"action": "is-authenticated"
 			}
+		},
+		"breadcrumb": {
+			"root": "Accueil",
+			"comments": "Commentaires",
+			"comments-trash": "Corbeille",
+			"#": "Page {page}"
 		}
 	}
 }

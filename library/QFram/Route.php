@@ -17,6 +17,7 @@ class Route
 	protected $varsNames = array();
 	protected $vars = array();
 	protected $before = array();
+	protected $breadcrumb = array();
 
 	public function __construct(array $data)
 	{
@@ -32,6 +33,7 @@ class Route
 	public function varsNames() { return $this->varsNames; }
 	public function vars() { return $this->vars; }
 	public function before() { return $this->before; }
+	public function breadcrumb() { return $this->breadcrumb; }
 
 	public function setName($value)
 	{
@@ -72,6 +74,22 @@ class Route
 			$before[$key]["action"] = str_replace('-', '', lcfirst(ucwords($before[$key]["action"], '-')));
 		}
 		$this->before = $before;
+	}
+
+	public function setBreadcrumb(array $breadcrumb)
+	{
+		foreach ($breadcrumb as $route_name => $route_display_name) {
+			if (preg_match_all('`{(.*)}`U', $route_display_name, $matches)) {
+				foreach ($matches[1] as $value) {
+					if (!isset($this->vars()[$value]) && isset($breadcrumb[$route_name])) {
+						unset($breadcrumb[$route_name]);
+					} else {
+						$breadcrumb[$route_name] = preg_replace('`{'.$value.'}`U', $this->vars()[$value], $route_display_name);
+					}
+				}
+			}
+		}
+		$this->breadcrumb = $breadcrumb;
 	}
 
 	public function setVarsFromUrl($url)

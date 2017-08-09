@@ -7,6 +7,7 @@
 			<nav>
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
+					<li class="breadcrumb-item"><a href="<?= $path('episodes') ?>">Épisodes</a></li>
 					<li class="breadcrumb-item active"><?= $episode->title() ?></li>
 				</ol>
 			</nav>

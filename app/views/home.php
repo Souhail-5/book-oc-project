@@ -39,44 +39,22 @@
 				</nav>
 			<?php endif; ?>
 			<div class="<?= $user->isAuthenticated() ? 'vh-80' : 'vh-90' ?> ov-a">
-				<nav class="push font-italic breadcrumb bg-white py-4">
-					<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
-					<?php if ($current_route->name() == 'root'): ?>
-						<span class="breadcrumb-item no-before">Accueil</span>
-					<?php else: ?>
-						<a class="breadcrumb-item no-before" href="<?= $path('root') ?>">Accueil</a>
-
-						<?php if ($current_route->name() == 'episodes'): ?>
-							<!-- Episodes -->
-							<span class="breadcrumb-item">Épisodes</span>
-						<?php endif; ?>
-						<?php if ($current_route->name() == 'episodes-draft'): ?>
-							<a class="breadcrumb-item" href="<?= $path('episodes') ?>">Épisodes</a>
-							<span class="breadcrumb-item">Brouillon</span>
-						<?php endif; ?>
-						<?php if ($current_route->name() == 'episodes-trash'): ?>
-							<a class="breadcrumb-item" href="<?= $path('episodes') ?>">Épisodes</a>
-							<span class="breadcrumb-item">Corbeille</span>
-						<?php endif; ?>
-
-						<?php if ($current_route->name() == 'comments'): ?>
-							<!-- Comments -->
-							<span class="breadcrumb-item">Commentaires</span>
-						<?php endif; ?>
-						<?php if ($current_route->name() == 'comments-approved'): ?>
-							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
-							<span class="breadcrumb-item">Approuvés</span>
-						<?php endif; ?>
-						<?php if ($current_route->name() == 'comments-signaled'): ?>
-							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
-							<span class="breadcrumb-item">Signalés</span>
-						<?php endif; ?>
-						<?php if ($current_route->name() == 'comments-trash'): ?>
-							<a class="breadcrumb-item" href="<?= $path('comments') ?>">Commentaires</a>
-							<span class="breadcrumb-item">Corbeille</span>
-						<?php endif; ?>
-					<?php endif; ?>
-				</nav>
+				<?php if ($current_route->breadcrumb()): ?>
+					<nav class="push font-italic breadcrumb bg-white py-4">
+						<span class="breadcrumb-item mr-2">Vous êtes ici :</span>
+						<?php $i = 0; $l = count($current_route->breadcrumb()); ?>
+						<?php foreach ($current_route->breadcrumb() as $route_name => $route_display_name): ?>
+							<?php if ($i == 0): ?>
+								<a class="breadcrumb-item no-before" href="<?= $path($route_name) ?>"><?= $route_display_name ?></a>
+							<?php elseif ($i == $l-1): ?>
+								<span class="breadcrumb-item"><?= $route_display_name ?></span>
+							<?php else: ?>
+								<a class="breadcrumb-item" href="<?= $path($route_name) ?>"><?= $route_display_name ?></a>
+							<?php endif; ?>
+							<?php $i++; ?>
+						<?php endforeach; ?>
+					</nav>
+				<?php endif; ?>
 				<?php if ($flash->exist()): ?>
 					<div class="push pr-5 border-0 rounded-0 alert alert-<?= $flash->get('type') ?>" role="alert">
 						<p class="m-0"><?= $flash->get('text') ?></p>
