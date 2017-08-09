@@ -19,9 +19,10 @@ class HttpResponse
 		exit;
 	}
 
-	public function refresh()
+	public function refresh($top=false)
 	{
-		header('Location: '.Router::currentPath());
+		$location = $top ? Router::currentPath().'#top' : Router::currentPath();
+		header('Location: '.$location);
 		exit;
 	}
 
