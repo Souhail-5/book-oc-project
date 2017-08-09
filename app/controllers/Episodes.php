@@ -47,7 +47,7 @@ class Episodes extends Controller
 					selector: '.episode-text',
 					inline: true,
 					theme: 'inlite',
-					selection_toolbar: 'bold italic | blockquote h2 h3',
+					selection_toolbar: 'bold italic | blockquote | h2 h3 | quicklink',
 					insert_toolbar: '',
 					branding: false
 				});",
