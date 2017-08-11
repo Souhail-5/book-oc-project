@@ -5,6 +5,16 @@
 		"controller": "episodes",
 		"action": "show-all-publish"
 	},
+	"legal":
+	{
+		"url": "/mentions-legales",
+		"controller": "users",
+		"action": "show-legal",
+		"breadcrumb": {
+			"root": "Accueil",
+			"#": "Mentions légales"
+		}
+	},
 	"404":
 	{
 		"url": "/404",

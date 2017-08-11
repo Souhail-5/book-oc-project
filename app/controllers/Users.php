@@ -19,9 +19,11 @@ class Users extends Controller
 		]);
 		$this->initPage();
 		$this->initComponents([
+			'home' => 'home',
 			'sign-in-form' => 'sign-in-form',
 			'403' => '403',
 			'404' => '404',
+			'mentions-legales' => 'mentions-legales',
 		]);
 	}
 
@@ -64,6 +66,16 @@ class Users extends Controller
 		$this->page->title = "Billet simple pour l'Alaska | Accès non autorisé";
 		$this->page->bodyId = "access-denied-403";
 		$this->page->view = $this->getComponent('403')->render();
+
+		$this->HttpResponse->send($this->page->render());
+	}
+
+	public function showLegal()
+	{
+		$this->page->title = "Billet simple pour l'Alaska | Mentions légales";
+		$this->page->bodyId = "legal";
+		$this->getComponent('home')->view = $this->getComponent('mentions-legales')->render();
+		$this->page->view = $this->getComponent('home')->render();
 
 		$this->HttpResponse->send($this->page->render());
 	}
