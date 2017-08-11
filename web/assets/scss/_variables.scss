@@ -20,8 +20,9 @@ $purple: #613d7c;
 // Reassign color vars to semantic color scheme
 $brand-primary: $blue;
 $brand-secondary: $yellow;
-$brand-danger: $red;
 $brand-success: $green;
+$brand-warning: $orange;
+$brand-danger: $red;
 
 $btn-secondary-bg: lighten($brand-primary, 45%);
 
