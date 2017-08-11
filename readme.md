@@ -17,7 +17,7 @@ To install and to run the project you will need this:
 ```
 PHP 7+
 MySQL 5.6+
-Node.js & npm (are needed because we use Gulp for compliling SCSS files)
+Node.js & npm (are needed because we use Gulp for compliling SCSS files and for using Browsersync)
 Grunt (is needed because Bootstrap.v4 use it for compiling SCSS files)
 ```
 
@@ -66,6 +66,7 @@ grunt watch
 
 * [SASS](http://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
 * [Gulp](https://gulpjs.com/) - A toolkit for automating painful or time-consuming tasks in development workflow.
+* [Browsersync](https://browsersync.io/) - A toolkit to get time-saving synchronised browser testing.
 * [Bootstrap v4](https://v4-alpha.getbootstrap.com/) - The most popular HTML, CSS, and JS framework
 
 ## Contributing
