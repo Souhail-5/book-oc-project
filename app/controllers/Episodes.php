@@ -332,6 +332,7 @@ class Episodes extends Controller
 			$episode->setText($this->HttpRequest->POSTData('mce_1'));
 
 			$this->getService('episodes')->update($episode, $publish);
+			if ($publish == true) $episode->setStatus('publish');
 
 			$episode = $this->getService('episodes')->getOne($episode);
 
