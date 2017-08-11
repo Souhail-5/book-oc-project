@@ -1,0 +1,10 @@
+{
+	"main":
+	{
+		"type": "mysql",
+		"host": "localhost",
+		"name": "project3",
+		"user": "root",
+		"password": "root"
+	}
+}

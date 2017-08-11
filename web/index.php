@@ -2,6 +2,7 @@
 session_start();
 
 use \QFram\Helper\Psr4AutoloaderClass;
+use \QFram\Helper\PDOFactory;
 use \QFram\Router;
 use \QFram\HttpRequest;
 use \QFram\HttpResponse;
@@ -23,5 +24,6 @@ $loader->addNamespace('Model\Service', __DIR__.'/../app/models/services');
 $loader->addNamespace('View', __DIR__.'/../app/views');
 $loader->addNamespace('Controller', __DIR__.'/../app/controllers');
 
+new PDOFactory;
 $router = new Router(new HttpRequest, new HttpResponse);
 $router->run();

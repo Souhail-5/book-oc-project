@@ -13,7 +13,7 @@ class Users
 
 	function __construct()
 	{
-		$this->db = PDOFactory::getMysqlConnexion();
+		$this->db = PDOFactory::getConnexion('main');
 	}
 
 	public function signInByEmail(User $user)

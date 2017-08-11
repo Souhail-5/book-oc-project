@@ -13,7 +13,7 @@ class Comments
 
 	function __construct()
 	{
-		$this->db = PDOFactory::getMysqlConnexion();
+		$this->db = PDOFactory::getConnexion('main');
 	}
 
 	public function add(Comment $comment)
