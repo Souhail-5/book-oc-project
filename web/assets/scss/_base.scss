@@ -21,24 +21,39 @@ body {
 	font-family: $font-family-monospace;
 }
 
-[class^="si-glyph"] svg {
-	width: 1rem;
-	height: 1rem;
-	position: relative; top: 0.1rem;
+[class^="si-glyph"] {
+	& * {
+		width: 1rem;
+		height: 1rem;
+		position: relative; top: 0.1rem;
+		transition: all 0.06s ease-in-out;
+	}
 
-	&.wh-1-05 {
+	&.wh-1-05 * {
 		width: 1.05rem;
 		height: 1.05rem;
 	}
 
-	&.wh-0-95 {
+	&.wh-0-95 * {
 		width: 0.95rem;
 		height: 0.95rem;
 	}
 
-	&.wh-0-80 {
+	&.wh-0-80 * {
 		width: 0.80rem;
 		height: 0.80rem;
+	}
+
+	&.meta * {
+		fill: $gray-light;
+	}
+
+	&.meta-danger * {
+		fill: $gray-light;
+	}
+
+	&.meta-success * {
+		fill: $gray-light;
 	}
 }
 
@@ -94,15 +109,10 @@ body {
 	font-size: 0.80rem;
 }
 
-.meta {
-	color: $gray-light;
-}
-
-.meta-danger {
-	color: $gray-light;
-}
-
-.meta-success {
+.meta,
+.meta-success,
+.meta-danger,
+.meta-warning {
 	color: $gray-light;
 }
 
@@ -110,18 +120,40 @@ a:hover.meta, .btn-link:hover.meta {
 	color: $gray-dark;
 	text-decoration: none;
 	cursor: pointer;
-}
 
-a:hover.meta-danger, .btn-link:hover.meta-danger {
-	color: $brand-danger;
-	text-decoration: none;
-	cursor: pointer;
+	[class^="si-glyph"] * {
+		fill: $gray-dark;
+	}
 }
 
 a:hover.meta-success, .btn-link:hover.meta-success {
 	color: $brand-success;
 	text-decoration: none;
 	cursor: pointer;
+
+	[class^="si-glyph"] * {
+		fill: $brand-success;
+	}
+}
+
+a:hover.meta-warning, .btn-link:hover.meta-warning {
+	color: $brand-warning;
+	text-decoration: none;
+	cursor: pointer;
+
+	[class^="si-glyph"] * {
+		fill: $brand-warning;
+	}
+}
+
+a:hover.meta-danger, .btn-link:hover.meta-danger {
+	color: $brand-danger;
+	text-decoration: none;
+	cursor: pointer;
+
+	[class^="si-glyph"] * {
+		fill: $brand-danger;
+	}
 }
 
 .morecontent span {

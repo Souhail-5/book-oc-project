@@ -11,16 +11,17 @@
 			<form class="ml-auto" action="" method="POST">
 				<?php if ($comment->approved() == 0 && $current_route->name() == 'episode'): ?>
 					<button class="btn btn-link p-0 ml-lg-4 meta-danger fz-0-95" type="submit" name="action" value="signal-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-circle-remove wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-circle-remove">
-						</svg>
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-circle-remove" />
+						</svg-icon>
 						Signaler
 					</button>
 					<input type="hidden" name="comment-id" value="<?= $comment->id() ?>">
 				<?php endif; ?>
 				<?php if ($comment->approved() == 0 && $current_route->originalController() == 'comments' && !empty($comment->nbrSignals())): ?>
 					<span class="meta ml-lg-4 fz-0-95">
-						<?= $comment->nbrSignals().' '.$_ifPlural($comment->nbrSignals(), 'signalements', 'signalement') ?>
+						<span class="font-weight-bold text-danger"><?= $comment->nbrSignals() ?></span>
+						<?= $_ifPlural($comment->nbrSignals(), 'signalements', 'signalement') ?>
 					</span>
 				<?php endif; ?>
 			</form>
@@ -30,39 +31,39 @@
 			<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-end align-items-lg-center" action="" method="POST">
 				<?php if ($current_route->originalController() == 'comments' && $current_route->name() != 'comments-trash'): ?>
 					<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-danger fz-0-95" type="submit" name="action" value="trash-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-trash">
-						</svg>
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-trash" />
+						</svg-icon>
 						Corbeille
 					</button>
 				<?php endif; ?>
 				<?php if ($current_route->name() == 'comments-trash'): ?>
 					<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-success fz-0-95" type="submit" name="action" value="untrash-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-arrow-backward wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-arrow-backward">
-						</svg>
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-arrow-backward" />
+						</svg-icon>
 						Restaurer
 					</button>
 					<button class="btn btn-link p-0 ml-lg-auto meta-danger fz-0-95" type="submit" name="action" value="delete-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-trash">
-						</svg>
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-trash" />
+						</svg-icon>
 						Supprimer définitivement
 					</button>
 				<?php endif; ?>
 				<?php if ($comment->approved() == 0 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-signaled')): ?>
 					<button class="btn btn-link p-0 ml-lg-auto meta-success fz-0-95" type="submit" name="action" value="approve-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-checked wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-checked">
-						</svg>
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-checked" />
+						</svg-icon>
 						Approuver
 					</button>
 				<?php endif; ?>
 				<?php if ($comment->approved() == 1 && ($current_route->name() == 'comments' || $current_route->name() == 'comments-approved')): ?>
-					<button class="btn btn-link p-0 ml-lg-auto meta-danger fz-0-95" type="submit" name="action" value="disapprove-comment">
-						<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-delete wh-0-95">
-							<use xlink:href="/sprite.svg#si-glyph-delete">
-						</svg>
+					<button class="btn btn-link p-0 ml-lg-auto meta-warning fz-0-95" type="submit" name="action" value="disapprove-comment">
+						<svg-icon class="si-glyph-turn-off wh-0-95 meta">
+							<src href="/sprite.svg#si-glyph-delete" />
+						</svg-icon>
 						Désapprouver
 					</button>
 				<?php endif; ?>

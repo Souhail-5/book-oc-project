@@ -20,24 +20,24 @@
 					<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-between align-items-lg-center" action="" method="POST">
 						<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
 						<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-success fz-0-95" type="submit" name="action" value="untrash-episode">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-arrow-backward wh-0-95">
-								<use xlink:href="/sprite.svg#si-glyph-arrow-backward">
-							</svg>
+							<svg-icon class="si-glyph-arrow-backward wh-0-95 meta">
+								<src href="/sprite.svg#si-glyph-arrow-backward wh-0-95" />
+							</svg-icon>
 							Restaurer
 						</button>
 						<button class="btn btn-link p-0 ml-lg-auto meta-danger fz-0-95" type="submit" name="action" value="delete-episode">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-trash wh-0-95">
-								<use xlink:href="/sprite.svg#si-glyph-trash">
-							</svg>
+							<svg-icon class="si-glyph-trash wh-0-95 meta">
+								<src href="/sprite.svg#si-glyph-trash wh-0-95" />
+							</svg-icon>
 							Supprimer définitivement
 						</button>
 					</form>
 				<?php else: ?>
 					<div class="d-flex flex-column flex-lg-row justify-content-between">
 						<time class="datetime meta mb-2 mb-lg-0" datetime="<?= ($current_route->name() == 'episodes-draft') ? $episode->modificationDatetime() : $episode->publishDatetime() ?>">
-							<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-calendar-1">
-								<use xlink:href="/sprite.svg#si-glyph-calendar-1">
-							</svg>
+							<svg-icon class="si-glyph-calendar-1 meta">
+								<src href="/sprite.svg#si-glyph-calendar-1" />
+							</svg-icon>
 							<?= ($current_route->name() == 'episodes-draft') ? 'Modifié' : 'Publié' ?> <span class="time-description"></span>
 						</time>
 						<?php if ($episode->nbrComments()): ?>
@@ -45,9 +45,9 @@
 						<?php else: ?>
 							<span class="meta">
 						<?php endif; ?>
-								<svg xmlns="http://www.w3.org/2000/svg" class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-									<use xlink:href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>">
-								</svg>
+								<svg-icon class="si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?> meta">
+									<src href="/sprite.svg#si-glyph-bubble-<?= $_ifPlural($episode->nbrComments(), 'message-talk', 'message') ?>" />
+								</svg-icon>
 								<?= $episode->nbrComments() ?>
 								<?= $_ifPlural($episode->nbrComments(), 'commentaires', 'commentaire') ?>
 						<?php if ($episode->nbrComments()): ?>
