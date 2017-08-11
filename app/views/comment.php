@@ -5,9 +5,6 @@
 			<div class="h6 mb-2 mb-lg-0 my-lg-0 fz-1-05">
 				<?= $_esc($comment->name()) ?>
 			</div>
-			<time class="datetime d-flex mb-2 mb-lg-0 my-lg-0" datetime="<?= $comment->publishDatetime() ?>">
-				<span class="meta mr-1">, écrit</span><span class="time-description meta"></span>
-			</time>
 			<form class="ml-auto" action="" method="POST">
 				<?php if ($comment->approved() == 0 && $current_route->name() == 'episode'): ?>
 					<button class="btn btn-link p-0 ml-lg-4 meta-danger fz-0-95" type="submit" name="action" value="signal-comment">
@@ -26,6 +23,9 @@
 				<?php endif; ?>
 			</form>
 		</div>
+		<time class="datetime d-flex mb-2 mb-lg-0 my-lg-0 fz-0-80" datetime="<?= $comment->publishDatetime() ?>">
+			<span class="meta mr-1">Publié</span><span class="time-description meta"></span>
+		</time>
 		<p class="comment-text mt-3 more"><?= nl2br($_esc($comment->text())) ?></p>
 		<?php if ($user->isAuthenticated()): ?>
 			<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-end align-items-lg-center" action="" method="POST">
