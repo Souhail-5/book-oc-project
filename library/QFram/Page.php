@@ -15,7 +15,7 @@ class Page extends Template
 		$this->title = "Billet simple pour l'Alaska";
 		$this->stylesheets =
 		[
-			'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400|Merriweather:300,900">',
+			'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:700|Lato:300,400,900|Merriweather:300,900">',
 			'<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.css">',
 			'<link rel="stylesheet" href="/assets/css/main.css">',
 		];
@@ -27,6 +27,7 @@ class Page extends Template
 			'<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>',
 			'<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js" integrity="sha256-DJpVvSniFq7HyHLFi3n3thaGrgI4XiEsDnQwyY3BnIo=" crossorigin="anonymous"></script>',
 			'<script src="/assets/js/mousetrap.min.js"></script>',
+			'<script src="/assets/js/iconwc.js"></script>',
 			'<script src="/assets/js/main.js"></script>',
 		];
 		$this->customBtmScripts = [];
