@@ -293,6 +293,40 @@ class Episodes
 		return new Episode($map);
 	}
 
+	public function getFirst()
+	{
+		$q = $this->db->prepare("
+			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
+			FROM episodes
+			WHERE status=:status
+			ORDER BY number ASC
+			LIMIT 1
+		");
+
+		$q->bindValue(':status', 'publish');
+
+		$q->execute();
+
+		$data = $q->fetch(\PDO::FETCH_ASSOC);
+		if (!$data) throw new \Exception("Aucun épisode n'a été trouvé");
+
+		$map = [
+			'id' => $data['id'],
+			'number' => $data['number'],
+			'part' => $data['part'],
+			'title' => $data['title'],
+			'text' => $data['text'],
+			'publishDatetime' => $data['publish_datetime'],
+			'modificationDatetime' => $data['modification_datetime'],
+			'nbrComments' => $data['nbr_comments'],
+			'slug' => $data['slug'],
+			'status' => $data['status'],
+			'trash' => $data['trash'],
+		];
+
+		return new Episode($map);
+	}
+
 	public function plusNbrComments($episode_id)
 	{
 		$q = $this->db->prepare('

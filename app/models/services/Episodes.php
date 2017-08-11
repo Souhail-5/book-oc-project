@@ -136,6 +136,15 @@ class Episodes
 		}
 	}
 
+	public function getFirst()
+	{
+		try {
+			return $this->episodes->getFirst();
+		} catch (\Exception $e) {
+			throw $e;
+		}
+	}
+
 	public function plusNbrComments($episode_id)
 	{
 		$this->episodes->plusNbrComments($episode_id);
