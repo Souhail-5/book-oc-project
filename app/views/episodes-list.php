@@ -21,13 +21,13 @@
 						<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
 						<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-success fz-0-95" type="submit" name="action" value="untrash-episode">
 							<svg-icon class="si-glyph-arrow-backward wh-0-95 meta">
-								<src href="/sprite.svg#si-glyph-arrow-backward wh-0-95" />
+								<src href="/sprite.svg#si-glyph-arrow-backward" />
 							</svg-icon>
 							Restaurer
 						</button>
 						<button class="btn btn-link p-0 ml-lg-auto meta-danger fz-0-95" type="submit" name="action" value="delete-episode">
 							<svg-icon class="si-glyph-trash wh-0-95 meta">
-								<src href="/sprite.svg#si-glyph-trash wh-0-95" />
+								<src href="/sprite.svg#si-glyph-trash" />
 							</svg-icon>
 							Supprimer définitivement
 						</button>
