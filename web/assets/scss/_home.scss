@@ -1,7 +1,10 @@
 .home-poster-wrap {
 	position: absolute; z-index: 2000;
+	max-height: 80vh;
+	background-color: #FFF;
+	box-shadow: 0px 0px 80px -10px rgba(0,0,0,0.29);
 	.poster {
-		box-shadow: 0px 0px 80px -10px rgba(0,0,0,0.29);
+		height: auto;
 	}
 }
 
@@ -10,13 +13,13 @@
 	box-shadow: 0px 0px 100px -10px rgba(0,0,0,0.29);
 
 	.push {
-		padding-left: 130px;
+		padding-left: 150px;
 	}
 
 	.navbar {
 		background-color: #FFF;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-		box-shadow: 0px 24px 18px -32px rgba(0,0,0,0.46);
+		box-shadow: 0px 24px 18px -32px rgba(0,0,0,0.30);
 	}
 
 	.breadcrumb {
@@ -30,6 +33,12 @@
 @media (max-width: 992px) {
 	.home-poster-wrap {
 		position: relative;
+		height: auto; max-height: none;
+		box-shadow: none;
+		border-bottom: 1px solid #EEE;
+		.poster {
+			height: 100%;
+		}
 	}
 
 	.home-poster-wrap .poster {

@@ -1,6 +1,6 @@
 <?php if ($nbr_elements > $nbr_elements_per_page): ?>
 	<nav>
-		<ul class="pagination justify-content-center">
+		<ul class="pagination justify-content-center align-items-center">
 			<?php for ($i = 1; $i <= ceil($nbr_elements / $nbr_elements_per_page); $i++): ?>
 				<?php if ((!isset($current_route->vars()['page']) && $i == 1) || (isset($current_route->vars()['page']) && $i == $current_route->vars()['page'])): ?>
 					<li class="page-item active"><span class="page-link"><?= $i ?></span><span class="sr-only">(active)</span></li>

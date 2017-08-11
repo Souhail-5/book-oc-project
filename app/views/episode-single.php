@@ -1,17 +1,17 @@
 <header class="featured-image-main jumbotron jumbotron-fluid mb-0 py-0">
-	<img src="/assets/images/poster-le-roi-lion.jpg" alt="Book's poster" class="cover">
+	<img src="/assets/images/featured-single-episode-<?= rand(1, 5) ?>.jpg" alt="Episode's featured image" class="cover">
 </header>
 <div class="container">
 	<section class="episode-main-content-wrap row no-gutters">
-		<div class="episode-main-content col-lg-10 offset-lg-1 px-2 px-lg-5 py-3 pb-5">
-			<nav>
+		<div class="episode-main-content col-lg-10 offset-lg-1 py-3 pb-5">
+			<nav class="px-2 px-lg-5">
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item"><a href="<?= $path('episodes') ?>">Épisodes</a></li>
 					<li class="breadcrumb-item active"><?= $episode->title() ?></li>
 				</ol>
 			</nav>
-			<article class="episode">
+			<article class="episode px-2 px-lg-5">
 				<?php if ($flash->exist()): ?>
 					<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
 						<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
@@ -32,7 +32,7 @@
 									<?= $_esc($episode->number()) ?><?= $_ifNotEmpty($episode->part(), " - {$_esc($episode->part())}") ?>
 								<?php endif; ?>
 							</div>
-							<h1 class="mx-auto my-4 mb-lg-5 episode-title"><?= $episode->title() ?></h1>
+							<h1 class="episode-title mx-auto my-4 mb-lg-5"><?= $episode->title() ?></h1>
 							<?php if ($user->isAuthenticated()): ?>
 								<div class="input-group flex-column flex-lg-row justify-content-center mb-3">
 									<span class="input-group-addon" id="basic-addon-slug"><?= $_SERVER['SERVER_NAME'] ?>/episode/</span>
@@ -85,17 +85,28 @@
 				<?php endif; ?>
 			</article>
 			<?php if (!empty($new_comment_form)): ?>
-				<aside class="mt-5">
-					<h4>Un commentaire ?</h4>
-					<hr>
-					<?= $new_comment_form ?>
+				<aside class="comment-form-wrap mt-5 py-3">
+					<hr class="my-5">
+					<div class="px-2 px-lg-5">
+						<h3 class="h2 sans-serif">Une réaction ?</h4>
+						<p class="mt-4 mb-5">
+							<?php if (!empty($comments)): ?>
+								Rejoignez <a href="#anchor-comments">la discussion</a> en laissant votre commentaire à propos de cette épisode.
+							<?php else: ?>
+								Entamer la discussion, avec les lecteurs et moi, en laissant votre commentaire à propos de cette épisode.
+							<?php endif; ?>
+						</p>
+						<?= $new_comment_form ?>
+					</div>
 				</aside>
 			<?php endif; ?>
 			<?php if (!empty($comments)): ?>
-				<aside class="mt-5">
-					<h4 id="anchor-comments">Commentaires</h4>
-					<hr>
-					<?= $comments ?>
+				<aside class="comments-wrap py-3">
+					<hr class="my-5">
+					<div class="px-2 px-lg-5">
+						<h3 class="h2 sans-serif mb-5" id="anchor-comments">Commentaires</h4>
+						<?= $comments ?>
+					</div>
 				</aside>
 			<?php endif; ?>
 		</div>

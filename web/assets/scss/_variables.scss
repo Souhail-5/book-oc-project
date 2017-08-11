@@ -24,3 +24,10 @@ $brand-danger: $red;
 $brand-success: $green;
 
 $btn-secondary-bg: lighten($brand-primary, 45%);
+
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+$font-family-sans-serif: 'Lato', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:      'Merriweather', Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:  'Inconsolata', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
