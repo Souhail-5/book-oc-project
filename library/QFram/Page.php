@@ -26,6 +26,7 @@ class Page extends Template
 			'<script src="/vendors/bootstrap/dist/js/bootstrap.js"></script>',
 			'<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>',
 			'<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js" integrity="sha256-DJpVvSniFq7HyHLFi3n3thaGrgI4XiEsDnQwyY3BnIo=" crossorigin="anonymous"></script>',
+			'<script src="/assets/js/mousetrap.min.js"></script>',
 			'<script src="/assets/js/main.js"></script>',
 		];
 		$this->customBtmScripts = [];

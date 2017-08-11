@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	Mousetrap.bind(['ctrl+shift+l'], function(e) {
+		window.location.href = "/se-connecter";
+		return false;
+	});
+
+	Mousetrap.bind(['ctrl+shift+h'], function(e) {
+		window.location.href = "/";
+		return false;
+	});
+
 	$('time').each(function(i, e) {
 		var datetime = $(e).attr('datetime');
 		$(e).children('.time-description').html(transformDate(datetime, 'YYYY-MM-DD HH:mm:ss'));

@@ -7,6 +7,7 @@
 					<p><?= $flash->get('text') ?></p>
 				</div>
 			<?php endif; ?>
+			<a class="d-inline-block mb-3" href="<?= $path('root') ?>">< Accueil</a>
 			<h2 class="mb-4">Se connectez</h2>
 			<p class="font-italic">Accédez à l'interface de gestion de votre site.</p>
 			<div class="form-group">
