@@ -13,8 +13,8 @@
 			</header>
 			<div class="py-3 px-4 mt-auto d-flex justify-content-end align-items-center">
 				<small class="mr-auto"><a href="<?= $path('legal') ?>" class="meta">Mentions légales</a></small>
-				<a href="#">F</a>
-				<a href="#">T</a>
+				<a target="_blank" href="https://facebook.com"><img class="social-icon mr-2" width="16px" height="16px" src="/assets/images/facebook-logo.png" alt="Clik on the Facebook logo to go to my Facebook page."></a>
+				<a target="_blank" href="https://twitter.com"><img class="social-icon" width="25px" height="25px" src="/assets/images/twitter-logo.png" alt="Clik on the Twitter logo to go to my Twitter page."></a>
 			</div>
 		</div>
 		<div class="main-content-wrap col-lg-10 offset-lg-2">
