@@ -13,9 +13,9 @@
 			</nav>
 			<article class="episode px-2 px-lg-5">
 				<?php if ($flash->exist()): ?>
-					<div class="alert alert-<?= $flash->get('type') ?> mb-5" role="alert">
-						<h4 class="alert-heading"><?= $flash->get('title') ?></h4>
-						<p><?= $flash->get('text') ?></p>
+					<div class="alert alert-<?= $flash->get('type') ?> mb-5 border-0" role="alert">
+						<h4 class="alert-heading sans-serif"><?= $flash->get('title') ?></h4>
+						<p class="m-0"><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
 				<?php if ($user->isAuthenticated()): ?>

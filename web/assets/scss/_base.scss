@@ -21,7 +21,7 @@ body {
 	font-family: $font-family-monospace;
 }
 
-[class^="si-glyph"] {
+[class^="si-glyph"] svg {
 	width: 1rem;
 	height: 1rem;
 	position: relative; top: 0.1rem;

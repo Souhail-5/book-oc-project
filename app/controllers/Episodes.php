@@ -337,7 +337,7 @@ class Episodes extends Controller
 
 			if (!$publish) $this->flash->hydrate([
 				'type' => 'info',
-				'title' => 'Modification enregistré',
+				'title' => 'Enregistré !',
 				'text' => 'Vos modifications ont bien été prises en compte.',
 			]);
 

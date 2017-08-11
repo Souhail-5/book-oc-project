@@ -72,7 +72,7 @@
 					</div>
 				<?php endif; ?>
 				<?php if ($flash->exist()): ?>
-					<div class="push pr-5 border-0 rounded-0 alert alert-<?= $flash->get('type') ?>" role="alert">
+					<div class="push alert alert-<?= $flash->get('type') ?> pr-5 border-0" role="alert">
 						<p class="m-0"><?= $flash->get('text') ?></p>
 					</div>
 				<?php endif; ?>
