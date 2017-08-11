@@ -26,9 +26,12 @@ class Episodes extends Controller
 			'new-comment-form' => 'new-comment-form',
 			'episode-new' => 'episode-new',
 		]);
-		if (Router::currentRoute()->name() == 'episode') $this->page->addScripts(['<script src="https://www.google.com/recaptcha/api.js"></script>']);
+		$this->hasFirstEpisode();
+		if (Router::currentRoute()->name() == 'episode' || Router::currentRoute()->name() == 'first-episode') {
+			$this->page->addScripts(['<script src="https://www.google.com/recaptcha/api.js"></script>']);
+		}
 		if ($this->user->isAuthenticated()) {
-			if (Router::currentRoute()->name() == 'episode' || Router::currentRoute()->name() == 'episode-new') {
+			if (Router::currentRoute()->name() == 'episode' || Router::currentRoute()->name() == 'first-episode' || Router::currentRoute()->name() == 'episode-new') {
 				$this->page->addScripts(['<script src="/assets/js/autosize-input.js"></script>']);
 			}
 			$this->page->addScripts([
@@ -174,6 +177,13 @@ class Episodes extends Controller
 		$this->renderHomePage();
 	}
 
+	public function showNew()
+	{
+		$this->getComponent('episode-new')->episode = $this->getService('episodes')->setNewEpisode();
+
+		$this->renderNewEpisodePage();
+	}
+
 	public function showOne()
 	{
 		$episode_view = $this->getComponent('episode-single');
@@ -217,11 +227,43 @@ class Episodes extends Controller
 		$this->renderSinglePage();
 	}
 
-	public function showNew()
+	public function showFirst()
 	{
-		$this->getComponent('episode-new')->episode = $this->getService('episodes')->setNewEpisode();
+		$episode_view = $this->getComponent('episode-single');
+		try {
+			$episode_view->episode = $this->getService('episodes')->getFirst();
+			if (
+				$episode_view->episode->trash() ||
+				(
+					!$this->user->isAuthenticated() &&
+					$episode_view->episode->status() == 'draft'
+				)
+			) {
+				throw new \Exception("Cette épisode n'est pas accessible");
+			}
+		} catch (\Exception $e) {
+			$this->HttpResponse->redirect(Router::genPath('404'));
+		}
 
-		$this->renderNewEpisodePage();
+		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
+
+		$comments = $this->getService('comments')->getCommentsByEpisodeId($episode_view->episode->id());
+
+		foreach ($comments as $comment) {
+			$component_name = "comment-{$comment->id()}";
+			$this->initComponents([$component_name => 'comment']);
+
+			$this->getComponent($component_name)->comment = $comment;
+			$episode_view->comments .= $this->getComponent($component_name)->render();
+		}
+
+		$new_comment_form = $this->getComponent('new-comment-form');
+		$new_comment = $new_comment_form->comment;
+		if (!isset($new_comment)) $new_comment_form->comment = $this->getService('comments')->setNewComment();
+		$new_comment_form->episode = $episode_view->episode;
+		$episode_view->new_comment_form = $new_comment_form->render();
+
+		$this->renderSinglePage();
 	}
 
 	public function draftEpisode()
@@ -461,5 +503,15 @@ class Episodes extends Controller
 	{
 		$comment_controller = new Comments($this->HttpRequest, $this->HttpResponse, 'signalComment');
 		$comment_controller->run();
+	}
+
+	public function hasFirstEpisode()
+	{
+		try {
+			$this->getService('episodes')->getFirst();
+			$this->getComponent('home')->hasFirstEpisode = true;
+		} catch (\Exception $e) {
+			$this->getComponent('home')->hasFirstEpisode = false;
+		}
 	}
 }

@@ -9,7 +9,9 @@
 					Billet simple pour l'Alaska
 				</h1>
 				<p class="text-justify">Lisez mon roman épisode par épisode, directement depuis mon site. Partagez, commentez !</p>
-				<p>Lire le <a href="#">premier épisode</a>.</p>
+				<?php if($hasFirstEpisode): ?>
+					<p>Lire le <a href="<?= $path('first-episode') ?>">premier épisode</a>.</p>
+				<?php endif; ?>
 			</header>
 			<div class="py-3 px-4 mt-auto d-flex justify-content-end align-items-center">
 				<small class="mr-auto"><a href="<?= $path('legal') ?>" class="meta">Mentions légales</a></small>

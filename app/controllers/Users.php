@@ -16,6 +16,7 @@ class Users extends Controller
 	{
 		$this->initServices([
 			'users' => 'Users',
+			'episodes' => 'Episodes',
 		]);
 		$this->initPage();
 		$this->initComponents([
@@ -25,6 +26,7 @@ class Users extends Controller
 			'404' => '404',
 			'mentions-legales' => 'mentions-legales',
 		]);
+		$this->hasFirstEpisode();
 	}
 
 	public function render()
@@ -115,5 +117,15 @@ class Users extends Controller
 	public function signOut()
 	{
 		$this->user->setAuthenticated(false);
+	}
+
+	public function hasFirstEpisode()
+	{
+		try {
+			$this->getService('episodes')->getFirst();
+			$this->getComponent('home')->hasFirstEpisode = true;
+		} catch (\Exception $e) {
+			$this->getComponent('home')->hasFirstEpisode = false;
+		}
 	}
 }

@@ -83,18 +83,6 @@
 			"#": "Page {page}"
 		}
 	},
-	"episode":
-	{
-		"url": "/episode/([a-z0-9-]+)",
-		"controller": "episodes",
-		"action": "show-one",
-		"varsNames": ["slug"],
-		"breadcrumb": {
-			"root": "Accueil",
-			"episodes": "Épisodes",
-			"#": "{slug}"
-		}
-	},
 	"episode-new":
 	{
 		"url": "/nouvel-episode",
@@ -110,6 +98,29 @@
 			"root": "Accueil",
 			"episodes": "Épisodes",
 			"episode-new": "Créer un nouvel épisode"
+		}
+	},
+	"episode":
+	{
+		"url": "/episode/([a-z0-9-]+)",
+		"controller": "episodes",
+		"action": "show-one",
+		"varsNames": ["slug"],
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"#": ""
+		}
+	},
+	"first-episode":
+	{
+		"url": "/episodes/premier-episode",
+		"controller": "episodes",
+		"action": "show-first",
+		"breadcrumb": {
+			"root": "Accueil",
+			"episodes": "Épisodes",
+			"#": ""
 		}
 	},
 	"comments":

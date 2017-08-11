@@ -15,6 +15,7 @@ class Comments extends Controller
 	{
 		$this->initServices([
 			'comments' => 'Comments',
+			'episodes' => 'Episodes',
 		]);
 		$this->initPage();
 		$this->initComponents([
@@ -22,6 +23,7 @@ class Comments extends Controller
 			'comments-list' => 'comments-list',
 			'pagination' => 'pagination',
 		]);
+		$this->hasFirstEpisode();
 	}
 
 	public function render()
@@ -244,6 +246,16 @@ class Comments extends Controller
 			$this->HttpResponse->refresh();
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
+		}
+	}
+
+	public function hasFirstEpisode()
+	{
+		try {
+			$this->getService('episodes')->getFirst();
+			$this->getComponent('home')->hasFirstEpisode = true;
+		} catch (\Exception $e) {
+			$this->getComponent('home')->hasFirstEpisode = false;
 		}
 	}
 }
