@@ -84,4 +84,4 @@ See also the list of [contributors](https://github.com/Souhail-5/book-oc-project
 
 ## License
 
-This project is licensed under the GPL3 License - see the [LICENSE](gpl.txt) file for details.
+This project is licensed under the GPL3 License - see the [LICENSE](LICENSE.md) file for details.
