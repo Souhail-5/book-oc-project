@@ -40,8 +40,8 @@ npm install
 The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it works you will need to create a Google reCAPTCHA API key:
 * Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
 * On the top right, click `Get reCAPTCHA` button
-* Follow the steps to get your API key
-* Paste you secret key into `/app/config/apis.json` and you are done.
+* Choose reCAPTCHA v2 and follow the steps to get your API key
+* Paste your public and secret keys into `/app/config/apis.json`. That's it.
 
 You are done!
 
@@ -55,7 +55,7 @@ When the project is installed and running, use the **admin demo account** by fol
 
 ##### Keyboard shortcuts
 
-You can use this shortcuts from everywhere on your website.
+You can use this shortcuts from everywhere on your website:
 
 * Access to the domain root: use `ctrl + shift + h`
 * Access to the sign-in page: use `ctrl + shift + l`
