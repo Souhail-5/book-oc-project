@@ -10,9 +10,7 @@ You will develop in PHP without using a framework to familiarize yourself with t
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-To install and to run the project you will need this:
+### Technical prerequisites
 
 ```
 PHP 7+
@@ -20,6 +18,10 @@ MySQL 5.6+
 Node.js & npm (are needed because we use Gulp for compliling SCSS files and for using Browsersync)
 Grunt (is needed because Bootstrap.v4 use it for compiling SCSS files)
 ```
+
+### Other prerequisites
+
+#### Demo account credentials
 
 When the project is installed and running, use the **admin demo account** by following this steps:
 * Go to `your-domain.com/se-connecter`. Type it or use `ctrl + shift + l`.
@@ -35,11 +37,11 @@ The project use reCAPTCHA from Google to prevent comments spams and abuses. To g
 * Follow the steps to get your API key
 * Paste you secret key into `/app/config/apis.json` and you are done.
 
-### Installing
+### How to install
 
-The first step is to download the whole project zip and unizp it in your computer.
+**STEP 1** => Download the whole project zip and unizp it in your computer.
 
-Then, make sure you have last npm version and install all dependencies that are listed in package.json, by following this steps:
+**STEP 2** => Make sure you have last npm version and install all dependencies that are listed in package.json:
 
 ```
 // In your terminal
@@ -47,13 +49,13 @@ cd project-folder
 npm install
 ```
 
-Now, you need to **configure a database** :
+**STEP 3** => Configure a database:
 * Install the database structure using `/app/databases/main.sql`. A demo user is already there.
 * Configure your database config file `/app/config/databases.json`. (Please keep `main` key unchanged)
 
-You are done.
+You are done !
 
-#### DO NOT FORGET
+##### DO NOT FORGET
 
 Do not forget to gitignore `/app/config/apis.json` and `/app/config/databases.json`. Otherwise you will push all of your secret configs.
 
