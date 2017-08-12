@@ -467,9 +467,12 @@ class Episodes extends Controller
 
 	public function newEpisodeComment()
 	{
-		$recaptcha_api_url = "https://www.google.com/recaptcha/api/siteverify?secret=6LcqKywUAAAAALJShgZJU8CB9VkLtgtCIIkcG6ng&response="
+		$recaptcha_api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+		. $this->getApi('recaptcha')['skey']
+		. "&response="
 		. $this->HttpRequest->POSTData('g-recaptcha-response')
-		. "&remoteip=" . $_SERVER['REMOTE_ADDR'] ;
+		. "&remoteip="
+		. $_SERVER['REMOTE_ADDR'] ;
 
 		$this->getComponent('new-comment-form')->comment = $this->getService('comments')->setNewComment([
 			'episodeId' => $this->HttpRequest->POSTData('episode-id'),
