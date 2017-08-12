@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container vh-100">
 	<div class="row justify-content-center align-items-center vh-66">
-		<div class="col-md-6" action="" method="POST">
+		<div class="col-md-6 p-5 bg-white wrap-shadow" action="" method="POST">
 			<h1>403</h1>
-			<h2>Aie, aie, aie !</h2>
+			<h2>Aie aie aie !</h2>
 			<?php if ($flash->exist()): ?>
 				<p><?= $flash->get('text') ?></p>
 			<?php else: ?>
