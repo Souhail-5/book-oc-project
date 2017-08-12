@@ -298,12 +298,13 @@ class Episodes
 		$q = $this->db->prepare("
 			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
 			FROM episodes
-			WHERE status=:status
+			WHERE status=:status AND trash=:trash
 			ORDER BY number ASC
 			LIMIT 1
 		");
 
 		$q->bindValue(':status', 'publish');
+		$q->bindValue(':trash', 0);
 
 		$q->execute();
 
