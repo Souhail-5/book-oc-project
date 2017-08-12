@@ -184,15 +184,19 @@ class Episodes extends Controller
 		$this->renderNewEpisodePage();
 	}
 
-	public function showOne()
+	public function showOne($first=false)
 	{
 		$episode_view = $this->getComponent('episode-single');
 		try {
-			$episode_view->episode = $this->getService('episodes')->getOne(
-				$this->getService('episodes')->setNewEpisode([
-					'slug' => $this->HttpRequest->GETData('slug'),
-				])
-			);
+			if ($first) {
+				$episode_view->episode = $this->getService('episodes')->getFirst();
+			} else {
+				$episode_view->episode = $this->getService('episodes')->getOne(
+					$this->getService('episodes')->setNewEpisode([
+						'slug' => $this->HttpRequest->GETData('slug'),
+					])
+				);
+			}
 			if (
 				$episode_view->episode->trash() ||
 				(
@@ -229,41 +233,7 @@ class Episodes extends Controller
 
 	public function showFirst()
 	{
-		$episode_view = $this->getComponent('episode-single');
-		try {
-			$episode_view->episode = $this->getService('episodes')->getFirst();
-			if (
-				$episode_view->episode->trash() ||
-				(
-					!$this->user->isAuthenticated() &&
-					$episode_view->episode->status() == 'draft'
-				)
-			) {
-				throw new \Exception("Cette épisode n'est pas accessible");
-			}
-		} catch (\Exception $e) {
-			$this->HttpResponse->redirect(Router::genPath('404'));
-		}
-
-		if ($episode_view->episode->status() == 'draft') return $this->renderSinglePage();
-
-		$comments = $this->getService('comments')->getCommentsByEpisodeId($episode_view->episode->id());
-
-		foreach ($comments as $comment) {
-			$component_name = "comment-{$comment->id()}";
-			$this->initComponents([$component_name => 'comment']);
-
-			$this->getComponent($component_name)->comment = $comment;
-			$episode_view->comments .= $this->getComponent($component_name)->render();
-		}
-
-		$new_comment_form = $this->getComponent('new-comment-form');
-		$new_comment = $new_comment_form->comment;
-		if (!isset($new_comment)) $new_comment_form->comment = $this->getService('comments')->setNewComment();
-		$new_comment_form->episode = $episode_view->episode;
-		$episode_view->new_comment_form = $new_comment_form->render();
-
-		$this->renderSinglePage();
+		$this->showOne(true);
 	}
 
 	public function draftEpisode()
@@ -490,14 +460,14 @@ class Episodes extends Controller
 				'title' => 'Merci !',
 				'text' => "Votre commentaire a bien été ajouté.",
 			]);
-			$this->HttpResponse->refresh(true);
+			$this->showOne(Router::currentRoute()->name() == 'first-episode');
 		} catch (\InvalidArgumentException $e) {
 			$this->flash->hydrate([
 				'type' => 'warning',
 				'title' => 'Attention !',
 				'text' => $e->getMessage(),
 			]);
-			$this->HttpResponse->refresh(true);
+			$this->showOne(Router::currentRoute()->name() == 'first-episode');
 		} catch (\Exception $e) {
 			$this->HttpResponse->redirect(Router::genPath('403'));
 		}
