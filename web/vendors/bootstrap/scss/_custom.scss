@@ -17,6 +17,16 @@ $purple: #613d7c;
 $brand-primary: $blue;
 $brand-secondary: $yellow;
 
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-shadows:            true;
+
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
 $font-family-sans-serif: 'Lato', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-serif:      'Merriweather', Georgia, "Times New Roman", Times, serif;
 $font-family-monospace:  'Inconsolata', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -56,6 +66,26 @@ $btn-secondary-border: $brand-primary;
 $border-radius:          0;
 $border-radius-lg:       0;
 $border-radius-sm:       0;
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-box-shadow:                 0 0 10px 0 rgba($black,.25);
+$btn-focus-box-shadow:           0 0 0 2px rgba($brand-primary, .25);
+$btn-active-box-shadow:          0 0 5px 0px rgba($black,.15);
+
+$btn-primary-border:             transparent;
+
+$btn-secondary-border:           transparent;
+
+$btn-info-border:                transparent;
+
+$btn-success-border:             transparent;
+
+$btn-warning-border:             transparent;
+
+$btn-danger-border:              transparent;
 
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius:              $border-radius;
