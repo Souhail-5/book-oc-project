@@ -19,24 +19,6 @@ Node.js & npm (are needed because we use Gulp for compliling SCSS files and for 
 Grunt (is needed because Bootstrap.v4 use it for compiling SCSS files)
 ```
 
-### Other prerequisites
-
-##### Demo account credentials
-
-When the project is installed and running, use the **admin demo account** by following this steps:
-* Go to `your-domain.com/se-connecter`. Type it or use `ctrl + shift + l`.
-* Sign-in using `demo@demo.com` as email, and `demo` as password.
-
-*Note: Everywhere in the website, use `ctrl + shift + h` to go to your domain root.*
-
-##### reCAPTCHA
-
-The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it works you will need to create a Google reCAPTCHA API key:
-* Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
-* On the top right, click `Get reCAPTCHA` button
-* Follow the steps to get your API key
-* Paste you secret key into `/app/config/apis.json` and you are done.
-
 ### How to install?
 
 **STEP 1** => Download the whole project zip and unizp it in your computer.
@@ -53,7 +35,30 @@ npm install
 * Install the database structure using `/app/databases/main.sql`. A demo user is already there.
 * Configure your database config file `/app/config/databases.json`. (Please keep `main` key unchanged)
 
+**STEP 4** => Configure reCAPTCHA:
+
+The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it works you will need to create a Google reCAPTCHA API key:
+* Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
+* On the top right, click `Get reCAPTCHA` button
+* Follow the steps to get your API key
+* Paste you secret key into `/app/config/apis.json` and you are done.
+
 You are done!
+
+### How to use?
+
+##### Demo account credentials
+
+When the project is installed and running, use the **admin demo account** by following this steps:
+* Go to `your-domain.com/se-connecter`. (Type it or use `ctrl + shift + l`)
+* Sign-in using `demo@demo.com` as email, and `demo` as password.
+
+##### Keyboard shortcuts
+
+You can use this shortcuts from everywhere on your website.
+
+* Access to the domain root: use `ctrl + shift + h`
+* Access to the sign-in page: use `ctrl + shift + l`
 
 ### Attention!
 
