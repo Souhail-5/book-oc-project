@@ -18,7 +18,9 @@
 		</small>
 	</div>
 	<div class="d-lg-flex justify-content-lg-between align-items-lg-center">
-		<div class="g-recaptcha mb-3 mb-lg-0" data-sitekey="6LcqKywUAAAAAHv9CGPw68Y9p-oS-1WfgZgdtaUe"></div>
+		<?php if (!empty($recaptcha_pkey)): ?>
+			<div class="g-recaptcha mb-3 mb-lg-0" data-sitekey="<?= $recaptcha_pkey ?>"></div>
+		<?php endif; ?>
 		<button type="submit" name="action" value="new-episode-comment" class="btn btn-primary">Valider</button>
 	</div>
 	<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">

@@ -223,6 +223,7 @@ class Episodes extends Controller
 		}
 
 		$new_comment_form = $this->getComponent('new-comment-form');
+		$new_comment_form->recaptcha_pkey = !empty($this->getApi('recaptcha')['pkey']) ? $this->getApi('recaptcha')['pkey'] : null;
 		$new_comment = $new_comment_form->comment;
 		if (!isset($new_comment)) $new_comment_form->comment = $this->getService('comments')->setNewComment();
 		$new_comment_form->episode = $episode_view->episode;
@@ -451,8 +452,12 @@ class Episodes extends Controller
 			'text' => $this->HttpRequest->POSTData('comment-text'),
 		]);
 		try {
-			// Comment the next line to deactivate ReCaptcha verification
-			if (!json_decode(file_get_contents($recaptcha_api_url), true)['success']) throw new \InvalidArgumentException("Votre commentaire n'a pas été validé. Vous devez d'abord valider le catpcha.");
+			if (
+				!empty($this->getApi('recaptcha')['pkey']) &&
+				!json_decode(file_get_contents($recaptcha_api_url), true)['success']
+			) {
+				throw new \InvalidArgumentException("Votre commentaire n'a pas été validé. Vous devez d'abord valider le catpcha.");
+			}
 			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
 			$this->getComponent('new-comment-form')->comment = null;
 			$this->flash->hydrate([
