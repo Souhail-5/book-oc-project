@@ -1,6 +1,6 @@
 # Book OC Project
 
-An OOP PHP blog CMS. Build with MVC. This project was done as part of a training (<a href="https://openclassrooms.com/" target="_blank">OpenClassrooms</a>).
+An OOP PHP blog CMS. Build with MVC. This project was done as part of a training ([OpenClassrooms](https://openclassrooms.com/)).
 
 **Instructions to follow**:
 A writer wants to have his own blog to publish his next novel in stages. Only concern: he does not want to use WordPress, he wants his own home blog!
@@ -30,7 +30,7 @@ When the project is installed and running, use the **admin demo account** by fol
 #### reCAPTCHA
 
 The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it works you will need to create a Google reCAPTCHA API key:
-* Go to <a href="https://www.google.com/recaptcha/" target="_blank">reCAPTCHA</a> website
+* Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
 * On the top right, click `Get reCAPTCHA` button
 * Follow the steps to get your API key
 * Paste you secret key into `/app/config/apis.json` and you are done.
@@ -76,10 +76,10 @@ grunt watch
 
 ## Built With
 
-* <a href="http://sass-lang.com/" target="_blank">SASS</a> - The most mature, stable, and powerful professional grade CSS extension language in the world.
-* <a href="https://gulpjs.com/" target="_blank">Gulp</a> - A toolkit for automating painful or time-consuming tasks in development workflow.
-* <a href="https://browsersync.io/" target="_blank">Browsersync</a> - A toolkit to get time-saving synchronised browser testing.
-* <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap v4</a> - The most popular HTML, CSS, and JS framework
+* [SASS](http://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
+* [Gulp](https://gulpjs.com/) - A toolkit for automating painful or time-consuming tasks in development workflow.
+* [Browsersync](https://browsersync.io/) - A toolkit to get time-saving synchronised browser testing.
+* [Bootstrap v4](https://v4-alpha.getbootstrap.com/) - The most popular HTML, CSS, and JS framework
 
 ## Contributing
 
@@ -87,7 +87,7 @@ grunt watch
 
 ## Versioning
 
-We will use <a href="http://semver.org/" target="_blank">SemVer</a> for versioning.
+We will use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
