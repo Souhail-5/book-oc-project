@@ -8,9 +8,9 @@
 				<ol class="breadcrumb bg-white pb-4 mb-4">
 					<li class="breadcrumb-item"><a href="<?= $path('root') ?>">Accueil</a></li>
 					<li class="breadcrumb-item"><a href="<?= $path('episodes') ?>">Épisodes</a></li>
-					<?php if ($episode->status() == 'publish'): ?>
+					<?php if ($episode->status() == 'publish' && $user->isAuthenticated()): ?>
 						<li class="breadcrumb-item"><a href="<?= $path('episodes') ?>">Publiés</a></li>
-					<?php elseif ($episode->status() == 'draft'): ?>
+					<?php elseif ($episode->status() == 'draft' && $user->isAuthenticated()): ?>
 						<li class="breadcrumb-item"><a href="<?= $path('episodes-draft') ?>">Brouillons</a></li>
 					<?php endif; ?>
 					<li class="breadcrumb-item active"><?= $episode->title() ?></li>
