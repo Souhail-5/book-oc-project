@@ -21,7 +21,7 @@ Grunt (is needed because Bootstrap.v4 use it for compiling SCSS files)
 
 ### Other prerequisites
 
-#### Demo account credentials
+##### Demo account credentials
 
 When the project is installed and running, use the **admin demo account** by following this steps:
 * Go to `your-domain.com/se-connecter`. Type it or use `ctrl + shift + l`.
@@ -29,7 +29,7 @@ When the project is installed and running, use the **admin demo account** by fol
 
 *Note: Everywhere in the website, use `ctrl + shift + h` to go to your domain root.*
 
-#### reCAPTCHA
+##### reCAPTCHA
 
 The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it works you will need to create a Google reCAPTCHA API key:
 * Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
@@ -37,7 +37,7 @@ The project use reCAPTCHA from Google to prevent comments spams and abuses. To g
 * Follow the steps to get your API key
 * Paste you secret key into `/app/config/apis.json` and you are done.
 
-### How to install
+### How to install?
 
 **STEP 1** => Download the whole project zip and unizp it in your computer.
 
@@ -53,9 +53,9 @@ npm install
 * Install the database structure using `/app/databases/main.sql`. A demo user is already there.
 * Configure your database config file `/app/config/databases.json`. (Please keep `main` key unchanged)
 
-You are done !
+You are done!
 
-##### DO NOT FORGET
+### Attention!
 
 Do not forget to gitignore `/app/config/apis.json` and `/app/config/databases.json`. Otherwise you will push all of your secret configs.
 
