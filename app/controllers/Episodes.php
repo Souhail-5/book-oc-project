@@ -478,6 +478,7 @@ class Episodes extends Controller
 			'text' => $this->HttpRequest->POSTData('comment-text'),
 		]);
 		try {
+			// Comment the next line to deactivate ReCaptcha verification
 			if (!json_decode(file_get_contents($recaptcha_api_url), true)['success']) throw new \InvalidArgumentException("Votre commentaire n'a pas été validé. Vous devez d'abord valider le catpcha.");
 			$this->getService('comments')->add($this->getComponent('new-comment-form')->comment);
 			$this->getComponent('new-comment-form')->comment = null;
