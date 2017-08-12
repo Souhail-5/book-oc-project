@@ -27,6 +27,14 @@ When the project is installed and running, use the **admin demo account** by fol
 
 *Note: Everywhere in the website, use `ctrl + shift + h` to go to your domain root.*
 
+#### reCAPTCHA
+
+The project use reCAPTCHA from Google to prevent comments spams and abuses. To get it work you will need to create a Google reCAPTCHA API key:
+* Go to [reCAPTCHA](https://www.google.com/recaptcha/) website
+* On the top right, click `Get reCAPTCHA` button
+* Follow the steps to get your API key
+* Paste you secret key into `/app/config/apis.json` and you are done.
+
 ### Installing
 
 The first step is to download the whole project zip and unizp it in your computer.
@@ -44,6 +52,10 @@ Now, you need to **configure a database** :
 * Configure your database config file `/app/config/databases.json`. (Please keep `main` key unchanged)
 
 You are done.
+
+#### DO NOT FORGET
+
+Do not forget to gitignore `/app/config/apis.json` and `/app/config/databases.json`. Otherwise you will push all of your secret configs.
 
 ## Deployment
 
