@@ -16,6 +16,7 @@ abstract class Controller
 	protected $services = [];
 	protected $page;
 	protected $components = [];
+	protected $apis_configs;
 
 	public function __construct(HttpRequest $HttpRequest, HttpResponse $HttpResponse, $action)
 	{
@@ -24,6 +25,7 @@ abstract class Controller
 		$this->action = $action;
 		$this->user = new User;
 		$this->flash = new Flash;
+		$this->apis_configs = json_decode(file_get_contents(__DIR__.'/../../app/config/apis.json'), true);
 		$this->init();
 	}
 
@@ -67,6 +69,11 @@ abstract class Controller
 	protected function getService($name)
 	{
 		return $this->services[$name];
+	}
+
+	protected function getApi($name)
+	{
+		return $this->apis_configs[$name];
 	}
 
 	public function run()
