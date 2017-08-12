@@ -5,7 +5,7 @@
 			<li class="mb-5">
 				<div class="mb-4">
 					<h2 class="h3">
-						<span class="badge badge-primary pr-2 py-1">
+						<span class="badge badge-primary sans-serif pr-2 py-1">
 							# <?= $_esc($episode->number()) ?><?= $_ifNotEmpty($episode->part(), "-{$episode->part()}") ?>
 						</span>
 						<?php if ($current_route->name() != 'episodes-trash'): ?>

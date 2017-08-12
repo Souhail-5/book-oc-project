@@ -2259,8 +2259,8 @@ pre code {
           background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: none;
+          box-shadow: none;
   -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
@@ -2471,8 +2471,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 
 .has-success .form-control:focus {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #a3d7a3;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #a3d7a3;
+  -webkit-box-shadow: none, 0 0 6px #a3d7a3;
+          box-shadow: none, 0 0 6px #a3d7a3;
 }
 
 .has-success .input-group-addon {
@@ -2498,8 +2498,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 
 .has-warning .form-control:focus {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f8d9ac;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f8d9ac;
+  -webkit-box-shadow: none, 0 0 6px #f8d9ac;
+          box-shadow: none, 0 0 6px #f8d9ac;
 }
 
 .has-warning .input-group-addon {
@@ -2525,8 +2525,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 
 .has-danger .form-control:focus {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eba5a3;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eba5a3;
+  -webkit-box-shadow: none, 0 0 6px #eba5a3;
+          box-shadow: none, 0 0 6px #eba5a3;
 }
 
 .has-danger .input-group-addon {
