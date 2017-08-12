@@ -9,7 +9,7 @@
 					Billet simple pour l'Alaska
 				</h1>
 				<h2 class="h6 mb-4 text-center fz-0-80">Jean Forteroche</h2>
-				<p class="text-justify">Lisez mon roman épisode par épisode, directement depuis mon site. Partagez, commentez !</p>
+				<p class="text-justify fw-300">Lisez mon roman épisode par épisode, directement depuis mon site. Partagez, commentez !</p>
 				<?php if($hasFirstEpisode): ?>
 					<p>Lire le <a href="<?= $path('first-episode') ?>">premier épisode</a>.</p>
 				<?php endif; ?>

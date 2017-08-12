@@ -17,7 +17,7 @@
 				</div>
 
 				<?php if ($current_route->name() == 'episodes-trash'): ?>
-					<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-between align-items-lg-center" action="" method="POST">
+					<form class="d-flex flex-column flex-lg-row align-items-start justify-content-lg-between align-items-lg-center fw-300" action="" method="POST">
 						<input type="hidden" name="episode-id" value="<?= $episode->id() ?>">
 						<button class="btn btn-link p-0 mr-lg-4 mb-3 mb-lg-0 meta-success fz-0-95" type="submit" name="action" value="untrash-episode">
 							<svg-icon class="si-glyph-arrow-backward wh-0-95 meta">

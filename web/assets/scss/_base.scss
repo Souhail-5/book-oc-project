@@ -21,6 +21,10 @@ body {
 	font-family: $font-family-monospace;
 }
 
+.fw-300 {
+	font-weight: 300;
+}
+
 [class^="si-glyph"] {
 	& * {
 		width: 1rem;
