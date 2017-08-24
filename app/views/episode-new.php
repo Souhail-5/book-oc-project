@@ -42,4 +42,7 @@
 			</form>
 		</div>
 	</div>
+	<small class="d-block w-100 mb-4 text-center">
+		<a href="<?= $path('legal') ?>" class="meta">Mentions légales</a>
+	</small>
 </div>

@@ -21,4 +21,7 @@
 			<button type="submit" name="action" value="sign-in" class="w-100 btn btn-primary">Se connecter</button>
 		</form>
 	</div>
+	<small class="d-block w-100 mb-4 text-center">
+		<a href="<?= $path('legal') ?>" class="meta">Mentions légales</a>
+	</small>
 </div>
