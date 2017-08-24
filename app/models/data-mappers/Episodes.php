@@ -299,7 +299,7 @@ class Episodes
 			SELECT id, number, part, title, text, publish_datetime, modification_datetime, nbr_comments, slug, status, trash
 			FROM episodes
 			WHERE status=:status AND trash=:trash
-			ORDER BY number ASC
+			ORDER BY number ASC, part ASC
 			LIMIT 1
 		");
 
